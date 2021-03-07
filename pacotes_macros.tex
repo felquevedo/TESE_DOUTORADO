@@ -1,0 +1,37 @@
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%	PACOTES_MACROS.tex 
+%  --------------------
+%
+%	Este arquivo é lido no preâmbulo do main.tex e portanto, você pode inserir nele:
+%
+%		- pacotes que não estão na classe ppgec.cls (veja se a classe já não possui)
+%		- suas próprias macros
+%		- qualquer outro comando de preâmbulo
+%
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%	Pacotes
+%	-------
+%
+\usepackage{float}	% permite posicionar a figura entre parágrafos usando H
+%
+%
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%	Macros e configurações de pacotes
+%	---------------------------------
+%
+% Imprimir anexo pdf: \imprimiranexopdf{nome do arquivo}{título do anexo}{primeirapagina}{proximaspaginas}
+\newcommand{\imprimiranexopdf}[4]{
+	\includepdf[pages=#3,pagecommand=\chapter{#2},scale=0.92,offset=0 -95]{#1}
+	\includepdf[pages=#4,pagecommand={}]{#1}
+}
+%
+%
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%	Outros comandos de preâmbulo
+%	----------------------------
+%
+%
