@@ -97,12 +97,63 @@ Por fim, o método mecanizado de cravação de tubos consiste em conectar dois p
 
 Como este trabalho está delimitado aos túneis profundos, esse método de escavação estará fora do escopo dessa tese. Apesar de mobilizar a resistência do maciço possuí condições de contorno bem diversas de túneis profundos.
 
-\section{Pré-suportes}
+\section{Pré-suportes e melhoramento do maciço}
 
+O termo \textbf{pré-suporte} não compreende apenas os elementos físicos, mas também técnicas que são utilizadas visando à estabilidade do maciço antes de iniciar a etapa de escavação da face de avanço do túnel. São comumente empregados em maciços ou regiões do maciço que apresentam riscos de desabamentos iminentes (\autoref{simulacao_falha}).
 
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[scale = 1]{0310-simulacao da falha na face de um tunel e colapso progressivo da face.png}
+	\end{center}
+	\caption{\label{simulacao_falha}À esquerda, simulação da falha na face de um túnel (fonte: \citeonline[p. 245]{Schofield1980}); à direita, o colapso progressivo da face do túnel rodoviário \textit{Vadlaheidi} na Islândia (fonte: \citeonline[p. 1]{Reynolds2015})}
+\end{figure}
+
+Alguns exemplos de técnicas de pré-suporte são:
+
+\begin{alineas}
+	
+	\item \textbf{enfilagens}: instalação de barras, placas ou perfis de aço no interior do maciço, logo acima do perímetro da seção de escavação;
+	
+	\item \textbf{escavação parcializada}: criação de taludes ou nichos de escavação sustentados com concreto projetado;
+	
+	\item \textbf{tirantes frontais}: consiste na instalação de tirantes de fibra de vidro ou injeções de concreto na face de escavação. Comumente utilizados quando o túnel tem que passar por zonas instáveis, como por exemplo, falhas geológicas;
+	
+	\item \textbf{pré-confinamento com ar comprimido}: consiste em aplicar ar com uma determinada pressão no interior da galeria de escavação. Essa técnica é comum em solos moles ou saturados com água;
+
+	\item \textbf{técnicas de melhoramento}: injeção de nata de cimento sobre pressão (\textit{Jet Grouting}) ou consolidação do solo por meio do congelamento com nitrogênio líquido, salmoura ou misto, injeções químicas, ou ainda, rebaixamento do lençol freático.
+
+\end{alineas}
+
+Mais detalhes sobre essas técnicas podem ser encontradas em  \citeonline[p. 9-36]{FederalHighwayAdministration2009}, \citeonline[p. 21]{Maidl2013} e em \citeonline[p. 77]{Chapman2018}. Como neste trabalho estamos interessados na modelagem da lei constitutiva do maciço não serão consideradas essas técnicas na modelagem.
 
 \section{Revestimento de túneis}
 
+O revestimento de um túnel tem como finalidade atender critérios operacionais de manutenção e de estabilidade da cavidade a curto, médio e longo prazo quando o maciço por conta própria não atende esses critérios. O revestimento é composto por um \textbf{revestimento primário} e, quando necessário, um \textbf{revestimento secundário}. A \autoref{secao_tunel_rodoviario} ilustra os elementos de uma seção típica de um túnel rodoviário.
+
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[scale = 1]{0311-ilustracao do revestimento e elementos internos de um tunel rodoviario.pdf}
+	\end{center}
+	\caption{\label{secao_tunel_rodoviario}Ilustração do revestimento e elementos internos de um túnel rodoviário (adaptado de: \citeonline[p. 20]{DEPARTAMENTODEESTRADASERODAGEMSAOPAULO2005})}
+\end{figure}
+
+O \textbf{revestimento primário} compreende os elementos físicos de suporte inicial (aplicados imediatamente após a escavação), com a finalidade de manter a cavidade do túnel estável. Contudo, quando os elementos de suporte inicial não são suficientes para estabilização da cavidade no médio e longo prazo, adicionam-se mais elementos constituindo assim o \textbf{revestimento secundário}. Quando se utiliza o revestimento secundário, o revestimento primário é comumente projetado com a finalidade exclusiva de garantir a estabilidade local da cavidade do túnel durante o período construtivo. Contudo, tanto o revestimento primário quanto o revestimento secundário contribuem para a estabilidade de médio e longo prazo. 
+
+É comum utilizar um ou mais de um dos seguintes elementos de suporte:
+
+\begin{alineas}
+	
+	\item \textbf{tirantes radiais}: são cabos (\textit{Cablebolts}) ou chumbadores (\textit{Rockbols}) ancorados ao longo do perímetro do túnel de forma mecânica (por atrito) e/ou química (com epóxi ou graute). Esses elementos podem estar tensionados (ativos) ou não (passivos) e serem permanentes ou temporários;
+	
+	\item \textbf{cintas metálicas}: são treliças ou trechos anelares metálicos (unidos entre si de forma rígida por parafusos, por soldagem, ou ainda, com uma união flexível podendo deslizar em suas juntas) instalados com um determinado espaçamento ao longo do comprimento longitudinal do túnel;
+	
+	\item \textbf{concreto projetado}: consiste em aplicar uma ou várias camadas de concreto (com ou sem fibras) sobre a superfície escavada do túnel. A superfície pode ainda conter telas metálicas ou cintas metálicas que ficarão embutidas nas camadas de concreto;
+	
+	\item \textbf{concreto pré-moldado}: consiste em instalar trechos anelares pré-fabricados de concreto;
+	
+	\item \textbf{concreto armado}: consiste em aplicar concreto e uma malha composta por vergalhões de aço no contorno da seção.
+	
+\end{alineas}
 
 
 \section{Principais aspectos considerados em estudos numéricos recentes de túneis}
