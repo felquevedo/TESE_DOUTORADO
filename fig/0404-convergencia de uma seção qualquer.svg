@@ -359,9 +359,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1.2271651"
-     inkscape:cx="284.80771"
-     inkscape:cy="151.5961"
+     inkscape:zoom="4.0033466"
+     inkscape:cx="119.35233"
+     inkscape:cy="110.98105"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      inkscape:document-rotation="0"
@@ -379,7 +379,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -463,9 +463,11 @@
          id="tspan6301"
          x="93.834457"
          y="70.665428"
-         style="font-size:3.52778px;line-height:1.25;stroke-width:0.264583">L<tspan
-   style="font-size:2.11667px"
-   id="tspan6305">14</tspan></tspan></text>
+         style="font-size:3.52778px;line-height:1.25;stroke-width:0.264583"><tspan
+           style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman,  Italic'"
+           id="tspan1815">L</tspan><tspan
+           style="font-size:2.11667px"
+           id="tspan6305">14</tspan></tspan></text>
     <text
        xml:space="preserve"
        style="font-size:10.5833px;line-height:0;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, ';stroke-width:0.264583"
@@ -476,9 +478,11 @@
          id="tspan6301-6"
          x="94.381981"
          y="43.481499"
-         style="font-size:3.52777px;line-height:1.25;stroke-width:0.264583">L<tspan
-   style="font-size:2.11667px;stroke-width:0.264583"
-   id="tspan6305-6">23</tspan></tspan></text>
+         style="font-size:3.52777px;line-height:1.25;stroke-width:0.264583"><tspan
+           style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman,  Italic'"
+           id="tspan1809">L</tspan><tspan
+           style="font-size:2.11667px;stroke-width:0.264583"
+           id="tspan6305-6">23</tspan></tspan></text>
     <text
        xml:space="preserve"
        style="font-size:10.5833px;line-height:0;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, ';stroke-width:0.264583"
@@ -490,9 +494,11 @@
          id="tspan6301-6-8"
          x="48.033657"
          y="93.40361"
-         style="font-size:3.52777px;line-height:1.25;stroke-width:0.264583">L<tspan
-   style="font-size:2.11667px;stroke-width:0.264583"
-   id="tspan6305-6-3">24</tspan></tspan></text>
+         style="font-size:3.52777px;line-height:1.25;stroke-width:0.264583"><tspan
+           style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman,  Italic'"
+           id="tspan1811">L</tspan><tspan
+           style="font-size:2.11667px;stroke-width:0.264583"
+           id="tspan6305-6-3">24</tspan></tspan></text>
     <text
        xml:space="preserve"
        style="font-size:10.5833px;line-height:0;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, ';stroke-width:0.264583"
@@ -504,9 +510,11 @@
          id="tspan6301-6-8-5"
          x="121.28178"
          y="7.4883533"
-         style="font-size:3.52777px;line-height:1.25;stroke-width:0.264583">L<tspan
-   style="font-size:2.11667px;stroke-width:0.264583"
-   id="tspan6305-6-3-6">13</tspan></tspan></text>
+         style="font-size:3.52777px;line-height:1.25;stroke-width:0.264583"><tspan
+           style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman,  Italic'"
+           id="tspan1813">L</tspan><tspan
+           style="font-size:2.11667px;stroke-width:0.264583"
+           id="tspan6305-6-3-6">13</tspan></tspan></text>
     <path
        style="fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;marker-start:url(#Arrow1Mstart)"
        d="m 95.091059,67.52353 h 5.166621"
