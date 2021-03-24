@@ -53,7 +53,52 @@ Como se pode ver na \autoref{perfil_exemplo}, dentro das hipóteses dos autores,
 
 \section{Mecanismos de ruptura em túneis profundos}
 
-A execução de túneis se tornou bastante segura após os preceitos filosóficos e teóricos do método empírico NATM (\textit{New Austrian Tunneling Method}) desenvolvido por Rabcewicz (\citeyear{Rabcewicz1964a}, \citeyear{Rabcewicz1964b} e \citeyear{Rabcewicz1964c}) e \citeonline{Rabcewicz1973}. E, atualmente, cada vez mais os estudos numéricos vem ajudando os projetistas na tomada de decisões seguras durante a fase de projeto. Contudo, apesar dessa abordagem empírica e numérica, ter diminuido significativamente o número de incidentes estes ainda existem. Compilados de acidentes podem ser encontrados em estudos da Health and Safety Executive (1996) e de pesquisadores como Stallman (2005), Seidenfuss (2006) e Sousa (2010), tal como reunido na Figura 4.6.
+A execução de túneis se tornou bastante segura após os preceitos filosóficos e teóricos do método empírico NATM (\textit{New Austrian Tunneling Method}) desenvolvido por Rabcewicz (\citeyear{Rabcewicz1964a}, \citeyear{Rabcewicz1964b} e \citeyear{Rabcewicz1964c}) e \citeonline{Rabcewicz1973}. E cada vez mais os estudos numéricos vêm ajudando os projetistas na tomada de decisões seguras durante a fase de projeto e execução. Contudo, apesar dessa abordagem empírica e numérica ter diminuído significativamente o número de incidentes estes ainda existem. Compilados de acidentes podem ser encontrados em estudos da \citeonline{HealthandSafetyExecutiveHSE1996} e de pesquisadores como \citeonline{Stallmann2005}, \citeonline{Seidenfus2006} e \citeonline{Sousa2010}, tal como reunido por \citeonline{Spackova2012} na \autoref{incidentes}.
+
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[scale = 1]{0406-número de incidentes em quatro banco de dados descriminado por autor e tecnologia de escavação.pdf}
+	\end{center}
+	\caption{\label{incidentes}Número de incidentes em quatro banco de dados descriminados por autor e método de escavação (adaptado de: \citeonline[p. 19]{Spackova2012})}
+\end{figure}
+
+\citeonline{Sousa2010}, por exemplo, agrupou os incidentes, tanto de túneis profundos como superficiais, em nove tipos, tal como apresentado na \autoref{distribuicao_incidentes}.
+
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[scale = 1]{0407-distribuição de incidentes de acordo com nove tipologias.pdf}
+	\end{center}
+	\caption{\label{distribuicao_incidentes}Distribuição de incidentes de acordo com nove tipologias (adaptado de: \citeonline[p. 82]{Sousa2010})}
+\end{figure}
+
+Contudo, de forma geral, no comportamento de túneis profundos executados em maciços aparentemente contínuos, ou seja, ausência de grandes descontinuidades ou acidentes geológicos, identifica-se dois mecanismos principais de colapso (ou ruptura): \textit{Spalling} (descamação ou fragmentação) e \textit{Squeezing} (deformações excessivas diferidas no tempo).
+
+O \textit{Spalling} é preponderante em maciço muito resistente, inicialmente pouco fraturado, no qual o nível de energia para iniciar a fissuração e consequente propagação costuma ser alto. Durante a redistribuição das tensões, causada pela escavação, as fissuras vão se desenvolvendo e destacando regiões da rocha no contorno da seção. Essas sofrem então uma descamação, ou ainda, ruptura por flambagem e tem-se, nesse último caso, uma repentina liberação de energia. Uma ruptura abrupta da rocha (\textit{rockburst}). Esse comportamento é refletido na curva tensão-deformação de uma amostra do maciço, por um significativo amolecimento após o pico de resistência, caracterizando, dessa forma, a rocha como frágil \cite[p. 83]{Kleine2007}. A \autoref{mecanismo_spalling} exemplifica esse mecanismo e a \autoref{foto_spalling} mostra a seção após tal colapso.
+
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[scale = 1]{0408-mecanismo de ruptura do maciço próximo a seção.pdf}
+	\end{center}
+	\caption{\label{mecanismo_spalling}Mecanismo de ruptura por \textit{Spalling} de um comprimento $L$ junto à seção do túnel: detalhamento do crescimento das fissuras e flambagem de uma profundidade $h$ da rocha no contorno da seção (adaptado de: \citeonline[p. 267]{Germanovich2000})}
+\end{figure}
+
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[scale = 1]{0409-foto ruptura por spalling.pdf}
+	\end{center}
+	\caption{\label{foto_spalling}À esquerda uma seção remanescente após moderada fragmentação e quebra em um túnel escavado com TBM e à direita uma seção em que parte do contorno apresentou instabilidade (flambagem) em um túnel escavado de forma não mecanizada (fonte: \citeonline[p. 1084]{Diederichs2007})}
+\end{figure}
+
+Já o \textit{Squeezing} é um modo de falha relacionado ao cisalhamento e encontrado principalmente em túneis profundos em condições de grandes tensões \textit{in situ}. Inicia-se quando a fissuração está suficientemente avançada, causando uma diminuição nas propriedades mecânicas do maciço, sem gerar instabilidade no contorno da seção. Essa diminuição das características mecânicas associada ao desenvolvimento da fissuração é progressiva e controlada, em especial, devido ao confinamento que reina no maciço. Ao contrário do primeiro mecanismo, a energia armazenada pela redistribuição das tensões é dissipada de forma gradual por deformações. Esse comportamento está intimamente relacionado com o fenômeno de fluência descrito na próxima seção a qual compreende um dos comportamentos que se pretende modelar e estudar nessa tese.
+
+A Figura 4.10 ilustra a evolução da convergência por esse fenômeno. Tal comportamento também é visto em galerias para estocagem de rejeitos radioativos em maciços argilosos profundos. Essas argilas possuem baixa condutividade hidráulica, portanto, pouca difusão molecular, sendo ideais para estocar esse material. Porém, apresentam esse comportamento diferido e que pode comprometer o projeto no longo tempo requerido para estabilização desse material radioativo. Estudos como os de \citeonline{Rousset1988} e \citeonline{Armand2013} são alguns exemplos de investigações nesse sentido. Laboratórios, tal como o HADES na Bélgica e \textit{Meuse/HauteMarne} (Figura 4.11) em Paris, são exemplos de túneis para estocagem radioativa que apresentam esse fenômeno.
+
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[scale = 1]{0410-evolução da convergencia do túnel fréjus.pdf}
+	\end{center}
+	\caption{\label{evolucao_convergencia}Evolução da convergência do túnel Fréjus (adaptado de: \citeonline[p. 17]{Lunardi1980})}
+\end{figure}
 
 \section{Influência da reologia do maciço}
 
