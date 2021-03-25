@@ -161,8 +161,35 @@ No comportamento da \autoref{ensaio_triaxial_ductil} pode-se destacar as seguint
 	
 \end{alineas}
 
+Para um maciço homogêneo, isotrópico e elástico linear a solução analítica para o campo de deslocamentos e tensões no entorno de uma seção circular afastada da zona de influência da face de escavação é conhecida desde \citeonline{Lame1852} e \citeonline{Kirsch1898}, sendo que este último generalizou a solução para um estado de tensões \textit{in situ} anisotrópico. 
+
+Contudo, como visto nas figuras acima, a massa rochosa não é um material perfeitamente elástico e dependendo da magnitude das tensões \textit{in situ} e do desvio das tensões causada pela escavação, o túnel pode apresentar uma zona plastificada ao redor da cavidade. Quando a seção é circular, o maciço homogêneo, isotrópico, elastoplástico, com tensões iniciais geostáticas-hidrostáticas, essa zona plástica é circular e caracterizada por um raio plástico $y$. \autoref{deslocamentos_tensoes_analitico} ilustra a solução analítica de um maciço elástico e um elastoplástico. Apesar de a solução depender da forma da lei constitutiva elastoplástica, em geral, para túneis não revestidos, há uma diminuição nas tensões ao redor da cavidade e um aumento na convergência.
+
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[scale = 1]{0414-campo de deslocamento e tensões no entorno de uma seção circular.pdf}
+	\end{center}
+	\caption{\label{deslocamentos_tensoes_analitico}Deslocamentos e tensões no entorno de uma seção circular submetida às tensões iniciais geostáticas-hidrostáticas $p_{\infty}$ e pressão interna $p_i$. À esquerda, maciço elástico e à direita, elastoplástico.}
+\end{figure}
+
+Algumas soluções analíticas considerando leis elastoplásticas específicas para túneis não revestidos podem ser encontradas, por exemplo, em \citeonline{Salencon1969}, \citeonline{Hoek1980}, \citeonline{Brown1983}, \citeonline{Detournay1987}, \citeonline{Carranza-Torres1999}, \citeonline{Carranza-Torres2004}, \citeonline{Sharan2003}, \citeonline{Sharan2005} e \citeonline{Alejano2009}.
+
+Um dos objetivos desta tese é justamente implementar um algoritmo geral para considerar esse comportamento instantâneo elastoplástico conjuntamente com o fenômeno diferido no tempo.
 
 \subsection{Comportamento diferido no tempo}
+
+O comportamento viscoso do maciço, caracterizado pela deformação contínua no tempo, mesmo sobre tensão e temperatura constantes, é denominado \textbf{fluência} (\textit{Creep}). E ocorre devido aos deslizamentos no interior do maciço ou ainda por transporte e difusão de massa fluída. Em solos argilosos com condições drenadas, parte da fluência é dada conjuntamente com a dissipação de poro-pressão. Em maciços rochosos, com pouca umidade, essa condição está bastante relacionada com o avanço de trincas e fissuras sobre grande confinamento. Esse comportamento é geralmente caracterizado através de um ensaio triaxial de fluência com uma amostra do maciço. Nesse teste, sobre condições de temperatura e umidade controladas, registram-se as deformações axiais da amostra temporalmente, mantendo-se uma pressão hidrostática e um dado desviador constante. Dessa forma, tem-se a curva típica apresentada na \autoref{curva_caracteristica_fluencia}.
+
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[scale = 1]{0415-curva característica de um ensaio de fluência com os três estágios de comportamento.pdf}
+	\end{center}
+	\caption{\label{curva_caracteristica_fluencia}Curva característica em um ensaio de fluência com os três estágios de comportamento (adaptado de: \citeonline[p. 107]{Costa1984})}
+\end{figure}
+
+Conforme pode-se ver na figura acima, no instante de aplicação da carga axial o corpo de prova sofre uma deformação instantânea inicial $\varepsilon_0$ elástica ou, dependendo do nível das tensões, elastoplástica. Conforme o tempo avança as deformações continuam aumentando, porém, a uma taxa decrescente. Esse estágio é chamado de \textbf{fluência primária} (ou transiente), pois em seguida a taxa de deformação diminui até ficar constante iniciando dessa forma o segundo estágio chamado de \textbf{fluência secundária} (permanente ou estacionária). Após essa fase, que pode consumir a maior parte do tempo, as deformações podem evoluir para o terceiro estágio chamado de \textbf{fluência terciária} (instável), onde a taxa de deformação passa a aumentar até que o material atinge a ruptura \cite{Costa1984}. Contudo, dependendo do nível das tensões, nem sempre a amostra apresenta os três estágios, podendo, inclusive, haver uma estabilização das deformações no tempo.
+
+Além desses estágios de comportamento citados, a recuperação das deformações é outro fenômeno característico de materiais em regime de fluência. Se durante a fluência primária for retirado a carga $F$ o corpo recuperará a sua configuração original seguindo a trajetória PQR, sendo o trecho PQ uma recuperação rápida e instantânea e o trecho QR uma recuperação lenta, assintótica e completa (salvo se houverem deformações plásticas durante o carregamento). Nesse caso, em que a recuperação é completa, o maciço está em regime viscoelástico. Contudo, se a descarga for feita no segundo estágio, haverá o mesmo comportamento instantâneo (trecho TU) e assintótico (trecho UV), mas a recuperação pode não ser mais completa. Nesse caso, evidencia-se o material comportando-se em seu regime viscoplástico (COSTA, 1984). Um exemplo típico desse ensaio pode ser visto na Figura 4.16
 
 \subsection{Alguns estudos considerando leis elastoplásticas e viscoplásticas}
 
