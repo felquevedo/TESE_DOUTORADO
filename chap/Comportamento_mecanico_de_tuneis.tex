@@ -178,7 +178,7 @@ Um dos objetivos desta tese é justamente implementar um algoritmo geral para co
 
 \subsection{Comportamento diferido no tempo}
 
-O comportamento viscoso do maciço, caracterizado pela deformação contínua no tempo, mesmo sobre tensão e temperatura constantes, é denominado \textbf{fluência} (\textit{Creep}). E ocorre devido aos deslizamentos no interior do maciço ou ainda por transporte e difusão de massa fluída. Em solos argilosos com condições drenadas, parte da fluência é dada conjuntamente com a dissipação de poro-pressão. Em maciços rochosos, com pouca umidade, essa condição está bastante relacionada com o avanço de trincas e fissuras sobre grande confinamento. Esse comportamento é geralmente caracterizado através de um ensaio triaxial de fluência com uma amostra do maciço. Nesse teste, sobre condições de temperatura e umidade controladas, registram-se as deformações axiais da amostra temporalmente, mantendo-se uma pressão hidrostática e um dado desviador constante. Dessa forma, tem-se a curva típica apresentada na \autoref{curva_caracteristica_fluencia}.
+O comportamento viscoso do maciço, caracterizado pela deformação contínua no tempo, mesmo sobre tensão e temperatura constantes, é denominado \textbf{fluência} (\textit{Creep}). E ocorre devido aos deslizamentos, quebras e acomodações no interior do maciço e, também, em conjunto com transporte e difusão de massa fluída. Em solos argilosos com condições drenadas, parte da fluência é dada conjuntamente com a dissipação de poro-pressão. Em maciços rochosos, com pouca umidade, essa condição está bastante relacionada com o avanço de trincas e fissuras sobre grande confinamento. Esse comportamento é geralmente caracterizado através de um ensaio triaxial de fluência com uma amostra do maciço. Nesse teste, sobre condições de temperatura e umidade controladas, registram-se as deformações axiais da amostra temporalmente, mantendo-se uma pressão hidrostática e um dado desviador constante. Dessa forma, tem-se a curva típica apresentada na \autoref{curva_caracteristica_fluencia}.
 
 \begin{figure}[H]
 	\begin{center}
@@ -189,7 +189,59 @@ O comportamento viscoso do maciço, caracterizado pela deformação contínua no
 
 Conforme pode-se ver na figura acima, no instante de aplicação da carga axial o corpo de prova sofre uma deformação instantânea inicial $\varepsilon_0$ elástica ou, dependendo do nível das tensões, elastoplástica. Conforme o tempo avança as deformações continuam aumentando, porém, a uma taxa decrescente. Esse estágio é chamado de \textbf{fluência primária} (ou transiente), pois em seguida a taxa de deformação diminui até ficar constante iniciando dessa forma o segundo estágio chamado de \textbf{fluência secundária} (permanente ou estacionária). Após essa fase, que pode consumir a maior parte do tempo, as deformações podem evoluir para o terceiro estágio chamado de \textbf{fluência terciária} (instável), onde a taxa de deformação passa a aumentar até que o material atinge a ruptura \cite{Costa1984}. Contudo, dependendo do nível das tensões, nem sempre a amostra apresenta os três estágios, podendo, inclusive, haver uma estabilização das deformações no tempo.
 
-Além desses estágios de comportamento citados, a recuperação das deformações é outro fenômeno característico de materiais em regime de fluência. Se durante a fluência primária for retirado a carga $F$ o corpo recuperará a sua configuração original seguindo a trajetória PQR, sendo o trecho PQ uma recuperação rápida e instantânea e o trecho QR uma recuperação lenta, assintótica e completa (salvo se houverem deformações plásticas durante o carregamento). Nesse caso, em que a recuperação é completa, o maciço está em regime viscoelástico. Contudo, se a descarga for feita no segundo estágio, haverá o mesmo comportamento instantâneo (trecho TU) e assintótico (trecho UV), mas a recuperação pode não ser mais completa. Nesse caso, evidencia-se o material comportando-se em seu regime viscoplástico (COSTA, 1984). Um exemplo típico desse ensaio pode ser visto na Figura 4.16
+Além desses estágios de comportamento citados, a recuperação das deformações é outro fenômeno característico de materiais em regime de fluência. Se durante a fluência primária for retirado a carga $F$ o corpo recuperará a sua configuração original seguindo a trajetória $\overline{\textrm{PQR}}$, sendo o trecho $\overline{\textrm{PQ}}$ uma recuperação rápida e instantânea e o trecho $\overline{\textrm{QR}}$ uma recuperação lenta, assintótica e completa (salvo se houverem deformações plásticas durante o carregamento). Nesse caso, em que a recuperação é completa, o maciço está em regime viscoelástico. Contudo, se a descarga for feita no segundo estágio, haverá o mesmo comportamento instantâneo (trecho $\overline{\textrm{TU}}$) e assintótico (trecho $\overline{\textrm{UV}}$), mas a recuperação pode não ser mais completa. Nesse caso, evidencia-se o material comportando-se em seu regime viscoplástico \cite{Costa1984}. Um exemplo típico desse ensaio pode ser visto na \autoref{curva_caracteristica_fluencia_ensaio}.
+
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[scale = 1]{0416-ensaio triaxial de fluência da Argila de Boom.pdf}
+	\end{center}
+	\caption{\label{curva_caracteristica_fluencia_ensaio}Ensaio triaxial de fluência da Argila de Boom (adaptado de: \citeonline[p. 42]{Rousset1988})}
+\end{figure}
+
+Na figura acima, pode-se destacar as seguintes fases \cite[p. 42]{Rousset1988}:
+
+\begin{alineas}
+	
+	\item para um pequeno desviador (1,75MPa) a deformação aumenta rapidamente no início. Sua evolução, em seguida, diminui e se estabiliza depois de alguns dias. Nessa etapa foi observado apenas a fase primária, transiente;
+	
+	\item para um desviador moderado (2,25MPa), após uma fase rápida, mas desacelerada (fase primária), observa-se o desenvolvimento de uma fase com taxa de deformação constante ($\dot{\varepsilon}\simeq 7\cdot {{10}^{-6}}{{h}^{-1}}$). Essa é uma fase de fluência secundária, que leva a deformações relativamente importantes, da ordem de 3,5\% após três meses;
+	
+	\item para um desviador forte (2,75MPa), próximo do limite máximo de resistência do comportamento instantâneo (\autoref{ensaio_triaxial_ductil}), a taxa de deformação da fase secundária é cinco vezes maior do que a anterior. Após duas semanas, leva a um aumento na taxa de deformação (fase terciária) e, finalmente, a ruptura da amostra, logo que a deformação ultrapassa 6\%.
+	
+\end{alineas}
+
+Como pode-se ver na \autoref{curva_caracteristica_fluencia_ensaio}, o ensaio de fluência permite conhecer os diferentes limiares que separam os diferentes comportamentos viscosos: fluência primária, secundária, secundária com terciária seguida de ruptura. Permite também estimar a velocidade de fluência durante a fase secundária, dependendo da magnitude do desviador. Dessa forma, pode-se obter os principais parâmetros de viscosidade para o modelo do material. Cabe salientar que a fluência depende da interação entre fatores intrínsecos do maciço (como a forma, defeitos e composição da micro e macroestrutura) com fatores extrínsecos (como a magnitude da tensão desviadora, temperatura, pressão de confinamento e umidade). Portanto, os ensaios devem simular esses fatores externos de modo a obter parâmetros para uma correta modelagem.
+
+Maiores detalhes sobre ensaios de fluência e caracterização desse comportamento podem ser obtidos em \citeonline{Rousset1988}, particularmente para maciços argilosos profundos, e ainda em \citeonline{Feda1992}, \citeonline{Hunsche1994}, \citeonline{Dusseault1993} e \citeonline{Cristescu1998}.
+
+Portanto, no comportamento do túnel, além da deformação instantânea (resultante da redistribuição das tensões e consequente plastificação do maciço ao redor da cavidade), deformações diferidas podem ocorrer e, dado a magnitude dos efeitos, pode tender a estabilização ou levar o sistema maciço-revestimento a danos e colapso. De forma ilustrativa, a \autoref{evolucao_U_t_x} mostra a convergência $U$ em função do tempo $t$ e do avanço da escavação $x$ para uma dada seção.
+
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[scale = 1]{0417-evolução da convergência U no tempo t em função do avanço da escavação.pdf}
+	\end{center}
+	\caption{\label{evolucao_U_t_x}Evolução da convergência $U$ no tempo $t$ em função do avanço da escavação $x$ (adaptado de: \citeonline[p. 8]{Panet1995})}
+\end{figure}
+
+Como pode-se ver na figura acima, mesmo sem escavar nos intervalos $[t_2,t_3]$ e $[t_5,t_6]$ a convergência não é constante, tal como seria em um maciço apenas elástico ou elastoplástico. Nesse caso ilustrativo, a convergência não só evoluiu como também se estabilizou com o tempo. 
+
+Há diversas formas de introduzir esse comportamento no interior das análises de túneis. Nas soluções analíticas e numéricas, diversas leis constitutivas são empregadas. Pode-se classificar essas leis como: 
+
+\begin{alineas}
+	
+	\item \textbf{empírico-experimentais}: geralmente são leis expressas por funções ajustadas empiricamente. Para tal existem funções potenciais, como em Obert (1965), exponeciais em Singh \& Mitchel (1968) e hiperbólicas como em Mesri et al. (1981) e Phienwej et al. (2007);
+	
+	\item \textbf{acoplamento hidro-mecânico}: leis que consideram o maciço como sendo constituído por uma fase sólida e fluída. Exemplos dessa abordagem podem ser encontrados nos trabalhos de Griffiths (1994), Leem \& Kemeny (1999), Wong et al. (2008), Deleruyelle et al. (2014) e Prassetyo \& Gutierrez (2018).
+	
+	\item \textbf{Viscoelásticas}: leis formuladas através da analogia com sistemas mecânicos derivados da associação de elementos simples (mola e amortecedor). Estudos com essa abordagem podem ser encontrados em Sakurai (1978), Panet (1979), Sulem et al. (1987), Ladanyi \& Gill (1988), Goodman (1989), Pan \& Dong (1991a, 1991b), Fahimifar, et al. (2010), Wang et al. (2014) e Wang et al. (2018);
+	
+	\item \textbf{Viscoplásticas}: leis formuladas através da teoria da plasticidade dependente do tempo, que, tal como as leis viscoelásticas, também possuem uma analogia com sistemas mecânicos elementares, mas introduzem um elemento de atrito, para representar o ponto a partir do qual o fenômeno passa a ter importância. Leis desse tipo podem ser encontradas nos estudos de Berest \& Nguyen (1983), Fritz (1984), Cristescu (1985, 1988), Ottosen (1986), Bernaud (1991), Gioda \& Cividini (1994), Boidy et al. (2002), Sekine, et al. (2009) e Roatesi (2012, 2014).
+	
+\end{alineas}
+
+Um exemplo da magnitude dos efeitos viscosos frente a leis elásticas e elastoplásticas em túneis profundos, pode ser vista no perfil de convergências da Figura 4.18 obtidas de análises em axissimetria. Quando se considera no modelo apenas a lei elastoviscoplástica em regime secundário, tal possui um comportamento intermediário entre as leis elásticas e elastoplásticas. Além disso, quanto mais rápido a escavação, mais a resposta se aproxima da solução em elasticidade e quanto mais lento mais se aproxima da elastoplasticidade. Isso é uma característica própria dos modelos viscoplásticos, por exemplo.
+
+Uma outra abordagem é a combinação de diversos comportamentos, tanto instantâneos quanto diferidos. E esse será o principal enfoque dessa tese, que compreenderá a implementação de um comportamento elastoplástico-viscoplástico.
 
 \subsection{Alguns estudos considerando leis elastoplásticas e viscoplásticas}
 
