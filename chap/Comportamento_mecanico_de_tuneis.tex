@@ -172,7 +172,7 @@ Contudo, como visto nas figuras acima, a massa rochosa não é um material perfe
 	\caption{\label{deslocamentos_tensoes_analitico}Deslocamentos e tensões no entorno de uma seção circular submetida às tensões iniciais geostáticas-hidrostáticas $p_{\infty}$ e pressão interna $p_i$. À esquerda, maciço elástico e à direita, elastoplástico.}
 \end{figure}
 
-Algumas soluções analíticas considerando leis elastoplásticas específicas para túneis não revestidos podem ser encontradas, por exemplo, em \citeonline{Salencon1969}, \citeonline{Hoek1980}, \citeonline{Brown1983}, \citeonline{Detournay1987}, \citeonline{Carranza-Torres1999}, \citeonline{Carranza-Torres2004}, \citeonline{Sharan2003}, \citeonline{Sharan2005} e \citeonline{Alejano2009}.
+Algumas soluções analíticas considerando leis elastoplásticas específicas para túneis não revestidos podem ser encontradas, por exemplo, em \citeonline{Salencon1969}, \citeonline{Hoek1980}, \citeonline{Brown1983}, \citeonline{Detournay1987}, \citeonline{Carranza-Torres1999}, \citeonline{Carranza-Torres2004}, Sharan (\citeyear{Sharan2003,Sharan2005}) e \citeonline{Alejano2009}.
 
 Um dos objetivos desta tese é justamente implementar um algoritmo geral para considerar esse comportamento instantâneo elastoplástico conjuntamente com o fenômeno diferido no tempo.
 
@@ -229,17 +229,24 @@ Há diversas formas de introduzir esse comportamento no interior das análises d
 
 \begin{alineas}
 	
-	\item \textbf{empírico-experimentais}: geralmente são leis expressas por funções ajustadas empiricamente. Para tal existem funções potenciais, como em Obert (1965), exponeciais em Singh \& Mitchel (1968) e hiperbólicas como em Mesri et al. (1981) e Phienwej et al. (2007);
+	\item \textbf{empírico-experimentais}: geralmente são leis expressas por funções ajustadas empiricamente. Para tal existem funções potenciais, como em \citeonline{Obert1965}, exponeciais em \citeonline{Singh1968} e hiperbólicas como em \citeonline{Mesri1981} e \citeonline{Phienwej2007};
 	
-	\item \textbf{acoplamento hidro-mecânico}: leis que consideram o maciço como sendo constituído por uma fase sólida e fluída. Exemplos dessa abordagem podem ser encontrados nos trabalhos de Griffiths (1994), Leem \& Kemeny (1999), Wong et al. (2008), Deleruyelle et al. (2014) e Prassetyo \& Gutierrez (2018).
+	\item \textbf{acoplamento hidro-mecânico}: leis que consideram o maciço como sendo constituído por uma fase sólida e fluída. Exemplos dessa abordagem podem ser encontrados nos trabalhos de \citeonline{Griffiths1994}, \citeonline{Leem1999}, \citeonline{Wong2008}, \citeonline{Deleruyelle2014} e \citeonline{Prassetyo2018}.
 	
-	\item \textbf{Viscoelásticas}: leis formuladas através da analogia com sistemas mecânicos derivados da associação de elementos simples (mola e amortecedor). Estudos com essa abordagem podem ser encontrados em Sakurai (1978), Panet (1979), Sulem et al. (1987), Ladanyi \& Gill (1988), Goodman (1989), Pan \& Dong (1991a, 1991b), Fahimifar, et al. (2010), Wang et al. (2014) e Wang et al. (2018);
+	\item \textbf{Viscoelásticas}: leis formuladas através da analogia com sistemas mecânicos derivados da associação de elementos simples (mola e amortecedor). Estudos com essa abordagem podem ser encontrados em \citeonline{Sakurai1978}, \citeonline{Panet1979}, \citeonline{Sulem1987}, \citeonline{Ladanyi1988}, \citeonline{Goodman1989}, Pan e Dong (\citeyear{Pan1991a}, \citeyear{Pan1991b}), \citeonline{Fahimifar2010}, \citeonline{Wang2014} e \citeonline{Wang2018};
 	
-	\item \textbf{Viscoplásticas}: leis formuladas através da teoria da plasticidade dependente do tempo, que, tal como as leis viscoelásticas, também possuem uma analogia com sistemas mecânicos elementares, mas introduzem um elemento de atrito, para representar o ponto a partir do qual o fenômeno passa a ter importância. Leis desse tipo podem ser encontradas nos estudos de Berest \& Nguyen (1983), Fritz (1984), Cristescu (1985, 1988), Ottosen (1986), Bernaud (1991), Gioda \& Cividini (1994), Boidy et al. (2002), Sekine, et al. (2009) e Roatesi (2012, 2014).
+	\item \textbf{Viscoplásticas}: leis formuladas através da teoria da plasticidade dependente do tempo, que, tal como as leis viscoelásticas, também possuem uma analogia com sistemas mecânicos elementares, mas introduzem um elemento de atrito, para representar o ponto a partir do qual o fenômeno passa a ter importância. Leis desse tipo podem ser encontradas nos estudos de \citeonline{Berest1983}, \citeonline{Fritz1984}, Cristescu (\citeyear{Cristescu1985}, \citeyear{Cristescu1988}), \citeonline{Ottosen1986}, \citeonline{Bernaud1991}, \citeonline{Gioda1994}, \citeonline{Boidy2002}, \citeonline{Sekine2009} e Roate\c{s}i (\citeyear{Roatesi2012},\citeyear{Roatesi2014}).
 	
 \end{alineas}
 
-Um exemplo da magnitude dos efeitos viscosos frente a leis elásticas e elastoplásticas em túneis profundos, pode ser vista no perfil de convergências da Figura 4.18 obtidas de análises em axissimetria. Quando se considera no modelo apenas a lei elastoviscoplástica em regime secundário, tal possui um comportamento intermediário entre as leis elásticas e elastoplásticas. Além disso, quanto mais rápido a escavação, mais a resposta se aproxima da solução em elasticidade e quanto mais lento mais se aproxima da elastoplasticidade. Isso é uma característica própria dos modelos viscoplásticos, por exemplo.
+Um exemplo da magnitude dos efeitos viscosos frente a leis elásticas e elastoplásticas em túneis profundos, pode ser vista no perfil de convergências da \autoref{perfil_convergencias_sterpi} obtidas de análises em axissimetria. Quando se considera no modelo apenas a lei elastoviscoplástica em regime secundário, tal possui um comportamento intermediário entre as leis elásticas e elastoplásticas. Além disso, quanto mais rápido a escavação, mais a resposta se aproxima da solução em elasticidade e quanto mais lenta mais se aproxima da elastoplasticidade. Isso é uma característica própria dos modelos viscoplásticos, por exemplo.
+
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[scale = 1]{0418-perfil de convergências.pdf}
+	\end{center}
+	\caption{\label{perfil_convergencias_sterpi}Perfil de convergências, em análises numéricas axissimétricas com maciço elástico (EL), elastoplástico (EP), viscoelástico (VE), viscoplástico com fluência no regime secundário (VP) e em regime terciário (VP3), todos na ausência de revestimento (adaptado de: \citeonline[p. 329]{Sterpi2009})}
+\end{figure}
 
 Uma outra abordagem é a combinação de diversos comportamentos, tanto instantâneos quanto diferidos. E esse será o principal enfoque dessa tese, que compreenderá a implementação de um comportamento elastoplástico-viscoplástico.
 
