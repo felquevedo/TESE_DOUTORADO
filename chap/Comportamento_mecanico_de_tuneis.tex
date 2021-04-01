@@ -272,11 +272,29 @@ Seguindo os mesmos passos de Rousset, \textbf{\citeonline{Piepi1995}} estudando 
 
 \textbf{\citeonline{Vrakas2015}} desenvolveram uma função hiperbólica para corrigir a convergência obtida em soluções que consideram pequenas deformações, eliminando assim a necessidade de análises em grandes deformações (para túneis cujas convergências excedem 10\% do raio do túnel) que estão associadas com o comportamento diferido no tempo.
 
-\textbf{\citeonline{Kargar2019}} apresenta soluções analíticas para alguns modelos viscoelásticos e o modelo CVISC. Modificar linha para o Felipe.
+\textbf{\citeonline{Kargar2019}} apresenta soluções analíticas para alguns modelos viscoelásticos e o modelo CVISC.
 
 \section{Influência da forma da seção}
 
+Muitas análises consideram, por simplificação, a seção circular. Esse formato de seção com um estado inicial de tensões geostático-hidrostático em um maciço homogêneo e isotrópico, fora da zona de influência da face de escavação, garante um campo de deslocamentos puramente radial. Essas condições são particularmente comuns nas soluções analíticas que consideram estado plano de deformações. Contudo, seções diferentes das circulares apresentam um campo de tensões e deformações não uniformes, havendo concentração de tensões próximo às quinas. Isso pode ser visto na \autoref{trajetorias_hoekbrown}.
+
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[scale = 1.3]{0419-trajetória das tensões principais.pdf}
+	\end{center}
+	\caption{\label{trajetorias_hoekbrown}Trajetória das tensões principais e linhas de isotensão, da maior e menor tensão principal, para seção circular (à esquerda) e ferradura (à direita) em condições geostáticas hidrostáticas (adaptado de: \citeonline[p. 469, 484]{Hoek1980})}
+\end{figure}
+
 \section{Influência da profundidade do túnel}
+
+A profundidade do túnel está diretamente relacionada com o estado de tensões iniciais. Dados empíricos (Figura 4.20a) sugerem que a tensão vertical pode ser estimada através da seguinte expressão (BROWN \& HOEK, 1978):
+
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[scale = 1.3]{0422-trajetória das tensões principais_aniso.pdf}
+	\end{center}
+	\caption{\label{trajetorias_hoekbrown_aniso}Trajetória das tensões principais e linhas de isotensão da maior e menor tensão principal para seção circular (à esquerda) e ferradura (à direita) considerando $K=0$  (adaptado de: \citeonline[p. 468,483]{Hoek1980})}
+\end{figure}
 
 \section{Influência da proximidade da superfície}
 
