@@ -287,7 +287,45 @@ Muitas análises consideram, por simplificação, a seção circular. Esse forma
 
 \section{Influência da profundidade do túnel}
 
-A profundidade do túnel está diretamente relacionada com o estado de tensões iniciais. Dados empíricos (Figura 4.20a) sugerem que a tensão vertical pode ser estimada através da seguinte expressão (BROWN \& HOEK, 1978):
+A profundidade do túnel está diretamente relacionada com o estado de tensões iniciais. Dados empíricos (\autoref{coeficiente_empuxo}a) sugerem que a tensão vertical pode ser estimada através da seguinte expressão \cite[p. 96]{Hoek1980}:
+
+\begin{equation}
+	\sigma_v(z=H)= \gamma H ,
+\end{equation}
+
+em que $\gamma$ é o peso específico do maciço e $H$ a profundidade do túnel. \citeonline{Hoek1980} reunem diversos dados que indicam que $\gamma$ (para maciços rochosos) situa-se na faixa de 20kN/m³ à 30kN/m³. Contudo, esses limites podem variar dependendo do banco de dados utilizado como, por exemplo, em \citeonline[p. 1030]{Martin2003}.
+
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[scale = 1.0]{0420-tensoes verticais e coeficiente de empuxo k.pdf}
+	\end{center}
+	\caption{\label{coeficiente_empuxo}a) tensões verticais e b) razão entre a tensão horizontal e vertical (coeficiente de empuxo $K$)  (adaptado de: \citeonline[p. 99-100]{Hoek1980})}
+\end{figure}
+
+Como pode ser visto na \autoref{coeficiente_empuxo}b, há certa dispersão da tensão horizontal. Esse aspecto ainda hoje é objeto de estudo e uma boa revisão desses trabalhos pode ser obtido em \citeonline{Zhu2013}. Muitos desses trabalhos propõem equações simplificadas para obter o valor do coeficiente de empuxo $K$. Por exemplo, \citeonline[p. 32]{Sheorey1994} desenvolveu um modelo elasto-estático termal para as tensões na crosta da terra e obteve a seguinte equação simplificada que pode ser utilizada para estimar o coeficiente de empuxo $K$ em maciços rochosos:
+
+\begin{equation}
+	K = 0,25 + 7E_h(0,001+1/H).
+\end{equation}
+
+Sendo $H$ (m) a profundidade e $E_h$ (GPa) o módulo de deformação médio horizontal na parte superior da crosta terrestre. Contudo, como apontado por Sheorey, seu trabalho não explica a ocorrência de tensões verticais mais altas do que a profundidade indicaria ou o porquê de duas tensões horizontais raramente serem iguais. Segundo \citeonline[p. 67]{Hoek1998}, essas diferenças provavelmente se devem às características topográficas e geológicas locais, que não podem ser consideradas em um modelo de grande escala. Consequentemente, onde as tensões \textit{in situ} tendem a ter uma influência significativa no comportamento de aberturas subterrâneas é melhor medi-las \textit{in loco}.
+
+Para túneis profundos, quando $H/D > 10$ , sendo $D$ o diâmetro equivalente da seção, é comum durante as análises, desprezar-se a variação da tensão vertical com a profundidade. Uma vez que, em túneis profundos, a variação de tensão ao longo do diâmetro da seção é irrelevante frente a magnitude da tensão na cota da profundidade, ou seja,
+
+\begin{equation}
+	\left|\Delta\sigma_v\right| = \left| \sigma_v(H+D/2)-\sigma_v(H-D/2)\right| = \left| \sigma_v(D) \right| <<  \left| \sigma_v(H)\right|
+\end{equation}
+
+Esse princípio pode ser melhor entendido através da \autoref{tunel_profundo}.
+
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[scale = 1.0]{0421-tunelprofundo.pdf}
+	\end{center}
+	\caption{\label{tunel_profundo}Princípio para se considerar um túnel profundo  (adaptado de: \citeonline[p. 8]{Benamar1996})}
+\end{figure}
+
+De qualquer forma, conforme a \autoref{coeficiente_empuxo}, a consideração das tensões iniciais geostática hidrostática é apenas um caso específico de tensões \textit{in situ}, ou seja, quando $K=1$. A diferença entre as tensões verticais e horizontais afetam fortemente o campo de tensões e deformações após a escavação. Isso pode ser visto em análises elásticas com estado plano de deformações através, por exemplo, da comparação entre a \autoref{trajetorias_hoekbrown} e a \autoref{trajetorias_hoekbrown_aniso} obtidas por \citeonline{Hoek1980}.
 
 \begin{figure}[H]
 	\begin{center}
@@ -295,6 +333,8 @@ A profundidade do túnel está diretamente relacionada com o estado de tensões 
 	\end{center}
 	\caption{\label{trajetorias_hoekbrown_aniso}Trajetória das tensões principais e linhas de isotensão da maior e menor tensão principal para seção circular (à esquerda) e ferradura (à direita) considerando $K=0$  (adaptado de: \citeonline[p. 468,483]{Hoek1980})}
 \end{figure}
+
+Além disso, quando o maciço apresenta um comportamento elastoplástico, a anisotropia das tensões \textit{in situ} afeta o formato da zona de plastificação. Isso pode ser visto no estudo de Detournay \& Jhon (1988). Utilizando soluções analíticas para seções circulares em um maciço elastoplástico com lei do comportamento de Mohr-Coulomb, esses autores apresentam um ábaco identificando os \textbf{modos de falha} (formas das zonas de plastificação) de acordo com o grau de anisotropia das tensões iniciais (Figura 4.23).
 
 \section{Influência da proximidade da superfície}
 
