@@ -313,7 +313,7 @@ Sendo $H$ (m) a profundidade e $E_h$ (GPa) o módulo de deformação médio hori
 Para túneis profundos, quando $H/D > 10$ , sendo $D$ o diâmetro equivalente da seção, é comum durante as análises, desprezar-se a variação da tensão vertical com a profundidade. Uma vez que, em túneis profundos, a variação de tensão ao longo do diâmetro da seção é irrelevante frente a magnitude da tensão na cota da profundidade, ou seja,
 
 \begin{equation}
-	\left|\Delta\sigma_v\right| = \left| \sigma_v(H+D/2)-\sigma_v(H-D/2)\right| = \left| \sigma_v(D) \right| <<  \left| \sigma_v(H)\right|
+	\left|\Delta\sigma_v\right| = \left| \sigma_v(H+D/2)-\sigma_v(H-D/2)\right| = \left| \sigma_v(D) \right| <<  \left| \sigma_v(H)\right|.
 \end{equation}
 
 Esse princípio pode ser melhor entendido através da \autoref{tunel_profundo}.
@@ -322,7 +322,7 @@ Esse princípio pode ser melhor entendido através da \autoref{tunel_profundo}.
 	\begin{center}
 		\includegraphics[scale = 1.0]{0421-tunelprofundo.pdf}
 	\end{center}
-	\caption{\label{tunel_profundo}Princípio para se considerar um túnel profundo  (adaptado de: \citeonline[p. 8]{Benamar1996})}
+	\caption{\label{tunel_profundo}Princípio para se desconsiderar a variação da tensão vertical na região próxima ao túnel  (adaptado de: \citeonline[p. 8]{Benamar1996})}
 \end{figure}
 
 De qualquer forma, conforme a \autoref{coeficiente_empuxo}, a consideração das tensões iniciais geostática hidrostática é apenas um caso específico de tensões \textit{in situ}, ou seja, quando $K=1$. A diferença entre as tensões verticais e horizontais afetam fortemente o campo de tensões e deformações após a escavação. Isso pode ser visto em análises elásticas com estado plano de deformações através, por exemplo, da comparação entre a \autoref{trajetorias_hoekbrown} e a \autoref{trajetorias_hoekbrown_aniso} obtidas por \citeonline{Hoek1980}.
@@ -334,7 +334,26 @@ De qualquer forma, conforme a \autoref{coeficiente_empuxo}, a consideração das
 	\caption{\label{trajetorias_hoekbrown_aniso}Trajetória das tensões principais e linhas de isotensão da maior e menor tensão principal para seção circular (à esquerda) e ferradura (à direita) considerando $K=0$  (adaptado de: \citeonline[p. 468,483]{Hoek1980})}
 \end{figure}
 
-Além disso, quando o maciço apresenta um comportamento elastoplástico, a anisotropia das tensões \textit{in situ} afeta o formato da zona de plastificação. Isso pode ser visto no estudo de Detournay \& Jhon (1988). Utilizando soluções analíticas para seções circulares em um maciço elastoplástico com lei do comportamento de Mohr-Coulomb, esses autores apresentam um ábaco identificando os \textbf{modos de falha} (formas das zonas de plastificação) de acordo com o grau de anisotropia das tensões iniciais (Figura 4.23).
+Além disso, quando o maciço apresenta um comportamento elastoplástico, a anisotropia das tensões \textit{in situ} afeta o formato da zona de plastificação. Isso pode ser visto no estudo de \citeonline{Detournay1988}. Utilizando soluções analíticas para seções circulares em um maciço elastoplástico com lei do comportamento de Mohr-Coulomb, esses autores apresentam um ábaco identificando os \textbf{modos de falha} (formas das zonas de plastificação) de acordo com o grau de anisotropia das tensões iniciais (\autoref{modos_falha}).
+
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[scale = 1.0]{0423-modos_falha.pdf}
+	\end{center}
+	\caption{\label{modos_falha}Relação entre o estado de tensões iniciais e os modos de falha, onde $q$ é a resistência à compressão uniaxial do maciço (adaptado de: \citeonline[p.  121]{Detournay1988})}
+\end{figure}
+
+Como se pode ver na \autoref{modos_falha}, esses autores identificaram quatro zonas:
+
+\begin{alineas}
+	\item \textbf{região I}: a massa rochosa se comporta como um material elástico linear, ou seja, onde o estado de tensões não excedeu o critério de plasticidade em qualquer ponto;
+	\item \textbf{região IIa}: a plastificação da rocha ao redor do túnel se estende em uma direção perpendicular a maior tensão principal de compressão, mas ainda não engloba completamente a seção do túnel;
+	\item \textbf{região IIb}: a seção está completamente rodeada por uma zona de plastificação oval;
+	\item \textbf{região III}: a zona de plastificação apresenta um formato de borboleta.
+\end{alineas}
+
+Além disso, quando há revestimento a anisotropia das tensões poderá ocasionar tração ou falha por compressão e cisalhamento na coroa ou nas paredes laterais do revestimento \cite{Brady2006}. Contudo, para uma situação em que $0 \leq K \leq 1$, em túneis profundos, a consideração de um estado geostático hidrostático ($K=1$) pode ser conservadora, para o dimensionamento do revestimento, como pode ser visto no estudo de \citeonline{Shrestha2015}.
+
 
 \section{Influência da proximidade da superfície}
 
