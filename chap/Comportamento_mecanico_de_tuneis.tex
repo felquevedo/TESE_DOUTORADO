@@ -357,7 +357,40 @@ Além disso, quando há revestimento a anisotropia das tensões poderá ocasiona
 
 \section{Influência da proximidade da superfície}
 
+Quando o túnel está muito próximo da superfície, a região do maciço acima da seção não possui condições para formar a parte superior do arco transversal e desviar as tensões ao redor da cavidade. Isso faz com que essa parcela do maciço atue como sobrecarga sobre o revestimento. Dessa forma, o maciço no entorno de uma seção circular, por exemplo, não possui o campo de deslocamentos puramente radial. A rigor essa condição de túnel raso vai depender da capacidade resistente do maciço, contudo há na literatura indicações de que essa condição é atingida quando a altura de maciço sobre a coroa da seção transversal é menor que duas vezes o diâmetro \cite[p. 67]{Chapman2018}. Como consequência, a deformação da seção passa a apresentar três modos de deformações sobrepostos: uma convergência uniforme, uma distorção e translação vertical (\autoref{modos_deformacao}).
+
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[scale = 1.0]{0424-modos_deformacao.pdf}
+	\end{center}
+	\caption{\label{modos_deformacao}Modos de deformações em túneis superficiais de seção circular (adaptado de: \citeonline[p. 4]{Pinto2014})}
+\end{figure}
+
+Quando o túnel apresenta um revestimento de concreto, por exemplo, o modo de deformação de distorção poderá induzir tensões de tração no interior do revestimento. Além disso, tão ou mais importante que a deformada da seção é o recalque induzido na superfície pelo processo de escavação. Conforme o túnel avança ele forma uma bacia de assentamento superficial que pode afetar as estruturas existentes (\autoref{bacia_assentamento}).
+
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[scale = 1.0]{0425-bacia de assentamento.pdf}
+	\end{center}
+	\caption{\label{bacia_assentamento}Representação tridimensional da bacia de assentamento superficial durante a construção de um túnel superficial (adaptado de: \citeonline{Yeates1985} \textit{apud} \citeonline[p. 80]{Rankin2008})}
+\end{figure}
+
+Seguindo o trabalho de \citeonline{Martos1958} sobre assentamentos causados por minas \citeonline{Schmidt1969} e \citeonline{Peck1969}, e posteriormente muitos outros autores, mostraram que o perfil de assentamento no plano transversal pode muito bem ser descrito e ajustado, de forma empírica, através de uma curva de distribuição Gaussiana (\autoref{perfil_assentamento_transversal}).
+
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[scale = 1.0]{0426-perfil assentamento transversal.pdf}
+	\end{center}
+	\caption{\label{perfil_assentamento_transversal}Perfil idealizado de assentamento transversal com distribuição normal (adaptado de: \citeonline{OReilly1982} \textit{apud} \citeonline[p. 80]{Rankin2008})}
+\end{figure}
+
+Após \citeonline{Peck1969} propor sua forma empírica para descrever a bacia de assentamentos, adaptações dela e outros métodos semi-empíricos foram desenvolvidos com base em mais observações. Devido ao comportamento bastante específico relacionado a proximidade da superfície, os estudos sobre túneis se dividem em \textbf{túneis superficiais} e \textbf{túneis profundos}. Apesar da generalidade do modelo proposto na tese, a influência da superfície não será estudada no presente trabalho, que envolverá apenas túneis profundos, contudo, um bom resumo bibliográfico de soluções semi-empíricas pode ser encontrado em \citeonline{Zhou2018} e soluções numéricas na introdução de \citeonline{Panji2016}.
+
 \section{Influência do revestimento e parâmetros adimensionais}
+
+Dependendo da qualidade da rocha e das dimensões da abertura, muitos maciços conseguem desenvolver o arqueamento das tensões com pouca deformação ou ausência de plastificação. Isso caracteriza um maciço \textbf{autoportante} e, nesse caso, é necessário apenas um revestimento estético ou primário para evitar quedas localizadas. Contudo, se a redistribuição das tensões puder levar o maciço à plastificação ou deformações excessivas, nesse caso, é necessária a utilização de um \textbf{revestimento com função estrutural}. Após escavar, a redistribuição das tensões para as zonas vizinhas no interior do maciço vai depender também dos deslocamentos permitidos por esse revestimento. Dessa forma, o estado de equilíbrio após a escavação não dependerá apenas das características do maciço, tensões iniciais, da geometria da seção e escavação, mas também do comportamento conjunto do maciço com esse revestimento. Portanto, o campo de tensões e deformações dependerão da rigidez relativa entre o maciço e o revestimento, da deformação do maciço no instante de colocação do revestimento, da distância não suportada em relação à frente de escavação e, quando há comportamentos diferidos no tempo, da velocidade de avanço da construção do túnel.
+
+A Figura 4.27 ilustra, em um corte longitudinal, o perfil de convergências e de tensões verticais sobre um túnel profundo revestido. À esquerda do ponto A o maciço encontra-se na zona não perturbada pela frente de escavação, mantendo, portanto, sua tensão vertical inicial  . Contudo, próximo à frente de escavação há um aumento das tensões verticais (entre os pontos A e B) devido ao arqueamento longitudinal das tensões próximo a face de escavação. No trecho não suportado   as tensões verticais são nulas, uma vez que não há impedimento à deformação da seção. Porém, a partir da ponta do revestimento (ponto D) há um acréscimo de tensões verticais (até o ponto E), novamente devido ao efeito de arqueamento longitudinal. Conforme a frente de escavação se afasta as tensões diminuem até atingirem um valor constante   (ponto F).
 
 \section{Método convergência-confinamento}
 
