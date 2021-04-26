@@ -388,9 +388,58 @@ Após \citeonline{Peck1969} propor sua forma empírica para descrever a bacia de
 
 \section{Influência do revestimento e parâmetros adimensionais}
 
-Dependendo da qualidade da rocha e das dimensões da abertura, muitos maciços conseguem desenvolver o arqueamento das tensões com pouca deformação ou ausência de plastificação. Isso caracteriza um maciço \textbf{autoportante} e, nesse caso, é necessário apenas um revestimento estético ou primário para evitar quedas localizadas. Contudo, se a redistribuição das tensões puder levar o maciço à plastificação ou deformações excessivas, nesse caso, é necessária a utilização de um \textbf{revestimento com função estrutural}. Após escavar, a redistribuição das tensões para as zonas vizinhas no interior do maciço vai depender também dos deslocamentos permitidos por esse revestimento. Dessa forma, o estado de equilíbrio após a escavação não dependerá apenas das características do maciço, tensões iniciais, da geometria da seção e escavação, mas também do comportamento conjunto do maciço com esse revestimento. Portanto, o campo de tensões e deformações dependerão da rigidez relativa entre o maciço e o revestimento, da deformação do maciço no instante de colocação do revestimento, da distância não suportada em relação à frente de escavação e, quando há comportamentos diferidos no tempo, da velocidade de avanço da construção do túnel.
+Dependendo da qualidade da rocha e das dimensões da abertura, muitos maciços conseguem desenvolver o arqueamento das tensões com pouca deformação ou ausência de plastificação. Isso caracteriza um maciço \textbf{autoportante} e, nesse caso, é necessário apenas um revestimento estético ou primário para evitar quedas localizadas. Contudo, se a redistribuição das tensões puder levar o maciço à plastificação ou deformações excessivas, nesse caso, é necessária a utilização de um \textbf{revestimento com função estrutural}. Dessa forma, a redistribuição das tensões para as zonas vizinhas no interior do maciço vai depender também dos deslocamentos permitidos por esse revestimento. Portanto, o estado de equilíbrio após a escavação não dependerá apenas das características do maciço, tensões iniciais, da geometria da seção e escavação, mas também do comportamento conjunto do maciço com esse revestimento. Consequentemente, o campo de tensões e deformações dependerão da rigidez relativa entre o maciço e o revestimento, da deformação do maciço no instante de colocação do revestimento, da distância não suportada em relação à frente de escavação e, quando há comportamentos diferidos no tempo, da velocidade de avanço da construção do túnel.
 
-A Figura 4.27 ilustra, em um corte longitudinal, o perfil de convergências e de tensões verticais sobre um túnel profundo revestido. À esquerda do ponto A o maciço encontra-se na zona não perturbada pela frente de escavação, mantendo, portanto, sua tensão vertical inicial  . Contudo, próximo à frente de escavação há um aumento das tensões verticais (entre os pontos A e B) devido ao arqueamento longitudinal das tensões próximo a face de escavação. No trecho não suportado   as tensões verticais são nulas, uma vez que não há impedimento à deformação da seção. Porém, a partir da ponta do revestimento (ponto D) há um acréscimo de tensões verticais (até o ponto E), novamente devido ao efeito de arqueamento longitudinal. Conforme a frente de escavação se afasta as tensões diminuem até atingirem um valor constante   (ponto F).
+A \autoref{perfil_tensoes_verticais} ilustra, em um corte longitudinal, o perfil de convergências e tensões verticais sobre um túnel profundo revestido. À esquerda do ponto A o maciço encontra-se na zona não perturbada pela frente de escavação, mantendo, portanto, sua tensão vertical inicial $p_{\infty}$. Contudo, próximo à frente de escavação há um aumento das tensões verticais (entre os pontos A e B) devido ao arqueamento longitudinal das tensões próximo à face de escavação. No trecho não suportado $d_0$ as tensões verticais são nulas, uma vez que não há impedimento à deformação da seção. Todavia, a partir da ponta do revestimento (ponto D) há um acréscimo de tensões verticais (até o ponto E), novamente ocasionado pelo arqueamento longitudinal. Conforme a frente de escavação se afasta as tensões diminuem até atingirem um valor constante $p_{eq}$ (ponto F) e o perfil de convergências atinge um valor máximo e constante $Ueq$.
+
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[scale = 1.0]{0427-perfil tensão vertical.pdf}
+	\end{center}
+	\caption{\label{perfil_tensoes_verticais}Perfil de tensões verticais e de convergências ao longo de uma linha longitudinal situada no teto do túnel (adaptado de: \citeonline{Eisenstein1984} \textit{apud} \citeonline[p. 41]{Couto2011})}
+\end{figure}
+
+O revestimento também possui interação com o comportamento diferido do maciço. O tempo entre ciclos de escavação-revestimento permitem que deformações viscosas ocorram durante a fase construtiva, ocasionando picos no perfil de convergência. Isso pode ser visto nas soluções numéricas axisimétricas obtidas por \citeonline{Bernaud1991} considerando uma lei elastoviscoplástica. A \autoref{perfil_convergencias_final_construção} mostra o efeito dessa interação no perfil de convergências. Pode-se ver que quanto maior a velocidade de escavação menores são os picos. E é possível notar também que a frequência desses picos está relacionada com o passo de escavação, que neste caso é de $1R$. Se o passo fosse menor, de $1/3R$, por exemplo, os picos seriam sensivelmente menores.
+
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[scale = 1.0]{0428-perfil de convergencias no final da construção.pdf}
+	\end{center}
+	\caption{\label{perfil_convergencias_final_construção}Perfil de convergência em função da velocidade adimensional de avanço no final da construção do túnel (adaptado de: \citeonline[p. 214]{Bernaud1991})}
+\end{figure}
+
+Contudo, os efeitos viscosos continuam mesmo após a construção do túnel. Com o tempo a convergência da seção vai aumentando e a pressão no revestimento diminuindo. Além disso, quanto mais rápido for o ciclo de escavação-revestimento, maior será a diferença entre a convergência no final da construção e após estabilizado os efeitos viscosos no longo prazo. Isso pode ser visto comparando-se a \autoref{perfil_convergencias_final_construção} com a \autoref{perfil_convergencias_apos_efeitos_viscosos}.
+
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[scale = 1.0]{0429-perfil de convergencias após efeitos viscosos.pdf}
+	\end{center}
+	\caption{\label{perfil_convergencias_apos_efeitos_viscosos}Perfil de convergência em função da velocidade de construção admensionalizada no final da construção do túnel (adaptado de: \citeonline[p. 214]{Bernaud1991})}
+\end{figure}
+
+Um aspecto importante derivado das soluções analíticas é a identificação de parâmetros adimensionais que governam a problemática de túneis e permitem extrapolar os valores de uma análise para outra adimensionalmente equivalente. Dado essa generalidade são parâmetros muito utilizados para apresentação de resultados, como os que constam na \autoref{perfil_convergencias_final_construção} e \autoref{perfil_convergencias_apos_efeitos_viscosos}.
+
+Segundo \citeonline[p. 5]{Bernaud1994}, nas soluções analíticas em estado plano de deformações, considerando tanto o maciço quanto o revestimento com leis constitutivas elásticas, obtêm-se os seguintes parâmetros adimensionais:
+
+\begin{equation}
+	p_\infty^* = \frac{p_\infty}{E},~~~ K_r^* = \frac{K_r}{E},~~~ d_0^* = \frac{d_0}{R} 
+\end{equation}
+
+em que $E$ é o módulo de elasticidade do maciço, $p_\infty$ a pressão geostática hidrostástica, $K_r$ a rigidez equivalente do revestimento, $d_0$ a distância não revestida logo atrás da frente de escavação e $R$ o raio externo da abertura circular do túnel. Quando o maciço possuí lei constitutiva elastoplástica de Tresca ou von-Mises, acrescenta-se mais um parâmetro adimensional:
+
+\begin{equation}
+	c^* = \frac{c}{E} 
+\end{equation}
+
+sendo $c$ a coesão do maciço. Além disso, quando o túnel se encontra imerso em um meio elastoviscoplástico perfeito com modelo de Perzyna, tem-se cinco parâmetros adimensionais, que são \cite[p. 198]{Bernaud1991}:
+
+\begin{equation}
+	E^* = \frac{E}{c},~~~ p_\infty^* = \frac{p_\infty}{c},~~~ K_r^* = \frac{K_r}{c},~~~ d_0^* = \frac{d_0}{R},~~~ V^*=\frac{\eta V}{Rc}
+\end{equation}
+
+em que $\eta$ é a constante de viscosidade dinâmica (em unidade de tensão vezes tempo) e $V$ a velocidade de avanço do túnel.
+
+Contudo, a principal dificuldade na determinação do estado de equilíbrio de um túnel revestido está no fato de que o maciço já possui uma convergência $U_0$ no instante de instalação do revestimento. E essa convergência é dependente da interação entre o maciço e o revestimento que já foi aplicado. Uma forma de lidar com essa complexidade é através do método Convergência-Confinamento (também conhecido como o método das Curvas Características).
 
 \section{Método convergência-confinamento}
 
