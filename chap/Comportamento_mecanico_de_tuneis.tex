@@ -220,7 +220,7 @@ Portanto, no comportamento do túnel, além da deformação instantânea (result
 	\begin{center}
 		\includegraphics[scale = 1]{0417-evolução da convergência U no tempo t em função do avanço da escavação.pdf}
 	\end{center}
-	\caption{\label{evolucao_U_t_x}Evolução da convergência $U$ no tempo $t$ em função do avanço da escavação $x$ (adaptado de: \citeonline[p. 8]{Panet1995})}
+	\caption{\label{evolucao_U_t_x}Evolução da convergência $U$ no tempo $t$ em função do avanço da escavação $x$ (adaptado de: \citeonline[p. 12]{Panet1995})}
 \end{figure}
 
 Como pode-se ver na figura acima, mesmo sem escavar nos intervalos $[t_2,t_3]$ e $[t_5,t_6]$ a convergência não é constante, tal como seria em um maciço apenas elástico ou elastoplástico. Nesse caso ilustrativo, a convergência não só evoluiu como também se estabilizou com o tempo. 
@@ -443,6 +443,30 @@ Contudo, a principal dificuldade na determinação do estado de equilíbrio de u
 
 \section{Método convergência-confinamento}
 
+Muitos autores propuseram contribuições para essa abordagem como \citeonline{Fenner1938}, \citeonline{Pacher1964}, \citeonline{Panet1974} e \citeonline{Bernaud1992}. Esse método consiste em desacoplar o problema da interação entre o maciço e o revestimento utilizando os conceitos de curva de convergência do maciço e de curva de confinamento do revestimento. 
 
+A \textbf{curva de convergência do maciço} (CV) é obtida graficando-se a convergência $U_i$ em função de uma pressão interna fictícia $p_i$ atuante no interior da cavidade, partindo essa pressão da tensão inicial geostática-hidrostática $p_\infty$ até zero. Essa curva de convergência é independente do suporte e carrega consigo o comportamento do maciço frente a uma descompressão simulada pela variação de $p_i$ (ver curva azul na \autoref{metodo cv-cf}). Quando o maciço possui um comportamento elastoplástico, a curva apresenta um trecho linear elástico até que a descompressão atinge um valor limite $p_{lim}$, sendo a partir daí um trecho não-linear. Resumo de soluções analíticas para essa curva, considerando estado plano de deformações, seção circular e tensões iniciais geostáticas-hidrostáticas, pode ser encontrado, por exemplo, em \citeonline{Brown1983} e \citeonline{Corbeta1990}.
 
+A aplicação desse método está no fato de que é possível também construir uma curva análoga referente ao suporte, chamada de \textbf{curva de confinamento do revestimento} (CF) (ver curva vermelha na \autoref{metodo cv-cf}) cuja intersecção com a curva de convergência fornecerá o ponto de equilíbrio $(P_{eq},U_{eq})$ que é a solução do problema da interação entre o maciço e o revestimento. Tal como utilizado por \citeonline[p. 29]{Panet1995} soluções analíticas para tubos espessos ou casca cilíndrica, mesmo em elasticidade, podem corresponder como uma primeira aproximação da curva de confinamento para um dado revestimento.
 
+Apesar do comportamento da curva de confinamento depender exclusivamente da lei constitutiva do revestimento, a convergência inicial $U_0$, a partir da qual essa curva inicia, vai depender da interação entre o maciço e do revestimento que foi anteriormente instalado, uma vez que a seção do túnel, afastada de $d_0$ da face de escavação, já possui essa convergência durante o avanço construtivo do túnel.
+
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[scale = 1.0]{0430-metodo convergencia-confinamento.pdf}
+	\end{center}
+	\caption{\label{metodo cv-cf}Método da Convergência-Confinamento (adaptado de: \citeonline[p. 6]{Bernaud1994})}
+\end{figure}
+
+As curvas de convergência (CV) e de confinamento (CF) podem ser obtidas tanto de soluções analíticas como numéricas em estado plano de deformações, sendo que no caso numérico podem considerar leis mais complexas de comportamento do maciço. Contudo, a determinação de $U_0$ só pode ser feita através de um método que considere a completa interação entre o maciço e o revestimento, como análises tridimensionais, axissimétricas ou ainda medidas \textit{in situ}.
+
+Existem métodos simplificados que se diferenciam justamente nas propostas de $U_0$ através de estudos, por exemplo, em axissimetria. Nesse aspecto, \citeonline{Bernaud1992}, mostraram que o método CV-CF proposto até então, estava em desfavor da segurança, pois desconsiderava a rigidez do revestimento na determinação de $U_0$   (\autoref{metodo NIM}), o que significa que o método CV-CF não considerava de forma correta a interação entre o maciço e o revestimento.
+
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[scale = 1.0]{0431-influencia da rigidez do suporte no perfil de convergencias.pdf}
+	\end{center}
+	\caption{\label{metodo NIM}Influência da rigidez do revestimento no perfil de convergências do túnel e no parâmetro $U_0$ (adaptado de: \citeonline[p. 13]{Bernaud1992})}
+\end{figure}
+
+Em vista disso, esses autores propuseram uma correção ao método Convergência-Confinamento criando o \textit{New Implicit Method} (NIM). Um método implícito, pois $U_0$ depende tanto da rigidez do revestimento quanto da convergência ao equilíbrio (que se quer determinar). Esse método foi desenvolvido para leis de comportamento do maciço em elasticidade, plasticidade e viscoplasticidade, conforme \citeonline{Bernaud1992} e \citeonline{Bernaud1994}.
