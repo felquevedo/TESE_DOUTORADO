@@ -8,9 +8,9 @@
    xmlns:xlink="http://www.w3.org/1999/xlink"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="109.99095mm"
+   width="110.83736mm"
    height="63.412243mm"
-   viewBox="0 0 109.99095 63.412243"
+   viewBox="0 0 110.83736 63.412243"
    version="1.1"
    id="svg8"
    inkscape:version="1.0.1 (3bc2e813f5, 2020-09-07)"
@@ -1471,8 +1471,8 @@
       <rect
          x="0"
          y="0"
-         width="3.90525e+06"
-         height="2.11455e+06"
+         width="3905250"
+         height="2114550"
          id="rect4835" />
     </clipPath>
     <image
@@ -1486,8 +1486,8 @@
       <rect
          x="0"
          y="0"
-         width="3.89572e+06"
-         height="2.114e+06"
+         width="3895720"
+         height="2114000"
          id="rect4839" />
     </clipPath>
   </defs>
@@ -1498,11 +1498,11 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1.2350977"
-     inkscape:cx="199.49435"
-     inkscape:cy="169.75787"
+     inkscape:zoom="2.7167402"
+     inkscape:cx="190.63987"
+     inkscape:cy="212.21777"
      inkscape:document-units="mm"
-     inkscape:current-layer="g2309"
+     inkscape:current-layer="layer1"
      inkscape:document-rotation="0"
      showgrid="false"
      inkscape:window-width="1920"
@@ -2096,7 +2096,7 @@
          id="tspan2521"
          x="191.51549"
          y="36.008167"
-         style="stroke-width:0.264583"></tspan></text>
+         style="stroke-width:0.264583" /></text>
     <text
        xml:space="preserve"
        style="font-size:3.52777px;line-height:1.25;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, ';stroke-width:0.264583"
@@ -2294,28 +2294,6 @@
          x="82.518051"
          y="169.75246"
          style="font-size:1.41111px;stroke-width:0.264583">1,5</tspan></text>
-    <text
-       xml:space="preserve"
-       style="font-size:3.52777px;line-height:1.25;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, ';stroke-width:0.264583"
-       x="188.94125"
-       y="71.713486"
-       id="text2389-4-4-4"><tspan
-         sodipodi:role="line"
-         id="tspan2387-7-7-52"
-         x="188.94125"
-         y="71.713486"
-         style="font-size:1.41111px;stroke-width:0.264583">1,0</tspan></text>
-    <text
-       xml:space="preserve"
-       style="font-size:3.52777px;line-height:1.25;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, ';stroke-width:0.264583"
-       x="194.77495"
-       y="77.870567"
-       id="text2389-4-4-4-6"><tspan
-         sodipodi:role="line"
-         id="tspan2387-7-7-52-7"
-         x="194.77495"
-         y="77.870567"
-         style="font-size:1.41111px;stroke-width:0.264583">1,0</tspan></text>
     <g
        id="g4734">
       <ellipse
@@ -2407,7 +2385,7 @@
          sodipodi:start="0"
          sodipodi:end="1.5707963"
          sodipodi:arc-type="arc"
-         d="m 113.32451,52.153351 a 7.410944,7.4109535 0 0 1 -2.17061,5.240335 7.410944,7.4109535 0 0 1 -5.24033,2.170618"
+         d="m 113.32451,52.153351 a 7.410944,7.4109535 0 0 1 -7.41094,7.410953"
          sodipodi:open="true" />
       <path
          style="opacity:1;fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.1;stroke-miterlimit:4;stroke-dasharray:0.6, 0.6;stroke-dashoffset:0;stroke-opacity:1"
@@ -2894,26 +2872,15 @@
          id="path1598-5-9-8-5" />
       <text
          xml:space="preserve"
-         style="font-size:3.52777px;line-height:1.25;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, ';stroke-width:0.264583"
-         x="122.51212"
-         y="73.00135"
+         style="font-size:2.82222px;line-height:1.25;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, ';stroke-width:0.264583"
+         x="122.21996"
+         y="73.390907"
          id="text2389-4-4-4-9"><tspan
            sodipodi:role="line"
            id="tspan2387-7-7-52-78"
-           x="122.51212"
-           y="73.00135"
-           style="font-size:1.41111px;stroke-width:0.264583">1,0</tspan></text>
-      <text
-         xml:space="preserve"
-         style="font-size:3.52777px;line-height:1.25;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, ';stroke-width:0.264583"
-         x="128.34583"
-         y="79.158432"
-         id="text2389-4-4-4-6-4"><tspan
-           sodipodi:role="line"
-           id="tspan2387-7-7-52-7-4"
-           x="128.34583"
-           y="79.158432"
-           style="font-size:1.41111px;stroke-width:0.264583">1,0</tspan></text>
+           x="122.21996"
+           y="73.390907"
+           style="font-size:2.82222px;stroke-width:0.264583">1,0</tspan></text>
       <path
          style="opacity:1;fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.1;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
          id="path4289"
@@ -3056,6 +3023,39 @@
            x="106.74876"
            y="-61.014927"
            style="font-size:1.41111px;stroke-width:0.264583">1,30</tspan></text>
+      <text
+         xml:space="preserve"
+         style="font-size:2.82222222px;line-height:1.25;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, ';stroke-width:0.264583;"
+         x="128.55873"
+         y="79.50309"
+         id="text2389-4-4-4-9-4"><tspan
+           sodipodi:role="line"
+           id="tspan2387-7-7-52-78-3"
+           x="128.55873"
+           y="79.50309"
+           style="stroke-width:0.264583;font-size:2.82222222px;">1,0</tspan></text>
     </g>
+    <text
+       xml:space="preserve"
+       style="font-size:2.82222px;line-height:1.25;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, ';stroke-width:0.264583"
+       x="188.85147"
+       y="72.239685"
+       id="text2389-4-4-4-9-36"><tspan
+         sodipodi:role="line"
+         id="tspan2387-7-7-52-78-0"
+         x="188.85147"
+         y="72.239685"
+         style="font-size:2.82222px;stroke-width:0.264583">1,0</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:2.82222222px;line-height:1.25;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, ';stroke-width:0.264583;"
+       x="193.05098"
+       y="76.670532"
+       id="text2389-4-4-4-9-9"><tspan
+         sodipodi:role="line"
+         id="tspan2387-7-7-52-78-2"
+         x="193.05098"
+         y="76.670532"
+         style="stroke-width:0.264583;font-size:2.82222222px;">1,0</tspan></text>
   </g>
 </svg>
