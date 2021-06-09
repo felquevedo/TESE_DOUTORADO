@@ -229,7 +229,36 @@ A \autoref{dominio_plasticamente_admissivel} ilustra de uma forma genérica esse
 	\end{center}
 	\caption{\label{dominio_plasticamente_admissivel}Domínio genérico plasticamente admissível $\Gamma$ no espaço das tensões principais}
 \end{figure}
-Em elastoplasticidade isotrópica, a função de escoamento pode ser descrita apenas em função dos invariantes do tensor de tensões e das forças associadas às variáveis internas. São, portanto, comuns as seguintes representações equivalentes (adaptado de CHEN \& HAN, 1988):
+Em elastoplasticidade isotrópica, a função de escoamento pode ser descrita apenas em função dos invariantes do tensor de tensões e das forças associadas às variáveis internas. São, portanto, comuns as seguintes representações equivalentes (adaptado de \citeauthor{Chen1988}, \citeyear{Chen1988}, p. 57-72):
+\begin{equation}
+	\label{eq:funcoes_escoamento}
+	f(\sigmall,\ql) = f(I_1,J_2,J_3,\ql) = f(\xi,\rho,\theta,\ql) = f(p,q,\theta,\ql) = f(\sigma_{oct},\tau_{oct},\theta,\ql)
+\end{equation}
+em que:
+\begin{equation}
+	\label{eq:invariantes_tensores}
+		\begin{array}{lcl}
+			I_1 = \text{tr}(\sigmall) = \sigma_{11}+\sigma_{22}+\sigma_{33},~~~ J_3 = \dfrac{1}{3}\text{tr}(\sll^3) = det(\sll) \\ 
+			J_2 = \dfrac{1}{2}\text{tr}(\sll^2) = \dfrac{1}{6}\left[ (\sigma_{11}-\sigma_{22})^2 + (\sigma_{22}-\sigma_{33})^2 + (\sigma_{33}-\sigma_{11})^2 \right] + \sigma_{12}^2+ \sigma_{23}^2+ \sigma_{13}^2 \\
+			\xi = p = \sigma_{oct} = \dfrac{1}{3}I_1, ~~~ \rho = \sqrt{\sll:\sll} = \sqrt{2J_2}, ~~~ \theta = \dfrac{1}{3}arcsen\left( \dfrac{-3\sqrt{3}}{2} \dfrac{J_3}{J_2^{3/2}} \right) \\
+			-\dfrac{\pi}{6} \le \theta \le \dfrac{\pi}{6}, ~~~ q = \sqrt{\dfrac{3}{2}\sll:\sll} = \sqrt{3J_2}, ~~~ \tau_{oct} = \sqrt{\dfrac{3}{2}J_2}	
+	\end{array}
+\end{equation}
+sendo $(\xi,\rho,\theta)$ as coordenadas de Haigh-Westergaard (em que $\theta$ também é conhecido como ângulo de Lode), $p$ a pressão hidrostática, $q$ a tensão equivalente de von-Mises, $(\sigma_{oct},\tau_{oct})$ a tensão normal e cisalhante octaédrica, respectivamente, e $\sll$  o tensor de tensões desviadoras, dado por:
+\begin{equation}
+	\label{eq:tensor_desviador}
+	\sll = \sigmall: \left[ \Umllll-\Umll \otimes \Umll \right] = \sigmall - p\Umll
+\end{equation}
+Quando a função de escoamento não depende de $I_1$   diz-se que a plasticidade é independente da pressão hidrostática, sendo determinada apenas pelo estado de tensões ao longo do plano desviador.
+
+Diversas funções de escoamentos podem ser obtidas na literatura, tal como as apresentadas no resumo de \citeonline{Viladkar1995} que reúne tanto as funções de escoamentos clássicas (von-Mises, Tresca, Drucker-Prager, Mohr-Coulomb) quanto mais sofisticadas (\textit{Cap Models, Critical State Model, Desai’s Generlized Model}). O presente trabalho utilizará as funções de escoamentos de Drucker-Prager e Mohr-Coulomb que compreendem também generalizações das funções de von-Mises e Tresca, respectivamente (\autoref{Funções_escoamento}).
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[scale = 1.0]{0505-funções de escoamento.pdf}
+	\end{center}
+	\caption{\label{Funções_escoamento}Funções de escoamento de a) Drucker-Prager e b) Mohr-Coulomb  (adaptado de: \citeonline[p. 824]{Zienkiewicz1974})}
+\end{figure}
+A função de escoamento de Mohr-Coulomb, representada através de invariantes, é dada por (de SOUZA NETO, et al. 2008):
 
 \subsection{Regra de fluxo plástico}
 
