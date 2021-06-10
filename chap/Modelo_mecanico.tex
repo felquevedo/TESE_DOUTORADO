@@ -258,15 +258,152 @@ Diversas funções de escoamentos podem ser obtidas na literatura, tal como as a
 	\end{center}
 	\caption{\label{Funções_escoamento}Funções de escoamento de a) Drucker-Prager e b) Mohr-Coulomb  (adaptado de: \citeonline[p. 824]{Zienkiewicz1974})}
 \end{figure}
-A função de escoamento de Mohr-Coulomb, representada através de invariantes, é dada por (de SOUZA NETO, et al. 2008):
+A função de escoamento de Mohr-Coulomb, representada através de invariantes, é dada por \cite[p. 166]{Neto2008}:
+\begin{equation}
+	\label{eq:f_Mohr_Coulomb}
+	f(\sigmall,\ql) = f(I_1,J_2,\theta,c,\phi) = \dfrac{\sin(\phi)}{3}I_1 + \left(\cos(\phi)-\dfrac{1}{\sqrt{3}}\sin(\theta)\sin(\phi)\right)\sqrt{J_2}-c\cos(\phi) 
+\end{equation}
+em que $c$ é a coesão e $\phi$ o ângulo de atrito. De forma análoga, a função de escoamento de Drucker-Prager é dada por \cite[p. 167]{Neto2008}:
+\begin{equation}
+	\label{eq:f_Drucker_Prager}
+	f(\sigmall,\ql) = f(I_1,J_2,\beta,k) = \beta I_1 +\sqrt{J_2}-k
+\end{equation}
+em que os parâmetros $\beta$ e $k$ podem ser relacionados com a coesão e o ângulo de atrito do modelo de Mohr-Coulomb. Para o caso em que a superfície de Drucker-Prager coincide com as bordas mais externas da superfície de Mohr-Coulomb tem-se \cite[p. 167]{Neto2008}:
+\begin{equation}
+	\label{eq:f_DP_bordasexternas_MC}
+	\beta = \dfrac{2\sin{\phi}}{\sqrt{3}(3-\sin(\phi))}, ~~~ k = \dfrac{6\cos{\phi}}{\sqrt{3}(3-\sin(\phi))}c
+\end{equation}
+e para o caso em que a superfície de Drucker-Prager coincide com as bordas mais internas da superfície de Mohr-Coulomb, tem-se \cite[p. 167]{Neto2008}:
+\begin{equation}
+	\label{eq:f_DP_bordasinternas_MC}
+	\beta = \dfrac{2\sin{\phi}}{\sqrt{3}(3+\sin(\phi))}, ~~~ k = \dfrac{6\cos{\phi}}{\sqrt{3}(3+\sin(\phi))}c
+\end{equation}
+Essa aproximação pode ser vista no plano desviador confome a Figura 5.6.
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[scale = 1.0]{0506-representação no plano desviador da aproximação da superficie de MC com DP.pdf}
+	\end{center}
+	\caption{\label{DP-MC-plano_desviador}Representação no plano desviador da aproximação da superfície de Mohr-Coulomb pela superfície de Drucker-Prager  (adaptado de: \citeauthor{Neto2008}, \citeyear{Neto2008}, p. 169)}
+\end{figure}
+Quando $\phi = 0$ a superfície de Mohr-Coulomb e a de Drucker-Prager se tornam independentes da pressão hidrostática e se particularizam, respectivamente, para a superfície de Tresca e von-Mises:
+\begin{equation}
+	\label{eq:f_Tresca}
+	f(\sigmall,\ql) = f(J_2,\theta,c) = \sqrt{J_2}\cos{\theta} - c
+\end{equation}
+\begin{equation}
+	\label{eq:f_von-Mises}
+	f(\sigmall,\ql) = f(J_2,\theta,c) = \sqrt{J_2} - \dfrac{2c}{\sqrt{3}}
+\end{equation}
+Igualando-se as expressões (\ref{eq:f_von-Mises}) e (\ref{eq:f_Tresca}) à zero e isolando $\sqrt{J_2}$ é possível relacionar ambas as superfícies através da coesão (Figura 5.7):
+\begin{equation}
+	\label{eq:f_von-Mises}
+	c_{TR} = \dfrac{2}{\sqrt{3}}\cos(\theta)c_{VM} = \left\{
+	\begin{array}{lcl}
+		\dfrac{2}{\sqrt{3}}c_{VM}, ~~~\text{se}~\theta = 30^\circ \\ 
+		c_{VM},~~~~~~~~~\text{se}~\theta = 0^\circ
+	\end{array}
+	\right.
+\end{equation}
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[scale = 1.0]{0507-representação no plano desviador da aproximação da superfície de TR e VM.pdf}
+	\end{center}
+	\caption{\label{TR-VM-plano_desviador}Representação no plano desviador da aproximação da superfície de Tresca pela superfície de von-Mises (adaptado de: \citeauthor{Neto2008}, \citeyear{Neto2008}, p. 159, 164)}
+\end{figure}
 
 \subsection{Regra de fluxo plástico}
 
+A regra de fluxo plástico descreve a lei de evolução das deformações plásticas com relação às tensões. Essa regra é postulada da seguinte forma:
+\begin{equation}
+	\label{eq:fluxo_elastoplastico}
+	\dot \varepsilonll^p = \dot \lambda \dgdsll
+\end{equation}
+em que $\dot \lambda$ é a taxa da magnitude de deformação plástica $\lambda$ (chamado também de multiplicador plástico) e $\dgdsll$ o tensor que dá a direção do fluxo plástico (conhecido também como vetor de fluxo ou gradiente do potencial plástico), sendo definido como:
+\begin{equation}
+	\label{eq:vetor_fluxo_elastoplastico}
+	\dgdsll = \dfrac{\partial g}{\partial \sigmall}
+\end{equation}
+em que $g$ é uma função análoga a $f$ chamada de potencial plástico. No caso em que $g=f$ tem-se a \textbf{plasticidade associada} (ou seja, a direção do fluxo plástico é perpendicular à superfície de plastificação) (\autoref{fluxo_associado}).
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[scale = 1.0]{0508-representacao geometrica do vetor de fluxo com plasticidade associada.pdf}
+	\end{center}
+	\caption{\label{fluxo_associado}Representação geométrica do vetor de fluxo em plasticidade associada (adaptado de: \citeonline[p. 182]{Chen1988})}
+\end{figure}
+Tal como a função de escoamento, o potencial plástico geralmente é descrito através dos invariantes do tensor de tensões e pode ser determinado aplicando a regra da cadeia em (\ref{eq:vetor_fluxo_elastoplastico}). Por exemplo, se $g(I_1,\sqrt{J_2},J_3,\ql)$, tem-se (adaptado de \citeauthor{Viladkar1995}, \citeyear{Viladkar1995}, p. 333):
+\begin{equation}
+	\label{eq:invariantes_tensores}
+	\begin{array}{lcl}
+		\dgdsll = C_1\gllum + C_2\glldois + C_3\glltres \\ 
+		\gllum = \dfrac{\partial I_1}{\partial \sigmall} = \Umll,~~~ \glldois = \dfrac{\partial \sqrt{J_2}}{\partial \sigmall} = \dfrac{1}{2\sqrt{J_2}}\sll,~~~ \glltres = \dfrac{\partial J_3}{\partial \sigmall} = \dfrac{4J_2}{3}\Umll \\
+		C_1 = \dfrac{\partial g}{\partial I_1},~~~C_2=\dfrac{\partial g}{\partial \sqrt{J_2}}-\dfrac{\tan{(3\theta)}}{\sqrt{J_2}}\dfrac{\partial g}{\partial \theta},~~~C_3 = \dfrac{\sqrt{3}}{2\cos{(3\theta})}-\dfrac{1}{J_2^{3/2}}\dfrac{\partial g}{\partial \theta}
+	\end{array}
+\end{equation}
+Nessa descrição, apenas as constantes $C_1$, $C_2$  e $C_3$ são particularidades das superfícies potenciais, sendo que para a superfície de Mohr-Coulomb tem-se:
+\begin{equation}
+	\label{eq:c1MC}
+	C_1 = \dfrac{1}{3}\sin(\phi)
+\end{equation}
+\begin{equation}
+	\label{eq:c2MC}
+	C_2 = \cos(\theta)\left[1+\tan(\theta)\tan(3\theta) + \dfrac{\sin(\phi)\left(\tan(3\theta)-\tan(\theta)\right)}{\sqrt{3}}\right]
+\end{equation}
+\begin{equation}
+	\label{eq:c3MC}
+	C_3 = \dfrac{\sqrt{3}\sin(\theta)+\cos(\theta)\sin(\phi)}{2J_2\cos(3\theta)}
+\end{equation}
+E para Drucker-Prager, tem-se:
+\begin{equation}
+	\label{eq:c1c2c3DP}
+	c_1 = \beta,~~~C_2 = 1,~~~C_3 = 0
+\end{equation}
+Nas expressões de $C_2$ e $C_3$, pode-se ver que o vetor de fluxo de Mohr-Coulomb, e consequentemente o de Tresca, possui uma singularidade quando $\theta = \pm \pi/6$. Isso ocorre devido a essas superfícies apresentarem um vértice nessas coordenadas no plano desviador. Há diversas formas de se resolver esse problema, sendo que a adotada no presente trabalho, dada por \citeonline[p. 234]{Owen1980}, será utilizar os valores de $C_1$,$C_2$ e $C_3$ de Drucker-Prager (ou von-Mises) quando $\theta = \pm \pi/6$.
+
+Um aspecto comum na geomecânica é a variação do volume do material durante a evolução das deformações plásticas. Esse efeito é comumente introduzido através da plasticidade não associada, adotando, ao invés do ângulo de atrito, um ângulo de dilatância $0<\psi<\phi$  na função potencial $g$.
+
 \subsection{Lei de endurecimento/amolecimento}
+A lei de endurecimento/amolecimento caracteriza, em geral, a dependência das variáveis internas (por exemplo, a coesão) em relação ao histórico de deformações plásticas. Essa lei de endurecimento/amolecimento é postulada da seguinte forma:
+\begin{equation}
+	\label{eq:amolecimento}
+	\dot \ql = \dot \lambda \hl(\sigmall,\ql)
+\end{equation}
+em que $\hl$ é um vetor que contém o conjunto dos módulos de endurecimento para cada força associada a cada variável interna. Como a função de escoamento $f$ é dependente das forças termodinâmicas associadas ao conjunto de variáveis internas $\alphal$, a mudança dessas ao longo da deformação plástica irá alterar a posição e/ou a forma da superfície de escoamento. Quando a superfície de escoamento é estática, ou seja, $\dot \ql=\underline 0$, tem-se a plasticidade perfeita, quando esta aumenta tem-se o endurecimento isotrópico e quando se desloca tem-se o endurecimento cinemático (\autoref{tipos_endurecimento}), sendo mista, quando composta das duas últimas.
+
+Em um primeiro momento, no presente trabalho, não será considerado a influência da lei de endurecimento e, portanto, as variáveis internas serão constantes ao longo da trajetória de tensões, ou seja, $\dot \ql = \dot \alphal = \underline 0$. Nesse caso, tem-se a elastoplasticidade perfeita. Nos modelos adotados de Mohr-Coulomb e Drucker-Prager, por exemplo, isso significa que a coesão e o ângulo de atrito permanecem constantes durante o trabalho plástico. Em um segundo momento se buscará implementar funções bilineares para representar o amolecimento característico do maciço, tal como vistos no Capítulo 4.3, contudo em caráter apenas isotrópico. Essa implementação, como será visto adiante, é feita através da coesão que dependerá da magnitude das deformações plásticas ao longo do histórico de tensões.
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[scale = 1.0]{0509-tipos_endurecimentos.pdf}
+	\end{center}
+	\caption{\label{tipos_endurecimento}Representação dos tipos de endurecimento no plano desviador e na curva tensão-deformação: a) elastoplasticidade perfeita, b) endurecimento isotrópico e c) endurecimento cinemático (adaptado de: \citeauthor{Neto2008}, \citeyear{Neto2008}, p. 178, 179, 186)}
+\end{figure}
+
 
 \subsection{Condições de carregamento e descarregamento}
 
+A evolução das equações (\ref{eq:fluxo_elastoplastico}) e (\ref{eq:amolecimento}) estão sujeitas à três condições (condições de Kuhn-Tucker), que são (\citeauthor{Neto2008}, \citeyear{Neto2008}, p. 170):
+\begin{equation}
+	\label{eq:kuhntucker}
+	f \le 0,~~~ \dot \lambda \ge 0, ~~~ \dot \lambda f = 0
+\end{equation}
+Essas condições estabelecem que apenas ocorre fluxo plástico quando o estado de tensões está sobre a superfície de escoamento e, neste caso, não há variação da função de escoamento, ou seja:
+\begin{equation}
+	\label{eq:consistencia}
+	\dot f = \dfrac{\partial f}{\partial \sigmall}:\sigmall + \dfrac{\partial f}{\partial \ql}\cdot \dot \ql = \dfdsll:\dot \sigma + \dfdql \cdot \dot \ql = 0
+\end{equation}
+A equação (\ref{eq:consistencia}) é conhecida como condição de consistência.
+
 \subsection{Multiplicador plástico e módulo elastoplástico contínuo}
+Introduzindo na condição de consistência (\ref{eq:consistencia}) a relação constitutiva (\ref{eq:leielastoplastica}), o fluxo plástico (\ref{eq:fluxo_elastoplastico}), a lei de endurecimento/amolecimento (\ref{eq:amolecimento}) e isolando o multiplicador plástico tem-se:
+\begin{equation}
+	\label{eq:lambda}
+	\dot \lambda = \dfrac{\dfdsll:\Dllll:\dot \varepsilonll}{\dfdsll:\Dllll:\dgdsll-\dfdql \cdot \hl}
+\end{equation}
+que introduzindo na relação constitutiva (\ref{eq:leielastoplastica}) leva à:
+\begin{equation}
+	\label{eq:Dep}
+	\Dllll^{ep} = \Dllll - \dfrac{\left(\Dllll:\dgdsll \right)\otimes\left(\Dllll:\dfdsll \right)}{\dfdsll:\Dllll:\dgdsll-\dfdql \cdot \hl}
+\end{equation}
+em que $\otimes$ é o produto tensorial. Através de (\ref{eq:Dep}) pode-se notar que se a plasticidade for associada o tensor constitutivo elastoplástico é simétrico. Também, pelo sinal do segundo termo, pode-se ver que a plasticidade representa uma redução no módulo de elasticidade do material.
 
 \section{Modelo constitutivo viscoplástico}
 
