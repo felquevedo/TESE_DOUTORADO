@@ -1,19 +1,39 @@
 
+
+\item[\textbf{Latino minúsculo:}]
 \item[$c$]				Coesão;
+\item[$c_{TR}$]			Coesão na superfície de escoamento de Tresca;
+\item[$c_{VM}$]			Coesão na superfície de escoamento de von-Mises;
+\item[$c_0$]			Coesão residual no modelo elastoplástico;
+\item[$c_1$]			Coesão para o modelo viscoplástico;
 \item[$d_0$]			Distância não revestida que acompanha a frente de escavação;
 \item[$d_0^*$]			Distância não revestida adimensional que acompanha a frente de escavação;
-\item[$\euml, \edoisl, \etresl$] Vetores ortonormais que definem o espaço do domínio;
-\item[$\fl$]			Campo de acelerações referente às forças de corpo;
+\item[$ \greenll $] 	Tensor de deformações de Green-Lagrange;
+\item[$\euml, \edoisl, \etresl$] Vetores ortonormais da base que define o espaço $\mathbb{R}^3$;
+\item[$f$]				Função de escoamento;
+\item[$f_0$]			Parâmetro de tensão no modelo viscoplástico;
+\item[$\fl$]					Campo de acelerações referente às forças de corpo;
+\item[$g$]				Função potencial;
+\item[$\gllum, \glldois, \glltres$] Gradientes para determinar o vetor de fluxo;
+\item[$\dgdsll$]		Vetor de fluxo;
+\item[$\hl$]			Vetor que contém o conjunto dos módulos de endurecimento para as forças associadas;
 \item[$h_s$]			Profundidade de \textit{Spalling} no perímetro de uma seção;
-\item[$\nl$]			Vetor normal à superfície $dS$;
+\item[$k$] 				Parâmetro da superfície de Drucker-Prager;
+\item[$l_0$] 			Dimensão característica para hipótese das pequenas perturbações;
+\item[$n$] 				Parâmetro adimensional que dá a forma potencial na lei viscoplástica;
+\item[$ p $]			Pressão hidrostática;
 \item[$ p_i $]			Pressão interna no interior da seção do túnel;
 \item[$ p_{lim} $] 		Pressão limite de plastificação do maciço;
 \item[$ p_{eq} $] 		Pressão de equilíbrio de um túnel revestido;
 \item[$ p_\infty $]		Pressão geostática-hidrostática;
 \item[$ p_\infty^* $]	Pressão geostática-hidrostática adimensional;
+\item[$ q $]	Tensão equivalente de von-Mises;
+\item[$\ql$] conjunto de forças termodinâmicas (escalares ou tensoriais) associadas às variáveis internas;
 \item[$ q_0 $] 			Resistência à compressão uniaxial do maciço;
 \item[$ r $]			Coordenada radial no plano da seção transversal do túnel;
+\item[$ \sll $]			Tensor de tensões desviadoras;
 \item[$ t $] 			Tempo;
+\item[$ \ul $] 		    Deslocamento da partícula material;
 \item[$ u(r) $] 		Deslocamento radial em uma coordenada radial $r$;
 \item[$ u_x $] 			Deslocamento na direção x;
 \item[$ u_y $] 			Deslocamento na direção y;
@@ -22,18 +42,26 @@
 \item[$ u_\varepsilon $] Deslocamento uniforme da seção de um túnel raso;
 \item[$ u_\delta $] 	 Distorção da seção de um túnel raso;
 \item[$ \Delta u_y $] 	 Translação vertical uniforme da seção de um túnel raso;
-\item[$ \ul $] 		    Deslocamento da partícula material;
-\item[$x$]				Eixo x (eixo longitudinal do túnel);
+\item[$ w $] 	 		Energia interna específica;
 \item[$\xl$]			Vetor posição da partícula material;
+\item[$x$]				Eixo x (eixo longitudinal do túnel);
 \item[$y$]				Eixo y;
 \item[$z$]				Eixo z (eixo da profundidade do túnel);
 
+\item[\textbf{Latino maiúsculo:}]
+\item[$C_1, C_2, C_3$]	Constantes para determinar o vetor de fluxo;
 \item[$D$]				Diâmetro equivalente da seção do túnel;
+\item[$\Dllll$] Tensor constitutivo elástico de quarta ordem simétrico;
+\item[$\Dllll^{ep}$] Tensor constitutivo elastoplástico contínuo;
+\item[$\Dllll^{vp}$] Tensor constitutivo viscoplástico contínuo;
 \item[$E$]				Módulo de Young;
 \item[$E^*$]			Módulo de Young adimensional;
 \item[$E_h$]			Módulo de deformação médio horizontal na parte superior da crosta terrestre;
 \item[$\Fll$]			Gradiente da transformação geométrica;
 \item[$H$]				Profundidade do túnel;
+\item[$I_1,I_2,I_3$] 	Invariantes do tensor de deformações ou do tensor de tensões;
+\item[$J_1,J_2,J_3$] 	Invariantes do tensor de tensões desviadoras;
+\item[$ J $] 	Jacobiano da transformação;
 \item[$K$]				Coeficiente de empuxo do maciço;
 \item[$K_r$]			Rigidez equivalente do revestimento;
 \item[$K_r^*$]			Rigidez equivalente adimensional do revestimento;
@@ -43,9 +71,11 @@
 \item[$ Q $] 			Pressão axial em um ensaio triaxial;
 \item[$ R $]			Raio da seção transversal do túnel;
 \item[$ R^p $]			Raio da zona plástica ao redor da seção do túnel;
-\item[$ S_0 $] 			Tensão desviadora no entorno do maciço;
 \item[$ S $] 			Superfície que atua o vetor tensão;
-\item[$ \Tl $] 			vetor tensão;
+\item[$ S_0 $] 			Tensão desviadora no entorno do maciço;
+\item[$ S_T $] 			Região da superfície do domínio com condição de contorno imposta;
+\item[$ \Tl $] 			Vetor tensão;
+\item[$ \Tl^d $] 		Vetor tensão imposto na fronteira $S_T$;
 \item[$ U $] 			Convergência da seção do túnel;
 \item[$ U_{0} $] 		Convergência da seção do túnel na cota não revestida a partir da face de escavação;
 \item[$ U_{eq} $] 		Convergência de equilíbrio de um túnel revestido;
@@ -55,38 +85,70 @@
 \item[$ V_a $] 			Volume de uma amostra em um ensaio triaxial;
 \item[$ V_{bacia} $]	Volume recalcado da bacia de assentamento de um túnel raso;
 
-\item[$ \eta $] 		Constante de viscosidade dinâmica;
-\item[$ \varepsilon_a $] Deformação axial de uma amostra em um ensaio triaxial;
-\item[$ \dot{\varepsilon_a} $] Taxa de deformação axial de uma amostra em um ensaio triaxial;
-\item[$ \phi $] 		Ângulo de atrito do maciço;
-\item[$\gamma_m$] 		Peso específico do maciço;
+\item[\textbf{Grego minúsculo:}]
+\item[$\alphal$] Conjunto de variáveis internas;
+\item[$\beta$] Parâmetro da superfície de Drucker-Prager;
 \item[$ \gammal $] 		Campo de acelerações referente às forças inerciais;
+\item[$\gamma_m$] 		Peso específico do maciço;
+\item[$\varepsilon_1,\varepsilon_2,\varepsilon_3$] 	Deformações principais;
+\item[$ \varepsilonll $] 	Tensor de deformações;
+\item[$\varepsilonll^e$] Deformação elástica;
+\item[$\varepsilonll^p$] Deformação plástica;
+\item[$\varepsilonll^{vp}$] Deformação viscoplástica;
+\item[$\bar{\varepsilon}^{vp}$] Magnitude da deformação viscoplástica acumulada;
+\item[$ \varepsilon_0 $] Deformação a partir da qual tem-se a coesão residual $c_0$;
+\item[$ \varepsilon_a $] Deformação axial de uma amostra em um ensaio triaxial;
+\item[$ \eta $] 		Constante de viscosidade dinâmica;
+\item[$\eta_1,\eta_2,\eta_3$] 	Direções principais;
+\item[$ \theta $] 		Ângulo de Lode;
+\item[$\lambda$] 	Magnitude da deformação plástica ou viscoplástica;
+\item[$\lambda^e$] 	Coeficiente de Lamè;
+\item[$\mu^e$] 	Coeficiente de Lamè;
 \item[$ \nu $] 			Coeficiente de Poisson;
-\item[$ \Omega $] 		Domínio contínuo;
-\item[$ \Omega' $] 		Subdomínio contínuo;
+\item[$ \xi_{H} $] 				Coordenada do espaço de Haigh-Westergaard;
+\item[$ \phi $] 		Ângulo de atrito do maciço;
 \item[$ \rho $] 		Densidade do domínio;
+\item[$ \rho_{H} $] 		Coordenada do espaço de Haigh-Westergaard;
+
+\item[$ \sigma_{oct} $] 	Tensão normal octaédrica;
 \item[$ \sigma_{v} $] 	Tensão vertical no interior do maciço;
 \item[$ \sigma_{\theta \theta} $] Tensão no maciço na direção ortorradial;
 \item[$ \sigma_{zz} $] 	Tensão no maciço ortogonal ao plano da seção do túnel;
 \item[$ \sigma_{rr} $] 	Tensão no maciço na direção radial;
 \item[$ \sigmall $] 	Tensor de tensões;
-\item[$ \divl $] 	Operador divergente;
-\item[$ \nabla $] 	Operador Gradiente;
+\item[$ \sigmall_0 $] 	Tensor de tensões inical;
+\item[$ \tau_{oct} $] 	Tensão cisalhante octaédrica;
+\item[$\psi$] energia livre específica;
+
+\item[\textbf{Grego maiúsculo:}]
+\item[$ \Gamma $]		Conjunto de tensões plasticamente admissíveis;
+\item[$ \Sigma $]		Superfície de descontinuidade no interior do domínio;
+\item[$ \Phi $]		Função de sobretensão;
+\item[$ \Omega $] 		Domínio contínuo;
+\item[$ \Omega' $] 		Subdomínio contínuo;
+
+\item[\textbf{Numéricos, operadores e funções matemáticas:}]
 \item[$ \Umll $] 	Tensor de segunda ordem unitário;
-\item[$ \greenll $] 	Tensor de deformações de Green-Lagrange;
-\item[$ \varepsilonll $] 	Tensor de deformações;
-\item[$ J $] 	Jacobiano da transformação;
+\item[$\Umllll$] Tensor unitário de quarta ordem;
 \item[det($\cdot$)] 	Função determinante;
 \item[tr($\cdot$)] 	Função traço;
-\item[$l_0$] 	Dimensão característica para hipótese das pequenas perturbações;
-\item[$\varepsilon_1,\varepsilon_2,\varepsilon_3$] 	Deformações principais;
-\item[$\eta_1,\eta_2,\eta_3$] 	Direções principais;
-\item[$I_1,I_2,I_3$] 	Invariantes do tensor de deformação;
-\item[$\Dllll$] Tensor constitutivo elástico de quarta ordem simétrico;
-\item[$\Umllll$] Tensor unitário de quarta ordem;
-\item[$\alphal$] Conjunto de variáveis internas;
-\item[$\varepsilonll^e$] Deformação elástica;
-\item[$\varepsilonll^p$] Deformação plástica;
-\item[$\Dllll^{ep}$] Tensor constitutivo elastoplástico contínuo;
-\item[$\psi$] energia livre específica;
-\item[$\ql$] conjunto de forças termodinâmicas (escalares ou tensoriais) associadas às variáveis internas;
+\item[$ \divl $] 	Operador divergente;
+\item[$ \nabla $] 	Operador Gradiente;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
