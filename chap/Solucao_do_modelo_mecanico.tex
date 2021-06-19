@@ -128,10 +128,10 @@ em que $N_i$ são as funções de interpolação de cada nó $i$, $n_e$ número 
 	\label{eq:deformacoes}
 	\varepsilonl(\xl) = \varepsilonl(x_1,x_2,x_3) = \nabla^s\ul(\xl) = \nabla^s \Nll~\ul_e = \Bll~\ul_e
 \end{equation}
-sendo $\varepsilonl$ o campo de deformações e $\Bll = \nabla^s \Nll$ a matriz que relaciona os deslocamentos nodais com as deformações no interior do elemento. Para problemas tridimensionais, o operador gradiente simétrico, na notação de Voigt, é dado por:
+sendo $\varepsilonl$ o campo de deformações e $\Bll = \nabla^s \Nll$ a matriz que relaciona os deslocamentos nodais com as deformações no interior do elemento. Para problemas tridimensionais, o operador gradiente simétrico $\nabla^s$, na notação de Voigt, é dado por:
 \begin{equation}
 	\label{eq:gradiente_simetrico}
-	\Nll = 	\begin{bmatrix}
+	\nabla^s = 	\begin{bmatrix}
 		\dfrac{\partial}{\partial x_1} & 0 & 0  \\
 		0 & \dfrac{\partial}{\partial x_2} & 0  \\
 		0 & 0 & \dfrac{\partial}{\partial x_3} \\
@@ -182,9 +182,45 @@ sendo que $\Fl_{int_e}$ e $\Fl_{ext_e}$ são as forças internas e externas no e
 	\end{center}
 	\caption{\label{discretizacao_MEF}Diagrama de corpo livre de um elemento finito (adaptado de: \citeonline[p. 19]{Lizarza2011})}
 \end{figure}
-No método dos elementos finitos, as integrais de volume no domínio  $\Omega_e$, por eficiência, são geralmente resolvidas em um domínio de referência $\Omega_\xi$ com geometria normalizada $-1 \le \xi_i \le 1$. As coordenadas $\underline \xi$ também são conhecidas como coordenadas naturais do elemento. Portanto, é feita a seguinte troca de variáveis nas integrais de volume (DHATT et al. 2012):
+No método dos elementos finitos, as integrais de volume no domínio  $\Omega_e$, por eficiência, são geralmente resolvidas em um domínio de referência $\Omega_\xi$ com geometria normalizada $-1 \le \xi_i \le 1$. As coordenadas $\underline \xi$ também são conhecidas como coordenadas naturais do elemento. Portanto, é feita a seguinte troca de variáveis nas integrais de volume \cite[p. 147]{Zienkiewicz2005}:
+\begin{equation}
+	\label{eq:troca_variavel_integral_volume}
+	\int_{\Omega_e}d\Omega_e = \iiint dx_1 dx_2 dx_3 = \int_{\Omega_\xi}det(\Jll)d\Omega_\xi = \int_{-1}^{1}\int_{-1}^{1}\int_{-1}^{1}\text{det}(\Jll)d\xi_1d\xi_2d\xi_3
+\end{equation}
+em que $\Jll = \dfrac{\partial \xl}{\partial \xil}$  é o Jacobiano da transformação entre as coordenada $\xl$ e $\xil$, sendo calculado com as mesmas funções de interpolação usadas para os deslocamentos no interior do elemento, se tratando, portanto, de um \textbf{elemento isoparamétrico}. A integral assim representada é então resolvida pelo método da Quadratura de Gauss-Legendre. Portanto, para uma função $f(\xl)$ qualquer, no domínio $\Omega_e$, tem-se:
+\begin{equation}
+	\label{eq:troca_variavel_integral_volume}
+	\int_{\Omega_e}f(\xl)d\Omega_e = \int_{-1}^{1}\int_{-1}^{1}\int_{-1}^{1}f(\xil)\text{det}(\Jll)d\xi_1d\xi_2d\xi_3 = \sum_{i_p=1}^{n_p}W_{i_p}J_{i_p}f(\xil_{i_p})
+\end{equation}
+em que $n_p$ é o número de pontos de integração (ou pontos de Gauss), $W_{i_p}$ é o peso referente ao ponto de integração, $f(\xil_{i_p})$ é o valor da função nas coordenadas naturais do ponto de integração e $J_{i_p}$ é o determinante do Jacobiano da transformação (nas coordenadas do ponto de integração) dado por \cite[p. 206-207]{Zienkiewicz2005}:
+\begin{equation}
+	\label{eq:jacobiano_transformacao}
+	J_{i_p} = \left\{
+	\begin{array}{lcl}
+		 \text{det}(\Jll)_{i_p}~~~\text{em 3D e estado plano de deformações} \\
+		2\pi\xi_{r_{i_p}}\text{det}(\Jll)_{i_p} ~~~\text{em axissimetria}
+	\end{array}
+\right..
+\end{equation}
+sendo $\xi_{r_{i_p}}$ a coordenada radial natural do ponto de Gauss. A equação (6.26) integra  exatamente se este for um polinômio de ordem menor ou igual a $2n_p-1$.
 
+Os elementos finitos que serão utilizados nesse trabalho com suas funções de interpolação, pesos e coordenadas dos pontos de integração podem ser vistos na \autoref{PLANE183}, para análises em estado plano de deformações e axissimetria e, para análises tridimensionais, que consomem maior tempo de processamento, será utilizado o elemento da \autoref{SOLID185}.
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[scale = 1.0]{0603-quadrilatero quadratico.pdf}
+	\end{center}
+	\caption{\label{PLANE183}Funções de interpolação, pesos e coordenadas dos pontos de Gauss para o elemento quadrilátero quadrático \textit{serendipity} isoparamétrico (adaptado de: \citeonline[p. 337, 369-370]{ANSYS2018})}
+\end{figure}
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[scale = 1.0]{0604-hexaedro linear.pdf}
+	\end{center}
+	\caption{\label{SOLID185}Funções de interpolação, pesos e coordenadas dos pontos de Gauss para o elemento hexaedro trilinear isoparamétrico (adaptado de: \citeonline[p. 345, 369-370]{ANSYS2018})}
+\end{figure}
 
+No ANSYS, ambos elementos possuem a opção degenerada em que é possível trabalhar de forma colapsada, triangular, por exemplo, no caso do PLANE183, e prisma, tetraédrica ou piramidal, no caso do SOLID185. Nas análises não serão utilizadas essas formas. 
+
+O elemento SOLID185 possuí também opções que lidam com problemas de travamento (\textit{Locking}) e modos espúrios (\textit{Hourglass}). O travamento é caracterizado por uma rigidez excessiva do elemento, e ocorre principalmente em elementos de primeira ordem com integração completa que estão sujeitos a flexão. Ou ainda, quando o material é quase incompressível. Também podem ocorrer em elementos de segunda ordem, quando as deformações plásticas são da ordem das deformações elásticas. Esse problema evita-se com refinamento da malha, técnicas de subintegração e funções de formas extras. O ANSYS possuí as duas últimas técnicas para o SOLID185 (\textit{Uniform Reduced Integration with Hourglass Control} e \textit{Enhanced Strain Formulation}). Os modos espúrios ocorrem quando se utiliza as técnicas de subintegração e é caracterizado por uma distorção no elemento porém com zero deformação. Esse problema é evitado utilizando integração completa ou refinamento da malha. No presente trabalho se utilizará a \textbf{integração completa} (\textit{Full integration with B method}) e se tentará evitar esses problemas através do \textbf{refinamento da malha}. 
 
 \section{Solução do sistema e discretização temporal}
 
