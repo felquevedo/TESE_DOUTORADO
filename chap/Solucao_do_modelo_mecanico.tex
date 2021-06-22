@@ -222,7 +222,116 @@ No ANSYS, ambos elementos possuem a opção degenerada em que é possível traba
 
 O elemento SOLID185 possuí também opções que lidam com problemas de travamento (\textit{Locking}) e modos espúrios (\textit{Hourglass}). O travamento é caracterizado por uma rigidez excessiva do elemento, e ocorre principalmente em elementos de primeira ordem com integração completa que estão sujeitos a flexão. Ou ainda, quando o material é quase incompressível. Também podem ocorrer em elementos de segunda ordem, quando as deformações plásticas são da ordem das deformações elásticas. Esse problema evita-se com refinamento da malha, técnicas de subintegração e funções de formas extras. O ANSYS possuí as duas últimas técnicas para o SOLID185 (\textit{Uniform Reduced Integration with Hourglass Control} e \textit{Enhanced Strain Formulation}). Os modos espúrios ocorrem quando se utiliza as técnicas de subintegração e é caracterizado por uma distorção no elemento porém com zero deformação. Esse problema é evitado utilizando integração completa ou refinamento da malha. No presente trabalho se utilizará a \textbf{integração completa} (\textit{Full integration with B method}) e se tentará evitar esses problemas através do \textbf{refinamento da malha}. 
 
-\section{Solução do sistema e discretização temporal}
+\section{Solução do sistema não linear}
+
+Após o processo de discretização do domínio $\Omega$ é necessário fazer a montagem e a solução do seguinte sistema global de equações:
+\begin{equation}
+	\label{eq:sistema_global}
+	\left(\Kll~\ul + \Fl_{\varepsilon_{0}} + \Fl_{\sigma_{0}}\right) - \left(\Fl_V+\Fl_S+\Fl_N \right) = \Fl_{int} - \Fl_{ext} = f(\ul) = \underline{0}  
+\end{equation}
+em que $\Kll$ é a matriz de rigidez global resultante da montagem das matrizes de rigidezes $\Kll_e$ de cada elemento, $\ul$ é o vetor incógnito de deslocamentos nodais global proveniente da montagem dos deslocamentos nodais $\ul_e$ de cada elemento, $\left\{\Fl_V,\Fl_S,\Fl_N,\Fl_{\varepsilon_0},\Fl_{\sigma_0} \right\}$ são as forças globais resultantes da montagem das forças em cada elemento, conforme (\ref{eq:elementos_forca_interna}) e (\ref{eq:elementos_forca_externa}). Não haverá um vetor de forças de contato global $\Fl_C$, uma vez que as forças de contato entre elementos vizinhos possuem a mesma magnitude e sentidos contrários e, portanto, se anulam no somatório global.
+
+Quando há uma não linearidade envolvendo as leis constitutivas do material (tal como na plasticidade ou viscoplasticidade, em que o problema é dependente da trajetória das tensões), a matriz de coeficientes $\Kll$ passa a depender dos deslocamentos nodais incógnitos  $\ul$, tornando o sistema (\ref{eq:sistema_global}) não linear. O \textbf{método de Newton-Raphson} é o processo iterativo comumente utilizado para resolver esse sistema e é utilizado pelo ANSYS. Dessa forma, aproximando esse sistema por uma série de Taylor truncada na primeira ordem (linearização) tem-se:
+\begin{equation}
+	\label{eq:taylor}
+	\fl(\ul) \approx \fl(\ul_i) + \fl'(\ul_i)(\ul_{i+1}-\ul_i).
+\end{equation}
+
+Fazendo $\fl(\ul) = \underline{0}$, isolando $\ul_{i+1}$ e substituindo (\ref{eq:sistema_global}) em (\ref{eq:taylor}) , considerando que $\Fl_{ext}$ não depende dos deslocamentos (devido à hipótese das pequenas perturbações), tem-se a seguinte expressão iterativa para aproximar $\ul$:
+\begin{equation}
+	\label{eq:NR}
+	\ul_{i+1} = \ul_i - \Kll(\ul_i)^{-1}\left(\Fl_{int}(\ul_i)-\Fl_{ext} \right) = \ul_i - \Kll_i^{-1} \left(\Fl_{int_i} - \Fl_{ext} \right) = \ul_i + \Kll_i^{-1}\Rl_i = \ul_i + \Delta \ul_i
+\end{equation}
+em que $\Delta \ul_i$ é o incremento de deslocamentos nodais da iteração atual $i$, $\Fl_{int_i}$ são as forças internas (ou forças restauradoras) da iteração atual (calculadas com $\ul_i$), $\Rl_i$ é o vetor de carga desbalanceado (também chamado de resíduo) para a iteração atual, $\Kll_i$ a matriz de rigidez global tangente na iteração atual, $\ul_i$ os deslocamentos nodais na iteração atual e $\ul_{i+1}$ os deslocamentos nodais atualizados para a próxima iteração.
+
+Como $\Delta \ul_i = \Kll_i^{-1}\Rl_i$ é um sistema de equações esparso (contém muitos elementos nulos) e geralmente simétrico, há diversas técnicas de solução que buscam explorar essas características para obter eficiência computacional. O ANSYS possui uma técnica de \textbf{solução direta}, que busca resolver o sistema através de operações que compreendem a inversão da matriz de rigidez, e três técnicas de \textbf{soluções indiretas}, que se aproximam da solução do sistema de forma interativa com uma dada tolerância.
+
+A solução direta (\textit{SPARSE - Sparse Direct Solver}) consiste em aplicar a fatorização de Cholesky modificada $\Kll = \Lll~\Dll~ \Lll^T$ (em que $\Lll$ é uma matriz triangular inferior e $\Dll$ uma matriz diagonal) e, através de substituições progressivas e retroativas, resolver o sistema. Algoritmos de solução direta podem ser encontrados em \citeonline{Felippa1975} e \citeonline{Smith2014}.
+
+As soluções indiretas, implementadas no ANSYS, se baseiam na família de Métodos dos Gradientes Conjugados Pré-Condicionados, que consistem em minimizar o potencial $V(\Delta \ul) = \frac{1}{2}\Delta \ul^T\Kll~\Delta \ul - \Delta \ul^T\Rl$ com aproximações $\Delta \ul^{(j+1)}=\Delta \ul^{j} + a_j \underline{d}^{(j)}~\text{para}~j=0,1,2,..m$, sendo $\underline d^{(j)}$ os gradientes conjugados, ou seja, $\underline {d}^{{(i)}^T} \Kll d^{(j)} = 0,~~ \forall i \neq j$. Quando o sistema é bem condicionado, sua solução converge para $m \leq n_{gdl}$ iterações e o número de operações é proporcional à raiz quadrada do número de condição da matriz $\Kll$, numero este que é a razão entre o maior e menor autovalor da matriz $\Kll$. Em vista disso, há diversas técnicas de transformação do sistema para melhorar o condicionamento dessa matriz através de fatorizações do tipo $\Mll^{-1}\Kll~\ul = \Mll^{-1} \Rl$, em que $\Mll$ é o pré-condicionador. O ANSYS possuí três métodos \cite[p. 647]{ANSYS2018}:
+
+\begin{alineas}
+	
+	\item JCG (\textit{Jacobi Conjugate Gradiente}): o pré-condicionador é tomado como sendo uma matriz diagonal cujos termos são as diagonais da matriz de rigidez;
+	
+	\item ICCG (\textit{Incomplete Cholesky Conjugate Gradiente}), o pré-condicionador é tomado através de uma fatorização incompleta de Cholesky. O algoritmo é internamente desenvolvido pela ANSYS e não publicado, e é mais robusto que o primeiro para matrizes mal condicionadas;
+	
+	\item PCG (\textit{Preconditioned Conjugate Gradiente}) é um solucionador da \textit{Computational Applications and System Integration, Inc} que não consta nos manuais do \textit{software}. Contudo, é dito eficiente e confiável para problemas mal condicionados.
+	
+\end{alineas}
+
+Maiores explicações dessas soluções indiretas, podem ser encontrados em \citeonline[p. 316]{Mendonca2019}. Cabe salientar que, tanto os métodos diretos quanto indiretos, são implementados buscando a eficiência computacional, evitando-se trabalhar com os elementos nulos, diminuindo o armazenamento e o número de operações. Alguns métodos que compreendem reordenamento e armazenamento eficiente do sistema, utilizados pelo ANSYS, podem ser encontrados em \citeonline{George1981}. Além disso, uma vantagem do ANSYS é a possibilidade de trabalhar com computação de alto desempenho (\textit{High Performance Computing}) com opções de aceleração usando placas de vídeo da Nvidia, memória compartilhada (SMP - \textit{Shared-Memory Parallel}) ou computação distribuída (MPI - \textit{Message Passing Interface}). Para o presente trabalho, foi utilizado a opção de SMP com 12 processadores.
+
+A rigor para um problema não linear a escolha do melhor método de solução vai depender de testagem. Por padrão o ANSYS utiliza o SPARSE. Contudo, recomenda utilizar o método PCG para estruturas sólidas 3D que possuem mais de 200.000 graus de liberdade. Para problemas mal condicionados, seja pela forma dos elementos, grandes diferenças entre as propriedades dos materiais ou ainda por insuficiente condições de contorno, recomenda-se o SPARSE \cite[p. 242]{ANSYS2018b}.
+
+Para incorporar a dependência do histórico de cargas (ou do tempo), a expressão (6.30) é discretizada em $1 \leq n \leq n_s$ subpassos em que a carga externa e o tempo são incrementados linearmente. Portanto, tem-se:
+
+\begin{equation}
+	\label{eq:NR1}
+	\Delta \ul_{n,i} = \Kll_{n,i}^{-1}\left(\Fl_{ext_{n+1}} - \Fl_{int_{n,i}} \right) = \Kll_{n,i}^{-1}\Rl_{n,i},
+\end{equation}
+\begin{equation}
+	\label{eq:NR2}
+	\ul_{n,i+1} = \ul_{n,i}+\Delta\ul_{n,i},
+\end{equation}
+\begin{equation}
+	\label{eq:NR3}
+	\Fl_{ext_{n+1}} = \Fl_{ext_n} + \Delta \Fl_{ext},
+\end{equation}
+\begin{equation}
+	\label{eq:NR4}
+	t_{n+1} = t_n + \Delta t,
+\end{equation}
+em que
+\begin{equation}
+	\label{eq:NR5}
+	\Fl_{int_{n,i}} = \left( \int_{\Omega} \Bll^T \sigmal d\Omega \right)_{n,i}
+\end{equation}
+sendo $\ul_{0,0}$, $\Fl_{int_{0,0}}$, $\Fl_{ext_0}$   e $t_0$ nulos. Para os próximos subpassos os valores de $\ul_{n,0}$ e $\Fl_{int_{n,0}}$, correspondem aos valores da solução convergente no subpasso anterior $n-1$. Os incrementos de força externa e tempo são dados por:
+\begin{equation}
+	\label{eq:NR6}
+	\Delta \Fl_{ext} = \dfrac{\Fl_{ext_p}}{n_s},~~~\Delta t = \dfrac{t_p}{n_s}
+\end{equation}
+sendo $\Fl_{ext_p}$ e $t_p$ as forças externas e tempo no final do passo. Além disso, no ANSYS (\citeyear{ANSYS2018}, p. 666), o método de Newton-Raphson possui três variações de acordo com a estratégia de atualização da matriz de rigidez $\Kll_{n,i}$. \textbf{Completo} quando a matriz de rigidez é atualizada a cada iteração $i$, ou seja, $\Kll_{n,i} \leftarrow \Kll_{n,i}$. Essa opção reduz o número de iterações de equilíbrio (convergência quadrática), porém, exige a montagem e inversão da matriz a cada iteração. \textbf{Modificado}, quando a matriz de rigidez é atualizada apenas a cada subpasso de carga/tempo $n$, ou seja, $\Kll_{n,i} \leftarrow \Kll_{n,0}$. \textbf{Inicial} quando é utilizada a mesma matriz para todos os subpassos e iterações, ou seja, $\Kll_{n,i} \leftarrow \Kll_{0,0}$. Sendo que a completa apresenta menor número de iterações de equilíbrio (convergência quadrática), porém, exige a montagem e fatorização da matriz de rigidez a cada iteração. Contudo, essa convergência só é efetivamente obtida se for utilizado o módulo consistente $\Dll^{alg}$ após o algoritmo de integração das tensões, conforme \citeonline{Simo1985}.
+
+Para cada subpasso de carga e/ou de tempo as iterações de equilíbrio continuam até que um determinado critério de convergência seja satisfeito. Esse é verificado sobre o vetor resíduo e o incremento de deslocamentos nodais para cada iteração de equilíbrio, através das seguintes expressões (omitindo-se o subíndice $n$) \cite[p. 667]{ANSYS2018}:
+\begin{equation}
+	\label{eq:convergencia}
+	||\Rl_i|| \leq \varepsilon_R R_{ref},~~~ ||\Delta \ul_i || \leq \varepsilon_u u_{ref}
+\end{equation}
+em que $\varepsilon_R$ e $\varepsilon_u$ são as tolerâncias para o resíduo (de 0,5\%) e deslocamentos (de 5\%), respectivamente. Os valores de referência $R_{ref}$ e $u_{ref}$ são $||\Fl_{ext_p}||$ e $||\ul_{n,i}||$, respectivamente. Ou seja, por padrão o critério para o resíduo é de 0,5\% do valor das forças externas e os deslocamentos não podem apresentar uma variação maior do que 5\%. No ANSYS, a norma pode ser calculada de três formas: a máxima componente em valor absoluto, a soma absoluta das componentes ou a norma euclidiana das componentes, conforme:
+\begin{equation}
+	\label{eq:jacobiano_transformacao}
+	||\xl|| = \left\{
+	\begin{array}{lcl}
+		||\xl||_\infty = \text{max}(x_j) \\
+		||\xl||_1 = \sum_{j}|x_j| \\
+		||\xl||_2 = (\sum_{j}x_j^2)^{1/2}
+	\end{array}
+	\right..
+\end{equation}
+em que $j$ é o índice da componente do vetor $\xl = \Rl$ e $\xl = \Delta \ul$. Para o presente trabalho foi escolhida a norma euclidiana. É possível que o algoritmo não convirja durante as iterações e, portanto, é utilizado a quantidade limite padrão do \textit{software} de $n_{eqit} = 25$ iterações por subpasso. A \autoref{NR} ilustra o andamento da solução ao longo dos subpassos. Pode-se ver que o resíduo e o incremento de deformações vão ficando cada vez menores ao longo das iterações de equilíbrio.
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[scale = 1.0]{0605-ilustracao das iteracoes do método de NR.pdf}
+	\end{center}
+	\caption{\label{NR}Ilustração das iterações do método de Newton-Raphson (adaptado de: \citeonline[p. 301]{Chen1988})}
+\end{figure}
+
+Além dessas opções, para problemas estáticos, o ANSYS possui três técnicas para melhora a convergência do método de Newton-Raphson, que são \cite[p. 668-673]{ANSYS2018}:
+
+\begin{alineas}
+	\item \textbf{Preditor}: extrapola o vetor de deslocamentos iniciais de cada subpasso utilizando os incrementos de deslocamentos acumulados do subpasso anterior multiplicados pela relação entre os incrementos de tempo entre ambos subpassos;
+	
+	\item \textbf{Descida Adaptativa}: consiste em alternar entre a matriz de rigidez tangente e secante conforme o andamento do resíduo durante as iterações de equilíbrio. Só é utilizada em conjunto com o método de Newton-Raphson Completo;
+	
+	\item \textbf{Pesquisa de linha}: tenta melhorar a solução multiplicando o incremento de deslocamentos por um escalar determinado pela minimização da energia do sistema;
+	
+	\item \textbf{Método do comprimento de arco}: utilizado para solução de equilíbrio estático não-linear de problemas instáveis como flambagem e pós-flambagem.
+	
+\end{alineas}
+
+Na Figura 6.7 tem-se o fluxograma do método de Newton-Raphson, mostrando as três opções de atualização da matriz de rigidez e os laços das iterações de equilíbrio e de subpassos.
 
 \section{Algoritmo de atualização das tensões e variáveis internas}
 
