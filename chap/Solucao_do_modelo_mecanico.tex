@@ -231,13 +231,13 @@ Após o processo de discretização do domínio $\Omega$ é necessário fazer a 
 \end{equation}
 em que $\Kll$ é a matriz de rigidez global resultante da montagem das matrizes de rigidezes $\Kll_e$ de cada elemento, $\ul$ é o vetor incógnito de deslocamentos nodais global proveniente da montagem dos deslocamentos nodais $\ul_e$ de cada elemento, $\left\{\Fl_V,\Fl_S,\Fl_N,\Fl_{\varepsilon_0},\Fl_{\sigma_0} \right\}$ são as forças globais resultantes da montagem das forças em cada elemento, conforme (\ref{eq:elementos_forca_interna}) e (\ref{eq:elementos_forca_externa}). Não haverá um vetor de forças de contato global $\Fl_C$, uma vez que as forças de contato entre elementos vizinhos possuem a mesma magnitude e sentidos contrários e, portanto, se anulam no somatório global.
 
-Quando há uma não linearidade envolvendo as leis constitutivas do material (tal como na plasticidade ou viscoplasticidade, em que o problema é dependente da trajetória das tensões), a matriz de coeficientes $\Kll$ passa a depender dos deslocamentos nodais incógnitos  $\ul$, tornando o sistema (\ref{eq:sistema_global}) não linear. O \textbf{método de Newton-Raphson} é o processo iterativo comumente utilizado para resolver esse sistema e é utilizado pelo ANSYS. Dessa forma, aproximando esse sistema por uma série de Taylor truncada na primeira ordem (linearização) tem-se:
+Quando há uma não linearidade envolvendo as leis constitutivas do material (tal como na plasticidade ou viscoplasticidade, em que o problema é dependente da trajetória das tensões), a matriz de coeficientes $\Kll$ passa a depender dos deslocamentos nodais incógnitos  $\ul$, tornando o sistema (\ref{eq:sistema_global}) não linear. O \textbf{método de Newton-Raphson} (NR) é o processo iterativo comumente utilizado para resolver esse sistema e é utilizado pelo ANSYS. Dessa forma, aproximando (\ref{eq:sistema_global}) por uma série de Taylor truncada na primeira ordem (linearização) tem-se:
 \begin{equation}
 	\label{eq:taylor}
 	\fl(\ul) \approx \fl(\ul_i) + \fl'(\ul_i)(\ul_{i+1}-\ul_i).
 \end{equation}
 
-Fazendo $\fl(\ul) = \underline{0}$, isolando $\ul_{i+1}$ e substituindo (\ref{eq:sistema_global}) em (\ref{eq:taylor}) , considerando que $\Fl_{ext}$ não depende dos deslocamentos (devido à hipótese das pequenas perturbações), tem-se a seguinte expressão iterativa para aproximar $\ul$:
+Fazendo $\fl(\ul) = \underline{0}$, isolando $\ul_{i+1}$ e substituindo (\ref{eq:sistema_global}) em (\ref{eq:taylor}), considerando que $\Fl_{ext}$ não depende dos deslocamentos (devido à hipótese das pequenas perturbações), tem-se a seguinte expressão iterativa para aproximar $\ul$:
 \begin{equation}
 	\label{eq:NR}
 	\ul_{i+1} = \ul_i - \Kll(\ul_i)^{-1}\left(\Fl_{int}(\ul_i)-\Fl_{ext} \right) = \ul_i - \Kll_i^{-1} \left(\Fl_{int_i} - \Fl_{ext} \right) = \ul_i + \Kll_i^{-1}\Rl_i = \ul_i + \Delta \ul_i
@@ -248,7 +248,7 @@ Como $\Delta \ul_i = \Kll_i^{-1}\Rl_i$ é um sistema de equações esparso (cont
 
 A solução direta (\textit{SPARSE - Sparse Direct Solver}) consiste em aplicar a fatorização de Cholesky modificada $\Kll = \Lll~\Dll~ \Lll^T$ (em que $\Lll$ é uma matriz triangular inferior e $\Dll$ uma matriz diagonal) e, através de substituições progressivas e retroativas, resolver o sistema. Algoritmos de solução direta podem ser encontrados em \citeonline{Felippa1975} e \citeonline{Smith2014}.
 
-As soluções indiretas, implementadas no ANSYS, se baseiam na família de Métodos dos Gradientes Conjugados Pré-Condicionados, que consistem em minimizar o potencial $V(\Delta \ul) = \frac{1}{2}\Delta \ul^T\Kll~\Delta \ul - \Delta \ul^T\Rl$ com aproximações $\Delta \ul^{(j+1)}=\Delta \ul^{j} + a_j \underline{d}^{(j)}~\text{para}~j=0,1,2,..m$, sendo $\underline d^{(j)}$ os gradientes conjugados, ou seja, $\underline {d}^{{(i)}^T} \Kll d^{(j)} = 0,~~ \forall i \neq j$. Quando o sistema é bem condicionado, sua solução converge para $m \leq n_{gdl}$ iterações e o número de operações é proporcional à raiz quadrada do número de condição da matriz $\Kll$, numero este que é a razão entre o maior e menor autovalor da matriz $\Kll$. Em vista disso, há diversas técnicas de transformação do sistema para melhorar o condicionamento dessa matriz através de fatorizações do tipo $\Mll^{-1}\Kll~\ul = \Mll^{-1} \Rl$, em que $\Mll$ é o pré-condicionador. O ANSYS possuí três métodos \cite[p. 647]{ANSYS2018}:
+As soluções indiretas, implementadas no ANSYS, se baseiam na família de Métodos dos Gradientes Conjugados Pré-Condicionados, que consistem em minimizar o potencial $V(\Delta \ul) = \frac{1}{2}\Delta \ul^T\Kll~\Delta \ul - \Delta \ul^T\Rl$ com aproximações $\Delta \ul^{(j+1)}=\Delta \ul^{j} + a_j \underline{d}^{(j)}~\text{para}~j=0,1,2,..m$, sendo $\underline d^{(j)}$ os gradientes conjugados, ou seja, $\underline {d}^{{(i)}^T} \Kll d^{(j)} = 0,~~ \forall i \neq j$. Quando o sistema é bem condicionado, sua solução converge para $m \leq n_{gdl}$ iterações e o número de operações é proporcional à raiz quadrada do número de condição da matriz $\Kll$, numero este que é a razão entre o maior e menor autovalor da matriz $\Kll$. Em vista disso, há diversas técnicas de transformação do sistema para melhorar o condicionamento dessa matriz através de uma transformação do tipo $\Mll^{-1}\Kll~\ul = \Mll^{-1} \Rl$, em que $\Mll$ é o pré-condicionador. O ANSYS possuí três métodos \cite[p. 647]{ANSYS2018}:
 
 \begin{alineas}
 	
@@ -264,8 +264,7 @@ Maiores explicações dessas soluções indiretas, podem ser encontrados em \cit
 
 A rigor para um problema não linear a escolha do melhor método de solução vai depender de testagem. Por padrão o ANSYS utiliza o SPARSE. Contudo, recomenda utilizar o método PCG para estruturas sólidas 3D que possuem mais de 200.000 graus de liberdade. Para problemas mal condicionados, seja pela forma dos elementos, grandes diferenças entre as propriedades dos materiais ou ainda por insuficiente condições de contorno, recomenda-se o SPARSE \cite[p. 242]{ANSYS2018b}.
 
-Para incorporar a dependência do histórico de cargas (ou do tempo), a expressão (6.30) é discretizada em $1 \leq n \leq n_s$ subpassos em que a carga externa e o tempo são incrementados linearmente. Portanto, tem-se:
-
+Para incorporar a dependência do histórico de cargas/tempo, para um dado passo de carga/tempo $p$, a expressão (\ref{eq:NR}) é discretizada em $1 \leq n \leq n_s$ subpassos em que a carga externa e o tempo do passo são incrementados linearmente. Dessa forma, itera-se o sistema (\ref{eq:NR}) repetidas vezes para cada subpasso $n$ tendo-se:
 \begin{equation}
 	\label{eq:NR1}
 	\Delta \ul_{n,i} = \Kll_{n,i}^{-1}\left(\Fl_{ext_{n+1}} - \Fl_{int_{n,i}} \right) = \Kll_{n,i}^{-1}\Rl_{n,i},
@@ -276,25 +275,25 @@ Para incorporar a dependência do histórico de cargas (ou do tempo), a express�
 \end{equation}
 \begin{equation}
 	\label{eq:NR3}
-	\Fl_{ext_{n+1}} = \Fl_{ext_n} + \Delta \Fl_{ext},
+	\Fl_{ext_{n+1}} = \Fl_{ext_n} + \Delta \Fl_{{ext}_p},
 \end{equation}
 \begin{equation}
 	\label{eq:NR4}
-	t_{n+1} = t_n + \Delta t,
+	t_{n+1} = t_n + \Delta t_p,
 \end{equation}
 em que
 \begin{equation}
 	\label{eq:NR5}
 	\Fl_{int_{n,i}} = \left( \int_{\Omega} \Bll^T \sigmal d\Omega \right)_{n,i}
 \end{equation}
-sendo $\ul_{0,0}$, $\Fl_{int_{0,0}}$, $\Fl_{ext_0}$   e $t_0$ nulos. Para os próximos subpassos os valores de $\ul_{n,0}$ e $\Fl_{int_{n,0}}$, correspondem aos valores da solução convergente no subpasso anterior $n-1$. Os incrementos de força externa e tempo são dados por:
+sendo $\ul_{0,0}$, $\Fl_{int_{0,0}}$, $\Fl_{ext_0}$   e $t_0$ nulos. Para os próximos subpassos os valores de $\ul_{n,0}$ e $\Fl_{int_{n,0}}$, correspondem aos valores da solução convergente no subpasso anterior $n-1$. O número de subpassos $n_s$ e o incremento de força externa $\Delta \underline{F}_p$ são dependentes do incremento de tempo utilizado no passo $\Delta t_p$, e são dados por:
 \begin{equation}
 	\label{eq:NR6}
-	\Delta \Fl_{ext} = \dfrac{\Fl_{ext_p}}{n_s},~~~\Delta t = \dfrac{t_p}{n_s}
+	n_s = \dfrac{t_p}{\Delta t_p},~~~ \Delta \Fl_{p} = \dfrac{\Fl_{ext_p}}{n_s}
 \end{equation}
-sendo $\Fl_{ext_p}$ e $t_p$ as forças externas e tempo no final do passo. Além disso, no ANSYS (\citeyear{ANSYS2018}, p. 666), o método de Newton-Raphson possui três variações de acordo com a estratégia de atualização da matriz de rigidez $\Kll_{n,i}$. \textbf{Completo} quando a matriz de rigidez é atualizada a cada iteração $i$, ou seja, $\Kll_{n,i} \leftarrow \Kll_{n,i}$. Essa opção reduz o número de iterações de equilíbrio (convergência quadrática), porém, exige a montagem e inversão da matriz a cada iteração. \textbf{Modificado}, quando a matriz de rigidez é atualizada apenas a cada subpasso de carga/tempo $n$, ou seja, $\Kll_{n,i} \leftarrow \Kll_{n,0}$. \textbf{Inicial} quando é utilizada a mesma matriz para todos os subpassos e iterações, ou seja, $\Kll_{n,i} \leftarrow \Kll_{0,0}$. Sendo que a completa apresenta menor número de iterações de equilíbrio (convergência quadrática), porém, exige a montagem e fatorização da matriz de rigidez a cada iteração. Contudo, essa convergência só é efetivamente obtida se for utilizado o módulo consistente $\Dll^{alg}$ após o algoritmo de integração das tensões, conforme \citeonline{Simo1985}.
+sendo $t_p$ e $\Fl_{ext_p}$, nessa ordem, o tempo e a força no final do passo. Em busca da convergência e eficiência computacional, o ANSYS tem a opção de variar automaticamente o $\Delta t_p$ dentro de um intervalo $\Delta t_{p_{min}} \leq \Delta t_p \leq \Delta t_{p_{max}}$ fornecido pelo usuário. É possível que o algoritmo não convirja durante as iterações e, portanto, é utilizado um limite de $n_{eqit} = 25$ iterações de equilíbrio por subpasso. Quando a solução não converge dentro desse limite, o ANSYS divide pela metade o incremento de tempo, e consequentemente a carga, e reinicia o cálculo do passo. Esse procedimento é chamado de Método da Bisseção e é executado tantas vezes quanto necessárias até atingir a convergência ou $\Delta t_p \leq \Delta t_{p_{min}}$ a partir do qual a solução é dada como não convergente e estabelecido o critério de parada \cite[p. 637]{ANSYS2018}.
 
-Para cada subpasso de carga e/ou de tempo as iterações de equilíbrio continuam até que um determinado critério de convergência seja satisfeito. Esse é verificado sobre o vetor resíduo e o incremento de deslocamentos nodais para cada iteração de equilíbrio, através das seguintes expressões (omitindo-se o subíndice $n$) \cite[p. 667]{ANSYS2018}:
+A convergência é verificada sobre o vetor resíduo e o incremento de deslocamentos nodais para cada iteração de equilíbrio, através das seguintes expressões (omitindo-se o subíndice $n$) \cite[p. 667]{ANSYS2018}:
 \begin{equation}
 	\label{eq:convergencia}
 	||\Rl_i|| \leq \varepsilon_R R_{ref},~~~ ||\Delta \ul_i || \leq \varepsilon_u u_{ref}
@@ -310,7 +309,7 @@ em que $\varepsilon_R$ e $\varepsilon_u$ são as tolerâncias para o resíduo (d
 	\end{array}
 	\right..
 \end{equation}
-em que $j$ é o índice da componente do vetor $\xl = \Rl$ e $\xl = \Delta \ul$. Para o presente trabalho foi escolhida a norma euclidiana. É possível que o algoritmo não convirja durante as iterações e, portanto, é utilizado a quantidade limite padrão do \textit{software} de $n_{eqit} = 25$ iterações por subpasso. A \autoref{NR} ilustra o andamento da solução ao longo dos subpassos. Pode-se ver que o resíduo e o incremento de deformações vão ficando cada vez menores ao longo das iterações de equilíbrio.
+em que $j$ é o índice da componente do vetor $\xl = \Rl$ e $\xl = \Delta \ul$. Para o presente trabalho foi escolhida a norma euclidiana que era o padrão do ANSYS. A \autoref{NR} ilustra o andamento da solução ao longo dos subpassos. Pode-se ver que o resíduo e o incremento de deformações vão ficando cada vez menores ao longo das iterações de equilíbrio.
 \begin{figure}[H]
 	\begin{center}
 		\includegraphics[scale = 1.0]{0605-ilustracao das iteracoes do método de NR.pdf}
@@ -318,20 +317,41 @@ em que $j$ é o índice da componente do vetor $\xl = \Rl$ e $\xl = \Delta \ul$.
 	\caption{\label{NR}Ilustração das iterações do método de Newton-Raphson (adaptado de: \citeonline[p. 301]{Chen1988})}
 \end{figure}
 
-Além dessas opções, para problemas estáticos, o ANSYS possui três técnicas para melhora a convergência do método de Newton-Raphson, que são \cite[p. 668-673]{ANSYS2018}:
-
+O ANSYS possui ainda três variações do método de Newton-Raphson de acordo com a estratégia de atualização da matriz de rigidez $\Kll_{n,i}$ (\citeyear{ANSYS2018}, p. 666): 
 \begin{alineas}
-	\item \textbf{Preditor}: extrapola o vetor de deslocamentos iniciais de cada subpasso utilizando os incrementos de deslocamentos acumulados do subpasso anterior multiplicados pela relação entre os incrementos de tempo entre ambos subpassos;
 	
-	\item \textbf{Descida Adaptativa}: consiste em alternar entre a matriz de rigidez tangente e secante conforme o andamento do resíduo durante as iterações de equilíbrio. Só é utilizada em conjunto com o método de Newton-Raphson Completo;
+	\item \textbf{Completo} (\textit{Full}): quando a matriz de rigidez é atualizada a cada iteração $i$, ou seja, $\Kll_{n,i} \leftarrow \Kll_{n,i}$. Essa opção reduz o número de iterações de equilíbrio (convergência quadrática), porém, exige a montagem, fatorização e inversão da matriz a cada iteração;
 	
-	\item \textbf{Pesquisa de linha}: tenta melhorar a solução multiplicando o incremento de deslocamentos por um escalar determinado pela minimização da energia do sistema;
+	\item \textbf{Modificado} (\textit{Modified}): quando a matriz de rigidez é atualizada apenas a cada subpasso de carga/tempo $n$, ou seja, $\Kll_{n,i} \leftarrow \Kll_{n,0}$; 
 	
-	\item \textbf{Método do comprimento de arco}: utilizado para solução de equilíbrio estático não-linear de problemas instáveis como flambagem e pós-flambagem.
+	\item \textbf{Inicial} (\textit{Inicial Stiffness}): quando é utilizada a mesma matriz para todos os subpassos e iterações, ou seja, $\Kll_{n,i} \leftarrow \Kll_{0,0}$. 
 	
 \end{alineas}
 
-Na Figura 6.7 tem-se o fluxograma do método de Newton-Raphson, mostrando as três opções de atualização da matriz de rigidez e os laços das iterações de equilíbrio e de subpassos.
+Além dessas opções, para problemas estáticos, o ANSYS possui três técnicas para melhorar a convergência do método de Newton-Raphson, que são \cite[p. 668-673]{ANSYS2018}:
+
+\begin{alineas}
+	\item \textbf{Preditor} (\textit{Predictor}): extrapola o vetor de deslocamentos iniciais de cada subpasso utilizando os incrementos de deslocamentos acumulados do subpasso anterior multiplicados pela relação entre os incrementos de tempo entre ambos subpassos;
+	
+	\item \textbf{Descida Adaptativa} (\textit{Adaptative Descent}): consiste em alternar entre a matriz de rigidez tangente e secante conforme o andamento do resíduo durante as iterações de equilíbrio. Só é utilizada em conjunto com o método de Newton-Raphson Completo;
+	
+	\item \textbf{Pesquisa de linha} (\textit{Line Search}): tenta melhorar a solução multiplicando o incremento de deslocamentos por um escalar determinado pela minimização da energia do sistema;
+	
+	\item \textbf{Método do comprimento de arco} (\textit{Arc-Length Method}): utilizado para solução de equilíbrio estático não-linear de problemas instáveis como flambagem e pós-flambagem.
+	
+\end{alineas}
+
+Na \autoref{NR-fluxograma} tem-se o fluxograma do método de Newton-Raphson, mostrando as três opções de atualização da matriz de rigidez, o método da bisseção e os laços das iterações de equilíbrio e de subpassos.
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[scale = 1.0]{0606-fluxograma do metodo NR.pdf}
+	\end{center}
+	\caption{\label{NR-fluxograma}Fluxograma do método de Newton-Raphson para solução do sistema de equações globais não lineares}
+\end{figure}
+Ainda na \autoref{NR-fluxograma} está detalhado a parte de atualização das tensões e variáveis internas e do módulo constitutivo, que serão os temas do próximo capítulo. É importante que esteja nesse fluxograma o detalhe dos laços nos elementos e nos pontos de Gauss, pois a customização do modelo do material, através da subrotina USERMAT, como veremos, estará justamente aninhado nesse laço mais interno dos pontos de Gauss.
+
+A convergência quadrática da opção de Newton-Raphson Completo só é efetivamente obtida se for utilizado o módulo consistente $\Dll^{alg}$ após o algoritmo de integração das tensões, conforme \citeonline{Simo1985}.
+
 
 \section{Algoritmo de atualização das tensões e variáveis internas}
 
