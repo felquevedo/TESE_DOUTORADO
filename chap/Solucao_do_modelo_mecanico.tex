@@ -394,9 +394,9 @@ Em geral, em elastoplasticidade, o método de Runge-Kutta de primeira ordem (tam
 \end{equation}
 em que $\Delta \lambda = \dot\lambda\Delta t$ e $0 \leq \theta \leq 1$ fornece a regra trapezoidal generalizada para o fluxo plástico e evolução das variáveis internas. Quando $\theta = 0$ tem-se a forma completamente explicita (\textit{fully explicit forward Euler}) e $\theta = 1$  completamente implicita (\textit{fully implicit backward Euler}). Os algoritmos semi-implícitos adotam $0 \leq \theta < 1$  ou ainda uma combinação implícita e explícita de $\Delta \lambda$, $\dgdsl$ e $\hl$.
 
-Os esquemas explícitos, como os de \citeonline{Nayak1972}, \citeonline{Zienkiewicz1969} e \citeonline{Owen1980} foram largamente usados até que \citeonline{Simo1985} propuseram um método implícito de dois passos conhecido como projeção do ponto mais próximo (\textit{Closest Point Projetction Method} ou abreviadamente CPPM). Isso pois, os esquemas completamente explícitos não satisfaziam a condição de consistência $f_{i+1} = f(\sigmal_{i+1},\ql_{i+1}) = 0$ no final do passo, uma vez que o multiplicador plástico e os vetores de fluxo são calculados com as tensões do passo anterior $i$. Segundo \citeonline[p. 278]{Belytschko2000} isso faz com que a solução acumule uma certa imprecisão. Esse fato levou a comunidade a desenvolver e utilizar cada vez mais os algoritmos implícitos e semi-implícitos que buscam satisfazer $f_{i+1} = 0$. E, portanto, será o método adotado nesse trabalho. Alguns dos principais métodos implícitos para elastoplasticidade podem ser encontrados em \citeonline{Simo1998}, \citeonline{Belytschko2000} e \citeonline{Neto2008}.
+Os esquemas explícitos, como os de \citeonline{Nayak1972}, \citeonline{Zienkiewicz1969} e \citeonline{Owen1980} foram largamente usados até que \citeonline{Simo1985} propuseram um método implícito de dois passos conhecido como projeção do ponto mais próximo (\textit{Closest Point Projetction Method} ou abreviadamente CPPM). Isso pois, os esquemas completamente explícitos não satisfaziam a condição de consistência $f_{i+1} = f(\sigmal_{i+1},\ql_{i+1}) = 0$ no final do passo, uma vez que o multiplicador plástico e os vetores de fluxo são calculados com as tensões do passo anterior $i$. Segundo \citeonline[p. 278]{Belytschko2000} isso faz com que a solução acumule uma certa imprecisão. Esse fato levou a comunidade a desenvolver e utilizar cada vez mais os algoritmos implícitos e semi-implícitos que buscam satisfazer $f_{i+1} = 0$. E, portanto, será o método adotado nesse trabalho. Alguns dos principais métodos implícitos para elastoplasticidade podem ser encontrados em \citeonline{Simo1998}, \citeonline{Belytschko2000}, \citeonline{Neto2008} e \citeonline{Huang2009}.
 
-Atualmente os métodos implícitos (e semi-implícitos) empregados nos algoritmos de atualização das tensões consistem em um esquema preditor-corretor de dois passos. Primeiro aplica-se a etapa do preditor elástico e, se necessário, a do corretor plástico. Definindo $\Delta \varepsilonl_{i+1}^p \equiv \varepsilonl_{i+1}^p - \varepsilonl_{i}^p$, o preditor elástico pode ser explicitado de (\ref{eq:esquema_int_constitutiva_ep})$_4$, conforme:
+Atualmente os métodos implícitos (e semi-implícitos) empregados nos algoritmos de atualização das tensões consistem em um esquema preditor-corretor de dois passos. Primeiro aplica-se a etapa do preditor elástico e, se necessário, a do corretor plástico. Dessa forma, definindo $\Delta \varepsilonl_{i+1}^p \equiv \varepsilonl_{i+1}^p - \varepsilonl_{i}^p$, o preditor elástico pode ser explicitado de (\ref{eq:esquema_int_constitutiva_ep})$_4$, conforme:
 \begin{equation}
 	\label{eq:preditor_elastico}
 	\sigmal_{i+1} = \Dll(\varepsilonl_{i+1}-\varepsilon_{i+1}^p) = \Dll(\varepsilonl_i+\Delta \varepsilonl_i-\varepsilonl_{i+1}^ p) = \sigmal_{i+1}^{trial} + \Delta \sigmal_{i+1}
@@ -457,7 +457,7 @@ Reorganizando (\ref{eq:algoritmo_ep_2})$_{1,2}$ tem-se o seguinte corretor plás
 em que
 \begin{equation}
 	\label{eq:Ak}
-	\left[ \All_k \right] = 
+	\left[ \All_k \right] = \left[ \All \right] =
 	\begin{bmatrix}
 		\Dll & \zerol \\
 		\zerol & -\Uml
@@ -474,9 +474,91 @@ Devido a esse tratamento explícito do vetor de fluxo plástico e do módulo de 
 	\end{array}\right\}}
 \end{equation}
 
-O fluxograma desse algoritmo pode ser visto na Figura 6.12, quando se tem endurecimento/amolecimento e na Figura 6.13 na ausência desse fenômeno.
+O fluxograma desse algoritmo pode ser visto na \autoref{algoritmo_EP_semiimplicito}.
+
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[scale = 1.0]{0608-integração EP semi-implicito.pdf}
+	\end{center}
+	\caption{\label{algoritmo_EP_semiimplicito}Algoritmo de integração para elastoplasticidade utilizando um esquema de Euler semi-implícito a) com edurecimento e b) sem endurecimento (omitindo o índice $i$+1).}
+\end{figure}
 
 \subsection{Integração das equações constitutivas viscoplásticas}
+
+Como visto no \autoref{cap: modelo mecanico}, considerando a hipótese das transformações infinitesimais, as equações constitutivas da viscoplasticidade, já na notação de Voigt, podem ser escritas como:
+\begin{equation}
+	\label{eq:constitutiva_vp}
+	\left\{
+	\begin{array}{lcl}
+		\dot \sigmal = \Dll~\dot \varepsilonl^e = \Dll(\dot \varepsilonl - \dot \varepsilonl^{vp}) \\
+		\dot \varepsilonl^{vp} = \dot \lambda \dgdsl \\
+		\dot \ql = \dot \lambda \hl \\
+		\dot f = \dfdsl^T \dot \sigmal + \dfdql^T \dot \ql = 0 \\
+		\dot \lambda =  \dfrac{\Phi(\sigmal, \ql)}{\eta}	
+	\end{array}
+	\right..
+\end{equation}
+
+Tal como na elastoplasticidade, aqui também se emprega um algoritmo de integração explícito, implícito ou semi-implícito para apartir de $\left\{ \varepsilonl_i, \varepsilonl_i^{vp},\sigmal_i,\ql_i \right\}$ e do incremento de deformação total $\Delta \varepsilonl_i$ chegar aos valores $\left\{ \varepsilonl_{i+1}, \varepsilonl_{i+1}^{vp},\sigmal_{i+1},\ql_{i+1} \right\}$  da iteração seguinte $i+1$. Contudo, na viscoplasticidade não há mais a imposição da condição de consistência, ou seja, que $f_{i+1} = 0$.
+
+Diferentes algoritmos de integração para viscoplasticidade podem ser encontrados na literatura, tais como em \citeonline{Cormeau1975}, \citeonline{Zienkiewicz1974},  \citeonline{Hughes1978}, \citeonline{Marques1983}, \citeonline{Peirce1984}, \citeonline{Bernaud1991}, \citeonline{Belytschko2000}, \citeonline{Neto2008} e \citeonline{Smith2014}.
+
+Para o presente trabalho será utilizado um esquema introduzido por \citeonline{Peirce1984} conhecido como método da taxa do módulo tangente (\textit{Rate Tangente Modulus Method}), descrito em \citeonline[p. 290]{Belytschko2000}, que compreende um esquema de Euler explícito para todas as variáveis, exceto $\Delta \lambda$ que é integrado de acordo com a regra trapezoidal generalizada. Portanto, de (\ref{eq:constitutiva_vp}) tem-se:
+\begin{equation}
+	\label{eq:esquema_int_constitutiva_vp}
+	\left\{
+	\begin{array}{lcl}
+		\varepsilonl_{i+1} = \varepsilonl_i + \Delta \varepsilonl_i \\
+		\varepsilonl_{i+1}^{vp} = \varepsilonl_i^{vp} + \Delta \lambda \dgdsl_i \\
+		\ql_{i+1} = \ql_i + \Delta \lambda \hl_i \\	
+		\sigmal_{i+1} = \Dll~\varepsilonl_{i+1}^e = \Dll(\varepsilonl_{i+1} - \varepsilonl_{i+1}^{vp}) \\
+		\Delta \lambda = \dfrac{\Delta t}{\eta}[(1-\theta)\Phi_i + \theta \Phi_{i+1}]
+	\end{array}
+	\right..
+\end{equation}
+em que a função de sobretensão $\Phi_{i+1}$ é obtida através da seguinte linearização:
+\begin{equation}
+	\label{eq:esquema_int_constitutiva_vp1}
+	\Phi_{i+1} = \Phi_i + \dPhidsl_i \Delta \sigmal + \dPhidql_i \Delta \ql.
+\end{equation}
+em que $\dPhidsl = \partial \dPhidsl / \partial \sigmal$ e $\dPhidql = \partial \dPhidsl / \partial \ql$. Substituindo (\ref{eq:esquema_int_constitutiva_vp1}) em (\ref{eq:esquema_int_constitutiva_vp})$_5$ tem-se:
+\begin{equation}
+	\label{eq:esquema_int_constitutiva_vp2}
+	\Delta \lambda = \dfrac{\Delta t}{\eta} \Phi_i + \dfrac{\theta \Delta t}{\eta}(\dPhidsl_i \Delta \sigmal + \dPhidql_i \Delta \ql).
+\end{equation}
+
+Introduzindo (\ref{eq:esquema_int_constitutiva_vp})$_2$ em (\ref{eq:esquema_int_constitutiva_vp})$_4$ e reescrevendo (\ref{eq:esquema_int_constitutiva_vp})$_3$ tem-se, na forma compacta:
+\begin{equation}
+	\label{eq:esquema_int_constitutiva_vp3}
+	\left\{ \begin{array}{lcl} \Delta \sigmal \\ \Delta \ql \end{array} \right\} = \left\{ \begin{array}{ccc} \Dll(\Delta\varepsilonl_i -\Delta \lambda \dgdsl_i) \\ \Delta \lambda \hl_i \end{array} \right\}.
+\end{equation}
+Substituindo (\ref{eq:esquema_int_constitutiva_vp3}) em (\ref{eq:esquema_int_constitutiva_vp2}) e isolando $\Delta \lambda$ tem-se:
+\begin{equation}
+	\label{eq:esquema_int_constitutiva_vp4}
+	\Delta \lambda = \dfrac{\Phi_i + \theta \dPhidsl_i^T\Dll\Delta\varepsilonl_i}{\dfrac{\eta}{\Delta t} + \theta (\dPhidsl_i^T\Dll\dgdsl_i - \dPhidql_i^T \hl_i)}.
+\end{equation}
+
+Quando $0 < \theta < 1$  tem-se um algoritmo semi-implicito e quando $\theta = 1$ tem-se um algoritmo totalmente explícito, com $\Delta \lambda = \Delta t \dfrac{\Phi_i}{\eta}$. Como pode-se ver nessa dedução, ao contrário da integração das tensões em elastoplasticidade, não há necessidade de resolver o sistema de forma iterativa. E, além disso, todas as variáveis são da iteração conhecida $i$. Esse fato, como será visto no próximo item, facilitará o acoplamento entre o algoritmo de viscoplasticidade e elastoplasticidade. Além disso, para viscoplasticidade não utilizaremos o endurecimento, simplificando a expressão (\ref{eq:esquema_int_constitutiva_vp4}) para:
+\begin{equation}
+	\label{eq:esquema_int_constitutiva_vp5}
+	\Delta \lambda = \dfrac{\Phi_i + \theta \dPhidsl_i^T\Dll\Delta\varepsilonl_i}{\dfrac{\eta}{\Delta t} + \theta \dPhidsl_i^T\Dll\dgdsl_i}.
+\end{equation}
+
+Contudo, diferentemente do algoritmo em elastoplasticidade, que possui a imposição da condição de consistência, um aspecto importante dos esquemas de integração em viscoplasticidade é sua estabilidade numérica. Essa estabilidade é garantida desde que o incremento de tempo fique abaixo de um certo limite, que depende, à rigor, de aspectos como o esquema de integração, superfície de escoamento e regra de fluxo. Caso o algoritmo encontre dificuldades de estabilidade numérica, nesse trabalho, utilizaram-se os limites de \citeonline[p. 829]{Cormeau1975}, em que para superfície de Drucker-Prager tem-se:
+\begin{equation}
+	\label{eq:deltatmin_dp}
+	\Delta t \leq \left\{ 
+		\begin{array}{lcl} 
+			\dfrac{4}{3}\dfrac{\eta}{\Phi}\dfrac{(1+\nu)}{E} {\sqrt{3J_2}} \\
+			\dfrac{\eta f_0}{\Phi'}\dfrac{(1+\nu)(1-2\nu)}{E}\dfrac{(3-\sin{\phi})^2}{\frac{3}{4}(1-2\nu)(3-\sin{\phi})^2 + 6(1+\nu)\sin{\phi}^2}
+		\end{array} \right.
+\end{equation}
+e para Mohr-Coulomb:
+\begin{equation}
+	\label{eq:deltatmin_mc}
+	\Delta t \leq \dfrac{\eta f_0}{\Phi'}\dfrac{(1+\nu)(1-2\nu)}{E}\dfrac{1}{1-2\nu + \sin{\phi}^2}
+\end{equation}
+sendo $\Phi' = d\Phi / d(f/f_0)$. Quando $\phi = 0$ têm-se os casos específicos para as superfícies de von-Mises e Tresca. Esses limites são deduzidos considerando viscoplasticidade associada e com esquema de integração totalmente explícito. O fluxograma desse algoritmo pode ser visto na Figura 6.14.
 
 \subsection{Integração das equações constitutivas elastoplástica-viscoplásticas}
 

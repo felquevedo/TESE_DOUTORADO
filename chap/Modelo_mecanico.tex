@@ -439,13 +439,13 @@ Contudo, no presente trabalho, apesar da generalidade dos algoritmos descritos n
 Como as deformações viscoplásticas ocorrem quando $f>0$ não há a imposição da condição de consistência. Dessa forma, tem-se que a taxa do multiplicador viscoplástico $\dot \lambda$ não pode ser obtida de uma condição do tipo $\dot f = 0$. Para contornar esse aspecto, existem modelos que fornecem uma expressão explícita para $\dot \lambda$, e no presente trabalho será adotado o modelo de Perzyna \cite[p. 823]{Zienkiewicz1974}:
 \begin{equation}
 	\label{eq:lambdavp}
-	\dot \lambda = \dfrac{\Phi(\sigmall,\ql)}{\eta}
+	\dot \lambda = \dfrac{\Phi(f/f_0)}{\eta}
 \end{equation}
 \begin{equation}
 	\label{eq:sobretensao}
 	\Phi = \left\langle  \dfrac{f(\sigmall,\ql)}{f_0} \right\rangle^n
 \end{equation}
-em que $\Phi$ é a função de sobretensão, $\eta$ é a constante de viscosidade dinâmica (unidade de tempo), $n$ é o parâmetro adimensional que dá a forma de lei de potência, $f_0$ parâmetro de tensão convenientemente adotado e $\left\langle * \right\rangle$ é a função de McCauley, que é nulo quando $*<0$, ou seja, apenas ocorrerá fluxo viscoplástico quando o critério $f$ for positivo.  
+em que $\eta$ é a constante de viscosidade dinâmica (unidade de tempo), $\Phi$ é a função de sobretensão, nesse caso, uma função potencial com expoente $n$, $f_0$ parâmetro de tensão convenientemente adotado e $\left\langle * \right\rangle$ é a função de McCauley, que é nulo quando $*<0$, ou seja, apenas ocorrerá fluxo viscoplástico quando o critério $f/f_0$ for positivo.  
 
 Muitas vezes o parâmetro $f_0$ não consta na expressão como, por exemplo, em \citeonline[p. 222]{Rousset1988}. Nesse caso, seu valor está implícito na constante $\eta$ que possuí unidade de tempo vezes tensão elevada na potência $n$, ao invés de apenas a unidade de tempo, como em \citeonline{Zienkiewicz1974}. Isso não constitui um problema, pois, é mantida a consistência dimensional da expressão. Contudo, essa sutileza é importante no momento de adimensionalizar resultados com a expressão (\ref{eq:parametros_admensionais_vp}) da velocidade. Nessa expressão, \citeonline{Bernaud1991} utiliza a constante de viscosidade dinâmica conforme \citeonline{Rousset1988}.
 
