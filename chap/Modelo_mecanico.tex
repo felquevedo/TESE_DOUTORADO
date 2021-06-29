@@ -322,7 +322,7 @@ Tal como a função de escoamento, o potencial plástico geralmente é descrito 
 	\label{eq:invariantes_tensores}
 	\begin{array}{lcl}
 		\dgdsll = C_1\gllum + C_2\glldois + C_3\glltres, \\ 
-		\gllum = \dfrac{\partial I_1}{\partial \sigmall} = \Umll,~~~ \glldois = \dfrac{\partial \sqrt{J_2}}{\partial \sigmall} = \dfrac{1}{2\sqrt{J_2}}\sll,~~~ \glltres = \dfrac{\partial J_3}{\partial \sigmall} = \dfrac{4J_2}{3}\Umll, \\
+		\gllum = \dfrac{\partial I_1}{\partial \sigmall} = \Umll,~~~ \glldois = \dfrac{\partial \sqrt{J_2}}{\partial \sigmall} = \dfrac{1}{2\sqrt{J_2}}\sll,~~~ \glltres = \dfrac{\partial J_3}{\partial \sigmall}, \\
 		C_1 = \dfrac{\partial g}{\partial I_1},~~~C_2=\dfrac{\partial g}{\partial \sqrt{J_2}}-\dfrac{\tan{(3\theta)}}{\sqrt{J_2}}\dfrac{\partial g}{\partial \theta},~~~C_3 = \dfrac{\sqrt{3}}{2\cos{(3\theta})}-\dfrac{1}{J_2^{3/2}}\dfrac{\partial g}{\partial \theta},
 	\end{array}
 \end{equation}
@@ -342,7 +342,7 @@ sendo que nessa descrição, apenas as constantes $C_1$, $C_2$  e $C_3$ são par
 e para Drucker-Prager, tem-se:
 \begin{equation}
 	\label{eq:c1c2c3DP}
-	c_1 = \beta,~~~C_2 = 1,~~~C_3 = 0.
+	C_1 = \beta,~~~C_2 = 1,~~~C_3 = 0.
 \end{equation}
 
 Nas expressões de $C_2$ e $C_3$, pode-se ver que o vetor de fluxo de Mohr-Coulomb, e consequentemente o de Tresca, possui uma singularidade quando $\theta = \pm \pi/6$. Isso ocorre devido a essas superfícies apresentarem um vértice nessas coordenadas no plano desviador. Há diversas formas de se resolver esse problema, sendo que a adotada no presente trabalho, dada por \citeonline[p. 234]{Owen1980}, será utilizar os valores de $C_1$,$C_2$ e $C_3$ de Drucker-Prager (ou von-Mises) quando $\theta = \pm \pi/6$.

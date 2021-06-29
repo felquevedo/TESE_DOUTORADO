@@ -89,12 +89,6 @@ sendo o subscrito $T$ a operação de transposição. Como se pode ver é utiliz
 	\end{array}
 \end{equation}
 
-Além disso, na notação de Voigt, é necessário definir o produto termo-a-termo entre \textit{arrays} unidimensionais, de tal forma que:
-\begin{equation}
-	\label{eq:ab}
-	\underline a ~ \underline b  = \underline c ~ \text{em que}~\underline c  = \left\{a_1b_1~~~a_2b_2~~~a_3b_3~~~a_4b_4~~~...~~~a_nb_n \right\}.
-\end{equation}
-
 Essa será a notação adotada para o restante do trabalho. Logo, o teorema dos trabalhos virtuais (\ref{eq:deslocamento_virtual_3}) pode ser reescrito da seguinte forma:
 \begin{equation}
 	\label{eq:deslocamento_virtual_3}
@@ -223,6 +217,7 @@ No ANSYS, ambos elementos possuem a opção degenerada em que é possível traba
 O elemento SOLID185 possuí também opções que lidam com problemas de travamento (\textit{Locking}) e modos espúrios (\textit{Hourglass}). O travamento é caracterizado por uma rigidez excessiva do elemento, e ocorre principalmente em elementos de primeira ordem com integração completa que estão sujeitos a flexão. Ou ainda, quando o material é quase incompressível. Também podem ocorrer em elementos de segunda ordem, quando as deformações plásticas são da ordem das deformações elásticas. Esse problema evita-se com refinamento da malha, técnicas de subintegração e funções de formas extras. O ANSYS possuí as duas últimas técnicas para o SOLID185 (\textit{Uniform Reduced Integration with Hourglass Control} e \textit{Enhanced Strain Formulation}). Os modos espúrios ocorrem quando se utiliza as técnicas de subintegração e é caracterizado por uma distorção no elemento porém com zero deformação. Esse problema é evitado utilizando integração completa ou refinamento da malha. No presente trabalho se utilizará a \textbf{integração completa} (\textit{Full integration with B method}) e se tentará evitar esses problemas através do \textbf{refinamento da malha}. 
 
 \section{Solução do sistema não linear}
+\label{cap: solução do sistema}
 
 Após o processo de discretização do domínio $\Omega$ é necessário fazer a montagem e a solução do seguinte sistema global de equações:
 \begin{equation}
@@ -357,7 +352,7 @@ A convergência quadrática da opção de Newton-Raphson Completo só é efetiva
 Como visto no capítulo anterior, durante as iterações de equilíbrio é necessário fazer a integração espacial das forças internas no contexto do método dos elementos finitos. Essa integração pode ser escrita da seguinte maneira (omitindo o subíndice $n$ referente ao subpasso):
 \begin{equation}
 	\label{eq:Fint}
-	\Fl_{int_i} = \int_{\Omega}\Bll^T\sigmal_{i+1}d\Omega = \sum_{i_e=1}^{n_e}\sum_{i_p=1}^{n_p}\left( \Bll^T\sigmal_{i+1}WJ\right)_{ip,ie}
+	\Fl_{int_i} = \int_{\Omega}\Bll^T\sigmal_{i+1}d\Omega = \sum_{i_e=1}^{n_e}\sum_{i_p=1}^{n_p}\left( \Bll^T\sigmal_{i+1}WJ\right)_{i_p,i_e}
 \end{equation}
 sendo $\sigmal_{i+1}$ dado pela relação constitutiva do material. Contudo, as relações constitutivas, por dependerem da trajetória das tensões e/ou do tempo, estão descritas em forma de taxas, conforme visto no \autoref{cap: modelo mecanico}. E, portanto, é necessária a solução desse sistema de equações diferenciais ordinárias por algum método de integração juntamente com as iterações de equilíbrio. Essa etapa de integração, no esquema de elementos finitos, é conhecida como algoritmo de atualização das tensões e variáveis internas. Tal como ilustrado na \autoref{NR-fluxograma}, esse algoritmo ocorre para cada ponto de Gauss de cada elemento e tem por finalidade obter o incremento de tensão $\Delta \sigmal$ e de forças associadas às variáveis internas $\Delta \ql$ a cada iteração de equilíbrio.
 
@@ -538,13 +533,13 @@ Substituindo (\ref{eq:esquema_int_constitutiva_vp3}) em (\ref{eq:esquema_int_con
 	\Delta \lambda = \dfrac{\Phi_i + \theta \dPhidsl_i^T\Dll\Delta\varepsilonl_i}{\dfrac{\eta}{\Delta t} + \theta (\dPhidsl_i^T\Dll\dgdsl_i - \dPhidql_i^T \hl_i)}.
 \end{equation}
 
-Quando $0 < \theta < 1$  tem-se um algoritmo semi-implicito e quando $\theta = 1$ tem-se um algoritmo totalmente explícito, com $\Delta \lambda = \Delta t \dfrac{\Phi_i}{\eta}$. Como pode-se ver nessa dedução, ao contrário da integração das tensões em elastoplasticidade, não há necessidade de resolver o sistema de forma iterativa. E, além disso, todas as variáveis são da iteração conhecida $i$. Esse fato, como será visto no próximo item, facilitará o acoplamento entre o algoritmo de viscoplasticidade e elastoplasticidade. Além disso, para viscoplasticidade não utilizaremos o endurecimento, simplificando a expressão (\ref{eq:esquema_int_constitutiva_vp4}) para:
+Quando $0 < \theta < 1$  tem-se um algoritmo semi-implicito e quando $\theta = 0$ tem-se um algoritmo totalmente explícito, com $\Delta \lambda = \Delta t \dfrac{\Phi_i}{\eta}$. Como pode-se ver nessa dedução, ao contrário da integração da relação constitutiva em elastoplasticidade, não há necessidade de resolver o sistema de forma iterativa. E, além disso, todas as variáveis são da iteração conhecida $i$. Esse fato, como será visto no próximo item, facilitará o acoplamento entre o algoritmo de viscoplasticidade e elastoplasticidade. Além disso, para viscoplasticidade não utilizaremos o endurecimento, simplificando a expressão (\ref{eq:esquema_int_constitutiva_vp4}) para:
 \begin{equation}
 	\label{eq:esquema_int_constitutiva_vp5}
 	\Delta \lambda = \dfrac{\Phi_i + \theta \dPhidsl_i^T\Dll\Delta\varepsilonl_i}{\dfrac{\eta}{\Delta t} + \theta \dPhidsl_i^T\Dll\dgdsl_i}.
 \end{equation}
 
-Contudo, diferentemente do algoritmo em elastoplasticidade, que possui a imposição da condição de consistência, um aspecto importante dos esquemas de integração em viscoplasticidade é sua estabilidade numérica. Essa estabilidade é garantida desde que o incremento de tempo fique abaixo de um certo limite, que depende, à rigor, de aspectos como o esquema de integração, superfície de escoamento e regra de fluxo. Caso o algoritmo encontre dificuldades de estabilidade numérica, nesse trabalho, utilizaram-se os limites de \citeonline[p. 829]{Cormeau1975}, em que para superfície de Drucker-Prager tem-se:
+Contudo, diferentemente do algoritmo em elastoplasticidade, que possui a imposição da condição de consistência, um aspecto importante dos esquemas de integração em viscoplasticidade é sua estabilidade numérica. Essa estabilidade é garantida desde que o incremento de tempo fique abaixo de um certo limite, que depende, à rigor, dos parâmetros do material, de aspectos como o esquema de integração, superfície de escoamento e regra de fluxo. Caso o algoritmo encontre dificuldades de estabilidade numérica, nesse trabalho, utilizaram-se os limites de \citeonline[p. 829]{Cormeau1975}, em que para superfície de Drucker-Prager tem-se:
 \begin{equation}
 	\label{eq:deltatmin_dp}
 	\Delta t \leq \left\{ 
@@ -558,14 +553,157 @@ e para Mohr-Coulomb:
 	\label{eq:deltatmin_mc}
 	\Delta t \leq \dfrac{\eta f_0}{\Phi'}\dfrac{(1+\nu)(1-2\nu)}{E}\dfrac{1}{1-2\nu + \sin{\phi}^2}
 \end{equation}
-sendo $\Phi' = d\Phi / d(f/f_0)$. Quando $\phi = 0$ têm-se os casos específicos para as superfícies de von-Mises e Tresca. Esses limites são deduzidos considerando viscoplasticidade associada e com esquema de integração totalmente explícito. O fluxograma desse algoritmo pode ser visto na Figura 6.14.
+sendo $\Phi' = d\Phi / d(f/f_0)$. Quando $\phi = 0$ têm-se os casos específicos para as superfícies de von-Mises e Tresca. Esses limites são deduzidos considerando viscoplasticidade associada e com esquema de integração totalmente explícito. O fluxograma desse algoritmo pode ser visto na \autoref{algoritmo_VP_semiimplicito}.
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[scale = 1.0]{0609-integração VP semi-implicito sem endurecimento.pdf}
+	\end{center}
+	\caption{\label{algoritmo_VP_semiimplicito}Algoritmo de integração para viscoplasticidade utilizando um esquema de Euler semi-implícito ou totalmente explícito (quando $\theta = 0$) sem endurecimento/amolecimento (omitindo o índice $i$+1).}
+\end{figure}
 
 \subsection{Integração das equações constitutivas elastoplástica-viscoplásticas}
+Como visto no \autoref{cap: modelo mecanico}, considerando a hipótese das transformações infinitesimais, as equações constitutivas da elastoplasticidade e viscoplasticidade são acopladas em série de forma a obter a relação constitutiva elastoplástica-viscoplástica linearizada (\ref{eq:lei_epvp}). Além disso, como a viscoplasticidade é integrada através de uma regra semi-implícita na qual todas as incógnitas são calculadas com as variáveis conhecidas do subpasso $i$, o incremento de deformação viscoplástica pode ser descontado diretamente do incremento de deformação total na etapa de predição elástica do algoritmo de elastoplasticidade. Dessa forma, o algoritmo para integração das equações constitutivas elastoplástica-viscoplástica pode ser visto no fluxograma da \autoref{algoritmo_EPVP} a) e em b) considerando elastoplasticidade sem endurecimento/amolecimento com esquema totalmente explícito para viscoplasticidade.
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[scale = 1.0]{0610-integração EPVP.pdf}
+	\end{center}
+	\caption{\label{algoritmo_EPVP}Integração modelo acoplado a) elastoplasticidade com endurecimento b) elastoplasticidade sem endurecimento e viscoplasticidade explícita (omitindo o índice $i$+1).}
+\end{figure}
 
-\subsection{Atualização do módulo constitutivo}
+\section{Atualização do módulo constitutivo}
 
-\subsection{Particularizando para estado plano de deformações e axissimetria}
+Como visto no diagrama da \autoref{NR-fluxograma}, após a atualização das tensões e variáveis internas tem-se a possibilidade de atualizar o módulo constitutivo. Segundo \citeonline[p. 287]{Belytschko2000}, devido à abrupta transição do comportamento plástico durante o escoamento, o módulo elastoplástico tangente contínuo pode causar carregamentos e descarregamentos espúrios (que não são reais). Para evitar esse tipo de problema, é recomendado utilizar um módulo tangente consistente com a linearização feita durante o algoritmo de integração das leis constitutivas. Além disso, como comentado no \autoref{cap: solução do sistema} sua utilização aumenta a taxa de convergência das iterações de equilíbrio. Sua expressão geral é definida por:
+\begin{equation}
+	\label{eq:D_alg1}
+	\Dll^{alg} = \left(\dfrac{d\sigmal}{d\varepsilonl} \right)_{i+1}.
+\end{equation}
 
-\subsection{Domínios, discretização, condições de contorno e ciclo construtivo para os modelos de verificação}
+Para derivar a expressão de $\Dll^{alg}$  escreve-se (\ref{eq:constitutiva_ep})$_{1,2,3,4}$ e (\ref{eq:constitutiva_vp})$_{1,2,3,4}$ na sua forma incremental e resolve-se para $d\sigmal/d\varepsilonl$  \cite[p. 285]{Belytschko2000}. Com isso, tem-se, para a elastoplasticidade, a seguinte relação (omitindo-se o índice $i+1$):
+\begin{equation}
+	\label{eq:D_alg_ep}
+	\Dll^{alg} = \Dll - \dfrac{\Dll~\dgdsl_i~\dfdsl^T \Dll}{\dfdsl^T\Dll~\dgdsl_i-\dfdql \hl_i}
+\end{equation}
+
+e para viscoplasticidade (com todas as variáveis calculadas no subpasso $i$):
+\begin{equation}
+	\label{eq:D_alg_vp}
+	\Dll^{alg} = \Dll - \dfrac{\theta \Dll~\dgdsl_i~\dPhidsl^T \Dll}{\eta/\Delta t+ \theta\dPhidsl^T\Dll~\dgdsl} - \dfrac{\Phi \Dll \dgdsl}{\eta/\Delta t+ \theta \dPhidsl^T\Dll~\dgdsl}.
+\end{equation}
+
+Para o modelo acoplado elastoplástico-viscoplástico tem-se (omitindo-se o índice $i+1$):
+\begin{equation}
+	\label{eq:D_alg_epvp}
+	\Dll^{alg} = \Dll - \dfrac{\Dll~\dgdsl_i^p~{\dfdsl^p}^T \Dll}{{\dfdsl^p}^T\Dll~\dgdsl_i^p-\dfdql \hl_i} - \dfrac{\theta \Dll~\dgdsl_i^{vp}~\dPhidsl^T \Dll}{\eta/\Delta t+ \theta\dPhidsl^T\Dll~\dgdsl_i^{vp}} - \dfrac{\Phi_i \Dll \dgdsl_i^{vp}}{\eta/\Delta t+ \theta \dPhidsl_i^T\Dll~\dgdsl_i^{vp}}.
+\end{equation}
+
+Adotar o módulo tangente consistente faz com que a convergência seja atingida com menos iterações de equilíbrio globais, contudo, o procedimento tem um custo para sistemas grandes, uma vez que a cada iteração é exigida a montagem e fatorização da matriz de rigidez global (caso seja utilizado a opção de Newton-Raphson completo). Portanto, é comum para sistemas grandes utilizar o módulo elástico $\Dll \leftarrow \Dll^e$ , exceto quando se tem problemas de convergência.
+
+Outra questão importante relacionada a esse módulo está em sua simetria. Por exemplo, como visto em (\ref{eq:Dep}) o módulo elastoplástico contínuo é simétrico se houver fluxo associado, ou seja, $f=g$. Contudo, essa propriedade não é transferida de forma geral para o módulo tangente consistente. Isso dependerá também do esquema de integração utilizado. Para o caso, do presente trabalho, com as superfícies utilizadas, será sempre simétrico se $g^{p}=f^{p}$ e $g^{vp}=f^{vp}$.
+
+\section{Particularizando para estado plano de deformações e axissimetria}
+Em problemas tridimensionais, com materiais isotrópicos, a relação constitutiva elástica linearizada, em termos das seis componentes de tensão e de deformação pode ser escrita, na notação de Voigt, conforme (adaptado de SMITH et al. 2014):
+\begin{equation}
+	\label{eq:Dl}
+	\left\{\begin{array}{lcl}
+		\sigma_{11} \\
+		\sigma_{22} \\
+		\sigma_{33} \\
+		\sigma_{21} \\
+		\sigma_{23} \\
+		\sigma_{31} 
+	\end{array}\right\} = 
+	\begin{bmatrix}
+	(1-\nu)	& \nu 		& \nu  		& 0	 		& 0 			& 0 \\
+	\nu 	& (1-\nu)	& \nu  		& 0		 	& 0				& 0  \\
+	\nu 	& \nu 		& (1-\nu)   & 0		 	& 0 			& 0  \\
+	0		& 0			& 0		    & (1-2\nu)/2 & 0 			& 0  \\
+	0		& 0			& 0		    & 0	       	& (1-2\nu)/2	& 0  \\
+	0		& 0			& 0		    & 0	       	& 0         	& (1-2\nu)/2
+	\end{bmatrix}
+	\left\{\begin{array}{lcl}
+	\varepsilon_{11} \\
+	\varepsilon_{22} \\
+	\varepsilon_{33} \\
+	\varepsilon_{21} \\
+	\varepsilon_{23} \\
+	\varepsilon_{31} 
+\end{array}\right\}
+\end{equation}
+
+Particularizando essa relação para problemas em estado plano de deformações e axissimetria tem-se (adaptado de SMITH et al. 2014):
+\begin{equation}
+	\label{eq:Dl}
+	\left\{\begin{array}{lcl}
+		\sigma_{11} \\
+		\sigma_{22} \\
+		\sigma_{33} \\
+		\sigma_{21}
+	\end{array}\right\} = 
+	\begin{bmatrix}
+		(1-\nu)	& \nu 		& \nu  		& 0	 		\\
+		\nu 	& (1-\nu)	& \nu  		& 0		 	\\
+		\nu 	& \nu 		& 1   		& 0		 	\\
+		0		& 0			& 0		    & (1-2\nu)/2 
+	\end{bmatrix}
+	\left\{\begin{array}{lcl}
+		\varepsilon_{11} \\
+		\varepsilon_{22} \\
+		\varepsilon_{33} \\
+		\varepsilon_{21}
+	\end{array}\right\}
+\end{equation}
+sendo, em axissimetria, as direções 1,2 e 3 em coordenadas cartesianas, correspondem respectivamente as direções $r, \theta$ e $z$ em coordenadas polares. Além disso, em problemas axissimétricos, a expressão (\ref{eq:gradiente_simetrico}) particulariza-se para (adaptado de SMITH et al. 2014):
+\begin{equation}
+	\label{eq:gradiente_simetrico_AXI_EPD}
+	\nabla^s = 	\begin{bmatrix}
+		\dfrac{\partial}{\partial r} & 0  \\
+		0 & 1/r  \\
+		0 & \dfrac{\partial}{\partial z} \\
+		\dfrac{\partial}{\partial z} & \dfrac{\partial}{\partial r}	
+	\end{bmatrix}
+\end{equation}
+
+Além disso, para o gradiente da função potencial em (\ref{eq:invariantes_tensores})$_2$, na notação de Voigt, para o caso 3D, tem-se (adaptado de \citeonline[p. 231]{Owen1980}):
+\begin{equation}
+	\label{eq:g1_3D}
+	\gl_1 = \left\{1,1,1,0,0,0\right\}^T
+\end{equation}
+\begin{equation}
+	\label{eq:g2_3D}
+	\gl_2 = \dfrac{1}{2\sqrt{J_2}} \left\{s_{11},s_{22},s_{33},2\sigma_{21},2\sigma_{23},2\sigma_{31}\right\}^T
+\end{equation}
+\begin{equation}
+	\label{eq:g3_3D}
+	\gl_3 = \left\{
+	\begin{array}{ccc}
+	s_{22}s_{33}-\sigma_{21}^2 + J_2/3 \\
+	s_{11}s_{33}-\sigma_{23}^2 + J_2/3 \\	
+	s_{11}s_{22}-\sigma_{31}^2 + J_2/3 \\
+	2(\sigma_{23}\sigma_{31}-s_{11}\sigma_{21}) \\
+	2(\sigma_{31}\sigma_{21}-s_{22}\sigma_{23}) \\
+	2(\sigma_{21}\sigma_{23}-s_{33}\sigma_{31})
+	\end{array} \right\}
+\end{equation}
+Para estado plano de deformações e axissimetria, tem-se (adaptado de \citeonline[p. 232]{Owen1980}):
+\begin{equation}
+	\label{eq:g1_2D}
+	\gl_1 = \left\{1,1,1,0\right\}^T
+\end{equation}
+\begin{equation}
+	\label{eq:g2_2D}
+	\gl_2 = \dfrac{1}{2\sqrt{J_2}} \left\{s_{11},s_{22},s_{33},2\sigma_{12}\right\}^T
+\end{equation}
+\begin{equation}
+	\label{eq:g3_2D}
+	\gl_3 = \left\{
+	\begin{array}{ccc}
+		s_{22}s_{33} + J_2/3 \\
+		s_{11}s_{33} + J_2/3 \\	
+		s_{11}s_{22}-\sigma_{12}^2 + J_2/3 \\
+		- 2s_{33}\sigma_{12}
+	\end{array} \right\}
+\end{equation}
+
+\section{Domínios, discretização, condições de contorno e ciclo construtivo para os modelos de verificação}
 
 
