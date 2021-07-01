@@ -270,7 +270,7 @@ Para incorporar a dependência do histórico de cargas/tempo, para um dado passo
 \end{equation}
 \begin{equation}
 	\label{eq:NR3}
-	\Fl_{ext_{n+1}} = \Fl_{ext_n} + \Delta \Fl_{{ext}_p},
+	\Fl_{ext_{n+1}} = \Fl_{ext_n} + \Delta \Fl_{p},
 \end{equation}
 \begin{equation}
 	\label{eq:NR4}
@@ -385,13 +385,13 @@ Em geral, em elastoplasticidade, o método de Runge-Kutta de primeira ordem (tam
 		\sigmal_{i+1} = \Dll~\varepsilonl_{i+1}^e = \Dll( \varepsilonl_{i+1} - \varepsilonl_{i+1}^p) \\
 		f_{i+1} = f(\sigmal_{i+1},\ql_{i+1}) = 0		
 	\end{array}
-	\right..
+	\right.
 \end{equation}
 em que $\Delta \lambda = \dot\lambda\Delta t$ e $0 \leq \theta \leq 1$ fornece a regra trapezoidal generalizada para o fluxo plástico e evolução das variáveis internas. Quando $\theta = 0$ tem-se a forma completamente explicita (\textit{fully explicit forward Euler}) e $\theta = 1$  completamente implicita (\textit{fully implicit backward Euler}). Os algoritmos semi-implícitos adotam $0 \leq \theta < 1$  ou ainda uma combinação implícita e explícita de $\Delta \lambda$, $\dgdsl$ e $\hl$.
 
-Os esquemas explícitos, como os de \citeonline{Nayak1972}, \citeonline{Zienkiewicz1969} e \citeonline{Owen1980} foram largamente usados até que \citeonline{Simo1985} propuseram um método implícito de dois passos conhecido como projeção do ponto mais próximo (\textit{Closest Point Projetction Method} ou abreviadamente CPPM). Isso pois, os esquemas completamente explícitos não satisfaziam a condição de consistência $f_{i+1} = f(\sigmal_{i+1},\ql_{i+1}) = 0$ no final do passo, uma vez que o multiplicador plástico e os vetores de fluxo são calculados com as tensões do passo anterior $i$. Segundo \citeonline[p. 278]{Belytschko2000} isso faz com que a solução acumule uma certa imprecisão. Esse fato levou a comunidade a desenvolver e utilizar cada vez mais os algoritmos implícitos e semi-implícitos que buscam satisfazer $f_{i+1} = 0$. E, portanto, será o método adotado nesse trabalho. Alguns dos principais métodos implícitos para elastoplasticidade podem ser encontrados em \citeonline{Simo1998}, \citeonline{Belytschko2000}, \citeonline{Neto2008} e \citeonline{Huang2009}.
+Os esquemas explícitos, como os de \citeonline{Nayak1972}, \citeonline{Zienkiewicz1969} e \citeonline{Owen1980} foram largamente usados até que \citeonline{Simo1985} propuseram um método implícito de dois passos conhecido como projeção do ponto mais próximo (\textit{Closest Point Projetction Method} ou abreviadamente CPPM). Isso pois, os esquemas completamente explícitos não satisfaziam a condição de consistência $f_{i+1} = f(\sigmal_{i+1},\ql_{i+1}) = 0$ no final do passo, uma vez que o multiplicador plástico e os vetores de fluxo são calculados com as tensões do passo anterior $i$. Segundo \citeonline[p. 278]{Belytschko2000} isso faz com que a solução acumule uma certa imprecisão. Esse fato levou a comunidade a desenvolver e utilizar cada vez mais os algoritmos implícitos e semi-implícitos que buscam satisfazer $f_{i+1} = 0$. E, portanto, será o método adotado nesse trabalho. Alguns dos principais métodos implícitos e semi-implícitos para elastoplasticidade podem ser encontrados em \citeonline{Simo1998}, \citeonline{Belytschko2000}, \citeonline{Neto2008} e \citeonline{Huang2009}.
 
-Atualmente os métodos implícitos (e semi-implícitos) empregados nos algoritmos de atualização das tensões consistem em um esquema preditor-corretor de dois passos. Primeiro aplica-se a etapa do preditor elástico e, se necessário, a do corretor plástico. Dessa forma, definindo $\Delta \varepsilonl_{i+1}^p \equiv \varepsilonl_{i+1}^p - \varepsilonl_{i}^p$, o preditor elástico pode ser explicitado de (\ref{eq:esquema_int_constitutiva_ep})$_4$, conforme:
+Atualmente esses métodos empregados nos algoritmos de atualização das tensões consistem em um esquema preditor-corretor de dois passos. Primeiro aplica-se a etapa do preditor elástico e, se necessário, a do corretor plástico. Dessa forma, definindo $\Delta \varepsilonl_{i+1}^p \equiv \varepsilonl_{i+1}^p - \varepsilonl_{i}^p$, o preditor elástico pode ser explicitado de (\ref{eq:esquema_int_constitutiva_ep})$_4$, conforme:
 \begin{equation}
 	\label{eq:preditor_elastico}
 	\sigmal_{i+1} = \Dll(\varepsilonl_{i+1}-\varepsilon_{i+1}^p) = \Dll(\varepsilonl_i+\Delta \varepsilonl_i-\varepsilonl_{i+1}^ p) = \sigmal_{i+1}^{trial} + \Delta \sigmal_{i+1}
@@ -514,9 +514,9 @@ Para o presente trabalho será utilizado um esquema introduzido por \citeonline{
 em que a função de sobretensão $\Phi_{i+1}$ é obtida através da seguinte linearização:
 \begin{equation}
 	\label{eq:esquema_int_constitutiva_vp1}
-	\Phi_{i+1} = \Phi_i + \dPhidsl_i \Delta \sigmal + \dPhidql_i \Delta \ql.
+	\Phi_{i+1} = \Phi_i + \dPhidsl_i \Delta \sigmal + \dPhidql_i \Delta \ql
 \end{equation}
-em que $\dPhidsl = \partial \dPhidsl / \partial \sigmal$ e $\dPhidql = \partial \dPhidsl / \partial \ql$. Substituindo (\ref{eq:esquema_int_constitutiva_vp1}) em (\ref{eq:esquema_int_constitutiva_vp})$_5$ tem-se:
+sendo $\dPhidsl = \partial \dPhidsl / \partial \sigmal$ e $\dPhidql = \partial \dPhidsl / \partial \ql$. Substituindo (\ref{eq:esquema_int_constitutiva_vp1}) em (\ref{eq:esquema_int_constitutiva_vp})$_5$ tem-se:
 \begin{equation}
 	\label{eq:esquema_int_constitutiva_vp2}
 	\Delta \lambda = \dfrac{\Delta t}{\eta} \Phi_i + \dfrac{\theta \Delta t}{\eta}(\dPhidsl_i \Delta \sigmal + \dPhidql_i \Delta \ql).
@@ -553,7 +553,7 @@ e para Mohr-Coulomb:
 	\label{eq:deltatmin_mc}
 	\Delta t \leq \dfrac{\eta f_0}{\Phi'}\dfrac{(1+\nu)(1-2\nu)}{E}\dfrac{1}{1-2\nu + \sin{\phi}^2}
 \end{equation}
-sendo $\Phi' = d\Phi / d(f/f_0)$. Quando $\phi = 0$ têm-se os casos específicos para as superfícies de von-Mises e Tresca. Esses limites são deduzidos considerando viscoplasticidade associada e com esquema de integração totalmente explícito. O fluxograma desse algoritmo pode ser visto na \autoref{algoritmo_VP_semiimplicito}.
+sendo $\Phi' = d\Phi / d(f/f_0)$. Quando $\phi = 0$ têm-se os casos específicos para as superfícies de von-Mises e Tresca. Esses limites são deduzidos considerando viscoplasticidade associada e com esquema de integração totalmente explícito. O fluxograma para o algoritmo de integração das equações viscoplásticas pode ser visto na \autoref{algoritmo_VP_semiimplicito}.
 \begin{figure}[H]
 	\begin{center}
 		\includegraphics[scale = 1.0]{0609-integração VP semi-implicito sem endurecimento.pdf}
@@ -562,7 +562,9 @@ sendo $\Phi' = d\Phi / d(f/f_0)$. Quando $\phi = 0$ têm-se os casos específico
 \end{figure}
 
 \subsection{Integração das equações constitutivas elastoplástica-viscoplásticas}
-Como visto no \autoref{cap: modelo mecanico}, considerando a hipótese das transformações infinitesimais, as equações constitutivas da elastoplasticidade e viscoplasticidade são acopladas em série de forma a obter a relação constitutiva elastoplástica-viscoplástica linearizada (\ref{eq:lei_epvp}). Além disso, como a viscoplasticidade é integrada através de uma regra semi-implícita na qual todas as incógnitas são calculadas com as variáveis conhecidas do subpasso $i$, o incremento de deformação viscoplástica pode ser descontado diretamente do incremento de deformação total na etapa de predição elástica do algoritmo de elastoplasticidade. Dessa forma, o algoritmo para integração das equações constitutivas elastoplástica-viscoplástica pode ser visto no fluxograma da \autoref{algoritmo_EPVP} a) e em b) considerando elastoplasticidade sem endurecimento/amolecimento com esquema totalmente explícito para viscoplasticidade.
+Como visto no \autoref{cap: modelo mecanico}, considerando a hipótese das transformações infinitesimais, as equações constitutivas da elastoplasticidade e viscoplasticidade são acopladas em série de forma a obter a relação constitutiva elastoplástica-viscoplástica linearizada (\ref{eq:lei_epvp}). Além disso, como a viscoplasticidade é integrada através de uma regra semi-implícita na qual todas as incógnitas são calculadas com as variáveis conhecidas do subpasso $i$, o incremento de deformação viscoplástica pode ser descontado diretamente do incremento de deformação total na etapa de predição elástica do algoritmo de elastoplasticidade.
+
+O algoritmo para integração das equações constitutivas elastoplástica-viscoplástica pode ser visto no fluxograma da \autoref{algoritmo_EPVP}, a) considerando elastoplasticidade com endurecimento/amolecimento e esquema semi-implícito para viscoplasticidade e em b) considerando elastoplasticidade sem endurecimento/amolecimento com esquema totalmente explícito para viscoplasticidade.
 \begin{figure}[H]
 	\begin{center}
 		\includegraphics[scale = 1.0]{0610-integração EPVP.pdf}
@@ -601,7 +603,7 @@ Adotar o módulo tangente consistente faz com que a convergência seja atingida 
 Outra questão importante relacionada a esse módulo está em sua simetria. Por exemplo, como visto em (\ref{eq:Dep}) o módulo elastoplástico contínuo é simétrico se houver fluxo associado, ou seja, $f=g$. Contudo, essa propriedade não é transferida de forma geral para o módulo tangente consistente. Isso dependerá também do esquema de integração utilizado. Para o caso, do presente trabalho, com as superfícies utilizadas, será sempre simétrico se $g^{p}=f^{p}$ e $g^{vp}=f^{vp}$.
 
 \section{Particularizando para estado plano de deformações e axissimetria}
-Em problemas tridimensionais, com materiais isotrópicos, a relação constitutiva elástica linearizada, em termos das seis componentes de tensão e de deformação pode ser escrita, na notação de Voigt, conforme (adaptado de SMITH et al. 2014):
+Em problemas tridimensionais, com materiais isotrópicos, a relação constitutiva elástica linearizada, em termos das seis componentes de tensão e de deformação pode ser escrita, na notação de Voigt, conforme (adaptado de \citeonline[p. 44]{Smith2014}):
 \begin{equation}
 	\label{eq:Dl}
 	\left\{\begin{array}{lcl}
@@ -612,14 +614,7 @@ Em problemas tridimensionais, com materiais isotrópicos, a relação constituti
 		\sigma_{23} \\
 		\sigma_{31} 
 	\end{array}\right\} = 
-	\begin{bmatrix}
-	(1-\nu)	& \nu 		& \nu  		& 0	 		& 0 			& 0 \\
-	\nu 	& (1-\nu)	& \nu  		& 0		 	& 0				& 0  \\
-	\nu 	& \nu 		& (1-\nu)   & 0		 	& 0 			& 0  \\
-	0		& 0			& 0		    & (1-2\nu)/2 & 0 			& 0  \\
-	0		& 0			& 0		    & 0	       	& (1-2\nu)/2	& 0  \\
-	0		& 0			& 0		    & 0	       	& 0         	& (1-2\nu)/2
-	\end{bmatrix}
+	\Dll
 	\left\{\begin{array}{lcl}
 	\varepsilon_{11} \\
 	\varepsilon_{22} \\
@@ -627,10 +622,22 @@ Em problemas tridimensionais, com materiais isotrópicos, a relação constituti
 	\varepsilon_{21} \\
 	\varepsilon_{23} \\
 	\varepsilon_{31} 
-\end{array}\right\}
+\end{array}\right\},
+\end{equation}
+\begin{equation}
+	\Dll = 
+	\dfrac{E}{(1+\nu)(1-2\nu)} 
+	\begin{bmatrix}
+	(1-\nu)	& \nu 		& \nu  		& 0	 		& 0 			& 0 \\
+	\nu 	& (1-\nu)	& \nu  		& 0		 	& 0				& 0  \\
+	\nu 	& \nu 		& (1-\nu)   & 0		 	& 0 			& 0  \\
+	0		& 0			& 0		    & \dfrac{(1-2\nu)}{2} & 0 			& 0  \\
+	0		& 0			& 0		    & 0	       	& \dfrac{(1-2\nu)}{2}	& 0  \\
+	0		& 0			& 0		    & 0	       	& 0         	& \dfrac{(1-2\nu)}{2}
+	\end{bmatrix}.
 \end{equation}
 
-Particularizando essa relação para problemas em estado plano de deformações e axissimetria tem-se (adaptado de SMITH et al. 2014):
+Particularizando essa relação para problemas em estado plano de deformações e axissimetria tem-se (adaptado de \citeonline[p. 42]{Smith2014}):
 \begin{equation}
 	\label{eq:Dl}
 	\left\{\begin{array}{lcl}
@@ -638,7 +645,7 @@ Particularizando essa relação para problemas em estado plano de deformações 
 		\sigma_{22} \\
 		\sigma_{33} \\
 		\sigma_{21}
-	\end{array}\right\} = 
+	\end{array}\right\} = \dfrac{E}{(1+\nu)(1-2\nu)}
 	\begin{bmatrix}
 		(1-\nu)	& \nu 		& \nu  		& 0	 		\\
 		\nu 	& (1-\nu)	& \nu  		& 0		 	\\
@@ -652,7 +659,7 @@ Particularizando essa relação para problemas em estado plano de deformações 
 		\varepsilon_{21}
 	\end{array}\right\}
 \end{equation}
-sendo, em axissimetria, as direções 1,2 e 3 em coordenadas cartesianas, correspondem respectivamente as direções $r, \theta$ e $z$ em coordenadas polares. Além disso, em problemas axissimétricos, a expressão (\ref{eq:gradiente_simetrico}) particulariza-se para (adaptado de SMITH et al. 2014):
+sendo que em axissimetria as direções 1,2 e 3 correspondem respectivamente as direções $r, \theta$ e $z$ em coordenadas polares. Além disso, em problemas axissimétricos, a expressão (\ref{eq:gradiente_simetrico}) particulariza-se para (adaptado de \citeonline[p. 41]{Smith2014}):
 \begin{equation}
 	\label{eq:gradiente_simetrico_AXI_EPD}
 	\nabla^s = 	\begin{bmatrix}
@@ -663,7 +670,7 @@ sendo, em axissimetria, as direções 1,2 e 3 em coordenadas cartesianas, corres
 	\end{bmatrix}
 \end{equation}
 
-Além disso, para o gradiente da função potencial em (\ref{eq:invariantes_tensores})$_2$, na notação de Voigt, para o caso 3D, tem-se (adaptado de \citeonline[p. 231]{Owen1980}):
+Ademais, para o gradiente da função potencial em (\ref{eq:invariantes_tensores})$_2$, na notação de Voigt, para o caso 3D, tem-se (adaptado de \citeonline[p. 231]{Owen1980}):
 \begin{equation}
 	\label{eq:g1_3D}
 	\gl_1 = \left\{1,1,1,0,0,0\right\}^T
@@ -682,16 +689,16 @@ Além disso, para o gradiente da função potencial em (\ref{eq:invariantes_tens
 	2(\sigma_{23}\sigma_{31}-s_{11}\sigma_{21}) \\
 	2(\sigma_{31}\sigma_{21}-s_{22}\sigma_{23}) \\
 	2(\sigma_{21}\sigma_{23}-s_{33}\sigma_{31})
-	\end{array} \right\}
+	\end{array} \right\}.
 \end{equation}
-Para estado plano de deformações e axissimetria, tem-se (adaptado de \citeonline[p. 232]{Owen1980}):
+e para o estado plano de deformações e axissimetria, tem-se (adaptado de \citeonline[p. 232]{Owen1980}):
 \begin{equation}
 	\label{eq:g1_2D}
-	\gl_1 = \left\{1,1,1,0\right\}^T
+	\gl_1 = \left\{1,1,1,0\right\}^T,
 \end{equation}
 \begin{equation}
 	\label{eq:g2_2D}
-	\gl_2 = \dfrac{1}{2\sqrt{J_2}} \left\{s_{11},s_{22},s_{33},2\sigma_{12}\right\}^T
+	\gl_2 = \dfrac{1}{2\sqrt{J_2}} \left\{s_{11},s_{22},s_{33},2\sigma_{12}\right\}^T,
 \end{equation}
 \begin{equation}
 	\label{eq:g3_2D}
@@ -701,7 +708,7 @@ Para estado plano de deformações e axissimetria, tem-se (adaptado de \citeonli
 		s_{11}s_{33} + J_2/3 \\	
 		s_{11}s_{22}-\sigma_{12}^2 + J_2/3 \\
 		- 2s_{33}\sigma_{12}
-	\end{array} \right\}
+	\end{array} \right\}.
 \end{equation}
 
 \section{Domínios, discretização, condições de contorno e ciclo construtivo para os modelos de verificação}
