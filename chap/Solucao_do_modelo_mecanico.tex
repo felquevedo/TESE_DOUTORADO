@@ -20,7 +20,7 @@ Aplicando o Teorema da Divergência no termo mais à esquerda da igualdade (\ref
 	\int_{\Omega} \sigmall : \dvarepsilonll d\Omega - \left(\int_{\Omega} \rho \fl \cdot \dul d\Omega + \int_{\partial \Omega} \Tl^d \cdot \dul dS \right) = U_{int} - W_{ext} = 0
 \end{equation}
 
-A expressão (\ref{eq:deslocamento_virtual}) é uma equação integral em que, no equilíbrio, o trabalho virtual das forças externas $W_{ext}$ sobre o sistema é totalmente convertido em energia potencial interna $U_{int}$  de deformação.
+A expressão (\ref{eq:deslocamento_virtual}) é uma equação integral em que, no equilíbrio, o trabalho das forças externas $W_{ext}$ sobre o sistema é totalmente convertido em energia potencial interna $U_{int}$  de deformação.
 
 \section{Notação de Voigt}
 Os tensores simétricos de segunda e quarta ordem são comumente representados, respectivamente, por arranjos (\textit{arrays}) vetoriais e matriciais convenientes à álgebra computacional. Dessa forma é utilizada a seguinte notação \cite[p. 682]{Zienkiewicz2005}:
@@ -170,7 +170,7 @@ nos quais:
 	\Fl_{V_e} = \int_{\Omega_e} \rho \Nll^T \fl d\Omega_e,~~~ \Fl_{S_e} = \int_{\partial \Omega_e} \Nll^T \Tl^d dS_e,~~~
 	\Fl_{C_e} = \int_{\partial \Omega_{e}} \Nll^T \Tl^c dS_c,
 \end{equation}
-sendo que $\Fl_{int_e}$ e $\Fl_{ext_e}$ são as forças internas e externas no elemento, respectivamente, $\Kll_e$ a matriz de rigidez do elemento, $\Fl_{\varepsilon_{0_e}}$ e $\Fl_{\sigma_{0_e}}$  forças internas no elemento devido às deformações inciais e tensões iniciais, respectivamente, $\Fl_{V_e}$ forças de volume do elemento, $\Fl_{S_e}$ forças de superfície no contorno livre do elemento, $\Fl_{C_e}$ forças de contato entre elementos vizinhos e $F_{N_e}$  forças nodais. A Figura 6.2 ilustra as forças externas de um elemento genérico.
+sendo que $\Fl_{int_e}$ e $\Fl_{ext_e}$ são as forças internas e externas no elemento, respectivamente, $\Kll_e$ a matriz de rigidez do elemento, $\Fl_{\varepsilon_{0_e}}$ e $\Fl_{\sigma_{0_e}}$  forças internas no elemento devido às deformações inciais e tensões iniciais, respectivamente, $\Fl_{V_e}$ forças de volume do elemento, $\Fl_{S_e}$ forças de superfície no contorno livre do elemento, $\Fl_{C_e}$ forças de contato entre elementos vizinhos e $Fl_{N_e}$  forças nodais. A Figura 6.2 ilustra as forças externas de um elemento genérico.
 \begin{figure}[H]
 	\begin{center}
 		\includegraphics[scale = 1.0]{0602-diagrama de corpo livro de um elemento finito.pdf}
@@ -297,15 +297,15 @@ A convergência é verificada sobre o vetor resíduo e o incremento de deslocame
 em que $\varepsilon_R$ e $\varepsilon_u$ são as tolerâncias para o resíduo (de 0,5\%) e deslocamentos (de 5\%), respectivamente. Os valores de referência $R_{ref}$ e $u_{ref}$ são $||\Fl_{ext_p}||$ e $||\ul_{n,i}||$, respectivamente. Ou seja, por padrão o critério para o resíduo é de 0,5\% do valor das forças externas e os deslocamentos não podem apresentar uma variação maior do que 5\%. No ANSYS, a norma pode ser calculada de três formas: a máxima componente em valor absoluto, a soma absoluta das componentes ou a norma euclidiana das componentes, conforme:
 \begin{equation}
 	\label{eq:jacobiano_transformacao}
-	||\xl|| = \left\{
+	||\underline *|| = \left\{
 	\begin{array}{lcl}
-		||\xl||_\infty = \text{max}(x_j) \\
-		||\xl||_1 = \sum_{j}|x_j| \\
-		||\xl||_2 = (\sum_{j}x_j^2)^{1/2}
+		||\underline *||_\infty = \text{max}(*_j) \\
+		||\underline *||_1 = \sum_{j}|*_j| \\
+		||\underline *||_2 = (\sum_{j}*_j^2)^{1/2}
 	\end{array}
 	\right..
 \end{equation}
-em que $j$ é o índice da componente do vetor $\xl = \Rl$ e $\xl = \Delta \ul$. Para o presente trabalho foi escolhida a norma euclidiana que era o padrão do ANSYS. A \autoref{NR} ilustra o andamento da solução ao longo dos subpassos. Pode-se ver que o resíduo e o incremento de deformações vão ficando cada vez menores ao longo das iterações de equilíbrio.
+em que $j$ é o índice da componente do vetor $\underline * = \Rl$ ou $\underline * = \Delta \ul$. Para o presente trabalho foi escolhida a norma euclidiana que era o padrão do ANSYS. A \autoref{NR} ilustra o andamento da solução ao longo dos subpassos. Pode-se ver que o resíduo e o incremento de deformações vão ficando cada vez menores ao longo das iterações de equilíbrio.
 \begin{figure}[H]
 	\begin{center}
 		\includegraphics[scale = 1.0]{0605-ilustracao das iteracoes do método de NR.pdf}
@@ -721,15 +721,13 @@ Tal como visto na \autoref{cap:Discretização espacial em elementos finitos} o 
 	\end{center}
 	\caption{\label{dominio_tunel}Representação do domínio $\Omega$ a ser discretizado}
 \end{figure}
-As leis constitutivas vistas no \autoref{cap: modelo mecanico} serão implementadas nesse domínio e estudadas em três condições: em estado plano de deformações, tridimensional e em axissimetria.
+As leis constitutivas vistas no \autoref{cap: modelo mecanico} são implementadas nesse domínio e estudadas em três condições: em estado plano de deformações, tridimensional e em axissimetria.
 
-Com o intuito de obter uma malha de fácil alteração, conveniente aos estudos de convergência de malha ou análises paramétricas, o domínio foi discretizado utilizando o pré-processamento do \textit{software} ANSYS v.19.2 através da linguagem APDL (\textit{Ansys Parametric Design Language}). Com o auxílio dessa linguagem é possível controlar a discretização do domínio em função de parâmetros que podem ser alterados facilmente e, dessa forma, obtido rapidamente uma nova malha para os estudos.
+Com o intuito de obter uma malha de fácil alteração, conveniente aos estudos de convergência de malha ou análises paramétricas, o domínio foi discretizado utilizando o pré-processamento do \textit{software} ANSYS v.19.2 através da linguagem APDL (\textit{Ansys Parametric Design Language}). Com o auxílio dessa linguagem é possível controlar a discretização do domínio em função de parâmetros que podem ser alterados facilmente e, dessa forma, obtido rapidamente uma nova malha para os estudos. As discretizações apresentadas vêm da experiência obtidas em estudos anteriores \cite{Quevedo2017} considerando isoladamente a elasticidade, elastoplastcidade e viscoplasticidade do maciço.
 
-A \autoref{malhaEPD_tunel} apresenta o domínio para análises em estado plano de deformações com seus parâmetros, condições de contorno e malha. A discretização apresentada vem da experiência de estudos anteriores \cite{Quevedo2017} considerando isoladamente a elasticidade, elastoplastcidade e viscoplasticidade do maciço.
+A \autoref{malhaEPD_tunel} apresenta o domínio para análises em estado plano de deformações com seus parâmetros, condições de contorno e malha. Como visto na \autoref{cap:Influência da escavação e o conceito de convergência da seção}, esse modelo é útil no estudo de seções fora da zona de influência da frente de escavação na qual se pode admitir a ausência de deslocamento ao longo do eixo longitudinal do túnel. Quando implementado a lei do material, esse modelo também é ideal para obter as curvas de convergência do maciço, tais como as da \autoref{cap:Método convergência-confinamento}.
 
-Como visto na \autoref{cap:Influência da escavação e o conceito de convergência da seção}, esse modelo é útil no estudo de seções fora da zona de influência da frente de escavação na qual se pode admitir a ausência de deslocamento ao longo do eixo longitudinal do túnel. Quando implementado a lei do material, esse modelo também é ideal para obter as curvas de convergência do maciço, tal como visto na \autoref{cap:Método convergência-confinamento}.
-
-Como pode-se ver na \autoref{malhaEPD_tunel}, é considerada condição de simetria para reduzir o modelo, sendo discretizada apenas uma quarta parte da região no entorno do túnel. Isso é possível em maciços homogêneos, com seção duplamente simétrica, tais como, a elíptica ou a circular, em que $R_{h_i}=R_{v_i}$. Também, nesse modelo, tanto a carga horizontal, vertical, bem como as tensões internas não poderão variar ao longo do domínio (condições geostáticas hidrostáticas). Como visto na \autoref{cap:Influência da profundidade do túnel}, é uma condição de estudo comum em túneis profundos. Contudo, essa condição seria facilmente modificada para considerar tensões variáveis com a profundidade e seção simétrica em torno do eixo $y$ apenas rebatendo a malha em torno do eixo $x$.
+Como pode-se ver na \autoref{malhaEPD_tunel}, é considerada condição de simetria para reduzir o modelo, sendo discretizada apenas uma quarta parte da região no entorno do túnel. Isso é possível em maciços homogêneos, com seção duplamente simétrica, tais como, a elíptica ou a circular ($R_{h_i}=R_{v_i}$). Também, nesse modelo, tanto a carga horizontal, vertical, bem como as tensões internas não poderão variar ao longo do domínio (condições geostáticas hidrostáticas). Como visto na \autoref{cap:Influência da profundidade do túnel}, é uma condição de estudo comum em túneis profundos. Contudo, essa condição seria facilmente modificada para considerar tensões variáveis com a profundidade e seção simétrica em torno do eixo $y$ apenas rebatendo a malha em torno do eixo $x$.
 
 \begin{figure}[H]
 	\begin{center}
@@ -738,7 +736,7 @@ Como pode-se ver na \autoref{malhaEPD_tunel}, é considerada condição de simet
 	\caption{\label{malhaEPD_tunel}Domínio, parâmetros geométricos, condições de contorno e malha para o modelo em estado plano de deformações}
 \end{figure}
 
-Conforme a \autoref{malhaEPD_tunel}, essa malha possui quatro regiões de refinamento: a região $A1$ representando o interior da seção do túnel, cujos elementos serão desativados já no início das análises; a região $A2$ referente ao revestimento (que estará presente sempre que o parâmetro  $e_{rev} > 0$); a região $A3$, circular, no entorno do túnel onde se dará maior esforço de refinamento, pela proximidade da seção e, por último, a região $A4$ relativa ao restante do domínio, onde os gradientes de tensão e deformação serão pequenos. Para a malha da \autoref{malhaEPD_tunel}, por exemplo, tem-se os parâmetros definidos pela \autoref{parametros_EPD}.
+Conforme a \autoref{malhaEPD_tunel}, essa malha possui quatro regiões de refinamento: a região $A1$ representando o interior da seção do túnel, cujos elementos serão desativados já no início das análises; a região $A2$ referente ao revestimento (que estará presente sempre que o parâmetro  $e_{rev} > 0$); a região $A3$, circular, no entorno do túnel onde se dará maior esforço de refinamento, pela proximidade da região escavada e, por último, a região $A4$ relativa ao restante do domínio, onde os gradientes de tensão e deformação serão pequenos. Para a malha da \autoref{malhaEPD_tunel}, tem-se a definição dos parâmetros e seus valores na \autoref{parametros_EPD}.
 
 \begin{table}[H]
 	\caption{Parâmetros para a construção da malha em estado plano de deformações da \autoref{malhaEPD_tunel}}
@@ -789,7 +787,7 @@ A discretização do domínio tridimensional faz uso dos mesmos parâmetros do e
 \end{figure}
 
 \begin{table}[H]
-	\caption{Parâmetros adicionais para a malha em estado tridimensional de deformações da \autoref{malha3D_tunel}}
+	\caption{Parâmetros adicionais a malha EPD para a malha em estado tridimensional de deformações da \autoref{malha3D_tunel}}
 	\label{parametros_3D}
 	\centering
 	\small
@@ -831,9 +829,9 @@ A cada passo $1 \leq i_p \leq n_p$ de escavação é desativado os elementos at�
 	\label{eq:tp}
 	t_p = \dfrac{L_p}{V_p}
 \end{equation}
-em que $V_p$ é a velocidade do passo em m/dias. Durante as análises, conforme o \autoref{cap: solução do sistema} e a \autoref{NR-fluxograma}, esse tempo é dividido em subpassos e feita as iterações de equilíbrio de Newton-Raphson em cada subpasso. Após a convergência, segue-se o próximo passo e assim por diante. Após o término das escavações e revestimento do túnel, para os modelos dependentes do tempo, a análise roda um último passo até o tempo final da análise, ou ainda, não ocorra a convergência das iterações globais ou locais.
+em que $V_p$ é a velocidade do passo em m/dias. A cada passo, conforme o \autoref{cap: solução do sistema} e a \autoref{NR-fluxograma}, esse tempo é dividido em subpassos e feita as iterações de equilíbrio de Newton-Raphson em cada subpasso. Após a convergência, segue-se o próximo passo e assim por diante. Após o término dos passos de escavação e revestimento do túnel, para os modelos dependentes do tempo, a análise roda um último passo até o tempo final da análise ou até o tempo em que se obteve a convergência das iterações globais de Newton-Raphson.
 
-Como pode-se notar, o modelo tridimensional possui a vantagem de considerar tanto o processo construtivo quanto seções diferentes da circular, contudo, tem um custo computacional elevado. Nesse aspecto as análises axissimétricas possuem vantagem apesar da restrição de simetria axial. Pelo baixo custo computacional, são ideais para estudos paramétricos. O domínio para o modelo axissimétrico, seus parâmetros, condições de contorno e sua malha podem ser vistos na \autoref{malhaAXI_tunel}.
+Como pode-se notar, o modelo tridimensional possui a vantagem de considerar tanto o processo construtivo quanto seções diferentes da circular, contudo, tem um custo computacional elevado. Nesse aspecto as análises axissimétricas possuem vantagem, apesar da restrição de simetria axial. Pelo baixo custo computacional, são ideais para estudos paramétricos. O domínio para o modelo axissimétrico, seus parâmetros, condições de contorno e sua malha podem ser vistos na \autoref{malhaAXI_tunel}.
 
 \begin{figure}[H]
 	\begin{center}
@@ -842,11 +840,11 @@ Como pode-se notar, o modelo tridimensional possui a vantagem de considerar tant
 	\caption{\label{malhaAXI_tunel}Domínio, parâmetros geométricos, condições de contorno e malha para o modelo axissimétrico}
 \end{figure}
 
-Conforme \autoref{malhaAXI_tunel}, no modelo axissimétrico o eixo longitudinal do túnel (eixo de rotação) está ao longo do eixo $y$, enquanto que o eixo $x$ representa o eixo radial. Os parâmetros para esse modelo podem ser vistos na Tabela 6.3.
+Conforme \autoref{malhaAXI_tunel}, no modelo axissimétrico o eixo longitudinal do túnel (eixo de rotação) está ao longo do eixo $y$, enquanto que o eixo $x$ representa o eixo radial. Os parâmetros para esse modelo podem ser vistos na \autoref{parametros_AXI}.
 
 \begin{table}[H]
 	\caption{Parâmetros adicionais para a malha em estado tridimensional de deformações da \autoref{malha3D_tunel}}
-	\label{parametros_3D}
+	\label{parametros_AXI}
 	\centering
 	\small
 	\renewcommand{\arraystretch}{1.25}
@@ -892,10 +890,10 @@ Conforme \autoref{malhaAXI_tunel}, no modelo axissimétrico o eixo longitudinal 
 	\normalsize
 \end{table}
 
-Para simular o ciclo contrutivo entre passos de escavação é utilizado o recurso de \textbf{ativação/desativação de elementos} em cada passo de solução. A desativação compreende três modificações:
+Para simular o ciclo contrutivo de escavação e revestimento é utilizado o recurso de \textbf{ativação/desativação de elementos} em cada passo de solução. A desativação, à rigor, compreende três modificações:
 \begin{alineas}
 	
-	\item a primeira consiste em substituir o valor do módulo de elasticidade do elemento por um valor pequeno, ou seja, 1E-12, isso fará com que durante as iterações de equilíbrio esses elementos pouco contribuam na matriz de rigidez e incremento de forças internas, distribuindo então as tensões para os elementos vizinhos ativados;
+	\item a primeira consiste em substituir o valor do módulo de elasticidade do elemento por um valor pequeno, ou seja, 1E-12, isso fará com que durante as iterações de equilíbrio esses elementos pouco contribuam na matriz de rigidez e no incremento de forças internas, distribuindo então as tensões para os elementos vizinhos ativados;
 	
 	\item a segunda alteração consiste em zerar as tensões internas nos pontos de Gauss do elemento, que estavam acumuladas dos passos anteriores; 
 	
@@ -903,7 +901,7 @@ Para simular o ciclo contrutivo entre passos de escavação é utilizado o recur
 	
 \end{alineas}
 
-O custo computacional desses modelos é refletido diretamente no tempo de processamento de cada subpasso durante a solução do sistema global. Esse tempo é função de diversos fatores. Dentre os mais simples estão a quantidade de operações em ponto flutuante (precisão simples ou dupla) necessários para a fatoração e solução do sistema frente à tecnologia de processamento (velocidade do processador e recursos de paralelização). A ordem de grandeza da quantidade de operações em ponto flutuante pode ser estimada através do tamanho do sistema. Portanto, a \autoref{tamanho_sistemas}, resume o tamanho do sistema para as malhas desses três modelos. Porém é necessário levar em conta as estratégias de atualização da matriz de rigidez e a quantidade de passos, sendo que este último aumenta tempo computacional linearmente.
+O custo computacional desses modelos é refletido diretamente no tempo de processamento de cada subpasso durante a solução do sistema global. Esse tempo é função de diversos fatores. Dentre os mais simples estão a quantidade de operações em ponto flutuante (precisão simples ou dupla) necessários para a fatoração e solução do sistema frente à tecnologia de processamento (velocidade do processador e recursos de paralelização). A ordem de grandeza da quantidade de operações em ponto flutuante pode ser estimada através do tamanho do sistema. Portanto, a \autoref{tamanho_sistemas}, resume o tamanho do sistema para as malhas desses três modelos. Porém, para o tempo global, é necessário considerar as estratégias de atualização da matriz de rigidez e a quantidade de passos, sendo que este último aumenta tempo computacional linearmente.
 
 \begin{table}[H]
 	\caption{Tamanho do sistema para cada modelo}

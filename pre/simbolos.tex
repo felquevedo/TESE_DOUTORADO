@@ -2,8 +2,8 @@
 
 \item[\textbf{Latino minúsculo:}]
 \item[$c$]				Coesão;
-\item[$c_{TR}$]			Coesão na superfície de escoamento de Tresca;
-\item[$c_{VM}$]			Coesão na superfície de escoamento de von-Mises;
+\item[$c_{TR}$]			Coesão considerando superfície de escoamento de Tresca;
+\item[$c_{VM}$]			Coesão considerando superfície de escoamento de von-Mises;
 \item[$c_0$]			Coesão residual no modelo elastoplástico;
 \item[$c_1$]			Coesão para o modelo viscoplástico;
 \item[$d_0$]			Distância não revestida que acompanha a frente de escavação;
@@ -11,16 +11,30 @@
 \item[$ \greenll $] 	Tensor de deformações de Green-Lagrange;
 \item[$\euml, \edoisl, \etresl$] Vetores ortonormais da base que define o espaço $\mathbb{R}^3$;
 \item[$f$]				Função de escoamento;
+\item[$f^p$]				Função de escoamento plástica;
+\item[$f^{vp}$]				Função de escoamento viscoplástica;
+\item[$\dfdsl$]			Vetor de derivadas da função de escoamento com relação as tensões (notação de Voigt);
+\item[$\dfdql$]			Vetor de derivadas da função de escoamento com relação as forças associadas (notação de Voigt);
 \item[$f_0$]			Parâmetro de tensão no modelo viscoplástico;
 \item[$\fl$]					Campo de acelerações referente às forças de corpo;
 \item[$g$]				Função potencial;
+\item[$g^p$]				Função potencial plástica;
+\item[$g^{vp}$]				Função potencial viscoplástica;
 \item[$\gllum, \glldois, \glltres$] Gradientes para determinar o vetor de fluxo;
+\item[$\gl_1, \gl_2, \gl_3$] Gradientes para determinar o vetor de fluxo (notação de Voigt);
 \item[$\dgdsll$]		Vetor de fluxo;
+\item[$\dgdsl$]			Vetor de fluxo (notação de Voigt);
 \item[$\hl$]			Vetor que contém o conjunto dos módulos de endurecimento para as forças associadas;
-\item[$h_s$]			Profundidade de \textit{Spalling} no perímetro de uma seção;
+\item[$h_s$]			Profundidade do fenômeno de \textit{Spalling} no perímetro do túnel;
+\item[$i$] 				Contador de iterações de equilíbrio;
+\item[$i_p$]			Ponto de integração;
 \item[$k$] 				Parâmetro da superfície de Drucker-Prager;
 \item[$l_0$] 			Dimensão característica para hipótese das pequenas perturbações;
 \item[$n$] 				Parâmetro adimensional que dá a forma potencial na lei viscoplástica;
+\item[$n$] 				Contador de subpassos;
+\item[$n_e$] 				Número de elementos;
+\item[$n_p$] 				Número de pontos de integração;
+\item[$n_{eqit}$] 				Limite de iterações de equilíbrio por subpasso;
 \item[$ p $]			Pressão hidrostática;
 \item[$ p_i $]			Pressão interna no interior da seção do túnel;
 \item[$ p_{lim} $] 		Pressão limite de plastificação do maciço;
@@ -33,7 +47,10 @@
 \item[$ r $]			Coordenada radial no plano da seção transversal do túnel;
 \item[$ \sll $]			Tensor de tensões desviadoras;
 \item[$ t $] 			Tempo;
+\item[$ t_p $] 			Tempo do passo;
 \item[$ \ul $] 		    Deslocamento da partícula material;
+\item[$ \ul $] 		    Vetor deslocamentos nodais;
+\item[$ \ul_e $] 		    Vetor de deslocamentos nodais do elemento;
 \item[$ u(r) $] 		Deslocamento radial em uma coordenada radial $r$;
 \item[$ u_x $] 			Deslocamento na direção x;
 \item[$ u_y $] 			Deslocamento na direção y;
@@ -44,33 +61,68 @@
 \item[$ \Delta u_y $] 	 Translação vertical uniforme da seção de um túnel raso;
 \item[$ w $] 	 		Energia interna específica;
 \item[$\xl$]			Vetor posição da partícula material;
-\item[$x$]				Eixo x (eixo longitudinal do túnel);
+\item[$x$]				Eixo x;
 \item[$y$]				Eixo y;
-\item[$z$]				Eixo z (eixo da profundidade do túnel);
+\item[$z$]				Eixo z;
 
 \item[\textbf{Latino maiúsculo:}]
+\item[$\All$]	Matriz algorítmica do esquema de integração;
+\item[$\Bll$]	Matriz que relaciona os deslocamentos nodais com as deformações no interior do elemento;
+
 \item[$C_1, C_2, C_3$]	Constantes para determinar o vetor de fluxo;
 \item[$D$]				Diâmetro equivalente da seção do túnel;
 \item[$\Dllll$] Tensor constitutivo elástico de quarta ordem simétrico;
 \item[$\Dllll^{ep}$] Tensor constitutivo elastoplástico contínuo;
 \item[$\Dllll^{vp}$] Tensor constitutivo viscoplástico contínuo;
+\item[$\Dll$] Tensor constitutivo (notação de Voigt);
+\item[$\Dll^{alg}$] Tensor constitutivo consistente com o esquema de integração (notação de Voigt);
+\item[$\Dll^{e}$] Tensor constitutivo elástico (notação de Voigt);
+\item[$\Dll^{ep}$] Tensor constitutivo elastoplástico contínuo (notação de Voigt);
+\item[$\Dll^{vp}$] Tensor constitutivo viscoplástico contínuo (notação de Voigt);
 \item[$E$]				Módulo de Young;
 \item[$E^*$]			Módulo de Young adimensional;
 \item[$E_h$]			Módulo de deformação médio horizontal na parte superior da crosta terrestre;
 \item[$\Fll$]			Gradiente da transformação geométrica;
+\item[$\Fl_{int}$]			Vetor de forças internas globais;
+\item[$\Fl_{int_e}$]			Vetor de forças internas do elemento;
+\item[$\Fl_{ext}$]			Vetor de forças externas globais;
+\item[$\Fl_{ext_e}$]			Vetor de forças externas do elemento;
+\item[$\Fl_{\varepsilon_{0_e}}$]	Vetor de forças internas do elemento devido às deformações iniciais;
+\item[$\Fl_{\sigma_{0_e}}$]	Vetor de forças internas do elemento devido às tensões iniciais;
+\item[$\Fl_{V_e}$]	Vetor de forças de volume do elemento;
+\item[$\Fl_{S_e}$]	Vetor de forças de superfície no contorno livre do elemento;
+\item[$\Fl_{C_e}$]	Vetor de forças de contato entre elementos vizinhos;
+\item[$\Fl_{N_e}$]	Vetor de forças nodais do elemento;
+
+\item[$\Fl_{\varepsilon_{0}}$]	Vetor de força interna global devido às deformações iniciais;
+\item[$\Fl_{\sigma_{0}}$]	Vetor de força interna global devido às tensões iniciais;
+\item[$\Fl_{V}$]	Vetor de força de volume global;
+\item[$\Fl_{S}$]	Vetor de força de superfície no contorno livre global;
+\item[$\Fl_{N}$]	Vetor de força nodal global;
+
+\item[$\Fl_{p}$]	Vetor de forças do passo;
+
 \item[$H$]				Profundidade do túnel;
 \item[$I_1,I_2,I_3$] 	Invariantes do tensor de deformações ou do tensor de tensões;
-\item[$J_1,J_2,J_3$] 	Invariantes do tensor de tensões desviadoras;
-\item[$ J $] 	Jacobiano da transformação;
+\item[$J_2,J_3$] 	Invariantes do tensor de tensões desviadoras;
+\item[$J$] 		Jacobiano da transformação;
+\item[$\Jll$] 		Jacobiano da transformação;
+\item[$J_{i_p}$ ] 				Determinante do Jacobiano da transformação no ponto de integração $i_p$;
 \item[$K$]				Coeficiente de empuxo do maciço;
 \item[$K_r$]			Rigidez equivalente do revestimento;
 \item[$K_r^*$]			Rigidez equivalente adimensional do revestimento;
+\item[$\Kll_e$]			Matriz de rigidez do elemento;
+\item[$\Kll$]			Matriz de rigidez global;
 \item[$L_s$]			Comprimento de \textit{Spalling} no perímetro de uma seção;
+\item[$\Lll$]			Matriz triangular inferior da fatorização de Cholesky;
+\item[$\Mll$]			Pré-condicionador do Método dos Gradientes Conjugados Pré-Condicionado;
+\item[$\Nll$]			Matriz contendo as funções de interpolação;
 \item[$ P $] 			Pressão de confinamento em um ensaio triaxial;
 \item[$ P_0 $] 			Tensão média no interior do maciço;
 \item[$ Q $] 			Pressão axial em um ensaio triaxial;
 \item[$ R $]			Raio da seção transversal do túnel;
 \item[$ R^p $]			Raio da zona plástica ao redor da seção do túnel;
+\item[$\Rl_i$]			Vetor resíduo global do método de Newton-Raphson;
 \item[$ S $] 			Superfície que atua o vetor tensão;
 \item[$ S_0 $] 			Tensão desviadora no entorno do maciço;
 \item[$ S_T $] 			Região da superfície do domínio com condição de contorno imposta;
@@ -79,25 +131,41 @@
 \item[$ U $] 			Convergência da seção do túnel;
 \item[$ U_{0} $] 		Convergência da seção do túnel na cota não revestida a partir da face de escavação;
 \item[$ U_{eq} $] 		Convergência de equilíbrio de um túnel revestido;
+\item[$ U_{int} $] 		Energia potencial interna de deformação;
 \item[$ U_{max} $] 		Convergência máxima da seção do túnel;
+\item[$ W_{ext} $] 		Trabalho das forças externas;
+\item[$ W_{i_p} $] 		Peso referente ao ponto de integração $i_p$;
 \item[$ V $] 			Velocidade de avanço do túnel;
 \item[$ V^* $] 			Velocidade adimensional de avanço do túnel;
 \item[$ V_a $] 			Volume de uma amostra em um ensaio triaxial;
 \item[$ V_{bacia} $]	Volume recalcado da bacia de assentamento de um túnel raso;
+\item[$V(\Delta \ul)$]	Potencial do Método dos Gradientes Conjugados;
 
 \item[\textbf{Grego minúsculo:}]
 \item[$\alphal$] Conjunto de variáveis internas;
 \item[$\beta$] Parâmetro da superfície de Drucker-Prager;
 \item[$ \gammal $] 		Campo de acelerações referente às forças inerciais;
 \item[$\gamma_m$] 		Peso específico do maciço;
+\item[$\dvarepsilonll$]		Campo de deformações virtuais;
+\item[$\dvarepsilonl$]		Campo de deformações virtuais (notação de Voigt);
+\item[$\dul$]		Campo de deslocamentos virtuais;
 \item[$\varepsilon_1,\varepsilon_2,\varepsilon_3$] 	Deformações principais;
 \item[$ \varepsilonll $] 	Tensor de deformações;
 \item[$\varepsilonll^e$] Deformação elástica;
 \item[$\varepsilonll^p$] Deformação plástica;
 \item[$\varepsilonll^{vp}$] Deformação viscoplástica;
+\item[$ \varepsilonl $] 	Tensor de deformações (notação de Voigt);
+\item[$\varepsilonl^e$] Deformação elástica (notação de Voigt);
+\item[$\varepsilonl^p$] Deformação plástica (notação de Voigt);
+\item[$\varepsilonl^{vp}$] Deformação viscoplástica (notação de Voigt);
+
+\item[$ \varepsilonl_0 $] Tensor de deformações iniciais (notação de Voigt);
 \item[$\bar{\varepsilon}^{vp}$] Magnitude da deformação viscoplástica acumulada;
 \item[$ \varepsilon_0 $] Deformação a partir da qual tem-se a coesão residual $c_0$;
-\item[$ \varepsilon_a $] Deformação axial de uma amostra em um ensaio triaxial;
+\item[$ \varepsilon_a $] Deformação axial em um ensaio triaxial;
+\item[$ \varepsilon_R $] tolerância para o resíduo;
+\item[$ \varepsilon_u $] tolerância para o incremento de deslocamentos;
+
 \item[$ \eta $] 		Constante de viscosidade dinâmica;
 \item[$\eta_1,\eta_2,\eta_3$] 	Direções principais;
 \item[$ \theta $] 		Ângulo de Lode;
@@ -106,6 +174,10 @@
 \item[$\mu^e$] 	Coeficiente de Lamè;
 \item[$ \nu $] 			Coeficiente de Poisson;
 \item[$ \xi_{H} $] 				Coordenada do espaço de Haigh-Westergaard;
+\item[$\underline \xi$] 				Coordenada naturais do elemento;
+\item[$\xil_{i_p}$] 				Coordenada natural do ponto de integração $i_p$;
+
+
 \item[$ \phi $] 		Ângulo de atrito do maciço;
 \item[$ \rho $] 		Densidade do domínio;
 \item[$ \rho_{H} $] 		Coordenada do espaço de Haigh-Westergaard;
@@ -117,6 +189,9 @@
 \item[$ \sigma_{rr} $] 	Tensão no maciço na direção radial;
 \item[$ \sigmall $] 	Tensor de tensões;
 \item[$ \sigmall_0 $] 	Tensor de tensões inical;
+\item[$ \sigmal $] 	Tensor de tensões (notação de Voigt);
+\item[$ \sigmal_0 $] 	Tensor de tensões iniciais (notação de Voigt);
+\item[$ \sigmal^{trial} $] 	Preditor elástico (notação de Voigt);
 \item[$ \tau_{oct} $] 	Tensão cisalhante octaédrica;
 \item[$\psi$] energia livre específica;
 
@@ -126,14 +201,22 @@
 \item[$ \Phi $]		Função de sobretensão;
 \item[$ \Omega $] 		Domínio contínuo;
 \item[$ \Omega' $] 		Subdomínio contínuo;
+\item[$ \Omega_e $] 		Domínio de um elemento;
+\item[$\Omega_\xi$] 		Domínio natural de um elemento;
 
 \item[\textbf{Numéricos, operadores e funções matemáticas:}]
+\item[$ \pi $] 		Constante $\pi \approxeq 3.141592653589793$;
 \item[$ \Umll $] 	Tensor de segunda ordem unitário;
+\item[$ \Umll $] 	Tensor de quarta ordem unitário (notação de Voigt);
+\item[$ \Uml $] 	Tensor de segunda ordem unitário (notação de Voigt);
 \item[$\Umllll$] Tensor unitário de quarta ordem;
-\item[det($\cdot$)] 	Função determinante;
-\item[tr($\cdot$)] 	Função traço;
+\item[det($*$)] 	Função determinante;
+\item[tr($*$)] 	Função traço;
+\item[$(*)^T$] 	Operador de transposição;
 \item[$ \divl $] 	Operador divergente;
 \item[$ \nabla $] 	Operador Gradiente;
+\item[$||*||$] 	Operador módulo;
+\item[$\sum *$] 	Operador somatório;
 
 
 
