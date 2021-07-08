@@ -1,0 +1,261 @@
+!***********************************************************!
+!** PROGRAMA TESTE DE MODELO MATERIAL 2D                  **!
+!** Versão: 1.14					  **!
+!**                                                       **!
+!** Objetivo: faz o teste do material plotando Uyxtempo   **!
+!**	      Syxtempo e SyxUy. Pode considerar material  **!
+!**	      elástico do Ansys e material viscoelástico. **!
+!**                                                       **!
+!** Programador: Felipe Quevedo                           **!
+!** Situação   : em teste (02/11/2016)                    **!
+!** Unidades   : kN,cm,s                                  **!
+!**                                                       **!
+!***********************************************************!
+
+!***********************************************************!
+! 1. Inicializando o Ansys                                  !
+!***********************************************************!
+FINISH  		! terminar qualquer processo anterior  
+/CLEAR,NOSTART  	! limpar o modelo
+
+!***********************************************************!
+! 1.1 Titulo da analise                                     !
+!***********************************************************!
+/TITLE, 'MODELO DE TESTE DE MATERIAIS'
+/FILNAME,file,0		! define nome file.* para os arquivos
+
+!***********************************************************!
+! 1.2 Pasta que guardará os arquivos da análise             !
+!***********************************************************!
+diretorio = 'J:\dissertacao\testeuser\' 	
+!
+!Obs: nessa pasta será salvo os arquivos file.* e *.jpeg
+! criados durante a análise. Tem que ser uma pasta existente
+! no PC.	
+!
+!***********************************************************!
+! 1.3 Nome dos arquivos de saída                            !
+!***********************************************************!
+arqconv = '2D-CEBMC90-CUBO-TESTE1'
+!
+! Obs: nome do arquivo de texto com os dados da
+!  deformção.
+!
+!***********************************************************!
+! 2. Dados de entrada                                       !
+!***********************************************************!
+! Dados de entrada do material
+modrev = 2				! 1 - elastico do Anys, 2 - viscoelastico usermat_visco.F
+fck = 4					! [kN/cm²] resistencia característica do concreto (FIB1990: eq 2.1-1)
+s = 0.25					! [adm] coef. que depende do tipo de concreto (FIB1990: item2.1.6.1 - eq2.1-54,p51)
+nurev = 0.2				! [adm] coeficiente de Poisson do concreto (FIB1990: item 2.1.4.3,p40)
+rh = 70					! [%] umidade relativa do ambiente (FIB1990: eq 2.1-66,p55; 2.1-71,p55; 2.1-78,p58)
+hf = 54.54				! [cm] espessura fictítica (2Ac/u onde Ac - area da secao, u - perimetro em contato com a atmosfera) (FIB1990: eq2.1-79,p55; eq2.1-66,p55)      
+ts = 7					! [dias] idade do concreto no inicio da secagem (FIB1990: eq2.1-74,p57)
+t0 = 9					! [dias] idade do concreto no instante de aplicação da carga
+tinf = 3000				! [dias] tempo final da analise (modrev=2)
+betasc = 5d0				! [adm] coeficiente que depende do tipo de cimento (4 - SL, 5 - N e R, 8 - RS)
+temperatura = 20			! [oC] temperatura
+alpha = 1				! [adm] efeito do tipo de cimento durante a cura
+ndec  = 10				! [década] No. de decadas utilizado para calcular os intervalos de tempo para o ajuste da cadeia de Kelvin (Maiga,2013: m da eq3.6,p45; m da Tabela B1,p167)
+ligafluencia = 1			!  1 - liga fluência, 0 - desliga fluência
+ligaretracao = 1			!  1 - liga retração, 0 - desliga retração
+ktime = 20				! [dias] dia para fazer a saida de dados (ustatev.txt)
+kelemid = 1				! [un] identificação do elemento para saida de dados (ustatev.txt)
+kkDomIntPt = 1				! [un] identificação do ponto de integração para saida de dados (ustatev.txt)
+nanalises = 4				! [un] No. de análises
+!
+! Dados de entrada da geometria e modelo
+modelem = 2				! 1 - PLANE183, 2 - PLANE182
+la = 1					! [cm] lado a da peça
+lb = 1					! [cm] lado b da peça
+diva = 1				! [un] numero de divisões do lado a do modelo para fazer o tamanho dos elementos (se igual a 1, terá um elemento)
+divb = 1				! [un] numero de divisões do lado a do modelo para fazer o tamanho dos elementos (se igual a 1, terá um elemento)
+ti = 0					! [dias] inicio do concreto
+dt = 1					! [dias] intervalo de tempo na analise
+!
+! Carregamentos e tempos
+*DIM,carga,ARRAY,8			! define vetor com carga com 5 entradas
+*DIM,tempo,ARRAY,8			! define vetor com o tempos finais para aplicação de cada carga
+!
+carga(1) = 0				! [kN/cm²] degrau de carga atuante até o tempo (1)
+carga(2) = 0.5				! [kN/cm²] degrau de carga atuante até o tempo (2)
+carga(3) = 1				! [kN/cm²] degrau de carga atuante até o tempo (3)
+carga(4) = 1.5				! [kN/cm²] degrau de carga atuante até o tempo (4)
+carga(5) = 0				! [kN/cm²] degrau de carga atuante até o tempo (5)
+carga(6) = 0				! [kN/cm²] degrau de carga atuante até o tempo (6)
+carga(7) = 0				! [kN/cm²] degrau de carga atuante até o tempo (7)			
+carga(8) = 0				! [kN/cm²] degrau de carga atuante até o tempo (8)
+tempo(1) = 9				! [dias] tempo final da carga 1
+tempo(2) = 49				! [dias] tempo final da carga 2
+tempo(3) = 74				! [dias] tempo final da carga 3
+tempo(4) = 100				! [dias] tempo final da carga 4
+tempo(5) = 0				! [dias] tempo final da carga 5
+tempo(6) = 0				! [dias] tempo final da carga 6
+tempo(7) = 0				! [dias] tempo final da carga 7
+tempo(8) = 0				! [dias] tempo final da carga 8
+tempo_grafico = 100			! [dias] tempo final no eixo do gráico
+!
+!***********************************************************!
+! 3. Pré-Processamento                                      !
+!***********************************************************!
+/CWD,diretorio				! define diretorio de trabalho
+/PREP7					! inicia módulo de pré-processamento
+!
+!***********************************************************!
+! 3.1 Configurando elemento finito                          !
+!***********************************************************!
+*IF,modelem,EQ,1,THEN
+	ET,1,PLANE183   	! 2D, 8 nós, quadrático, 2GDL por nó (Tx,Ty)
+*ELSE
+	ET,1,PLANE182   	! 2D, 4 nós, linear, 2GDL por nó (Tx,Ty)
+*ENDIF
+!
+KEYOPT,1,2,0		! 0 - reduced integration, 1 - full integration
+KEYOPT,1,3,2		! 2 - plane strain, 1 - layered solid
+KEYOPT,1,6,0		! 0 - pure displacemnt, 1 - mixed u/p
+!
+!***********************************************************!
+! 3.2 Configurando o material		                    !
+!***********************************************************!
+*if,modrev,eq,1,then
+	! Definindo o material elastico do Ansys
+	Erev = 21.5E3/10*(fck+0.8)**(1D0/3D0) 
+	MPTEMP,1,0  					! defini uma tabela de temperaturas
+	MPDATA,EX,1,,Erev				! modulo de elasticidade do revestimento
+	MPDATA,PRXY,1,,nurev 				! coeficiente de poisson do revestimento
+*elseif,modrev,eq,2,then
+	! Definindo material do usuário linear usermat_visco.F
+	TB,USER,i,1,17					
+	TBTEMP,1.0  
+	TBDATA,1,ligafluencia,ligaretracao
+	TBDATA,3,ti
+	TBDATA,4,ts,t0,tinf
+	TBDATA,7,fck,nurev
+	TBDATA,9,s,rh,hf,betasc,alpha
+	TBDATA,14,ndec
+	TBDATA,15,ktime,kelemid,kkDomIntPt		
+	TB,STATE,i,,500
+*endif
+!
+!***********************************************************!
+! 3.3 Criando o modelo sólido	                            !
+!***********************************************************!
+BLC4,0,0,la,lb				! criando um bloco
+/VIEW,1,1,1,1				! visualizando o bloco   
+/ANG,1 					! definindo ângulo de visualização
+!
+!***********************************************************!
+! 3.4 Aplicando condições de contorno                       !
+!***********************************************************!
+! aplicando restrição no plano yz
+DL,4, ,UX,0  
+DL,1, ,UY,0  		
+!
+! Obs: pode ser que tenha algum erro nas condições de contorno
+!***********************************************************!
+! 3.5 Criando a malha			                    !
+!***********************************************************!
+LESIZE,1,,,diva
+LESIZE,3,,,diva
+!
+LESIZE,4,,,divb
+LESIZE,2,,,divb
+!
+MSHAPE,0,2D 				! 0 - quadrilatero, 1 - triangulo, 2D - area mesh
+MSHKEY,1				! 0 - malha livre, 1 - malha mapeada, 2 - mapeada se possivel
+AMESH,1					! malha o sólido 
+!
+!***********************************************************!
+! 4. Solução			   			    !
+!***********************************************************!
+!
+/SOLU	
+ANTYPE,0,NEW				! parte da solução anterior
+NLGEOM,ON				! inclui efeitos de grandes deformações
+OUTRES,ALL,ALL				! escreve todos os resultados no banco de dado
+OUTRES,SVAR,ALL
+SOLCONTROL,ON				! o Ansys controla parâmetros da análise não-linear
+AUTOTS,ON				! o Ansys controla os subpassos (nsubs/deltim)
+PARSAV,ALL,parametros,txt		! salva os parâmetros da análise
+PSCONTROL,ALL,ON
+!
+KBC,1					! define carga tipo passo
+DELTIM,dt,dt,dt				! define o dtime para todas etapas de carga
+TUNIF,temperatura
+*DO,i,1,nanalises,1
+	TIME,tempo(i)
+	SFL,2,PRES,carga(i)
+	LSWRITE
+*ENDDO
+LSSOLVE,1,nanalises,1,  
+!
+FINISH					! sai do módulo de solução
+!***********************************************************!
+! 5. Pós processamento                                      !
+!***********************************************************!
+
+! mudando a cor da janela
+/RGB,INDEX,100,100,100,0	
+/RGB,INDEX,0,0,0,15 		
+
+! qualidade do arquivo jpeg de saida
+JPEG,QUAL,100,  
+JPEG,ORIENT,HORIZ   
+JPEG,COLOR,2
+JPEG,TMOD,1
+/GFILE,800, 
+
+! plota campo de deformações X em arquivo jpeg
+/POST1 			! entra no módulo de pós-processamento	
+SET,last  		! seleciona ultimo passo
+/SHOW,JPEG		! abre arquivo jpeg 
+/DSCALE,ALL,500		! escala
+PLNSTR,U,SUM,2,1	! plota solução nodal
+/SHOW,CLOSE 		! fecha jpeg
+
+! selecionando o nó canto superior do cubo
+nodenumber=node(la,lb,0)
+
+! graficos tensão deformação
+/POST26			      ! entra no módulo timehistory de pós-processamento 
+ANSOL,2,nodenumber,EPEL,X,epsx_2
+!NSOL,2,nodenumber,U,X, UX_2   ! solução UX  
+ANSOL,3,nodenumber,S,X,SX_3   ! solução SX  
+!
+! Fator de escala para inverter o sentido da tensão e do deslocamento (caso queira)
+PROD,2,,,,,,,-1.000000
+PROD,3,,,,,,,-1.000000
+!
+! plota Sy vs tempo em arquivo jpeg
+/AXLAB,X,t[dias]
+/AXLAB,Y,Sx[kN/cm2]
+/SHOW,JPEG
+XVAR,1  
+PLVAR,3,
+/SHOW,CLOSE
+!
+! plota Uy vs tempo em arquivo jpeg e na tela (para ver efeito da viscosidade)
+/AXLAB,X,t[dias]	! titulo eixo X
+/AXLAB,Y,Eps[adm]	! titulo eixo Y
+/SHOW,JPEG		! abre arquivo jpeg
+XVAR,1			! defini variavel x
+PLVAR,2			! defini variavel y
+/SHOW,CLOSE 		! fecha jpeg
+XVAR,1  
+PLVAR,2,
+
+! plota Uy vs tempo em arquivo de texto
+*CREATE,scratch,gui 
+*DEL,_P26_EXPORT
+*DIM,_P26_EXPORT,TABLE,tempo_grafico,1
+VGET,_P26_EXPORT(1,0),1 
+VGET,_P26_EXPORT(1,1),2 
+/OUTPUT,arqconv,'txt','.'   
+*VWRITE,'TIME','2'  
+%14C %14C   
+*VWRITE,_P26_EXPORT(1,0),_P26_EXPORT(1,1)   
+%14.5G %14.5G   
+/OUTPUT,TERM
+*END
+/INPUT,scratch,gui  

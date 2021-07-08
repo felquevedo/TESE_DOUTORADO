@@ -1,0 +1,298 @@
+!***********************************************************!
+!** PROGRAMA TESTE DE MODELO MATERIAL 3D                  **!
+!** Versão: 1.14					  **!
+!**                                                       **!
+!** Objetivo: faz o teste do material plotando:   	  **!
+!**	      - tensão vs deformação  			  **!
+!**	      - tensão vs tempo  			  **!
+!**                                                       **!
+!** Programador: Felipe Quevedo                           **!
+!** Situação   : em teste (05/07/2021)                    **!
+!** Unidades   : kN,cm,s                                  **!
+!**                                                       **!
+!***********************************************************!
+
+!***********************************************************!
+! 1. Inicializando o Ansys                                  !
+!***********************************************************!
+FINISH  		! terminar qualquer processo anterior  
+/CLEAR,NOSTART  	! limpar o modelo
+!
+!***********************************************************!
+! 1.1 Titulo da analise                                     !
+!***********************************************************!
+/TITLE, 'MODELO DE TESTE DE MATERIAIS'
+/FILNAME,file,0		! define nome file.* para os arquivos
+
+!***********************************************************!
+! 1.2 Pasta que guardará os arquivos da análise             !
+!***********************************************************!
+diretorio = 'D:\testes_ANSYS\modelo_material\' 	
+!
+!Obs: nessa pasta será salvo os arquivos file.* e *.jpeg
+! criados durante a análise. Tem que ser uma pasta existente
+! no PC.	
+!
+!***********************************************************!
+! 1.3 Nome dos arquivos de saída                            !
+!***********************************************************!
+arqconv = '3D-CUBO-TESTE1'
+!
+! Obs: nome do arquivo de texto com os dados da
+!  deformção.
+!
+!***********************************************************!
+! 2. Dados de entrada                                       !
+!***********************************************************!
+! Parâmetros do material
+modmat 	= 3				! 1 - elastico do Anys, 2 - elastoplastico VM Ansys, 3 - Usermat VM Ansys
+young  	= 2670				! [MPa] módulo de elasticidade
+nu     	= 0.2				! [adm] coeficiente de Poisson	
+yield   = 28.17				! [MPa] tensão de escoamento (modmat = 2)
+youngt  = 0.01				! [MPa] módulo de elastoplástico tangente (modmat = 2)
+! 
+! Parâmetros da geometria
+la 	= 1				! [cm] lado a do cubo
+lb 	= 1				! [cm] lado b do buco
+lc 	= 1				! [cm] lado c do cubo
+!
+! Parâmetros do modelo MEF
+modelem = 1				! 1 - SOLID185, 2 - SOLID186
+nla 	= 2				! [un] numero de elementos em la
+nlb 	= 2				! [un] numero de elementos em lb
+nlc 	= 2				! [un] numero de elementos em lc
+!
+! Dados das condições de contorno
+npassos = 8				! [un] No. de passos
+dt 	= 1				! [dias] incremento de tempo nos subpassos
+tipo_solicitacao = 1			! 1 - aplica deslocamento, 2 - aplica carga
+!
+! Deslocamentos impostos
+*DIM,solicitacao,ARRAY,8			! define vetor de deslocamentos
+*DIM,tempo,ARRAY,8			! define vetor com o tempos finais para aplicação de cada carga
+!
+solicitacao(1) = 0.001			! [m] incremento de deslocamento/carga para o passo (1)
+solicitacao(2) = 0.005			! [m] incremento de deslocamento/carga para o passo (2)
+solicitacao(3) = 0.01			! [m] incremento de deslocamento/carga para o passo (3)
+solicitacao(4) = 0.02			! [m] incremento de deslocamento/carga para o passo (4)
+solicitacao(5) = 0.03			! [m] incremento de deslocamento/carga para o passo (5)
+solicitacao(6) = 0.04			! [m] incremento de deslocamento/carga para o passo (6)
+solicitacao(7) = 0.05			! [m] incremento de deslocamento/carga para o passo (7)			
+solicitacao(8) = 1			! [m] incremento de deslocamento/carga para o passo (8)
+tempo(1) = 10				! [dias] tempo final do passo (1)
+tempo(2) = 20				! [dias] tempo final do passo (2)
+tempo(3) = 30				! [dias] tempo final do passo (3)
+tempo(4) = 40				! [dias] tempo final do passo (4)
+tempo(5) = 50				! [dias] tempo final do passo (5)
+tempo(6) = 60				! [dias] tempo final do passo (6)
+tempo(7) = 70				! [dias] tempo final do passo (7)
+tempo(8) = 80				! [dias] tempo final do passo (8)
+tempo_grafico = 100			! [dias] tempo final no eixo do gráico
+!
+! Parâmetros para pós-processamento
+ktime 		= 20			! [dias] dia para fazer a saida de dados (ustatev.txt)
+kelemid 	= 1			! [un] identificação do elemento para saida de dados (ustatev.txt)
+kkDomIntPt 	= 1			! [un] identificação do ponto de integração para saida de dados (ustatev.txt)
+!
+! Salva os parâmetros em um arquivo de texto
+PARSAV,ALL,parametros,txt		! salva os parâmetros da análise
+!
+!
+!
+!
+!------------------FIM ENTRADA DE DADOS---------------------!
+!
+!
+!
+!
+!***********************************************************!
+! 3. Pré-Processamento                                      !
+!***********************************************************!
+/CWD,diretorio				! define diretorio de trabalho
+/PREP7					! inicia módulo de pré-processamento
+!
+!***********************************************************!
+! 3.1 Configurando elemento finito                          !
+!***********************************************************!
+ET,1,SOLID185   	! 3D, 20 nós, quadrático, 3GDL por nó (Tx,Ty,Tz)
+KEYOPT,1,2,1		! 0 - reduced integration, 1 - full integration
+KEYOPT,1,3,0		! 0 - structural solid, 1 - layered solid
+KEYOPT,1,6,0		! 0 - pure displacemnt, 1 - mixed u/p
+!
+!***********************************************************!
+! 3.2 Configurando o material		                    !
+!***********************************************************!
+*IF,modmat,eq,1,then
+	! Definindo o material elastico do Ansys
+	MPTEMP,1,0  		! defini uma tabela de temperaturas
+	MPDATA,EX,1,,young	! modulo de elasticidade do revestimento
+	MPDATA,PRXY,1,,nu 	! coeficiente de poisson do revestimento
+*ELSEIF,modmat,eq,2,then
+	! Definindo o material elastoplástico VM do Ansys
+	MPTEMP,1,0  		! defini uma tabela de temperaturas
+	MPDATA,EX,1,,young	! modulo de elasticidade do revestimento
+	MPDATA,PRXY,1,,nu 	
+	TB,BISO,1,1,2,  
+	TBTEMP,0
+	TBDATA,,yield,youngt,,,,
+*ELSEIF,modmat,eq,3,then
+	! Definindo material do usuário linear usermat_vm do ANSYS
+	TB,USER,1,2,4
+	TBTEMP,1.0 		
+	TBDATA,1,young,nu,yield,youngt, ! E, posn, sigy, H
+	TB,STATE,1,,8
+	
+*ENDIF
+!
+!***********************************************************!
+! 3.3 Criando o modelo sólido	                            !
+!***********************************************************!
+BLC4,0,0,la,lb,lc			! criando um bloco
+/VIEW,1,1,1,1				! visualizando o bloco   
+/ANG,1 					! definindo ângulo de visualização
+!
+!***********************************************************!
+! 3.4 Aplicando condições de contorno                       !
+!***********************************************************!
+! aplicando restrição no plano yz
+DA,1,UZ,0
+DA,5,UX,0
+DA,3,UY,0		
+!
+! Obs: pode ser que tenha algum erro nas condições de contorno
+!***********************************************************!
+! 3.5 Criando a malha			                    !
+!***********************************************************!
+LESIZE,4,,,nla
+LESIZE,5,,,nla
+LESIZE,2,,,nla
+LESIZE,7,,,nla
+!
+LESIZE,8,,,nlb
+LESIZE,6,,,nlb
+LESIZE,1,,,nlb
+LESIZE,3,,,nlb
+!
+LESIZE,9,,,nlc
+LESIZE,10,,,nlc
+LESIZE,11,,,nlc
+LESIZE,12,,,nlc
+!
+MSHAPE,0,3D 	! 0 - hexaedro, 1 - tetraedro, 3D - volume mesh
+MSHKEY,1	! 0 - malha livre, 1 - malha mapeada, 2 - mapeada se possivel
+VMESH,1		! cria a malha
+!
+!***********************************************************!
+! 4. Solução			   			    !
+!***********************************************************!
+/SOLU	
+ANTYPE,0,NEW			! 0 - Análise estática, New - nova
+NLGEOM,OFF			! OFF - Ignora grandes deformações, ON - ativa
+OUTRES,ALL,ALL			! Guarda todos os itens de solução a cada subpasso
+OUTRES,SVAR,ALL			! Guarda as variáveis de estado da Usermat a cada subpasso
+AUTOTS,OFF			! ON - Liga subpassos automáticos				! o Ansys controla os subpassos (nsubs/deltim)
+PSCONTROL,ALL,ON		! OFF - Desativa paralelização, ON - liga paralelização
+KBC,1				! 0 - solicitação linearmente interpolada no passo, 1 - solicitação linearmente interpolada no primeiro subpasso 
+DELTIM,dt,dt,dt,OFF		! dtime incremento do tempo do passo, incremento mínimo, incremento máximo, chave (ON usa dtime do passo anterior se AUTOTS for ON, OFF - usa dtime no inicio de cada passo)
+!
+*DO,i,1,npassos,1	
+	TIME,tempo(i)
+	*IF,tipo_solicitacao,EQ,1,THEN
+		DA,6,UX,solicitacao(i)
+	*ELSEIF,tipo_solicitacao,EQ,2,THEN
+		SFA,6,1,PRES,solicitacao(i)
+	*ENDIF
+	SOLVE
+*ENDDO 
+FINISH
+!***********************************************************!
+! 5. Pós processamento                                      !
+!***********************************************************!
+! mudando a cor da janela
+/RGB,INDEX,100,100,100,0	
+/RGB,INDEX,0,0,0,15 		
+!
+! qualidade do arquivo jpeg de saida
+JPEG,QUAL,100,  
+JPEG,ORIENT,HORIZ   
+JPEG,COLOR,2
+JPEG,TMOD,1
+/GFILE,800, 
+!
+!***********************************************************!
+! 5.1 Plotando campo de deformações x em jpg                !
+!***********************************************************!
+/POST1 			! entra no módulo de pós-processamento	
+SET,last  		! seleciona ultimo passo
+/SHOW,JPEG		! abre arquivo jpeg 
+/DSCALE,ALL,500		! define a escala
+PLNSTR,U,SUM,2,1	! plota solução nodal
+/SHOW,CLOSE 		! fecha jpeg
+!
+!***********************************************************!
+! 5.2 Plotando tensão e deformação x ao longo do tempo      !
+!***********************************************************!
+! coleta o número do nó do canto superior do cubo
+nodenumber=node(la,lb,lc)
+!
+! graficos tensão vs deformação
+/POST26			      	 ! entra no módulo timehistory de pós-processamento 
+ANSOL,2,nodenumber,EPEL,X,epsx_2 ! componente da deformação em x
+ANSOL,3,nodenumber,S,X,SX_3   	 ! componente da tensão em X  
+!
+! Fator de escala para inverter o sentido da tensão e do deslocamento (caso queira)
+PROD,2,,,,,,,1.000000
+PROD,3,,,,,,,1.000000
+!
+! plota Sx vs tempo em arquivo jpeg
+/AXLAB,X,t[dias]	! titulo eixo x
+/AXLAB,Y,Sx[kN/cm2]	! titulo eixo y
+/SHOW,JPEG		! abre o arquivo jpeg pra escrita
+XVAR,1  		! identifica variavel x		
+PLVAR,3			! identifica variavel para plotar	
+/SHOW,CLOSE		! fecha arquivo jpeg pra escrita
+!
+! plota Epsilonx vs tempo em arquivo jpeg
+/AXLAB,X,t[dias]	! titulo eixo x
+/AXLAB,Y,Epsilonx[adm]	! titulo eixo y
+/SHOW,JPEG		! abre o arquivo jpeg pra escrita
+XVAR,1			! identifica variavel x		
+PLVAR,2			! identifica variavel para plotar		
+/SHOW,CLOSE 		! fecha arquivo jpeg pra escrita
+!
+! plota Epsilonx vs tempo na tela
+XVAR,1  
+PLVAR,2,
+!
+!***********************************************************!
+! 5.3 Plotando tensão vs deformação                         !
+!***********************************************************!
+/AXLAB,X,Epsilonx[adm]	! titulo eixo x
+/AXLAB,Y,Sx[kN/cm2]	! titulo eixo y
+/SHOW,JPEG		! abre o arquivo jpeg pra escrita
+XVAR,2  		! identifica variavel x		
+PLVAR,3			! identifica variavel para plotar	
+/SHOW,CLOSE		! fecha arquivo jpeg pra escrita
+!
+! plota Sx vs Epsilonx na tela
+XVAR,2  
+PLVAR,3,
+!
+!***********************************************************!
+! 5.4 Plotando em arquivo de texto                          !
+!***********************************************************!
+! plota em txt tempo vs Epsilonx vs Sx
+*CREATE,scratch,gui 
+*DEL,resultados
+*DIM,resultados,TABLE,tempo_grafico,2
+VGET,resultados(1,0),1 
+VGET,resultados(1,1),2 
+VGET,resultados(1,2),3
+/OUTPUT,arqconv,'txt','.'   
+*VWRITE,'Time','Epsilonx','Sx' 
+%14C %14C %14C
+*VWRITE,resultados(1,0),resultados(1,1),resultados(1,2)    
+%14.5G %14.5G %14.5G  
+/OUTPUT,TERM
+*END
+/INPUT,scratch,gui  
