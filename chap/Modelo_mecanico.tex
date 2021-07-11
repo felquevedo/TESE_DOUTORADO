@@ -88,7 +88,7 @@ Em problemas quase-estáticos isotérmicos, quando os deslocamentos, as deforma�
 
 \section{Hipótese das pequenas perturbações e a descrição Lagrangeana}
 
-A hipótese das \textbf{transformações infinitesimai (HTI)} supõe que o gradiente da transformação é aproximadamente a identidade, ou seja, $\Fll \approx \Umll$ . Isso implica, por (\ref{eq:transformacao_geometrica}), que $\left| \nabla \ul \right| \ll 1$ e, como consequência, pode-se desprezar os termos de derivada mais alta no tensor de deformações de Green-Lagrange, de modo que:
+A \textbf{hipótese das transformações infinitesimais (HTI)} supõe que o gradiente da transformação é aproximadamente a identidade, ou seja, $\Fll \approx \Umll$ . Isso implica, por (\ref{eq:transformacao_geometrica}), que $\left| \nabla \ul \right| \ll 1$ e, como consequência, pode-se desprezar os termos de derivada mais alta no tensor de deformações de Green-Lagrange, de modo que:
 \begin{equation}
 	\label{eq:green_lagrange_linearizado}
 	\greenll = \frac{1}{2} \left(\Fll^T \cdot \Fll - \Umll \right) = \frac{1}{2} \left(\nabla \ul + \nabla\ul^T + \nabla\ul^T \cdot \nabla \ul \right) \approxeq \frac{1}{2} \left(\nabla \ul + \nabla\ul^T \right) = \nabla^s\ul = \varepsilonll
@@ -127,12 +127,12 @@ sendo que os invariantes do tensor de deformações são dados por:
 	I_3 = \text{tr}(\varepsilonll^3) = \frac{1}{3} \varepsilon_{ij} \varepsilon_{jk} \varepsilon_{ki}.
 \end{equation}
 
-A lei do comportamento elástico se obtém de $\sigmall = \partial w / \partial \varepsilonll$ . Aplicando a regra da cadeia em relação aos invariantes e fazendo uma aproximação de primeira ordem em torno de $\sigmall_0$ tem-se a seguinte lei constitutiva da \textbf{elasticidade linear isótropa}:
+A lei do comportamento elástico se obtém de $\sigmall = \partial w / \partial \varepsilonll$ . Aplicando a regra da cadeia em relação aos invariantes e fazendo uma aproximação de primeira ordem em torno de $\sigmall_0$ tem-se a seguinte lei constitutiva da \textbf{elasticidade linear isótropa}
 \begin{equation}
 	\label{eq:lei_elasticidade}
-	\sigmall - \sigmall_0 = \Dllll:\varepsilonll
+	\sigmall - \sigmall_0 = \Dllll:\varepsilonll,
 \end{equation}
-em que $\Dllll$ é o tensor constitutivo elástico de quarta ordem simétrico dado por:
+em que $\Dllll$ é o tensor constitutivo elástico de quarta ordem simétrico dado por
 \begin{equation}
 	\label{eq:tensor_constitutivo_elastico}
  	\Dllll = \lambda^e \Umll \otimes \Umll + 2 \mu^e \Umllll
@@ -140,11 +140,11 @@ em que $\Dllll$ é o tensor constitutivo elástico de quarta ordem simétrico da
 sendo $\underline{\underline 1} \otimes \underline{\underline 1}$ o tensor de quarta ordem dado pelo produto tensorial ($\otimes$) entre dois tensores unitários de segunda ordem e $\underline{\underline{\underline{\underline 1}}}$ o tensor unitário de quarta ordem. As constantes $\lambda^e$ e $\mu^e$ são conhecidos como os coeficientes de Lamè, que possuem as seguintes relações com o módulo de Young $E$ e o coeficiente de Poisson $\nu$:
 \begin{equation}
 	\label{eq:lambdae}
-	\lambda^e = \frac{E \nu}{(1+\nu)(1-2\nu)}
+	\lambda^e = \frac{E \nu}{(1+\nu)(1-2\nu)},
 \end{equation}
 \begin{equation}
 	\label{eq:mue}
-	\mu^e = \frac{E}{2(1+\nu)}
+	\mu^e = \frac{E}{2(1+\nu)}.
 \end{equation}
 
 \section{Modelo constitutivo elastoplástico}
@@ -195,7 +195,7 @@ Uma característica fenomenológica dos materiais elastoplásticos é a existên
 	\label{eq:superficie_escoamento}
 	\partial \Gamma = \left\{ \sigmall | f(\sigmall,\ql) = 0 \right\}
 \end{equation}
-em que $f$ é a \textbf{função de escoamento}. Essa superfície delimita o conjunto de tensões que estão dentro do domínio elástico, ou seja, \textbf{elasticamente admissíveis (E.A.)}:
+em que $f$ é a \textbf{função de escoamento}. Essa superfície delimita o conjunto de tensões que estão dentro do domínio elástico, ou seja, \textbf{elasticamente admissíveis (E. A.)}:
 \begin{equation}
 	\label{eq:dominio_elasticamente_admissivel}
 	\Gamma^* = \left\{ \sigmall | f(\sigmall,\ql) < 0 \right\},
@@ -222,13 +222,14 @@ em que:
 \begin{equation}
 	\label{eq:invariantes_tensores}
 		\begin{array}{lcl}
-			I_1 = \text{tr}(\sigmall) = \sigma_{11}+\sigma_{22}+\sigma_{33},~~~ J_3 = \dfrac{1}{3}\text{tr}(\sll^3) = det(\sll), \\ 
+			I_1 = \text{tr}(\sigmall) = \sigma_{11}+\sigma_{22}+\sigma_{33}\\
 			J_2 = \dfrac{1}{2}\text{tr}(\sll^2) = \dfrac{1}{6}\left[ (\sigma_{11}-\sigma_{22})^2 + (\sigma_{22}-\sigma_{33})^2 + (\sigma_{33}-\sigma_{11})^2 \right] + \sigma_{12}^2+ \sigma_{23}^2+ \sigma_{13}^2, \\
+			J_3 = \dfrac{1}{3}\text{tr}(\sll^3) = \text{det}(\sll) = s_{11}s_{22}s_{33}-s_{11}\sigma_{23}^2-s_{22}\sigma_{13}^2-s_{33}\sigma_{12}^2+2\sigma_{12}\sigma_{23}\sigma_{13}, \\ 
 			\xi_{H} = p = \sigma_{oct} = \dfrac{1}{3}I_1, ~~~ \rho_{H} = \sqrt{\sll:\sll} = \sqrt{2J_2}, ~~~ \theta = \dfrac{1}{3}arcsen\left( \dfrac{-3\sqrt{3}}{2} \dfrac{J_3}{J_2^{3/2}} \right), \\
 			-\dfrac{\pi}{6} \le \theta \le \dfrac{\pi}{6}, ~~~ q = \sqrt{\dfrac{3}{2}\sll:\sll} = \sqrt{3J_2}, ~~~ \tau_{oct} = \sqrt{\dfrac{3}{2}J_2},
 	\end{array}
 \end{equation}
-sendo $(\xi_H,\rho_H,\theta)$ as coordenadas de Haigh-Westergaard (em que $\theta$ também é conhecido como ângulo de Lode), $p$ a pressão hidrostática, $q$ a tensão equivalente de von-Mises, $(\sigma_{oct},\tau_{oct})$ a tensão normal e cisalhante octaédrica, respectivamente, e $\sll$  o tensor de tensões desviadoras, dado por:
+sendo $(\xi_H,\rho_H,\theta)$ as coordenadas de Haigh-Westergaard (em que $\theta$ também é conhecido como ângulo de Lode), $p$ a pressão hidrostática, $q$ a tensão equivalente de von-Mises, $(\sigma_{oct},\tau_{oct})$ a tensão normal e cisalhante octaédrica, respectivamente, e $s_{ij}$ são as componentes do tensor de tensões desviadoras $\sll$, dado por:
 \begin{equation}
 	\label{eq:tensor_desviador}
 	\sll = \sigmall: \left[ \Umllll-\Umll \otimes \Umll \right] = \sigmall - p\Umll.

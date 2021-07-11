@@ -58,9 +58,9 @@ lc 	= 1				! [cm] lado c do cubo
 !
 ! Parâmetros do modelo MEF
 modelem = 1				! 1 - SOLID185, 2 - SOLID186
-nla 	= 2				! [un] numero de elementos em la
-nlb 	= 2				! [un] numero de elementos em lb
-nlc 	= 2				! [un] numero de elementos em lc
+nla 	= 1				! [un] numero de elementos em la
+nlb 	= 1				! [un] numero de elementos em lb
+nlc 	= 1				! [un] numero de elementos em lc
 !
 ! Dados das condições de contorno
 npassos = 8				! [un] No. de passos
@@ -137,9 +137,9 @@ KEYOPT,1,6,0		! 0 - pure displacemnt, 1 - mixed u/p
 	TBDATA,,yield,youngt,,,,
 *ELSEIF,modmat,eq,3,then
 	! Definindo material do usuário linear usermat_vm do ANSYS
-	TB,USER,1,2,4
+	TB,USER,1,2,5
 	TBTEMP,1.0 		
-	TBDATA,1,young,nu,yield,youngt, ! E, posn, sigy, H
+	TBDATA,1,1,young,nu,yield,youngt, ! modelo, E, posn, sigy, H
 	TB,STATE,1,,8
 	
 *ENDIF
@@ -191,7 +191,7 @@ NLGEOM,OFF			! OFF - Ignora grandes deformações, ON - ativa
 OUTRES,ALL,ALL			! Guarda todos os itens de solução a cada subpasso
 OUTRES,SVAR,ALL			! Guarda as variáveis de estado da Usermat a cada subpasso
 AUTOTS,OFF			! ON - Liga subpassos automáticos				! o Ansys controla os subpassos (nsubs/deltim)
-PSCONTROL,ALL,ON		! OFF - Desativa paralelização, ON - liga paralelização
+PSCONTROL,ALL,OFF		! OFF - Desativa paralelização, ON - liga paralelização
 KBC,1				! 0 - solicitação linearmente interpolada no passo, 1 - solicitação linearmente interpolada no primeiro subpasso 
 DELTIM,dt,dt,dt,OFF		! dtime incremento do tempo do passo, incremento mínimo, incremento máximo, chave (ON usa dtime do passo anterior se AUTOTS for ON, OFF - usa dtime no inicio de cada passo)
 !

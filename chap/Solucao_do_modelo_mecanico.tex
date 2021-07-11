@@ -26,27 +26,27 @@ A expressão (\ref{eq:deslocamento_virtual}) é uma equação integral em que, n
 Os tensores simétricos de segunda e quarta ordem são comumente representados, respectivamente, por arranjos (\textit{arrays}) vetoriais e matriciais convenientes à álgebra computacional. Dessa forma é utilizada a seguinte notação \cite[p. 682]{Zienkiewicz2005}:
 \begin{equation}
 	\label{eq:sigmal}
-	\sigmall \rightarrow \sigmal = \left\{\sigma_{11}~~~\sigma_{22}~~~\sigma_{33}~~~\sigma_{21}~~~\sigma_{23}~~~\sigma_{31} \right\}^T
+	\sigmall \rightarrow \sigmal = \left\{\sigma_{11}~~~\sigma_{22}~~~\sigma_{33}~~~\sigma_{12}~~~\sigma_{23}~~~\sigma_{13} \right\}^T
 \end{equation}
 \begin{equation}
 	\label{eq:varepsilonl}
-	\varepsilonll \rightarrow \varepsilonl = \left\{\varepsilon_{11}~~~\varepsilon_{22}~~~\varepsilon_{33}~~~2\varepsilon_{21}~~~2\varepsilon_{23}~~~2\varepsilon_{31} \right\}^T
+	\varepsilonll \rightarrow \varepsilonl = \left\{\varepsilon_{11}~~~\varepsilon_{22}~~~\varepsilon_{33}~~~2\varepsilon_{12}~~~2\varepsilon_{23}~~~2\varepsilon_{13} \right\}^T
 \end{equation}
 \begin{equation}
 	\label{eq:Dl}
 	\Dllll \rightarrow \Dll = 
 	\begin{bmatrix}
-		D_{1111} & D_{1122} & D_{1133}  & D_{1121} & D_{1123} & D_{1131} \\
-				& D_{2222}  & D_{2233}  & D_{2221} & D_{2223} & D_{2231}  \\
-				& 			& D_{3333}  & D_{3321} & D_{3323} & D_{3331}  \\
-				& 			&		    & D_{2121} & D_{2123} & D_{2131}  \\
-				& \text{SIM}&		    & 	       & D_{2323} & D_{2331}  \\
-				& 			&		    & 	       &          & D_{3131} 
+		D_{1111} & D_{1122} & D_{1133}  & D_{1112} & D_{1123} & D_{1113} \\
+		D_{2211} & D_{2222}  & D_{2233}  & D_{2212} & D_{2223} & D_{2213}  \\
+		D_{3311} & D_{3322} & D_{3333}  & D_{3312} & D_{3323} & D_{3313}  \\
+		D_{1211} & D_{1222}	& D_{1233}  & D_{1212} & D_{1223} & D_{1213}  \\
+		D_{2311} & D_{2322} & D_{2333} & D_{2312} & D_{2323} & D_{2313}  \\
+		D_{1311} & D_{1322}	& D_{1333} & D_{1312} & D_{1323} & D_{1313} 
 	\end{bmatrix}
 \end{equation}
 \begin{equation}
 	\label{eq:dgdsl}
-	\dgdsll \rightarrow \dgdsl = \left\{\dfrac{\partial g}{\partial \sigma_{11}}~~~\dfrac{\partial g}{\partial \sigma_{22}}~~~\dfrac{\partial g}{\partial \sigma_{33}}~~~\dfrac{\partial g}{\partial \sigma_{21}}~~~\dfrac{\partial g}{\partial \sigma_{23}}~~~\dfrac{\partial g}{\partial \sigma_{31}} \right\}^T
+	\dgdsll \rightarrow \dgdsl = \left\{\dfrac{\partial g}{\partial \sigma_{11}}~~~\dfrac{\partial g}{\partial \sigma_{22}}~~~\dfrac{\partial g}{\partial \sigma_{33}}~~~\dfrac{\partial g}{\partial \sigma_{12}}~~~\dfrac{\partial g}{\partial \sigma_{23}}~~~\dfrac{\partial g}{\partial \sigma_{13}} \right\}^T
 \end{equation}
 \begin{equation}
 	\label{eq:Uml}
@@ -678,21 +678,21 @@ Ademais, para o gradiente da função potencial em (\ref{eq:invariantes_tensores
 \end{equation}
 \begin{equation}
 	\label{eq:g2_3D}
-	\gl_2 = \dfrac{1}{2\sqrt{J_2}} \left\{s_{11},s_{22},s_{33},2\sigma_{21},2\sigma_{23},2\sigma_{31}\right\}^T
+	\gl_2 = \dfrac{1}{2\sqrt{J_2}} \left\{s_{11},s_{22},s_{33},2\sigma_{12},2\sigma_{23},2\sigma_{13}\right\}^T
 \end{equation}
 \begin{equation}
 	\label{eq:g3_3D}
 	\gl_3 = \left\{
 	\begin{array}{ccc}
-	s_{22}s_{33}-\sigma_{21}^2 + J_2/3 \\
-	s_{11}s_{33}-\sigma_{23}^2 + J_2/3 \\	
-	s_{11}s_{22}-\sigma_{31}^2 + J_2/3 \\
-	2(\sigma_{23}\sigma_{31}-s_{11}\sigma_{21}) \\
-	2(\sigma_{31}\sigma_{21}-s_{22}\sigma_{23}) \\
-	2(\sigma_{21}\sigma_{23}-s_{33}\sigma_{31})
+	s_{22}s_{33}-\sigma_{23}^2 + J_2/3 \\
+	s_{11}s_{33}-\sigma_{13}^2 + J_2/3 \\	
+	s_{11}s_{22}-\sigma_{12}^2 + J_2/3 \\
+	2(\sigma_{23}\sigma_{13}-s_{33}\sigma_{12}) \\
+	2(\sigma_{13}\sigma_{12}-s_{11}\sigma_{23}) \\
+	2(\sigma_{12}\sigma_{23}-s_{22}\sigma_{13})
 	\end{array} \right\}.
 \end{equation}
-e para o estado plano de deformações e axissimetria, tem-se (adaptado de \citeonline[p. 232]{Owen1980}):
+e para o estado plano de deformações e axissimetria, tem-se (adaptado de \citeonline[p. 233]{Owen1980}):
 \begin{equation}
 	\label{eq:g1_2D}
 	\gl_1 = \left\{1,1,1,0\right\}^T,
