@@ -265,7 +265,7 @@ e para o caso em que a superfície de Drucker-Prager coincide com as bordas mais
 	\beta = \dfrac{2\sin{\phi}}{\sqrt{3}(3+\sin(\phi))}, ~~~ k = \dfrac{6\cos{\phi}}{\sqrt{3}(3+\sin(\phi))}c.
 \end{equation}
 
-Essa aproximação pode ser vista no plano desviador confome a Figura 5.6.
+Essa aproximação pode ser vista no plano desviador conforme a \autoref{DP-MC-plano_desviador}.
 \begin{figure}[H]
 	\begin{center}
 		\includegraphics[scale = 1.0]{0506-representação no plano desviador da aproximação da superficie de MC com DP.pdf}
@@ -351,20 +351,47 @@ Nas expressões de $C_2$ e $C_3$, pode-se ver que o vetor de fluxo de Mohr-Coulo
 Um aspecto comum na geomecânica é a variação do volume do material durante a evolução das deformações plásticas. Esse efeito é comumente introduzido através da plasticidade não associada, adotando, ao invés do ângulo de atrito, um ângulo de dilatância $0<\psi<\phi$  na função potencial $g$.
 
 \subsection{Lei de endurecimento/amolecimento}
-A lei de endurecimento/amolecimento caracteriza, em geral, a dependência das variáveis internas (por exemplo, a coesão) em relação ao histórico de deformações plásticas. Essa lei de endurecimento/amolecimento é postulada da seguinte forma \cite[p. 249]{Belytschko2000}:
+A lei de endurecimento/amolecimento caracteriza, em geral, a dependência das variáveis internas (por exemplo, a coesão e o ângulo de atrito) em relação ao histórico de deformações plásticas. Essa lei de endurecimento/amolecimento é postulada da seguinte forma \cite[p. 249]{Belytschko2000}:
 \begin{equation}
 	\label{eq:amolecimento}
 	\dot \ql = \dot \lambda \hl(\sigmall,\ql)
 \end{equation}
-em que $\hl$ é um vetor que contém o conjunto dos módulos de endurecimento para cada força associada a cada variável interna. Como a função de escoamento $f$ é dependente das forças termodinâmicas associadas ao conjunto de variáveis internas $\alphal$, a mudança dessas ao longo da deformação plástica irá alterar a posição e/ou a forma da superfície de escoamento. Quando a superfície de escoamento é estática, ou seja, $\dot \ql=\underline 0$, tem-se a plasticidade perfeita, quando esta aumenta tem-se o endurecimento isotrópico e quando se desloca tem-se o endurecimento cinemático (\autoref{tipos_endurecimento}), sendo mista, quando composta das duas últimas.
+em que $\hl$ é um vetor que contém os gradientes de uma função potencial $h$ com relação à cada força associada a sua respectiva variável interna. Como a função de escoamento $f$ é dependente das forças termodinâmicas associadas ao conjunto de variáveis internas $\alphal$, a mudança dessas ao longo da deformação plástica irá alterar a posição e/ou a forma da superfície de escoamento. Quando a superfície de escoamento é estática, ou seja, $\dot \ql=\underline 0$, tem-se a plasticidade perfeita, quando esta aumenta tem-se o endurecimento isotrópico e quando se desloca tem-se o endurecimento cinemático (\autoref{tipos_endurecimento}), sendo mista, quando composta das duas últimas.
 
-Em um primeiro momento, no presente trabalho, não será considerado a influência da lei de endurecimento e, portanto, as variáveis internas serão constantes ao longo da trajetória de tensões, ou seja, $\dot \ql = \dot \alphal = \underline 0$. Nesse caso, tem-se a elastoplasticidade perfeita. Nos modelos adotados de Mohr-Coulomb e Drucker-Prager, por exemplo, isso significa que a coesão e o ângulo de atrito permanecem constantes durante o trabalho plástico. Em um segundo momento se buscará implementar funções bilineares para representar o amolecimento característico do maciço, tal como vistos no Capítulo 4.3, contudo em caráter apenas isotrópico. Essa implementação, como será visto adiante, é feita através da coesão que dependerá da magnitude das deformações plásticas ao longo do histórico de tensões.
 \begin{figure}[H]
 	\begin{center}
 		\includegraphics[scale = 1.0]{0509-tipos_endurecimentos.pdf}
 	\end{center}
 	\caption{\label{tipos_endurecimento}Representação dos tipos de endurecimento no plano desviador e na curva tensão-deformação: a) elastoplasticidade perfeita, b) endurecimento isotrópico e c) endurecimento cinemático (adaptado de: \citeauthor{Neto2008}, \citeyear{Neto2008}, p. 178, 179, 186)}
 \end{figure}
+
+Em um primeiro momento, no presente trabalho, não será considerado a influência da lei de endurecimento e, portanto, as variáveis internas serão constantes ao longo do histórico de deformações, ou seja, $\dot \ql = \dot \alphal = \underline 0$. Nesse caso, tem-se a elastoplasticidade perfeita. Para os modelos adotados significa que a coesão e o ângulo de atrito permanecem constantes durante a deformação plástica. Em um segundo momento é implementado uma função linear definida por partes para representar o endurecimento/amolecimento característico do maciço, tal como vistos no Capítulo 4.3, contudo em caráter associado ($h = f$) e isotrópico. Essa implementação, é feita exclusivamente através da coesão que dependerá da magnitude das deformações plásticas ao longo do histórico de tensões (conforme \autoref{funcao_coesao}).
+
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[scale = 1.0]{0510-lei de endurecimento ou amolecimento_coesao.pdf}
+	\end{center}
+	\caption{\label{funcao_coesao}Função linear definida por partes para representar o endurecimento/amolecimento através do parâmetro coesivo (adaptado de: \citeonline[p. 158]{Potts1999}}
+\end{figure}
+Portanto, usando a regra da cadeia, escreve-se (\ref{eq:amolecimento}) da seguinte forma: 
+\begin{equation}
+	\label{eq:expressao_amolecimento}
+	\dot \ql = \left\{ \begin{array}{l} \dot c \\ \dot \phi \end{array} \right\} = \dot \lambda \left\{ \begin{array}{ccc} \dfrac{\partial f}{\partial c}\dfrac{\partial c}{\partial \bar \epsilon^p} \\ 0 \end{array} \right\}.
+\end{equation}
+em que, conforme (\ref{eq:f_Mohr_Coulomb}) e (\ref{eq:f_Drucker_Prager}), tem-se:
+\begin{equation}
+	\label{eq:dfdc}
+	\dfrac{\partial f}{\partial c} = \left\{ \begin{array}{ll} - \cos(\phi), & \text{para Mohr-Coulomb} \\ - \dfrac{6\cos(\phi)}{\sqrt{3}(3\pm \sin(\phi))}, & \text{para Drucker-Prager}\end{array}\right.
+\end{equation}
+e
+\begin{equation}
+	\label{eq:dcde}
+	\dfrac{\partial c}{\partial \bar \epsilon_{p}} = \left\{ \begin{array}{ll} \dfrac{(c_p-c_i)}{\bar \epsilon^p_I} &  \text{para zona I} \\ 
+	c_p, & \text{para zona II} \\
+	\dfrac{(c_r-c_p)}{\bar \epsilon^p_{r}-\bar \epsilon^p_{II}}, & \text{para zona III} \\	
+	c_r, & \text{para zona IV}
+\end{array}\right..
+\end{equation}
 
 
 \subsection{Condições de carregamento e descarregamento}
@@ -473,7 +500,7 @@ Dessa forma, dentro das mesmas hipóteses dos modelos anteriores, a relação co
 Uma observação importante é que as superfícies de escoamentos e as variáveis internas que definem a parcela elastoplástica e viscoplástica desse modelo podem ser diferentes entre si, incluindo a associação das suas respectivas funções potenciais com suas superfícies de escoamento. Apesar dessa abordagem genérica, na presente tese será adotada inicialmente a proposta seguida pelas soluções analíticas de \citeonline{Rousset1988} em que as forças termodinâmicas associadas às variáveis internas que governam a lei de endurecimento/amolecimento instantâneas e diferidas $\ql^p$ e $\ql^{vp}$, respectivamente, são funções multilineares de parâmetros coesivos em função da deformação plástica e viscoplástica equivalentes. Por exemplo para ilustrar esse comportamento, de forma unidimensional, segue-se as seguintes expressões \cite[p. 220]{Rousset1988}:
 \begin{equation}
 	\label{eq:qp_rousset}
-	q^p	= h(\varepsilon^p) = c(\varepsilon^p) \left\{
+	c(\varepsilon^p) = \left\{
 		\begin{array}{lcl}
 			2c - \dfrac{2(c-c_0)}{\varepsilon_0}\varepsilon^p \\ 
 			2c_0~~~\text{se}~~~\varepsilon^p > \varepsilon_0

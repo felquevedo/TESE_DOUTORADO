@@ -44,12 +44,39 @@ arqconv = '3D-CUBO-TESTE1'
 !***********************************************************!
 ! 2. Dados de entrada                                       !
 !***********************************************************!
-! Parâmetros do material
-modmat 	= 3				! 1 - elastico do Anys, 2 - elastoplastico VM Ansys, 3 - Usermat VM Ansys
-young  	= 2670				! [MPa] módulo de elasticidade
-nu     	= 0.2				! [adm] coeficiente de Poisson	
-yield   = 28.17				! [MPa] tensão de escoamento (modmat = 2)
-youngt  = 0.01				! [MPa] módulo de elastoplástico tangente (modmat = 2)
+! Modelo do material
+!
+! matmod = 1
+!	elastico do ANSYS
+!
+! matmod = 2
+!	elastoplastico VM do ANSYS (BISO)
+!
+! matmod = 3
+!	elastoplastico DP_CLASSICAL do ANSYS
+!
+! matmod = 4
+!	usermat3D_VM do ANSYS (BISO)
+!
+! matmod = 5
+!	usermat3D_elastico
+!
+! matmod = 6
+!	usermat3D_EP
+!				
+modmat 	    = 3				! modelo do material
+!				
+young  	    = 2670			! [MPa] módulo de elasticidade (1,2,3,4,5,6)
+nu     	    = 0.2			! [adm] coeficiente de Poisson (1,2,3,4,5,6)
+yield       = 28.17			! [MPa] tensão de escoamento   (2,4)
+youngt      = 0.01			! [MPa] módulo de elastoplástico tangente (2,4)
+!
+superficief = 2				! função de escoamento: 1- (MC ou TR), 2- (DP ou VM) (6)
+superficieg = 2				! função potencial: 1- (MC ou TR), 2- (DP ou VM) (6)
+flag	    = 1				! 1- DP coincide com as bordas externas MC (6) 
+c	    = yield/2			! [MPa]	coesão		       (3,6)
+fi	    = 0				! [graus] angulo de atrito (0 - TR ou VM) (3,6)
+psi	    = fi			! [graus] angulo de dilatância   (3,6)
 ! 
 ! Parâmetros da geometria
 la 	= 1				! [cm] lado a do cubo
@@ -68,7 +95,7 @@ dt 	= 1				! [dias] incremento de tempo nos subpassos
 tipo_solicitacao = 1			! 1 - aplica deslocamento, 2 - aplica carga
 !
 ! Deslocamentos impostos
-*DIM,solicitacao,ARRAY,8			! define vetor de deslocamentos
+*DIM,solicitacao,ARRAY,8		! define vetor de deslocamentos
 *DIM,tempo,ARRAY,8			! define vetor com o tempos finais para aplicação de cada carga
 !
 solicitacao(1) = 0.001			! [m] incremento de deslocamento/carga para o passo (1)
@@ -124,22 +151,44 @@ KEYOPT,1,6,0		! 0 - pure displacemnt, 1 - mixed u/p
 !***********************************************************!
 *IF,modmat,eq,1,then
 	! Definindo o material elastico do Ansys
-	MPTEMP,1,0  		! defini uma tabela de temperaturas
-	MPDATA,EX,1,,young	! modulo de elasticidade do revestimento
-	MPDATA,PRXY,1,,nu 	! coeficiente de poisson do revestimento
+	MPTEMP,1,0  		
+	MPDATA,EX,1,,young	
+	MPDATA,PRXY,1,,nu 	
 *ELSEIF,modmat,eq,2,then
 	! Definindo o material elastoplástico VM do Ansys
-	MPTEMP,1,0  		! defini uma tabela de temperaturas
-	MPDATA,EX,1,,young	! modulo de elasticidade do revestimento
+	MPTEMP,1,0  		
+	MPDATA,EX,1,,young	!
 	MPDATA,PRXY,1,,nu 	
 	TB,BISO,1,1,2,  
 	TBTEMP,0
 	TBDATA,,yield,youngt,,,,
 *ELSEIF,modmat,eq,3,then
-	! Definindo material do usuário linear usermat_vm do ANSYS
+	! Definindo o material elastoplástico DP_CLASSICAL do Ansys
+	MPTEMP,1,0  		
+	MPDATA,EX,1,,young	
+	MPDATA,PRXY,1,,nu 	
+	TB,DP,1  
+	TBTEMP,0
+	TBDATA,1,yield/2*SQRT(3),fi,psi,,,
+*ELSEIF,modmat,eq,4,then
+	! Definindo material usermat3D VM do Ansys
 	TB,USER,1,2,5
 	TBTEMP,1.0 		
-	TBDATA,1,1,young,nu,yield,youngt, ! modelo, E, posn, sigy, H
+	TBDATA,1,modmat,young,nu,yield,yieldt ! modelo, E, posn, sigy, H
+	TB,STATE,1,,8
+*ELSEIF,modmat,eq,5,then
+	! Definindo material usermat3D_elastico
+	TB,USER,1,2,3
+	TBTEMP,1.0 		
+	TBDATA,1,modmat,young,nu	! modelo, E, posn
+	TB,STATE,1,,8	
+*ELSEIF,modmat,eq,6,then
+	! Definindo material usermat3D_EP
+	TB,USER,1,2,9
+	TBTEMP,1.0 		
+	TBDATA,1,modmat,young,nu
+	TBDATA,4,superficief,superficieg
+	TBDATA,6,flag,c,fi,psi	
 	TB,STATE,1,,8
 	
 *ENDIF
@@ -188,6 +237,7 @@ VMESH,1		! cria a malha
 /SOLU	
 ANTYPE,0,NEW			! 0 - Análise estática, New - nova
 NLGEOM,OFF			! OFF - Ignora grandes deformações, ON - ativa
+NROPT,FULL			! NR - FULL, MODI, INIT, AUTO 			
 OUTRES,ALL,ALL			! Guarda todos os itens de solução a cada subpasso
 OUTRES,SVAR,ALL			! Guarda as variáveis de estado da Usermat a cada subpasso
 AUTOTS,OFF			! ON - Liga subpassos automáticos				! o Ansys controla os subpassos (nsubs/deltim)
