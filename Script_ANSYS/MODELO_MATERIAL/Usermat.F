@@ -386,6 +386,7 @@
       PARAMETER           (mcomp = 6)         ! máximo de componentes
       PARAMETER           (nrmax = 10)        ! máximo número de interações de NR
       PARAMETER           (vPi = 3.14159265358979323846d0) ! máximo número de interações de NR
+      INTEGER             ncompgt             ! numero de componentes para o vetor de tensões iniciais
       DOUBLE PRECISION    dstress(mcomp)      ! incremento de tensão
       DOUBLE PRECISION    dsdeEl(mcomp,mcomp) ! matriz constitutiva elástica
       DOUBLE PRECISION    dsdeElinv(mcomp,mcomp) ! inversa da matriz constitutiva elástica
@@ -399,6 +400,8 @@
       DOUBLE PRECISION    c                   ! coesão
       DOUBLE PRECISION    fi                  ! angulo de atrito
       DOUBLE PRECISION    psi                 ! angulo de dilatância
+      DOUBLE PRECISION    ci,cp,cr            ! coesão inicial, pico e residual
+      DOUBLE PRECISION    eps1,eps2,eps3      ! deformações plásticas equivalentes limites
       !
       DOUBLE PRECISION    stresstrial(mcomp)  ! tensão tentativa
       DOUBLE PRECISION    I1                  ! primeiro invariante das tensões
@@ -416,9 +419,14 @@
       DOUBLE PRECISION    ftDg                ! dfds*D*dgds
       DOUBLE PRECISION    dlam                ! incremento da magnitude da deformação plástica
       DOUBLE PRECISION    dlamk               ! incremento dlam pelo NR do corretor plástico
+      DOUBLE PRECISION    depsPl(mcomp)       ! incremento de deformação plástica
+      DOUBLE PRECISION    depsPleq            ! incremento de deformação plástica
+      DOUBLE PRECISION    epsPleq             ! deformação plástica equivalente
+      DOUBLE PRECISION    czao                ! constante para o calculo da deformação plástica equivalente
       DOUBLE PRECISION    DgftD(mcomp,mcomp)  ! Produto para calcular matriz algoritmica
       DOUBLE PRECISION    dfds_m(1,mcomp)     ! Produto para calcular matriz algoritmica
       DOUBLE PRECISION    dgds_m(mcomp,1)     ! Produto para calcular matriz algoritmica
+      DOUBLE PRECISION    dhdq,dfdq,dfdc,dcde
       
       EXTERNAL            vzero, vmove, get_ElmData, get_ElmInfo
       ! 
@@ -431,9 +439,20 @@
       superficief = prop(4)
       superficieg = prop(5)
       flag        = prop(6)
-      c           = prop(7)
-      fi          = prop(8)*vPi/180
-      psi         = prop(9)*vPi/180
+      fi          = prop(7)*vPi/180
+      psi         = prop(8)*vPi/180
+      ci          = prop(9)
+      cp          = prop(10)
+      cr          = prop(11)
+      eps1        = prop(12)
+      eps2        = prop(13)
+      eps3        = prop(14)
+      ! 
+      !**************************************************************************! 
+      ! Coletando variáveis de estado                                            !
+      !**************************************************************************! 
+      epsPleq = ustatev(1)
+      CALL vmove(ustatev(2), epsPl(1), ncomp)
       ! 
       !**************************************************************************! 
       ! Calculo da matriz constitutiva                                           !
@@ -447,13 +466,20 @@
       tsstif(1) = 0.5d0*(young /(1.0d0+posn))
       !
       !**************************************************************************! 
+      ! Coletando tensões iniciais                                               !
+      !**************************************************************************! 
+      call get_ElmInfo('NCOMP', ncompgt)
+      call vzero(sigi(1),ncompgt)
+      call get_ElmData ('ISIG', elemId,kDomIntPt, ncompgt, sigi)
+      !
+      !**************************************************************************! 
       ! Calculo preditor elástico                                                !
       !**************************************************************************! 
       stresstrial = 0.0d0
       stresstrial = MATMUL(dsdeEl(1:ncomp,1:ncomp),
-     &              strain(1:ncomp)+dstrain(1:ncomp))
+     &              strain(1:ncomp)+dstrain(1:ncomp)-epsPl(1:ncomp))
       !
-      stress = stresstrial
+      stress = stresstrial + sigi
       dsdePl = dsdeEl
       !
       !**************************************************************************! 
@@ -474,6 +500,7 @@
       !**************************************************************************! 
       ! Calcula função de escoamento                                             !
       !**************************************************************************!  
+      CALL calcula_c(ci,cp,cr,eps1,eps2,eps3,epsPleq,c)
       CALL yield(superficief,I1,J2,theta,c,fi,flag,f)
       !
       !**************************************************************************! 
@@ -483,6 +510,11 @@
           ! Aplica o corretor plástico
           dlam = 0.0d0
           i = 0
+          !
+          CALL calcula_dfdc(superficief,flag,fi,dfdc)
+          CALL calcula_dcde(ci,cp,cr,eps1,eps2,eps3,epsPleq,dcde)
+          dhdq = dfdc*dcde
+          !
           DO 
               ! Calcula dfds
               CALL invars(stress,I1,J2,J3,p,q,theta,s)
@@ -492,15 +524,28 @@
               !
               ! Calcula dlamda
               ftDg    = DOT_PRODUCT(dfds,MATMUL(dsdeEl,dgds))
-              dlamk   = f/(ftDg)
+              !
+              ! Calcula dfdq
+              CALL calcula_dfdc(superficief,flag,fi,dfdc)
+              CALL calcula_dcde(ci,cp,cr,eps1,eps2,eps3,epsPleq,dcde)
+              dfdq = dfdc
+              !
+              dlamk   = f/(ftDg - dfdq*dhdq)
               dstress = -dlamk*MATMUL(dsdeEl,dgds)
               !
               ! Atualizando variáveis internas
               stress  = stress + dstress
               dlam    = dlam + dlamk
               !
+              ! calcula a deformação plástica equivalente
+              depsPl = dlam*dgds
+              CALL normatensor(depsPl,ncomp,depsPleq)
+              CALL calcula_Czao(flag,fi,Czao)
+              epsPleq = epsPleq + Czao*depsPleq
+              !
               ! Testa o critério de escoamento
               CALL invars(stress,I1,J2,J3,p,q,theta,s) 
+              CALL calcula_c(ci,cp,cr,eps1,eps2,eps3,epsPleq,c)
               CALL yield(superficief,I1,J2,theta,c,fi,flag,f)   
               IF(f.LE.0.00001d0)EXIT
               !
@@ -513,7 +558,21 @@
           ENDDO
           !
           ! Calcula as deformações plásticas 
-          epsPl = dlam*dgds    
+          !depsPl = dlam*dgds
+          epsPl = epsPl + depsPl
+          !
+          ! Calcula deformação plástica efetiva (equivalente)
+          !CALL normatensor(depsPl,ncomp,depsPleq)
+          !CALL calcula_Czao(flag,fi,Czao)
+          !epsPleq = epsPleq + Czao*depsPleq
+          !
+          ! Guarda deformação plástica equivalente
+          ustatev(1) = epsPleq
+          !
+          ! Guarda deformações plásticas
+          DO i=1,ncomp
+              ustatev(i+1) = epsPl(i)
+          ENDDO
           !
           !**************************************************************************! 
           ! Atualizando o módulo constitutivo                                        !
@@ -809,6 +868,161 @@
       !
       END SUBROUTINE
       !
+      SUBROUTINE normatensor(tensor,ncomp,norma)      
+      !**************************************************************************!
+      !** Subrotina: normatensor                                               **!
+      !**                                                                      **!
+      !** Objetivo: calcula a norma de um tensor escrito em notação de Voigt   **!
+      !**                                                                      **!
+      !**                                                                      **!      
+      !** Situação:                                                            **!
+      !**                                                                      **!
+      !**************************************************************************!   
+      IMPLICIT NONE
+      INTEGER ncomp
+      DOUBLE PRECISION tensor(ncomp)
+      DOUBLE PRECISION norma
+      !
+      IF(ncomp.EQ.6)THEN
+      norma = SQRT(2.0d0/6.0d0*
+     &    ((tensor(1)-tensor(2))**2+(tensor(2)-tensor(3))**2+
+     &    (tensor(3)-tensor(1))**2)+
+     &    tensor(4)**2+tensor(5)**2+tensor(6)**2)
+      ELSEIF(ncomp.EQ.4)THEN
+          norma = SQRT(2.0d0/6.0d0*
+     &    ((tensor(1)-tensor(2))**2+(tensor(2)-tensor(3))**2+
+     &    (tensor(3)-tensor(1))**2)+
+     &    tensor(4)**2)
+      ELSE
+      ENDIF
+      !
+      END SUBROUTINE
+      !
+      SUBROUTINE calcula_Czao(flag,fi,Czao)
+      !**************************************************************************!
+      !** Subrotina: Czao                                                      **!
+      !**                                                                      **!
+      !** Objetivo: calcula o C utilizado no calculo da deformação plástica    **!
+      !**           efetiva                                                    **!
+      !**                                                                      **!      
+      !** Situação:                                                            **!
+      !**                                                                      **!
+      !**************************************************************************!           
+      IMPLICIT NONE
+      INTEGER             flag                ! 1- DP coincide com as bordas externas MC 
+      DOUBLE PRECISION    fi                  ! angulo de atrito
+      DOUBLE PRECISION    Czao                ! constante para o calculo da deformação plástica efetiva
+      DOUBLE PRECISION    beta                ! constante referente a pressão hidrostática
+      !
+      ! Calcula o C para a deformação plástica equivalente
+      IF(flag.EQ.1)THEN
+          ! DP coincide com as bordas mais externas de MC
+          beta = 2.0d0*SIN(fi)/(SQRT(3.0d0)*(3.0d0-SIN(fi)))
+      ELSE
+          ! DP coincide com as bordas mais internas de MC
+          beta = 2.0d0*SIN(fi)/(SQRT(3.0d0)*(3.0d0+SIN(fi)))
+      ENDIF          
+      Czao = (beta+1.0d0/SQRT(3.0d0))/(SQRT(3*beta**2+1.0d0/2.0d0))
+      END SUBROUTINE
+      !
+      SUBROUTINE calcula_dfdc(superficie,flag,fi,dfdc)
+      !**************************************************************************!
+      !** Subrotina: calcula_dfdc                                              **!
+      !**                                                                      **!
+      !** Objetivo: calcula dfdc                                               **!
+      !**                                                                      **!
+      !**                                                                      **!      
+      !** Situação:                                                            **!
+      !**                                                                      **!
+      !**************************************************************************! 
+      IMPLICIT NONE
+      INTEGER             superficie          ! função potencial: 1- (MC ou TR), 2- (DP ou VM)
+      INTEGER             flag                ! 1- DP coincide com as bordas externas MC 
+      DOUBLE PRECISION    fi                  ! angulo de atrito
+      DOUBLE PRECISION    dfdc                ! derivada de f em relação a c
+      !
+      SELECT CASE(superficie)
+      CASE(1)
+          dfdc = -COS(fi)
+      CASE(2)
+          SELECT CASE(flag)
+          CASE(1)
+              dfdc = -6*COS(fi)/(SQRT(3.0d0)*(3.0d0-SIN(fi)))
+          CASE(2)
+              dfdc = -6*COS(fi)/(SQRT(3.0d0)*(3.0d0+SIN(fi)))
+          END SELECT
+      END SELECT
+      END SUBROUTINE
+      !
+      !
+      SUBROUTINE calcula_dcde(ci,cp,cr,eps1,eps2,eps3,epsPleq,
+     & dcde)
+      !**************************************************************************!
+      !** Subrotina: calcula_dfdepsPleq                                        **!
+      !**                                                                      **!
+      !** Objetivo: calcula df/depsPleq                                        **!
+      !**                                                                      **!
+      !**                                                                      **!      
+      !** Situação:                                                            **!
+      !**                                                                      **!
+      !**************************************************************************! 
+      IMPLICIT NONE
+      DOUBLE PRECISION    ci                  ! coesão inicial
+      DOUBLE PRECISION    cp                  ! coesão no pico
+      DOUBLE PRECISION    cr                  ! coesão residual
+      DOUBLE PRECISION    eps1                ! deformação plastica equivalente 1
+      DOUBLE PRECISION    eps2                ! deformação plastica equivalente 2 
+      DOUBLE PRECISION    eps3                ! deformação plastica equivalente 3
+      DOUBLE PRECISION    epsPleq             ! deformação plástica equivalente
+      DOUBLE PRECISION    dcde                ! dc/depsPleq
+      !
+      IF(epsPleq.LE.eps1)THEN
+          dcde = (cp-ci)/(eps1)
+      ELSEIF((epsPleq.GT.eps1).AND.(epsPleq.LE.eps2))THEN
+          dcde = 0.0d0
+      ELSEIF((epsPleq.GT.eps2).AND.(epsPleq.LE.eps3))THEN
+          dcde = (cr-cp)/(eps3-eps2)
+      ELSEIF(epsPleq.GT.eps3)THEN
+          dcde = 0.0d0
+      ENDIF
+      !
+      END SUBROUTINE
+      !
+      SUBROUTINE calcula_c(ci,cp,cr,eps1,eps2,eps3,epsPleq,
+     & c)
+      !**************************************************************************!
+      !** Subrotina: calcul c                                                  **!
+      !**                                                                      **!
+      !** Objetivo: calcula c                                                  **!
+      !**                                                                      **!
+      !**                                                                      **!      
+      !** Situação:                                                            **!
+      !**                                                                      **!
+      !**************************************************************************! 
+      IMPLICIT NONE
+      DOUBLE PRECISION    ci                  ! coesão inicial
+      DOUBLE PRECISION    cp                  ! coesão no pico
+      DOUBLE PRECISION    cr                  ! coesão residual
+      DOUBLE PRECISION    eps1                ! deformação plastica equivalente 1
+      DOUBLE PRECISION    eps2                ! deformação plastica equivalente 2 
+      DOUBLE PRECISION    eps3                ! deformação plastica equivalente 3
+      DOUBLE PRECISION    epsPleq             ! deformação plástica equivalente
+      DOUBLE PRECISION    c                   ! coesão
+      !
+      IF(epsPleq.LE.eps1)THEN
+          c = ci + (cp-ci)/(eps1)*epsPleq
+      ELSEIF((epsPleq.GT.eps1).AND.(epsPleq.LE.eps2))THEN
+          c = cp
+      ELSEIF((epsPleq.GT.eps2).AND.(epsPleq.LE.eps3))THEN
+          c = cp + (cr-cp)/(eps3-eps2)*(epsPleq - eps2)
+      ELSEIF(epsPleq.GT.eps3)THEN
+          c = cr
+      ENDIF
+      !
+      END SUBROUTINE
+      ! 
+      
+      
 *deck,usermat3d    USERDISTRIB  parallel                                gal
       subroutine usermat3d_vm_ansys (
      &                   matId, elemId,kDomIntPt, kLayer, kSectPt,

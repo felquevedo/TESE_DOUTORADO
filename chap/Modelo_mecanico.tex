@@ -354,9 +354,9 @@ Um aspecto comum na geomecânica é a variação do volume do material durante a
 A lei de endurecimento/amolecimento caracteriza, em geral, a dependência das variáveis internas (por exemplo, a coesão e o ângulo de atrito) em relação ao histórico de deformações plásticas. Essa lei de endurecimento/amolecimento é postulada da seguinte forma \cite[p. 249]{Belytschko2000}:
 \begin{equation}
 	\label{eq:amolecimento}
-	\dot \ql = \dot \lambda \hl(\sigmall,\ql)
+	\dot \ql = \dot \lambda \hl = \dot \lambda \dfrac{\partial h}{\partial \alphal}
 \end{equation}
-em que $\hl$ é um vetor que contém os gradientes de uma função potencial $h$ com relação à cada força associada a sua respectiva variável interna. Como a função de escoamento $f$ é dependente das forças termodinâmicas associadas ao conjunto de variáveis internas $\alphal$, a mudança dessas ao longo da deformação plástica irá alterar a posição e/ou a forma da superfície de escoamento. Quando a superfície de escoamento é estática, ou seja, $\dot \ql=\underline 0$, tem-se a plasticidade perfeita, quando esta aumenta tem-se o endurecimento isotrópico e quando se desloca tem-se o endurecimento cinemático (\autoref{tipos_endurecimento}), sendo mista, quando composta das duas últimas.
+em que $\hl$ é um vetor que contém os gradientes de uma função potencial $h$ com relação às variáveis internas. Como a função de escoamento $f$ é dependente das forças associadas ao conjunto de variáveis internas $\alphal$, a mudança dessas ao longo da deformação plástica irá alterar a posição e/ou a forma da superfície de escoamento. Quando a superfície de escoamento é estática, ou seja, $\dot \ql=\underline 0$, tem-se a plasticidade perfeita, quando esta aumenta tem-se o endurecimento isotrópico e quando se desloca tem-se o endurecimento cinemático, sendo mista, quando composta das duas últimas (\autoref{tipos_endurecimento}).
 
 \begin{figure}[H]
 	\begin{center}
@@ -364,8 +364,7 @@ em que $\hl$ é um vetor que contém os gradientes de uma função potencial $h$
 	\end{center}
 	\caption{\label{tipos_endurecimento}Representação dos tipos de endurecimento no plano desviador e na curva tensão-deformação: a) elastoplasticidade perfeita, b) endurecimento isotrópico e c) endurecimento cinemático (adaptado de: \citeauthor{Neto2008}, \citeyear{Neto2008}, p. 178, 179, 186)}
 \end{figure}
-
-Em um primeiro momento, no presente trabalho, não será considerado a influência da lei de endurecimento e, portanto, as variáveis internas serão constantes ao longo do histórico de deformações, ou seja, $\dot \ql = \dot \alphal = \underline 0$. Nesse caso, tem-se a elastoplasticidade perfeita. Para os modelos adotados significa que a coesão e o ângulo de atrito permanecem constantes durante a deformação plástica. Em um segundo momento é implementado uma função linear definida por partes para representar o endurecimento/amolecimento característico do maciço, tal como vistos no Capítulo 4.3, contudo em caráter associado ($h = f$) e isotrópico. Essa implementação, é feita exclusivamente através da coesão que dependerá da magnitude das deformações plásticas ao longo do histórico de tensões (conforme \autoref{funcao_coesao}).
+Em um primeiro momento, no presente trabalho, não é considerado a influência da lei de endurecimento e as variáveis internas serão constantes ao longo do histórico de deformações, ou seja, $\dot \ql = \dot \alphal = \underline 0$. Nesse caso, tem-se a elastoplasticidade perfeita. Para os modelos adotados significa que a coesão e o ângulo de atrito permanecem constantes durante a deformação plástica. Em um segundo momento é considerado uma função linear definida por partes para representar o endurecimento/amolecimento característico do maciço, tal como vistos no Capítulo 4.3, contudo em caráter associado ($h = f$) e isotrópico. Essa implementação, é feita exclusivamente através da coesão que dependerá da deformação plástica efetiva ao longo do histórico de tensões (conforme \autoref{funcao_coesao}).
 
 \begin{figure}[H]
 	\begin{center}
@@ -373,12 +372,12 @@ Em um primeiro momento, no presente trabalho, não será considerado a influênc
 	\end{center}
 	\caption{\label{funcao_coesao}Função linear definida por partes para representar o endurecimento/amolecimento através do parâmetro coesivo (adaptado de: \citeonline[p. 158]{Potts1999}}
 \end{figure}
-Portanto, usando a regra da cadeia, escreve-se (\ref{eq:amolecimento}) da seguinte forma: 
+Portanto, usando a regra da cadeia, escreve-se (\ref{eq:amolecimento}) da seguinte forma:
 \begin{equation}
 	\label{eq:expressao_amolecimento}
 	\dot \ql = \left\{ \begin{array}{l} \dot c \\ \dot \phi \end{array} \right\} = \dot \lambda \left\{ \begin{array}{ccc} \dfrac{\partial f}{\partial c}\dfrac{\partial c}{\partial \bar \epsilon^p} \\ 0 \end{array} \right\}.
 \end{equation}
-em que, conforme (\ref{eq:f_Mohr_Coulomb}) e (\ref{eq:f_Drucker_Prager}), tem-se:
+As derivadas parciais na expressão acima, conforme (\ref{eq:f_Mohr_Coulomb}) e (\ref{eq:f_Drucker_Prager}), ficam sendo
 \begin{equation}
 	\label{eq:dfdc}
 	\dfrac{\partial f}{\partial c} = \left\{ \begin{array}{ll} - \cos(\phi), & \text{para Mohr-Coulomb} \\ - \dfrac{6\cos(\phi)}{\sqrt{3}(3\pm \sin(\phi))}, & \text{para Drucker-Prager}\end{array}\right.
@@ -387,12 +386,23 @@ e
 \begin{equation}
 	\label{eq:dcde}
 	\dfrac{\partial c}{\partial \bar \epsilon_{p}} = \left\{ \begin{array}{ll} \dfrac{(c_p-c_i)}{\bar \epsilon^p_I} &  \text{para zona I} \\ 
-	c_p, & \text{para zona II} \\
+	0, & \text{para zona II} \\
 	\dfrac{(c_r-c_p)}{\bar \epsilon^p_{r}-\bar \epsilon^p_{II}}, & \text{para zona III} \\	
-	c_r, & \text{para zona IV}
+	0, & \text{para zona IV}
 \end{array}\right..
 \end{equation}
 
+O valor da deformação plástica efetiva é calculada a partir da seguinte expressão:
+\begin{equation}
+	\label{eq:epsPeq}
+	\dot{{\bar \epsilon}}^p = C||\dot \varepsilonll^p||
+\end{equation}
+em que $C$ a rigor depende da superfície de plasticidade, do gradiente do potencial plástico e do estado de tensões ao qual está submetido a amostra no ensaio. Sua dedução é feita através do trabalho plástico por unidade de volume. Para o presente trabalho, será utilizado a seguinte expressão deduzida para Drucker-Prager, que considera plasticidade associada e que considera multiplos estados de tensões (adaptado de \citeauthor{Chen1988}, \citeyear{Chen1988}, p. 257-259):
+\begin{equation}
+	\label{eq:Czao}
+	C = \dfrac{\beta+1/\sqrt{3}}{\sqrt{3\beta^2+1/2}}.
+\end{equation}
+Quando $\phi = 0$ o material é independente da pressão hidrostática, ou seja, $\beta = 0$ e tem-se $C = \sqrt{2/3}$.
 
 \subsection{Condições de carregamento e descarregamento}
 
