@@ -64,11 +64,11 @@ arqconv = '3D-CUBO-TESTE1'
 ! matmod = 6
 !	usermat3D_EP
 !				
-modmat 	    = 2				! modelo do material
+modmat 	    = 6				! modelo do material
 !				
-young  	    = 2670			! [MPa] módulo de elasticidade (1,2,3,4,5,6)
+young  	    = 466.67			! (2250,466.67) [MPa] módulo de elasticidade (1,2,3,4,5,6)
 nu     	    = 0.2			! [adm] coeficiente de Poisson (1,2,3,4,5,6)
-yield       = 28.17			! [MPa] tensão de escoamento   (2,4)
+yield       = 1.4			! (18,1.4)[MPa] tensão de escoamento   (2,4)
 youngt      = 200			! [MPa] módulo de elastoplástico tangente (2,4)
 !
 superficief = 2				! função de escoamento: 1- (MC ou TR), 2- (DP ou VM) (6)
@@ -76,12 +76,12 @@ superficieg = 2				! função potencial: 1- (MC ou TR), 2- (DP ou VM) (6)
 flag	    = 1				! 1- DP coincide com as bordas externas MC (6) 
 fi	    = 0				! [graus] angulo de atrito (0 - TR ou VM) (3,6)
 psi	    = fi			! [graus] angulo de dilatância (3,6)
-c1	    = yield/2			! [MPa]	coesão inicial (3,6)
-c2	    = c1			! [MPa] coesão de pico
-c3	    = c1			! [MPa] coesão residual
-eps1	    = 0.1e10			! deformação equivalente limite da zona 1
-eps2	    = 0.2e10			! deformação equivalente limite da zona 2
-eps3	    = 0.3e10			! deformação equivalente limite da zona 3
+c1	    = 1.4/2			! (18,1.4)[MPa]	coesão inicial (3,6)
+c2	    = 2.6/2			! (27.5,2.6)[MPa] coesão de pico
+c3	    = 1.8/2			! (11,1.8)[MPa] coesão residual
+eps1	    = 0.014			! (0.005, 0.014)deformação equivalente limite da zona 1
+eps2	    = 0.055			! (0.007, 0.055) deformação equivalente limite da zona 2
+eps3	    = 2*0.072			! (0.042, 0.072)deformação equivalente limite da zona 3
 ! 
 ! Parâmetros da geometria
 la 	= 1				! [cm] lado a do cubo
@@ -94,22 +94,14 @@ nla 	= 1				! [un] numero de elementos em la
 nlb 	= 1				! [un] numero de elementos em lb
 nlc 	= 1				! [un] numero de elementos em lc
 !
-! Dados das condições de contorno
-t		 = 1			! [incremento de tempo ou partes inteiras da solicitação] do passo
-dt 		 = 0.01			! [incremento de tempo ou incremento de partes inteiras da solicitação] a cada subpasso
-vkbc		 = 0			! 0 - solicitação linearmente interpolada no passo, 1 - solicitação linearmente interpolada no primeiro subpasso 
-solicitacao 	 = 0.1			! [m,MPa] deslocamento/carga no final do passo (1)
+! Dados das condições de contorno 
+tipo_problema	 = 1			! 1 - 3D, 2 - EPD
+solicitacao 	 = 0.1			! (0.05, 0.1)deslocamento uniaxial aplicado no passo
 tipo_solicitacao = 1			! 1 - aplica deslocamento, 2 - aplica carga
 pr		 = 0			! [Mpa] tensões iniciais
-!
-tipo_problema	= 1			! 1 - 3D, 2 - EPD
-!
-tempo_grafico  = 100			! [dias] tempo final no eixo do gráico
-!
-! Parâmetros para pós-processamento
-ktime 		= 20			! [dias] dia para fazer a saida de dados (ustatev.txt)
-kelemid 	= 1			! [un] identificação do elemento para saida de dados (ustatev.txt)
-kkDomIntPt 	= 1			! [un] identificação do ponto de integração para saida de dados (ustatev.txt)
+vkbc		 = 0			! 0 - solicitação linearmente interpolada no passo, 1 - solicitação linearmente interpolada no primeiro subpasso
+t		 = ABS(solicitacao)	! [incremento de tempo ou partes inteiras da solicitação] do passo
+dt 		 = ABS(solicitacao)/400	! [incremento de tempo ou incremento de partes inteiras da solicitação] a cada subpasso
 !
 ! Salva os parâmetros em um arquivo de texto
 PARSAV,ALL,parametros,txt		! salva os parâmetros da análise
@@ -261,33 +253,31 @@ NLGEOM,OFF			! OFF - Ignora grandes deformações, ON - ativa
 NROPT,FULL			! NR - FULL, MODI, INIT, AUTO 			
 OUTRES,ALL,ALL			! Guarda todos os itens de solução a cada subpasso
 OUTRES,SVAR,ALL			! Guarda as variáveis de estado da Usermat a cada subpasso
-AUTOTS,OFF			! ON - Liga subpassos automáticos				! o Ansys controla os subpassos (nsubs/deltim)
+!AUTOTS,OFF			! ON - Liga subpassos automáticos				! o Ansys controla os subpassos (nsubs/deltim)
 PSCONTROL,ALL,OFF		! OFF - Desativa paralelização, ON - liga paralelização
-KBC,0				! 0 - solicitação linearmente interpolada no passo, 1 - solicitação linearmente interpolada no primeiro subpasso 
-DELTIM,dt,dt,dt,OFF		! dtime incremento do tempo do passo, incremento mínimo, incremento máximo, chave (ON usa dtime do passo anterior se AUTOTS for ON, OFF - usa dtime no inicio de cada passo)
+LNSRCH,1
+CNVTOL,F, ,0.0000001,2, , 	! Criterio de convergencia
+CNVTOL,U, ,0.0000001,0, ,
 !
 ! aplica tensões iniciais 
 ALLSEL,ALL
 INISTATE, DEFINE,,,,,-pr,-pr,-pr,0,0,0		
 !
+! Aplica a solicitação
+*IF,tipo_problema,EQ,1,THEN
+	DA,6,UX,solicitacao
+*ELSEIF,tipo_problema,EQ,2,THEN
+	DL,2, ,UX,solicitacao
+*ENDIF
 !
-*DO,i,1,npassos,1
-	TIME,tempo(i)
-	*IF,tipo_solicitacao,EQ,1,THEN
-		*IF,tipo_problema,EQ,1,THEN
-			DA,6,UX,solicitacao(i)
-		*ELSEIF,tipo_problema,EQ,2,THEN
-			DL,2, ,UX,solicitacao(i)
-		*ENDIF
-	*ELSEIF,tipo_solicitacao,EQ,2,THEN
-		*IF,tipo_problema,EQ,1,THEN
-			SFA,6,1,PRES,solicitacao(i)
-		*ELSEIF,tipo_problema,EQ,2,THEN
-			SFL,2,PRES,solicitacao(i)
-		*ENDIF	
-	*ENDIF
-	SOLVE
-*ENDDO 
+! Define o tempo final do passo
+KBC,vkbc
+DELTIM,dt,dt,dt,OFF		! dtime incremento do tempo do passo, incremento mínimo, incremento máximo, chave (ON usa dtime do passo anterior se AUTOTS for ON, OFF - usa dtime no inicio de cada passo)	
+TIME,t
+!
+! Resolve o sistema
+SOLVE
+!
 FINISH
 !***********************************************************!
 ! 5. Pós processamento                                      !
@@ -314,7 +304,7 @@ PLNSTR,U,SUM,2,1	! plota solução nodal
 /SHOW,CLOSE 		! fecha jpeg
 !
 !***********************************************************!
-! 5.2 Plotando tensão e deformação x ao longo do tempo      !
+! 5.2 Plotando tensão e deformação       		    !
 !***********************************************************!
 ! coleta o número do nó do canto superior do cubo
 *IF,tipo_problema,EQ,1,THEN
@@ -323,7 +313,7 @@ PLNSTR,U,SUM,2,1	! plota solução nodal
 	nodenumber=node(la,lb,0)
 *ENDIF
 !
-! graficos tensão vs deformação
+! Coleta deformação axial e tensão axial
 /POST26			      	 ! entra no módulo timehistory de pós-processamento 
 ANSOL,2,nodenumber,EPEL,X,epsx_2 ! componente da deformação em x
 ANSOL,3,nodenumber,S,X,SX_3   	 ! componente da tensão em X  
@@ -331,43 +321,16 @@ ANSOL,3,nodenumber,S,X,SX_3   	 ! componente da tensão em X
 ! Fator de escala para inverter o sentido da tensão e do deslocamento (caso queira)
 PROD,2,,,,,,,1.000000
 PROD,3,,,,,,,1.000000
-!
-! plota Sx vs tempo em arquivo jpeg
-/AXLAB,X,eps[adm]	! titulo eixo x
+! 
+! plota Sx vs eps em arquivo jpeg e na tela
+/AXLAB,X,epsX [adm] 	! titulo eixo x
 /AXLAB,Y,Sx[kN/cm2]	! titulo eixo y
 /SHOW,JPEG		! abre o arquivo jpeg pra escrita
 XVAR,1  		! identifica variavel x		
 PLVAR,3			! identifica variavel para plotar	
 /SHOW,CLOSE		! fecha arquivo jpeg pra escrita
-!
-! plota Epsilonx vs tempo em arquivo jpeg
-/AXLAB,X,t[dias]	! titulo eixo x
-/AXLAB,Y,Epsilonx[adm]	! titulo eixo y
-/SHOW,JPEG		! abre o arquivo jpeg pra escrita
-XVAR,1			! identifica variavel x		
-PLVAR,2			! identifica variavel para plotar		
-/SHOW,CLOSE 		! fecha arquivo jpeg pra escrita
-!
-! plota Epsilonx vs tempo na tela
 XVAR,1  
-PLVAR,2,
-!
-! plota deformação equivalente na tela
-PLESOL,SVAR,1
-!
-!***********************************************************!
-! 5.3 Plotando tensão vs deformação                         !
-!***********************************************************!
-/AXLAB,X,Epsilonx[adm]	! titulo eixo x
-/AXLAB,Y,Sx[kN/cm2]	! titulo eixo y
-/SHOW,JPEG		! abre o arquivo jpeg pra escrita
-XVAR,2  		! identifica variavel x		
-PLVAR,3			! identifica variavel para plotar	
-/SHOW,CLOSE		! fecha arquivo jpeg pra escrita
-!
-! plota Sx vs Epsilonx na tela
-XVAR,2  
-PLVAR,3,
+PLVAR,3,		
 !
 !***********************************************************!
 ! 5.4 Plotando em arquivo de texto                          !
