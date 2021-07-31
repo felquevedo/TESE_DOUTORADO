@@ -1,0 +1,427 @@
+!***********************************************************!
+!** PROGRAMA TESTE DE MODELO MATERIAL 3D                  **!
+!** Versão: 1.14					  **!
+!**                                                       **!
+!** Objetivo: faz o teste do material plotando:   	  **!
+!**	      - tensão vs deformação  			  **!
+!**	      - tensão vs tempo  			  **!
+!**                                                       **!
+!** Programador: Felipe Quevedo                           **!
+!** Situação   : em teste (05/07/2021)                    **!
+!** Unidades   : kN,cm,s                                  **!
+!**                                                       **!
+!***********************************************************!
+
+!***********************************************************!
+! 1. Inicializando o Ansys                                  !
+!***********************************************************!
+FINISH  		! terminar qualquer processo anterior  
+/CLEAR,NOSTART  	! limpar o modelo
+!
+!***********************************************************!
+! 1.1 Titulo da analise                                     !
+!***********************************************************!
+/TITLE, 'MODELO DE TESTE DE MATERIAIS'
+/FILNAME,file,0		! define nome file.* para os arquivos
+
+!***********************************************************!
+! 1.2 Pasta que guardará os arquivos da análise             !
+!***********************************************************!
+diretorio = 'D:\testes_ANSYS\modelo_material\' 	
+!
+!Obs: nessa pasta será salvo os arquivos file.* e *.jpeg
+! criados durante a análise. Tem que ser uma pasta existente
+! no PC.	
+!
+!***********************************************************!
+! 1.3 Nome dos arquivos de saída                            !
+!***********************************************************!
+arqconv = '3D-CUBO-TESTE1'
+!
+! Obs: nome do arquivo de texto com os dados da
+!  deformção.
+!
+!***********************************************************!
+! 2. Dados de entrada                                       !
+!***********************************************************!
+! Modelo do material
+!
+! matmod = 1
+!	elastico do ANSYS
+!
+! matmod = 2
+!	elastoplastico VM do ANSYS (BISO)
+!
+! matmod = 3
+!	elastoplastico DP_CLASSICAL do ANSYS
+!
+! matmod = 4
+!	usermat3D_VM do ANSYS (BISO)
+!
+! matmod = 5
+!	usermat3D_elastico
+!
+! matmod = 6
+!	usermat3D_EP
+!
+! matmod = 7
+!	usermat3D_EPVP
+!
+! matmod = 8
+!	viscoplastico Perzyna VM do ANSYS
+!
+!				
+modmat 	    = 6				! modelo do material
+!				
+young  	    = 466.67			! (2250,466.67) [MPa] módulo de elasticidade (1,2,3,4,5,6)
+nu     	    = 0.2			! [adm] coeficiente de Poisson (1,2,3,4,5,6)
+yield       = 1.4			! (18,1.4)[MPa] tensão de escoamento   (2,4)
+youngt      = 0.00001			! [MPa] módulo de elastoplástico tangente (2,4)
+!
+superficief = 2				! função de escoamento: 1- (MC ou TR), 2- (DP ou VM) (6)
+superficieg = 2				! função potencial: 1- (MC ou TR), 2- (DP ou VM) (6)
+flag	    = 1				! 1- DP coincide com as bordas externas MC (6) 
+fi	    = 0				! [graus] angulo de atrito (0 - TR ou VM) (3,6)
+psi	    = fi			! [graus] angulo de dilatância (3,6)
+c1	    = 1.4/2			! (18,1.4)[MPa]	coesão inicial (3,6)
+c2	    = 2.6/2			! (27.5,2.6)[MPa] coesão de pico
+c3	    = 1.8/2			! (11,1.8)[MPa] coesão residual
+eps1	    = 0.014			! (0.005, 0.014)deformação equivalente limite da zona 1
+eps2	    = 0.055			! (0.007, 0.055) deformação equivalente limite da zona 2
+eps3	    = 2*0.072			! (0.042, 0.072)deformação equivalente limite da zona 3
+!
+superficiefvp = 2			! função de escoamento: 1- (MC ou TR), 2- (DP ou VM) (7)
+superficiegvp = 2			! função potencial: 1- (MC ou TR), 2- (DP ou VM) (7)
+flagvp	      = 1			! 1- DP coincide com as bordas externas MC (7) 
+fivp          = fi			! [graus] angulo de atrito (0 - TR ou VM) (7)
+psivp         = psi			! [graus] angulo de dilatância (7)
+cvp 	      = 1.4/2			! (18,1.4)[MPa]	coesão inicial (7)
+n1	      = 1			! [adm] expoente do modelo de Perzyna
+eta           = 1E7/(60*60*24)		! [dia] constante de viscosidade dinâmica
+f0     	      = 1			! [MPa] valor de referência
+thetavp       = 1			! forma de integração: 0 - totalmente explícito, 1 - semi-implicito
+!
+gamma	      = ((2*cvp/f0)**n1)/eta 	! [dias^-1] coeficiente Gamma do modelo de Perzyna Ansys
+m  	      = 1/n1			! [adm] coeficiente m do modelo de Perzyna do ANSYS
+!
+! Parâmetros da geometria
+la 	= 1				! [cm] lado a do cubo
+lb 	= 1				! [cm] lado b do buco
+lc 	= 1				! [cm] lado c do cubo
+!
+! Parâmetros do modelo MEF
+modelem = 1				! 1 - SOLID185, 2 - SOLID186
+nla 	= 1				! [un] numero de elementos em la
+nlb 	= 1				! [un] numero de elementos em lb
+nlc 	= 1				! [un] numero de elementos em lc
+!
+! Dados das condições de contorno 
+tipo_problema	 = 1			! 1 - 3D, 2 - EPD, 3 - AXI
+solicitacao 	 = 0.1			! (0.05, 0.1)deslocamento uniaxial aplicado no passo
+pr		 = 0			! [Mpa] tensões iniciais
+vkbc		 = 0			! 0 - solicitação linearmente interpolada no passo, 1 - solicitação linearmente interpolada no primeiro subpasso
+t		 = ABS(solicitacao)	! [incremento de tempo ou partes inteiras da solicitação] do passo
+dt 		 = ABS(solicitacao)/400	! [incremento de tempo ou incremento de partes inteiras da solicitação] a cada subpasso
+!
+!
+! Salva os parâmetros em um arquivo de texto
+PARSAV,ALL,parametros,txt		! salva os parâmetros da análise
+!
+!
+!
+!
+!------------------FIM ENTRADA DE DADOS---------------------!
+!
+!
+!
+!
+!***********************************************************!
+! 3. Pré-Processamento                                      !
+!***********************************************************!
+/CWD,diretorio				! define diretorio de trabalho
+/PREP7					! inicia módulo de pré-processamento
+!
+!***********************************************************!
+! 3.1 Configurando elemento finito                          !
+!***********************************************************!
+*IF,tipo_problema,EQ,1,THEN
+	ET,1,SOLID185   	! 3D, 8 nós, linear, 3GDL por nó (Tx,Ty,Tz)
+	KEYOPT,1,2,1		! 0 - reduced integration, 1 - full integration
+	KEYOPT,1,3,0		! 0 - structural solid, 1 - layered solid
+	KEYOPT,1,6,0		! 0 - pure displacemnt, 1 - mixed u/p
+*ELSEIF,tipo_problema,EQ,2,THEN
+	ET,1,PLANE183   	! 2D,  8 nós, quadrático, 2GDL por nó (Tx,Ty)
+	KEYOPT,1,1,0		! 0 - Quadrilátero
+	KEYOPT,1,3,2		! 1 - Axi, 2 - EPD
+	KEYOPT,1,6,0		! 0 - pure displacemnt, 1 - mixed u/p
+*ELSEIF,tipo_problema,EQ,3,THEN
+	ET,1,PLANE183   	! 2D,  8 nós, quadrático, 2GDL por nó (Tx,Ty)
+	KEYOPT,1,1,0		! 0 - Quadrilátero
+	KEYOPT,1,3,1		! 1 - Axi, 2 - EPD
+	KEYOPT,1,6,0		! 0 - pure displacemnt, 1 - mixed u/p
+*ENDIF
+!
+!***********************************************************!
+! 3.2 Configurando o material		                    !
+!***********************************************************!
+*IF,modmat,eq,1,then
+	! Definindo o material elastico do Ansys
+	MPTEMP,1,0  		
+	MPDATA,EX,1,,young	
+	MPDATA,PRXY,1,,nu 	
+*ELSEIF,modmat,eq,2,then
+	! Definindo o material elastoplástico VM do Ansys
+	MPTEMP,1,0  		
+	MPDATA,EX,1,,young	!
+	MPDATA,PRXY,1,,nu 	
+	TB,BISO,1,1,2,  
+	TBTEMP,0
+	TBDATA,,yield,youngt,,,,
+*ELSEIF,modmat,eq,3,then
+	! Definindo o material elastoplástico DP_CLASSICAL do Ansys
+	MPTEMP,1,0  		
+	MPDATA,EX,1,,young	
+	MPDATA,PRXY,1,,nu 	
+	TB,DP,1  
+	TBTEMP,0
+	TBDATA,1,yield/2*SQRT(3),fi,psi,,,
+*ELSEIF,modmat,eq,4,then
+	! Definindo material usermat3D VM do Ansys
+	TB,USER,1,2,5
+	TBTEMP,1.0 		
+	TBDATA,1,modmat,young,nu,yield,yieldt ! modelo, E, posn, sigy, H
+	TB,STATE,1,,8
+*ELSEIF,modmat,eq,5,then
+	! Definindo material usermat3D_elastico
+	TB,USER,1,2,3
+	TBTEMP,1.0 		
+	TBDATA,1,modmat,young,nu	! modelo, E, posn
+	TB,STATE,1,,8	
+*ELSEIF,modmat,eq,6,then
+	! Definindo material usermat3D_EP
+	TB,USER,1,2,14
+	TBTEMP,1.0 		
+	TBDATA,1,modmat,young,nu
+	TBDATA,4,superficief,superficieg
+	TBDATA,6,flag,fi,psi,
+	TBDATA,9,c1,c2,c3,eps1,eps2,eps3	
+	TB,STATE,1,,20	
+*ELSEIF,modmat,eq,7,then
+	! Definindo material usermat3D_EPVP
+	TB,USER,1,2,24
+	TBTEMP,1.0 		
+	TBDATA,1,modmat,young,nu
+	TBDATA,4,superficief,superficieg
+	TBDATA,6,flag,fi,psi,
+	TBDATA,9,c1,c2,c3,eps1,eps2,eps3
+	TBDATA,15,superficiefvp,superficiegvp
+	TBDATA,17,flagvp,fivp,psivp
+	TBDATA,20,cvp
+	TBDATA,21,n1,eta,f0
+	TBDATA,24,thetavp	
+	TB,STATE,1,,17
+*ELSEIF,modmat,eq,8,then
+	! Definindo o material viscoplastico perzyna VM do Ansys
+	MPTEMP,1,0  		
+	MPDATA,EX,1,,young	!
+	MPDATA,PRXY,1,,nu 	
+	TB,BISO,1,1,2,  
+	TBTEMP,0
+	TBDATA,,yield,youngt,,,,
+	TB,RATE,1,1,2,1
+	TBTEMP,0
+	TBDATA,,m,gamma,,,,	
+*ENDIF
+!
+!***********************************************************!
+! 3.3 Criando o modelo sólido	                            !
+!***********************************************************!
+*IF,tipo_problema,EQ,1,THEN
+	BLC4,0,0,la,lb,lc			! criando um bloco
+	/VIEW,1,1,1,1				! visualizando o bloco   
+	/ANG,1 					! definindo ângulo de visualização
+*ELSEIF,tipo_problema,EQ,2,THEN
+	BLC4,0,0,la,lb,0			! criando um bloco
+	/VIEW,1,1,1,1				! visualizando o bloco   
+	/ANG,1 
+*ELSEIF,tipo_problema,EQ,3,THEN
+	BLC4,0,0,la/2,lb,0			! criando um bloco
+	/VIEW,1,1,1,1				! visualizando o bloco   
+	/ANG,1 
+*ENDIF
+!
+!***********************************************************!
+! 3.4 Aplicando condições de contorno                       !
+!***********************************************************!
+! aplicando restrição no plano yz
+*IF,tipo_problema,EQ,1,THEN
+	DA,1,UZ,0
+	DA,5,UX,0
+	DA,3,UY,0
+*ELSEIF,tipo_problema,EQ,2,THEN
+	DL,1,,UY,0
+	DL,4,,UX,0
+*ELSEIF,tipo_problema,EQ,3,THEN
+	DL,1,,UY,0
+	DL,4,,UX,0
+*ENDIF
+!
+! Obs: pode ser que tenha algum erro nas condições de contorno
+!***********************************************************!
+! 3.5 Criando a malha			                    !
+!***********************************************************!
+*IF,tipo_problema,EQ,1,THEN
+	LESIZE,4,,,nla
+	LESIZE,5,,,nla
+	LESIZE,2,,,nla
+	LESIZE,7,,,nla
+	!
+	LESIZE,8,,,nlb
+	LESIZE,6,,,nlb
+	LESIZE,1,,,nlb
+	LESIZE,3,,,nlb
+	!
+	LESIZE,9,,,nlc
+	LESIZE,10,,,nlc
+	LESIZE,11,,,nlc
+	LESIZE,12,,,nlc
+	!
+	MSHAPE,0,3D 	! 0 - hexaedro, 1 - tetraedro, 3D - volume mesh
+	MSHKEY,1	! 0 - malha livre, 1 - malha mapeada, 2 - mapeada se possivel
+	VMESH,1		! cria a malha
+*ELSEIF,tipo_problema,EQ,2,THEN
+	LESIZE,1,,,nla
+	LESIZE,3,,,nla
+	!
+	LESIZE,4,,,nlb
+	LESIZE,2,,,nlb
+	!
+	MSHAPE,0,2D 				! 0 - quadrilatero, 1 - triangulo, 2D - area mesh
+	MSHKEY,1				! 0 - malha livre, 1 - malha mapeada, 2 - mapeada se possivel
+	AMESH,1					! malha o sólido
+*ELSEIF,tipo_problema,EQ,3,THEN
+	LESIZE,1,,,nla
+	LESIZE,3,,,nla
+	!
+	LESIZE,4,,,nlb
+	LESIZE,2,,,nlb
+	!
+	MSHAPE,0,2D 				! 0 - quadrilatero, 1 - triangulo, 2D - area mesh
+	MSHKEY,1				! 0 - malha livre, 1 - malha mapeada, 2 - mapeada se possivel
+	AMESH,1					! malha o sólido
+*ENDIF
+!
+!***********************************************************!
+! 4. Solução			   			    !
+!***********************************************************!
+/SOLU	
+ANTYPE,0,NEW			! 0 - Análise estática, New - nova
+NLGEOM,OFF			! OFF - Ignora grandes deformações, ON - ativa
+NROPT,FULL			! NR - FULL, MODI, INIT, AUTO 			
+OUTRES,ALL,ALL			! Guarda todos os itens de solução a cada subpasso
+OUTRES,SVAR,ALL			! Guarda as variáveis de estado da Usermat a cada subpasso
+!AUTOTS,OFF			! ON - Liga subpassos automáticos				! o Ansys controla os subpassos (nsubs/deltim)
+PSCONTROL,ALL,OFF		! OFF - Desativa paralelização, ON - liga paralelização
+LNSRCH,1
+CNVTOL,F, ,0.0000001,2, , 	! Criterio de convergencia
+CNVTOL,U, ,0.0000001,0, ,
+!
+! aplica tensões iniciais 
+ALLSEL,ALL
+INISTATE, DEFINE,,,,,-pr,-pr,-pr,0,0,0		
+!
+! Aplica a solicitação
+*IF,tipo_problema,EQ,1,THEN
+	DA,4,UY,solicitacao
+	SFA,4,1,PRES,pr
+	SFA,6,1,PRES,pr
+	SFA,2,1,PRES,pr
+*ELSEIF,tipo_problema,EQ,2,THEN
+	DL,3, ,UY,solicitacao
+*ELSEIF,tipo_problema,EQ,3,THEN
+	DL,3, ,UY,solicitacao
+*ENDIF
+!
+! Define o tempo final do passo
+KBC,vkbc
+DELTIM,dt,dt,dt,OFF		! dtime incremento do tempo do passo, incremento mínimo, incremento máximo, chave (ON usa dtime do passo anterior se AUTOTS for ON, OFF - usa dtime no inicio de cada passo)	
+TIME,t
+!
+! Resolve o sistema
+SOLVE
+!
+FINISH
+!***********************************************************!
+! 5. Pós processamento                                      !
+!***********************************************************!
+! mudando a cor da janela
+/RGB,INDEX,100,100,100,0	
+/RGB,INDEX,0,0,0,15 		
+!
+! qualidade do arquivo jpeg de saida
+JPEG,QUAL,100,  
+JPEG,ORIENT,HORIZ   
+JPEG,COLOR,2
+JPEG,TMOD,1
+/GFILE,800, 
+!
+!***********************************************************!
+! 5.1 Plotando campo de deformações x em jpg                !
+!***********************************************************!
+/POST1 			! entra no módulo de pós-processamento	
+SET,last  		! seleciona ultimo passo
+/SHOW,JPEG		! abre arquivo jpeg 
+/DSCALE,ALL,500		! define a escala
+PLNSTR,U,SUM,2,1	! plota solução nodal
+/SHOW,CLOSE 		! fecha jpeg
+!
+!***********************************************************!
+! 5.2 Plotando tensão e deformação       		    !
+!***********************************************************!
+! coleta o número do nó do canto superior do cubo
+*IF,tipo_problema,EQ,1,THEN
+	nodenumber=node(la,lb,lc)
+*ELSEIF,tipo_problema,EQ,2,THEN
+	nodenumber=node(la,lb,0)
+*ELSEIF,tipo_problema,EQ,3,THEN
+	nodenumber=node(la,lb,0)
+*ENDIF
+!
+! Coleta deformação axial e tensão axial
+/POST26			      	 ! entra no módulo timehistory de pós-processamento 
+ANSOL,2,nodenumber,EPEL,Y,epsy_2 ! componente da deformação em x
+ANSOL,3,nodenumber,S,Y,SY_3   	 ! componente da tensão em X  
+!
+! Fator de escala para inverter o sentido da tensão e do deslocamento (caso queira)
+PROD,2,,,,,,,1.000000
+PROD,3,,,,,,,1.000000
+! 
+! plota Sx vs eps em arquivo jpeg e na tela
+/AXLAB,X,epsY [adm] 	! titulo eixo x
+/AXLAB,Y,Sy[kN/cm2]	! titulo eixo y
+/SHOW,JPEG		! abre o arquivo jpeg pra escrita
+XVAR,1  		! identifica variavel x		
+PLVAR,3			! identifica variavel para plotar	
+/SHOW,CLOSE		! fecha arquivo jpeg pra escrita
+XVAR,1  
+PLVAR,3,		
+!
+!***********************************************************!
+! 5.4 Plotando em arquivo de texto                          !
+!***********************************************************!
+! plota em txt tempo vs Epsilonx vs Sx
+*CREATE,scratch,gui 
+*DEL,resultados
+*DIM,resultados,TABLE,tempo_grafico,2
+VGET,resultados(1,0),1 
+VGET,resultados(1,1),2 
+VGET,resultados(1,2),3
+/OUTPUT,arqconv,'txt','.'   
+*VWRITE,'Time','Epsilony','Sy' 
+%14C %14C %14C
+*VWRITE,resultados(1,0),resultados(1,1),resultados(1,2)    
+%14.5G %14.5G %14.5G  
+/OUTPUT,TERM
+*END
+/INPUT,scratch,gui  
+!
