@@ -263,7 +263,7 @@ A rigor para um problema não linear a escolha do melhor método de solução va
 Para incorporar a dependência do histórico de cargas/tempo, para um dado passo de carga/tempo $p$, a expressão (\ref{eq:NR}) é discretizada em $1 \leq n \leq n_s$ subpassos em que a carga externa e o tempo do passo são incrementados linearmente. Dessa forma, itera-se o sistema (\ref{eq:NR}) repetidas vezes para cada subpasso $n$ tendo-se:
 \begin{equation}
 	\label{eq:NR1}
-	\Delta \ul_{n,i} = \Kll_{n,i}^{-1}\left(\Fl_{ext_{n+1}} - \Fl_{int_{n,i}} \right) = \Kll_{n,i}^{-1}\Rl_{n,i},
+	\Delta \ul_{n,i} = \Kll_{n,i}^{-1}\left(\Fl_{ext_{n}} - \Fl_{int_{n,i}} \right) = \Kll_{n,i}^{-1}\Rl_{n,i},
 \end{equation}
 \begin{equation}
 	\label{eq:NR2}
@@ -271,11 +271,11 @@ Para incorporar a dependência do histórico de cargas/tempo, para um dado passo
 \end{equation}
 \begin{equation}
 	\label{eq:NR3}
-	\Fl_{ext_{n+1}} = \Fl_{ext_n} + \Delta \Fl_{p},
+	\Fl_{ext_{n}} = \Fl_{ext_{n-1}} + \Delta \Fl_{p},
 \end{equation}
 \begin{equation}
 	\label{eq:NR4}
-	t_{n+1} = t_n + \Delta t_p,
+	t_{n} = t_{n-1} + \Delta t_p,
 \end{equation}
 em que
 \begin{equation}
@@ -308,7 +308,7 @@ em que $\varepsilon_R$ e $\varepsilon_u$ são as tolerâncias para o resíduo (d
 em que $j$ é o índice da componente do vetor $\underline * = \Rl$ ou $\underline * = \Delta \ul$. Para o presente trabalho foi escolhida a norma euclidiana que era o padrão do ANSYS. A \autoref{NR} ilustra o andamento da solução ao longo dos subpassos. Pode-se ver que o resíduo e o incremento de deformações vão ficando cada vez menores ao longo das iterações de equilíbrio.
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[scale = 1.0]{0605-ilustracao das iteracoes do método de NR.pdf}
+		\includegraphics[scale = 1.0]{0605_2-ilustracao das iteracoes do método de NR.pdf}
 	\end{center}
 	\caption{\label{NR}Ilustração das iterações do método de Newton-Raphson (adaptado de: \citeonline[p. 301]{Chen1988})}
 \end{figure}
@@ -340,7 +340,7 @@ Além dessas opções, para problemas estáticos, o ANSYS possui três técnicas
 Na \autoref{NR-fluxograma} tem-se o fluxograma do método de Newton-Raphson, mostrando as três opções de atualização da matriz de rigidez, o método da bisseção e os laços das iterações de equilíbrio e de subpassos.
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[scale = 1.0]{0606-fluxograma do metodo NR.pdf}
+		\includegraphics[scale = 1.0]{0606_2-fluxograma do metodo NR.pdf}
 	\end{center}
 	\caption{\label{NR-fluxograma}Fluxograma do método de Newton-Raphson para solução do sistema de equações globais não lineares}
 \end{figure}
@@ -353,9 +353,9 @@ A convergência quadrática da opção de Newton-Raphson Completo só é efetiva
 Como visto no capítulo anterior, durante as iterações de equilíbrio é necessário fazer a integração espacial das forças internas no contexto do método dos elementos finitos. Essa integração pode ser escrita da seguinte maneira (omitindo o subíndice $n$ referente ao subpasso):
 \begin{equation}
 	\label{eq:Fint}
-	\Fl_{int_i} = \int_{\Omega}\Bll^T\sigmal_{i+1}d\Omega = \sum_{i_e=1}^{n_e}\sum_{i_p=1}^{n_p}\left( \Bll^T\sigmal_{i+1}WJ\right)_{i_p,i_e}
+	\Fl_{int_{n,i}} = \int_{\Omega}\Bll^T\sigmal_{n}d\Omega = \sum_{i_e=1}^{n_e}\sum_{i_p=1}^{n_p}\left( \Bll^T\sigmal_{n}WJ\right)_{i_p,i_e}
 \end{equation}
-sendo $\sigmal_{i+1}$ dado pela relação constitutiva do material. Contudo, as relações constitutivas, por dependerem da trajetória das tensões e/ou do tempo, estão descritas em forma de taxas, conforme visto no \autoref{cap: modelo mecanico}. E, portanto, é necessária a solução desse sistema de equações diferenciais ordinárias por algum método de integração juntamente com as iterações de equilíbrio. Essa etapa de integração, no esquema de elementos finitos, é conhecida como algoritmo de atualização das tensões e variáveis internas. Tal como ilustrado na \autoref{NR-fluxograma}, esse algoritmo ocorre para cada ponto de Gauss de cada elemento e tem por finalidade obter o incremento de tensão $\Delta \sigmal$ e de forças associadas às variáveis internas $\Delta \ql$ a cada iteração de equilíbrio.
+sendo $\sigmal_{n}$ dado pela relação constitutiva do material. Contudo, as relações constitutivas, por dependerem da trajetória das tensões e/ou do tempo, estão descritas em forma de taxas, conforme visto no \autoref{cap: modelo mecanico}. E, portanto, é necessária a solução desse sistema de equações diferenciais ordinárias por algum método de integração juntamente com as iterações de equilíbrio. Essa etapa de integração, no esquema de elementos finitos, é conhecida como \textbf{algoritmo de atualização das tensões e variáveis internas}. Tal como ilustrado na \autoref{NR-fluxograma}, esse algoritmo ocorre para cada ponto de Gauss de cada elemento e tem por finalidade obter o incremento de tensão $\Delta \sigmal$ e de forças associadas às variáveis internas $\Delta \ql$ através do incremento de deformação total $\Delta \varepsilonl_n$ acumulado de cada iteração de equilíbrio.
 
 \subsection{Integração das equações constitutivas elastoplásticas}
 
@@ -373,33 +373,33 @@ Como visto no \autoref{cap: modelo mecanico}, considerando a hipótese das peque
 	\right..
 \end{equation}
 
-Em geral, a proposta dos algoritmos de integração consiste em integrar as equações constitutivas através de métodos numéricos, como os de Runge-Kutta, com técnicas explícitas, implícitas ou semi-implícitas. E dessa forma, conhecido o conjunto de $\left\{ \varepsilonl_i, \varepsilonl_i^p,\sigmal_i,\ql_i \right\}$   na iteração $i$ e o incremento de deformação total $\Delta \varepsilonl_i$ busca-se os valores $\left\{ \varepsilonl_{i+1}, \varepsilonl_{i+1}^p,\sigmal_{i+1},\ql_{i+1} \right\}$ da iteração seguinte $i+1$. No presente trabalho \textbf{será implementado um esquema semi-implícito de Euler de dois passos para a relação constitutiva elastoplástica}, inicialmente em elastoplasticidade perfeita, e posteriormente com as leis de endurecimento/amolecimento bilineares para fins de análise na problemática de túneis.
+Em geral, a proposta dos algoritmos de integração consiste em integrar as equações constitutivas através de métodos numéricos, como os de Runge-Kutta, com técnicas explícitas, implícitas ou semi-implícitas. E dessa forma, conhecido o conjunto de $\left\{ \varepsilonl_n, \varepsilonl_n^p,\sigmal_n,\ql_n \right\}$ do último subpasso convergido $n$ e o incremento de deformação total $\Delta \varepsilonl$ obtido pela iteração de Newton-Raphson, busca-se os valores $\left\{ \varepsilonl_{n+1}, \varepsilonl_{n+1}^p,\sigmal_{n+1},\ql_{n+1} \right\}$, plasticamente admissíveis, do subpasso $n+1$. No presente trabalho \textbf{será implementado um esquema semi-implícito de Euler de dois passos para a relação constitutiva elastoplástica}, inicialmente em elastoplasticidade perfeita, e posteriormente com a lei de endurecimento/amolecimento multilinear para fins de análise na problemática de túneis.
 
 Em geral, em elastoplasticidade, o método de Runge-Kutta de primeira ordem (também conhecido como o método de Euler) é comumente utilizado para fazer a integração das relações constitutivas (\ref{eq:constitutiva_ep}), tendo-se o seguinte esquema de integração:
 \begin{equation}
 	\label{eq:esquema_int_constitutiva_ep}
 	\left\{
 	\begin{array}{lcl}
-		\varepsilonl_{i+1} = \varepsilonl_i + \Delta \varepsilonl_i \\
-		\varepsilonl_{i+1}^p = \varepsilonl_i^p + \left[(1-\theta) \Delta \lambda_i \dgdsl_i + \theta \Delta \lambda_{i+1} \dgdsl_{i+1}\right] \\
-		\ql_{i+1} = \ql_i + \left[(1-\theta) \Delta \lambda_i \hl_i + \theta \Delta \lambda_{i+1} \hl_{i+1}\right] \\	
-		\sigmal_{i+1} = \Dll~\varepsilonl_{i+1}^e = \Dll( \varepsilonl_{i+1} - \varepsilonl_{i+1}^p) \\
-		f_{i+1} = f(\sigmal_{i+1},\ql_{i+1}) = 0		
+		\varepsilonl_{n+1} = \varepsilonl_n + \Delta \varepsilonl \\
+		\varepsilonl_{n+1}^p = \varepsilonl_n^p + \left[(1-\theta) \Delta \lambda_n \dgdsl_n + \theta \Delta \lambda_{n+1} \dgdsl_{n+1}\right] \\
+		\ql_{n+1} = \ql_n + \left[(1-\theta) \Delta \lambda_n \hl_n + \theta \Delta \lambda_{n+1} \hl_{n+1}\right] \\	
+		\sigmal_{n+1} = \Dll~\varepsilonl_{n+1}^e = \Dll( \varepsilonl_{n+1} - \varepsilonl_{n+1}^p) \\
+		f_{n+1} = f(\sigmal_{n+1},\ql_{n+1}) = 0		
 	\end{array}
 	\right.
 \end{equation}
 em que $\Delta \lambda = \dot\lambda\Delta t$ e $0 \leq \theta \leq 1$ fornece a regra trapezoidal generalizada para o fluxo plástico e evolução das variáveis internas. Quando $\theta = 0$ tem-se a forma completamente explicita (\textit{fully explicit forward Euler}) e $\theta = 1$  completamente implicita (\textit{fully implicit backward Euler}). Os algoritmos semi-implícitos adotam $0 \leq \theta < 1$  ou ainda uma combinação implícita e explícita de $\Delta \lambda$, $\dgdsl$ e $\hl$.
 
-Os esquemas explícitos, como os de \citeonline{Nayak1972}, \citeonline{Zienkiewicz1969} e \citeonline{Owen1980} foram largamente usados até que \citeonline{Simo1985} propuseram um método implícito de dois passos conhecido como projeção do ponto mais próximo (\textit{Closest Point Projetction Method} ou abreviadamente CPPM). Isso pois, os esquemas completamente explícitos não satisfaziam a condição de consistência $f_{i+1} = f(\sigmal_{i+1},\ql_{i+1}) = 0$ no final do passo, uma vez que o multiplicador plástico e os vetores de fluxo são calculados com as tensões do passo anterior $i$. Segundo \citeonline[p. 278]{Belytschko2000} isso faz com que a solução acumule uma certa imprecisão. Esse fato levou a comunidade a desenvolver e utilizar cada vez mais os algoritmos implícitos e semi-implícitos que buscam satisfazer $f_{i+1} = 0$. E, portanto, será o método adotado nesse trabalho. Alguns dos principais métodos implícitos e semi-implícitos para elastoplasticidade podem ser encontrados em \citeonline{Simo1998}, \citeonline{Belytschko2000}, \citeonline{Neto2008} e \citeonline{Huang2009}.
+Os esquemas explícitos, como os de \citeonline{Nayak1972}, \citeonline{Zienkiewicz1969} e \citeonline{Owen1980} foram largamente usados até que \citeonline{Simo1985} propuseram um método implícito de dois passos conhecido como projeção do ponto mais próximo (\textit{Closest Point Projetction Method} ou abreviadamente CPPM). Isso pois, os esquemas completamente explícitos não satisfaziam a condição de consistência $f_{n+1} = f(\sigmal_{n+1},\ql_{n+1}) = 0$ no final do passo, uma vez que o multiplicador plástico e os vetores de fluxo são calculados com as tensões do passo anterior $n$. Segundo \citeonline[p. 278]{Belytschko2000} isso faz com que a solução acumule uma certa imprecisão. Esse fato levou a comunidade a desenvolver e utilizar cada vez mais os algoritmos implícitos e semi-implícitos que buscam satisfazer $f_{n+1} = 0$. E, portanto, será o método adotado nesse trabalho. Alguns dos principais métodos implícitos e semi-implícitos para elastoplasticidade podem ser encontrados em \citeonline{Simo1998}, \citeonline{Belytschko2000}, \citeonline{Neto2008} e \citeonline{Huang2009}.
 
-Atualmente esses métodos empregados nos algoritmos de atualização das tensões consistem em um esquema preditor-corretor de dois passos. Primeiro aplica-se a etapa do preditor elástico e, se necessário, a do corretor plástico. Dessa forma, definindo $\Delta \varepsilonl_{i+1}^p \equiv \varepsilonl_{i+1}^p - \varepsilonl_{i}^p$, o preditor elástico pode ser explicitado de (\ref{eq:esquema_int_constitutiva_ep})$_4$, conforme:
+Atualmente esses métodos empregados nos algoritmos de atualização das tensões consistem em um esquema preditor-corretor de dois passos. Primeiro aplica-se a etapa do preditor elástico e, se necessário, a do corretor plástico. Dessa forma, definindo $\Delta \varepsilonl_{n+1}^p \equiv \varepsilonl_{n+1}^p - \varepsilonl_{n}^p$, o preditor elástico pode ser explicitado de (\ref{eq:esquema_int_constitutiva_ep})$_4$, conforme:
 \begin{equation}
 	\label{eq:preditor_elastico}
-	\sigmal_{i+1} = \Dll(\varepsilonl_{i+1}-\varepsilon_{i+1}^p) = \Dll(\varepsilonl_i+\Delta \varepsilonl_i-\varepsilonl_{i+1}^ p) = \sigmal_{i+1}^{trial} + \Delta \sigmal_{i+1}
+	\sigmal_{n+1} = \Dll(\varepsilonl_{n+1}-\varepsilon_{n+1}^p) = \Dll(\varepsilonl_n+\Delta \varepsilonl_n-\varepsilonl_{n+1}^ p) = \sigmal_{n+1}^{trial} + \Delta \sigmal_{n+1}
 \end{equation}
-em que $\sigmal_{i+1}^{trial} = \sigmal_i + \Dll \Delta \varepsilonl_i$ é o preditor elástico (também conhecido como tensão tentativa). Desse modo, no primeiro passo calcula-se a tensão tentativa e testa-se a função de escoamento $f$. Caso $f<0$ o estado de tensões está no domínio elástico e não há necessidade de aplicar o corretor plástico. Contudo, se $f>0$, ou seja, o estado de tensões está fora do domínio plasticamente admissível, é necessário aplicar a etapa do corretor plástico.
+em que $\sigmal_{n+1}^{trial} = \sigmal_n + \Dll \Delta \varepsilonl_n$ é o \textbf{preditor elástico} (também conhecido como tensão tentativa). Desse modo, no primeiro passo calcula-se a tensão tentativa e testa-se a função de escoamento $f$. Caso $f<0$ o estado de tensões está no domínio elástico e não há necessidade de aplicar o corretor plástico. Contudo, se $f>0$, ou seja, o estado de tensões está fora do domínio plasticamente admissível, é necessário aplicar a etapa do corretor plástico.
 
-O corretor plástico, nada mais é do que o procedimento de solução do sistema (\ref{eq:esquema_int_constitutiva_ep})$_{2,3,5}$ que determinará o valor de $\Delta \sigmal_{i+1}$ e $\Delta \ql_{i+1}$. Quando não é possível obter uma solução analítica para esse sistema, o procedimento de solução comumente utilizado é o de Newton-Raphson que itera $k$ vezes no espaço das tensões e variáveis internas até que o estado de tensões retorne sobre a superfície de escoamento (plasticamente admissível). Por isso esses esquemas também são conhecidos como algoritmos de retorno mapeado (\textit{Return Mapping Algorithm}). A Figura 6.8 ilustra geometricamente esse procedimento.
+O \textbf{corretor plástico}, nada mais é do que o procedimento de solução do sistema (\ref{eq:esquema_int_constitutiva_ep})$_{2,3,5}$ que determinará o valor de $\Delta \sigmal_{n+1}$ e $\Delta \ql_{n+1}$. Quando não é possível obter uma solução analítica para esse sistema, o procedimento de solução comumente utilizado é o de Newton-Raphson que itera $k$ vezes no espaço das tensões e variáveis internas até que o estado de tensões retorne sobre a superfície de escoamento (plasticamente admissível). Por isso esses esquemas também são conhecidos como algoritmos de retorno mapeado (\textit{Return Mapping Algorithm}). A Figura 6.8 ilustra geometricamente esse procedimento.
 
 \begin{figure}[H]
 	\begin{center}
@@ -410,13 +410,13 @@ O corretor plástico, nada mais é do que o procedimento de solução do sistema
 
 Uma dificuldade do método totalmente implícito é a necessidade da obtenção de gradientes de segunda ordem das funções potenciais, o que levou ao desenvolvimento e utilização de algoritmos semi-implícitos. No presente trabalho será implementado o algoritmo de \citeonline{Moran1990} descrito em \citeonline[p. 287]{Belytschko2000} que adotam para o multiplicador plástico um esquema implícito e para o vetor de fluxo e módulo de endurecimento um esquema explícito.
 
-Portanto, para resolver por Newton-Raphson o sistema que dá origem ao corretor plástico, se escreve as equações (\ref{eq:esquema_int_constitutiva_ep})$_{2,3,5}$ da seguinte forma residual (omitindo-se o índice $i+1$):
+Portanto, para resolver por Newton-Raphson o sistema que dá origem ao corretor plástico, se escreve as equações (\ref{eq:esquema_int_constitutiva_ep})$_{2,3,5}$ da seguinte forma residual (omitindo-se o índice $n+1$):
 \begin{equation}
 	\label{eq:algoritmo_ep_1}
 	\left\{
 	\begin{array}{lcl}
-		\al = -\varepsilonl^p + \varepsilonl_i^p + \Delta \lambda \dgdsl_i = \zerol	\\
-		\bl = -\ql + \ql_i + \Delta\lambda\hl_i = \zerol \\
+		\al = -\varepsilonl^p + \varepsilonl_n^p + \Delta \lambda \dgdsl_n = \zerol	\\
+		\bl = -\ql + \ql_n + \Delta\lambda\hl_n = \zerol \\
 		f = f(\sigmal,\ql) = 0
 	\end{array}
 	\right..
@@ -427,8 +427,8 @@ Linearizando essas equações em relação à $\Delta \lambda$, sendo que $\Delt
 	\label{eq:algoritmo_ep_2}
 	\left\{
 	\begin{array}{lcl}
-		\al_k + \Dll^{-1}\Delta\sigmal_k + \delta \lambda_k \dgdsl_i = \zerol \\
-		\bl_k - \Delta \ql_k + \delta \lambda_k \hl_i = \zerol \\
+		\al_k + \Dll^{-1}\Delta\sigmal_k + \delta \lambda_k \dgdsl_n = \zerol \\
+		\bl_k - \Delta \ql_k + \delta \lambda_k \hl_n = \zerol \\
 		f_k + \dfdsl_k^T\Delta\sigmal_k + \dfdql_k^T \Delta \ql_k = 0
 	\end{array}
 	\right..
@@ -442,31 +442,31 @@ Reorganizando (\ref{eq:algoritmo_ep_2})$_{1,2}$ tem-se o seguinte corretor plás
 		\Delta \sigmal_k \\
 		\Delta \ql_k
 	\end{array}
-	\right\} = -\delta\lambda_k \left[ \All_k \right]
+	\right\} = -\delta\lambda_k \left[ \All \right]
 	\left\{	
 	\begin{array}{lcl}
-		\dgdsl_i \\
-		\hl_i
+		\dgdsl_n \\
+		\hl_n
 	\end{array}
 	\right\}
 \end{equation}
 em que
 \begin{equation}
 	\label{eq:Ak}
-	\left[ \All_k \right] = \left[ \All \right] =
+	\left[ \All \right] =
 	\begin{bmatrix}
 		\Dll & \zerol \\
 		\zerol & -\Uml
 	\end{bmatrix}.
 \end{equation}
 
-Devido a esse tratamento explícito do vetor de fluxo plástico e do módulo de endurecimento tem-se em (\ref{eq:Ak}) uma expressão fechada para $\left[\All_k \right]$ envolvendo apenas o módulo elástico. Além disso, como o sistema (\ref{eq:algoritmo_ep_2}) é composto de funções lineares em relação à $\Delta \lambda$ os resíduos $\al_k$ e $\bl_k$ serão automaticamente nulos, dispensando sua verificação no critério de convergência. Substituindo (\ref{eq:algoritmo_ep_3}) em (\ref{eq:algoritmo_ep_2})$_3$ tem-se o termo de atualização do multiplicador plástico durante as iterações:
+Devido a esse tratamento explícito do vetor de fluxo plástico e do módulo de endurecimento tem-se em (\ref{eq:Ak}) uma expressão fechada para $\left[\All \right]$ envolvendo apenas a matriz constitutiva elástica. Além disso, como o sistema (\ref{eq:algoritmo_ep_2}) é composto de funções lineares em relação à $\Delta \lambda$ os resíduos $\al_k$ e $\bl_k$ serão automaticamente nulos, dispensando sua verificação no critério de convergência. Substituindo (\ref{eq:algoritmo_ep_3}) em (\ref{eq:algoritmo_ep_2})$_3$ tem-se o termo de atualização do multiplicador plástico durante as iterações:
 \begin{equation}
 	\label{eq:deltalambdak}
 	\delta \lambda_k = \dfrac{f_k}{\left[\dfdsl_k^T~~~~\dfdql_k^T\right]\left[\All_k \right]\left\{ 
 	\begin{array}{lcl}
-			\dgdsl_i \\ 
-			\hl_i
+			\dgdsl_n \\ 
+			\hl_n
 	\end{array}\right\}}
 \end{equation}
 
@@ -474,9 +474,17 @@ O fluxograma desse algoritmo pode ser visto na \autoref{algoritmo_EP_semiimplici
 
 \begin{figure}[H]
 	\begin{center}
+		\includegraphics[scale = 1.0]{0608-integração EP semi-implicito_2.pdf}
+	\end{center}
+	\caption{\label{algoritmo_EP_semiimplicito}Algoritmo de integração para elastoplasticidade utilizando um esquema de Euler semi-implícito (omitindo o índice $i$+1).}
+\end{figure}
+
+
+\begin{figure}[H]
+	\begin{center}
 		\includegraphics[scale = 1.0]{0608-integração EP semi-implicito.pdf}
 	\end{center}
-	\caption{\label{algoritmo_EP_semiimplicito}Algoritmo de integração para elastoplasticidade utilizando um esquema de Euler semi-implícito a) com edurecimento e b) sem endurecimento (omitindo o índice $i$+1).}
+	\caption{\label{algoritmo_EP_semiimplicito3}Algoritmo de integração para elastoplasticidade utilizando um esquema de Euler semi-implícito a) com edurecimento e b) sem endurecimento (omitindo o índice $i$+1).}
 \end{figure}
 
 \subsection{Integração das equações constitutivas viscoplásticas}

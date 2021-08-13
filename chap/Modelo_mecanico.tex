@@ -237,7 +237,7 @@ sendo $(\xi_H,\rho_H,\theta)$ as coordenadas de Haigh-Westergaard (em que $\thet
 
 Quando a função de escoamento não depende de $I_1$   diz-se que a plasticidade é independente da pressão hidrostática, sendo determinada apenas pelo estado de tensões ao longo do plano desviador.
 
-Diversas funções de escoamentos podem ser obtidas na literatura, tal como as apresentadas no resumo de \citeonline{Viladkar1995} que reúne tanto as funções de escoamentos clássicas (von-Mises, Tresca, Drucker-Prager, Mohr-Coulomb) quanto mais sofisticadas (\textit{Cap Models, Critical State Model, Desai’s Generlized Model}). O presente trabalho utilizará as funções de escoamentos de Drucker-Prager e Mohr-Coulomb que compreendem também generalizações das funções de von-Mises e Tresca, respectivamente (\autoref{Funções_escoamento}).
+Diversas funções de escoamentos podem ser obtidas na literatura, tal como as apresentadas no resumo de \citeonline{Viladkar1995} que reúne tanto as funções de escoamentos clássicas (von-Mises, Tresca, Drucker-Prager, Mohr-Coulomb) quanto mais sofisticadas (\textit{Cap Models, Critical State Model, Desai’s Generlized Model}). O presente trabalho utilizará as funções de escoamentos de Drucker-Prager (DP) e Mohr-Coulomb (MC) que compreendem também generalizações das funções de von-Mises (VM) e Tresca (TR), respectivamente (\autoref{Funções_escoamento}).
 \begin{figure}[H]
 	\begin{center}
 		\includegraphics[scale = 1.0]{0505-funções de escoamento.pdf}
@@ -279,16 +279,16 @@ Quando $\phi = 0$ a superfície de Mohr-Coulomb e a de Drucker-Prager se tornam 
 \end{equation}
 \begin{equation}
 	\label{eq:f_von-Mises}
-	f(\sigmall,\ql) = f(J_2,\theta,c) = \sqrt{J_2} - \dfrac{2c}{\sqrt{3}}.
+	f(\sigmall,\ql) = f(J_2,\theta,c) = \sqrt{3}\sqrt{J_2} - 2c.
 \end{equation}
 
 Igualando-se as expressões (\ref{eq:f_von-Mises}) e (\ref{eq:f_Tresca}) à zero e isolando $\sqrt{J_2}$ é possível relacionar ambas as superfícies através da coesão (\autoref{TR-VM-plano_desviador}):
 \begin{equation}
 	\label{eq:ctr_cvm}
-	c_{TR} = \dfrac{2}{\sqrt{3}}\cos(\theta)c_{VM} = \left\{
+	c_{\text{TR}} = \dfrac{2}{\sqrt{3}}\cos(\theta)c_{\text{VM}} = \left\{
 	\begin{array}{lcl}
-		\dfrac{2}{\sqrt{3}}c_{VM}, ~~~\text{se}~\theta = 0^\circ \\ 
-		c_{VM},~~~~~~~~~\text{se}~\theta = 30^\circ
+		\dfrac{2}{\sqrt{3}}c_{\text{VM}}, ~~~\text{se}~\theta = 0^\circ \\ 
+		c_{\text{VM}},~~~~~~~~~\text{se}~\theta = 30^\circ
 	\end{array}
 	\right..
 \end{equation}
@@ -318,45 +318,50 @@ em que $g$ é uma função análoga a $f$ chamada de potencial plástico. No cas
 	\end{center}
 	\caption{\label{fluxo_associado}Representação geométrica do vetor de fluxo em plasticidade associada (adaptado de: \citeonline[p. 182]{Chen1988})}
 \end{figure}
-Tal como a função de escoamento, o potencial plástico geralmente é descrito através dos invariantes do tensor de tensões e seu gradiente pode ser determinado aplicando a regra da cadeia em (\ref{eq:vetor_fluxo_elastoplastico}). Por exemplo, se $g(I_1,\sqrt{J_2},J_3,\ql)$, tem-se (adaptado de \citeauthor{Viladkar1995}, \citeyear{Viladkar1995}, p. 333):
+Tal como a função de escoamento, o potencial plástico geralmente é descrito através dos invariantes do tensor de tensões e seu gradiente pode ser determinado aplicando a regra da cadeia em (\ref{eq:vetor_fluxo_elastoplastico}). Por exemplo, se $g(I_1,\sqrt{J_2},J_3,\ql)$, tem-se (adaptado de \citeonline[p. 231]{Owen1980}):
 \begin{equation}
 	\label{eq:invariantes_tensores}
 	\begin{array}{lcl}
 		\dgdsll = C_1\gllum + C_2\glldois + C_3\glltres, \\ 
 		\gllum = \dfrac{\partial I_1}{\partial \sigmall} = \Umll,~~~ \glldois = \dfrac{\partial \sqrt{J_2}}{\partial \sigmall} = \dfrac{1}{2\sqrt{J_2}}\sll,~~~ \glltres = \dfrac{\partial J_3}{\partial \sigmall}, \\
-		C_1 = \dfrac{\partial g}{\partial I_1},~~~C_2=\dfrac{\partial g}{\partial \sqrt{J_2}}-\dfrac{\tan{(3\theta)}}{\sqrt{J_2}}\dfrac{\partial g}{\partial \theta},~~~C_3 = \dfrac{\sqrt{3}}{2\cos{(3\theta})}-\dfrac{1}{J_2^{3/2}}\dfrac{\partial g}{\partial \theta},
+		C_1 = \dfrac{\partial g}{\partial I_1},~~~C_2=\dfrac{\partial g}{\partial \sqrt{J_2}}-\dfrac{\tan{(3\theta)}}{\sqrt{J_2}}\dfrac{\partial g}{\partial \theta},~~~C_3 = -\dfrac{\sqrt{3}}{2\cos{(3\theta})}\dfrac{1}{J_2^{3/2}}\dfrac{\partial g}{\partial \theta},
 	\end{array}
 \end{equation}
-sendo que nessa descrição, apenas as constantes $C_1$, $C_2$  e $C_3$ são particularidades das diferentes superfícies potenciais. Para a superfície de Mohr-Coulomb tem-se:
-\begin{equation}
-	\label{eq:c1MC}
-	C_1 = \dfrac{1}{3}\sin(\phi),
-\end{equation}
-\begin{equation}
-	\label{eq:c2MC}
-	C_2 = \cos(\theta)\left[1+\tan(\theta)\tan(3\theta) + \dfrac{\sin(\phi)\left(\tan(3\theta)-\tan(\theta)\right)}{\sqrt{3}}\right],
-\end{equation}
-\begin{equation}
-	\label{eq:c3MC}
-	C_3 = \dfrac{\sqrt{3}\sin(\theta)+\cos(\theta)\sin(\phi)}{2J_2\cos(3\theta)},
-\end{equation}
-e para Drucker-Prager, tem-se:
-\begin{equation}
-	\label{eq:c1c2c3DP}
-	C_1 = \beta,~~~C_2 = 1,~~~C_3 = 0.
-\end{equation}
+sendo que nessa descrição, apenas as constantes $C_1$, $C_2$  e $C_3$ são particularidades das diferentes superfícies potenciais, conforme \autoref{tab:c1c2c3}. 
+
+\begin{table}[H]
+	\caption{Constantes para o cálculo do gradiente do potencial plástico (adaptado de \citeonline[p. 231]{Owen1980}}
+	\label{tab:c1c2c3}
+	\centering
+	\small
+	\renewcommand{\arraystretch}{1.25}
+	\begin{tabular}{c c c c}
+		\hline
+		\multicolumn{1}{c}{\textbf{SUPERFÍCIE}} &
+		\multicolumn{1}{c}{{$\mathbf C_1$}} &
+		\multicolumn{1}{c}{{$\mathbf C_2$}} &
+		\multicolumn{1}{c}{{$\mathbf C_3$}} \\
+		\hline
+		TR & $0$ & $2\cos{\theta}(1+\tan{\theta}\tan{3\theta})$ & $\dfrac{\sqrt{3}}{J_2}\dfrac{\sin{\theta}}{\cos{3\theta}}$ \\		
+		VM & $0$ & $\sqrt{3}$ & $0$ \\
+		MC & $\dfrac{1}{3}\sin(\phi)$ &  $\scriptstyle \cos(\theta)\left[1 +\tan(\theta)\tan(3\theta)+\dfrac{\scriptstyle \sin(\phi)\left[\tan(3\theta)-\tan(\theta)\right]}{\scriptstyle \sqrt{3}}\right]$ & $\dfrac{\sqrt{3}\sin(\theta)+\cos(\theta)\sin(\phi)}{2J_2\cos(3\theta)}$ \\		
+		DP & $\beta$ & $1$ & $0$ \\			
+		\hline
+	\end{tabular}
+	\normalsize
+\end{table}
 
 Nas expressões de $C_2$ e $C_3$, pode-se ver que o vetor de fluxo de Mohr-Coulomb, e consequentemente o de Tresca, possui uma singularidade quando $\theta = \pm \pi/6$. Isso ocorre devido a essas superfícies apresentarem um vértice nessas coordenadas no plano desviador. Há diversas formas de se resolver esse problema, sendo que a adotada no presente trabalho, dada por \citeonline[p. 234]{Owen1980}, será utilizar os valores de $C_1$,$C_2$ e $C_3$ de Drucker-Prager (ou von-Mises) quando $\theta = \pm \pi/6$.
 
 Um aspecto comum na geomecânica é a variação do volume do material durante a evolução das deformações plásticas. Esse efeito é comumente introduzido através da plasticidade não associada, adotando, ao invés do ângulo de atrito, um ângulo de dilatância $0<\psi<\phi$  na função potencial $g$.
 
 \subsection{Lei de endurecimento/amolecimento}
-A lei de endurecimento/amolecimento fornece a regra de evolução das forças termodinâmicas associadas ao longo das deformações plásticas. Essa lei de endurecimento/amolecimento é postulada da seguinte forma \cite[p. 249]{Belytschko2000}:
+A lei de endurecimento/amolecimento fornece a regra de evolução da superfície de escoamento ao longo das deformações plásticas (\textit{strain-hardening/softening}) ou do trabalho plástico (\textit{work-hardening/softening}). Para a presente tese, será adotado o primeiro caso e a lei é então postulada da seguinte forma \cite[p. 249]{Belytschko2000}:
 \begin{equation}
 	\label{eq:amolecimento}
-	\dot \ql = \dot \lambda \hl = \dot \lambda \dfrac{\partial h}{\partial \ql}
+	\dot \ql = \dot \lambda \hl = - \dot \lambda \dfrac{\partial h}{\partial \ql}
 \end{equation}
-em que $\hl$ é um vetor que contém os gradientes de uma função potencial $h$ com relação às forças termodinâmicas associadas. Como a função de escoamento $f$ é dependente das forças associadas a mudança dessas ao longo da deformação plástica irá alterar a posição e/ou a forma da superfície de escoamento. Quando a superfície de escoamento é estática, ou seja, $\dot \ql=\underline 0$, tem-se a plasticidade perfeita, quando esta aumenta tem-se o endurecimento isotrópico e quando se desloca tem-se o endurecimento cinemático, sendo mista, quando composta das duas últimas (\autoref{tipos_endurecimento}).
+em que $\hl = - \partial h / \partial \ql$ é um vetor que contém os gradientes de uma função potencial $h$ com relação às forças termodinâmicas associadas. Como a função de escoamento $f$ é dependente de $\ql$, a mudança dessas ao longo da deformação plástica irá alterar a posição e/ou a forma da superfície de escoamento. Quando a superfície de escoamento é estática, ou seja, $\dot \ql=\underline 0$, tem-se a plasticidade perfeita, quando esta aumenta tem-se o endurecimento isotrópico e quando se desloca tem-se o endurecimento cinemático, sendo mista, quando composta das duas últimas (\autoref{tipos_endurecimento}).
 
 \begin{figure}[H]
 	\begin{center}
@@ -364,23 +369,27 @@ em que $\hl$ é um vetor que contém os gradientes de uma função potencial $h$
 	\end{center}
 	\caption{\label{tipos_endurecimento}Representação dos tipos de endurecimento no plano desviador e na curva tensão-deformação: a) elastoplasticidade perfeita, b) endurecimento isotrópico e c) endurecimento cinemático (adaptado de: \citeauthor{Neto2008}, \citeyear{Neto2008}, p. 178, 179, 186)}
 \end{figure}
-Em um primeiro momento, no presente trabalho, não é considerado a influência da lei de endurecimento e as variáveis internas serão constantes ao longo do histórico de deformações, ou seja, $\dot \ql = \underline 0$. Nesse caso, tem-se a elastoplasticidade perfeita. Considerando apenas o endurecimento/amolecimento isotrópico, nos modelos adotados, isso significa que a coesão e o ângulo de atrito permanecem constantes durante a deformação plástica. Em um segundo momento é considerado uma função linear definida por partes para representar o endurecimento/amolecimento característico do maciço, tal como vistos no Capítulo 4.3, contudo em caráter associado ($h = f$) e isotrópico. Essa implementação, é feita exclusivamente através da coesão que dependerá da deformação plástica efetiva ao longo do histórico de tensões (conforme \autoref{funcao_coesao}).
-
+Em um primeiro momento, no presente trabalho, não é considerado a influência da lei de endurecimento e as forças termodinâmicas serão constantes ao longo do histórico de deformações, ou seja, $\dot \ql = \underline 0$. Nesse caso, tem-se a elastoplasticidade perfeita. Em um segundo momento é considerado a lei de endurecimento/amolecimento associada ($h = f$) e isotrópica. A coesão será a força termodinâmica associada, ou seja, $q = c(\bar \epsilon^p)$, sendo a deformação plástica equivalente $\bar \epsilon^p$ a variável de estado. Para tanto, é considerado uma função coesiva multilinear, conforme \autoref{funcao_coesao}, de modo a representar o endurecimento/amolecimento característico do maciço, tal como vistos no Capítulo 4.3.
 \begin{figure}[H]
 	\begin{center}
 		\includegraphics[scale = 1.0]{0510-lei de endurecimento ou amolecimento_coesao.pdf}
 	\end{center}
-	\caption{\label{funcao_coesao}Função linear definida por partes para representar o endurecimento/amolecimento através do parâmetro coesivo (adaptado de: \citeonline[p. 158]{Potts1999}}
+	\caption{\label{funcao_coesao}Função multilinear definida por partes para representar o endurecimento/amolecimento através do parâmetro coesivo (adaptado de: \citeonline[p. 158]{Potts1999}}
 \end{figure}
 Portanto, usando a regra da cadeia, escreve-se (\ref{eq:amolecimento}) da seguinte forma:
 \begin{equation}
 	\label{eq:expressao_amolecimento}
-	\dot q = \dot \lambda \dfrac{\partial f}{\partial q} = \dot \lambda \left( \dfrac{\partial f}{\partial c}\dfrac{\partial c}{\partial \bar \epsilon^p} + \dfrac{\partial f}{\partial \phi}\dfrac{\partial \phi}{\partial \bar \epsilon^p} \right)	
+	\dot q = - \dot \lambda \dfrac{\partial h}{\partial q} = - \dot \lambda \dfrac{\partial f}{\partial c} = \dot \lambda \left(- \dfrac{\partial f}{\partial c}\dfrac{\partial c}{\partial \bar \epsilon^p}\right)	
 \end{equation}
-Como não haverá variação do ângulo de atrito, tem-se $\partial \phi / \partial \bar \epsilon^p = 0$ e apenas a parcela relacionada com a coesão permanece, sendo, seus termos, conforme (\ref{eq:f_Mohr_Coulomb}) e (\ref{eq:f_Drucker_Prager}), dados por:
+sendo, seus termos, conforme (\ref{eq:f_Mohr_Coulomb}), (\ref{eq:f_Drucker_Prager}), (\ref{eq:f_Tresca}), (\ref{eq:f_von-Mises}) e \autoref{funcao_coesao}, dados por:
 \begin{equation}
 	\label{eq:dfdc}
-	\dfrac{\partial f}{\partial c} = \left\{ \begin{array}{ll} - \cos(\phi), & \text{para Mohr-Coulomb} \\ - \dfrac{6\cos(\phi)}{\sqrt{3}(3\pm \sin(\phi))}, & \text{para Drucker-Prager}\end{array}\right.
+	\dfrac{\partial f}{\partial c} = \left\{ \begin{array}{ll} 
+		- 1, & \text{para Tresca} \\
+		- 2, & \text{para von-Mises} \\
+		- \cos(\phi), & \text{para Mohr-Coulomb} \\ 
+		- \dfrac{6\cos(\phi)}{\sqrt{3}(3\pm \sin(\phi))}, & \text{para Drucker-Prager}\end{array}	
+	\right.
 \end{equation}
 e
 \begin{equation}
@@ -397,7 +406,13 @@ O valor da deformação plástica efetiva é calculada a partir da seguinte expr
 	\label{eq:epsPeq}
 	\dot{{\bar \epsilon}}^p = C||\dot \varepsilonll^p||
 \end{equation}
-em que $C$ a rigor depende da superfície de plasticidade, do gradiente do potencial plástico e do estado de tensões ao qual está submetido a amostra no ensaio. Sua dedução é feita através do trabalho plástico por unidade de volume. Para o presente trabalho, será utilizado a seguinte expressão deduzida para Drucker-Prager, que considera plasticidade associada e estados de tensões gerais (adaptado de \citeauthor{Chen1988}, \citeyear{Chen1988}, p. 257-259):
+em que
+\begin{equation}
+	\label{eq:epsPeq}
+	||\dot \varepsilonll^p|| = \sqrt{(\dot{\varepsilon}^{p}_{11})^2 + (\dot{\varepsilon}^{p}_{22})^2 + (\dot{\varepsilon}^{p}_{33})^2 + 2(\dot{\varepsilon}^{p}_{12})^2 + 2(\dot{\varepsilon}^{p}_{23})^2 + 2(\dot{\varepsilon}^{p}_{13})^2}
+\end{equation}
+
+e $C$ a rigor depende da superfície de plasticidade, do gradiente do potencial plástico e do estado de tensões ao qual está submetido a amostra no ensaio. Sua dedução é feita através do trabalho plástico por unidade de volume. Para o presente trabalho, será utilizado a seguinte expressão deduzida para Drucker-Prager, que considera plasticidade associada e estados de tensões gerais (adaptado de \citeauthor{Chen1988}, \citeyear{Chen1988}, p. 257-259):
 \begin{equation}
 	\label{eq:Czao}
 	C = \dfrac{\beta+1/\sqrt{3}}{\sqrt{3\beta^2+1/2}}.

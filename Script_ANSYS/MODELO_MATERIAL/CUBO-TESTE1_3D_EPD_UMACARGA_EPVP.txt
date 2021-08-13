@@ -118,7 +118,7 @@ nlc 	= 1				! [un] numero de elementos em lc
 ! Dados das condições de contorno 
 tipo_problema	 = 1			! 1 - 3D, 2 - EPD, 3 - AXI
 solicitacao 	 = 0.1			! (0.05, 0.1)deslocamento uniaxial aplicado no passo
-pr		 = 0			! [Mpa] tensões iniciais
+pr		 = 0.5			! (2,0.5) [Mpa] tensões iniciais
 vkbc		 = 0			! 0 - solicitação linearmente interpolada no passo, 1 - solicitação linearmente interpolada no primeiro subpasso
 t		 = ABS(solicitacao)	! [incremento de tempo ou partes inteiras da solicitação] do passo
 dt 		 = ABS(solicitacao)/400	! [incremento de tempo ou incremento de partes inteiras da solicitação] a cada subpasso
@@ -315,7 +315,6 @@ PARSAV,ALL,parametros,txt		! salva os parâmetros da análise
 ! 4. Solução			   			    !
 !***********************************************************!
 /SOLU	
-ANTYPE,0,NEW			! 0 - Análise estática, New - nova
 NLGEOM,OFF			! OFF - Ignora grandes deformações, ON - ativa
 NROPT,FULL			! NR - FULL, MODI, INIT, AUTO 			
 OUTRES,ALL,ALL			! Guarda todos os itens de solução a cada subpasso
@@ -326,26 +325,50 @@ LNSRCH,1
 CNVTOL,F, ,0.0000001,2, , 	! Criterio de convergencia
 CNVTOL,U, ,0.0000001,0, ,
 !
-! aplica tensões iniciais 
+!***********************************************************!
+! 4.1 Instala a tensão inicial				    !
+!***********************************************************!
+ANTYPE,0,NEW			! 0 - Análise estática, New - nova
+!
+! Define as tensões iniciais
 ALLSEL,ALL
 INISTATE, DEFINE,,,,,-pr,-pr,-pr,0,0,0		
 !
-! Aplica a solicitação
+! Define o tempo
+DELTIM,0.0001/10,0.0001/10,0.0001,OFF		! dtime incremento do tempo do passo, incremento mínimo, incremento máximo, chave (ON usa dtime do passo anterior se AUTOTS for ON, OFF - usa dtime no inicio de cada passo)	
+TIME,0.0001			! primeiro tempo
+!
+! Aplica as condições de contorno
+KBC,1				! aplica no primeiro subpasso
 *IF,tipo_problema,EQ,1,THEN
-	DA,4,UY,solicitacao
 	SFA,4,1,PRES,pr
 	SFA,6,1,PRES,pr
 	SFA,2,1,PRES,pr
+*ELSEIF,tipo_problema,EQ,2,THEN
+*ELSEIF,tipo_problema,EQ,3,THEN
+*ENDIF
+!
+! Resolve o sistema
+SOLVE
+!
+!***********************************************************!
+! 4.1 Aplica o deslocamento imposto			    !
+!***********************************************************!
+!
+! Define o tempo
+DELTIM,dt,dt,dt,OFF		! dtime incremento do tempo do passo, incremento mínimo, incremento máximo, chave (ON usa dtime do passo anterior se AUTOTS for ON, OFF - usa dtime no inicio de cada passo)	
+TIME,t			! primeiro tempo
+!
+! Aplica a solicitação
+KBC,vkbc
+*IF,tipo_problema,EQ,1,THEN
+	DA,4,UY,solicitacao
+
 *ELSEIF,tipo_problema,EQ,2,THEN
 	DL,3, ,UY,solicitacao
 *ELSEIF,tipo_problema,EQ,3,THEN
 	DL,3, ,UY,solicitacao
 *ENDIF
-!
-! Define o tempo final do passo
-KBC,vkbc
-DELTIM,dt,dt,dt,OFF		! dtime incremento do tempo do passo, incremento mínimo, incremento máximo, chave (ON usa dtime do passo anterior se AUTOTS for ON, OFF - usa dtime no inicio de cada passo)	
-TIME,t
 !
 ! Resolve o sistema
 SOLVE
