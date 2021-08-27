@@ -213,7 +213,7 @@ A \autoref{dominio_plasticamente_admissivel} ilustra de uma forma genérica esse
 	\end{center}
 	\caption{\label{dominio_plasticamente_admissivel}Domínio genérico plasticamente admissível $\Gamma$ no espaço das tensões principais}
 \end{figure}
-Em elastoplasticidade isotrópica, a função de escoamento pode ser descrita apenas em função dos invariantes do tensor de tensões e das forças associadas às variáveis internas. São, portanto, comuns as seguintes representações equivalentes (adaptado de \citeauthor{Chen1988}, \citeyear{Chen1988}, p. 57-72):
+Em elastoplasticidade isotrópica, a função de escoamento pode ser descrita apenas em função dos invariantes do tensor de tensões e das forças associadas às variáveis internas. São, portanto, comuns as seguintes representações equivalentes (adaptado de \citeauthor{Chen1988}, \citeyear{Chen1988}, p. 53-72):
 \begin{equation}
 	\label{eq:funcoes_escoamento}
 	f(\sigmall,\ql) = f(I_1,J_2,J_3,\ql) = f(\xi_{H},\rho_{H},\theta,\ql) = f(p,q,\theta,\ql) = f(\sigma_{oct},\tau_{oct},\theta,\ql)
@@ -225,7 +225,7 @@ em que:
 			I_1 = \text{tr}(\sigmall) = \sigma_{11}+\sigma_{22}+\sigma_{33}\\
 			J_2 = \dfrac{1}{2}\text{tr}(\sll^2) = \dfrac{1}{6}\left[ (\sigma_{11}-\sigma_{22})^2 + (\sigma_{22}-\sigma_{33})^2 + (\sigma_{33}-\sigma_{11})^2 \right] + \sigma_{12}^2+ \sigma_{23}^2+ \sigma_{13}^2, \\
 			J_3 = \dfrac{1}{3}\text{tr}(\sll^3) = \text{det}(\sll) = s_{11}s_{22}s_{33}-s_{11}\sigma_{23}^2-s_{22}\sigma_{13}^2-s_{33}\sigma_{12}^2+2\sigma_{12}\sigma_{23}\sigma_{13}, \\ 
-			\xi_{H} = p = \sigma_{oct} = \dfrac{1}{3}I_1, ~~~ \rho_{H} = \sqrt{\sll:\sll} = \sqrt{2J_2}, ~~~ \theta = \dfrac{1}{3}arcsen\left( \dfrac{-3\sqrt{3}}{2} \dfrac{J_3}{J_2^{3/2}} \right), \\
+			\xi_{H} = p = \sigma_{oct} = \dfrac{1}{3}I_1, ~~~ \rho_{H} = \sqrt{\sll:\sll} = \sqrt{2J_2}, ~~~ \theta = \dfrac{1}{3}\text{asin}\left( \dfrac{-3\sqrt{3}}{2} \dfrac{J_3}{J_2^{3/2}} \right), \\
 			-\dfrac{\pi}{6} \le \theta \le \dfrac{\pi}{6}, ~~~ q = \sqrt{\dfrac{3}{2}\sll:\sll} = \sqrt{3J_2}, ~~~ \tau_{oct} = \sqrt{\dfrac{3}{2}J_2},
 	\end{array}
 \end{equation}
@@ -272,7 +272,7 @@ Essa aproximação pode ser vista no plano desviador conforme a \autoref{DP-MC-p
 	\end{center}
 	\caption{\label{DP-MC-plano_desviador}Representação no plano desviador da aproximação da superfície de Mohr-Coulomb pela superfície de Drucker-Prager  (adaptado de: \citeauthor{Neto2008}, \citeyear{Neto2008}, p. 169)}
 \end{figure}
-Quando $\phi = 0$ a superfície de Mohr-Coulomb e a de Drucker-Prager se tornam independentes da pressão hidrostática e se particularizam, respectivamente, para a superfície de Tresca e von-Mises:
+Quando $\phi = 0$ a superfície de Mohr-Coulomb e a de Drucker-Prager se tornam independentes da pressão hidrostática e se particularizam, respectivamente, para a superfície de Tresca e von-Mises (adaptado de: \citeauthor{Neto2008}, \citeyear{Neto2008}, p. 162-163):
 \begin{equation}
 	\label{eq:f_Tresca}
 	f(\sigmall,\ql) = f(J_2,\theta,c) = \sqrt{J_2}\cos{\theta} - c,
@@ -498,11 +498,22 @@ Como as deformações viscoplásticas ocorrem quando $f>0$ não há a imposiçã
 	\label{eq:sobretensao}
 	\Phi = \left\langle  \dfrac{f(\sigmall,\ql)}{f_0} \right\rangle^n
 \end{equation}
-em que $\eta$ é a constante de viscosidade dinâmica (unidade de tempo), $\Phi$ é a função de sobretensão, nesse caso, uma função potencial com expoente $n$, $f_0$ parâmetro de tensão convenientemente adotado e $\left\langle * \right\rangle$ é a função de McCauley, que é nulo quando $*<0$, ou seja, apenas ocorrerá fluxo viscoplástico quando o critério $f/f_0$ for positivo.  
+em que $\eta$ é a constante de viscosidade dinâmica (unidade de tempo), $\Phi$ é a função de sobretensão, nesse caso, uma função potencial com expoente $n$, $f_0$ parâmetro de tensão convenientemente adotado a partir do qual se inicia o fenômeno viscoso e $\left\langle * \right\rangle$ é a função de McCauley, que é nulo quando $*<0$, ou seja, apenas ocorrerá fluxo viscoplástico quando o critério $f/f_0$ for positivo. O valor de $f_0$ a rigor depende da superfície viscoplástica adotada, conforme (adaptado de \citeonline[p. 239, 273]{Owen1980}:
+
+\begin{equation}
+	\label{eq:f0}
+	f_0 = \left\{ \begin{array}{ll} 
+		c, & \text{para Tresca} \\
+		2c, & \text{para von-Mises} \\
+		c\cos(\phi), & \text{para Mohr-Coulomb} \\ 
+		 k, & \text{para Drucker-Prager}\end{array}	
+	\right.
+\end{equation}
+
 
 Muitas vezes o parâmetro $f_0$ não consta na expressão como, por exemplo, em \citeonline[p. 222]{Rousset1988}. Nesse caso, seu valor está implícito na constante $\eta$ que possuí unidade de tempo vezes tensão elevada na potência $n$, ao invés de apenas a unidade de tempo, como em \citeonline{Zienkiewicz1974}. Isso não constitui um problema, pois, é mantida a consistência dimensional da expressão. Contudo, essa sutileza é importante no momento de adimensionalizar resultados com a expressão (\ref{eq:parametros_admensionais_vp}) da velocidade. Nessa expressão, \citeonline{Bernaud1991} utiliza a constante de viscosidade dinâmica conforme \citeonline{Rousset1988}.
 
-\section{Modelo constitutivo elastoplástico-viscoplástico}
+\section{Modelo constitutivo elastoplástico viscoplástico}
 O modelo elastoplástico-viscoplástico proposto nessa tese, dentro das hipóteses de pequenas transformações, compreende justamente a associação em série dos modelos constitutivos acima, portanto:
 \begin{equation}
 	\label{eq:decomposicao_deformacoes_epvp}
@@ -554,3 +565,7 @@ O comportamento desse modelo reológico pode ainda ser melhor entendido através
 	\caption{\label{resposta_epvp_deformacao_constante}Resposta do sistema a uma solicitação $\dot \varepsilon = \text{const}$ (adaptado de: \citeonline[p. 221]{Rousset1988})}
 \end{figure}
 Para altas taxas de deformação (caso 1 e 2), a tensão aumenta rapidamente até atingir o valor limite de $2c$ e em seguida diminui abruptamente (ruptura frágil) ou gradualmente (ruptura dúctil) mantendo uma tensão residual de $2c_0$. Pode-se notar que no caso 1, quando a taxa de deformação é muito alta, ao contrário do caso 2, os efeitos viscosos praticamente não ocorrem, tendo apenas o comportamento elastoplástico. Contudo, para taxas menores de deformação (caso 3) o limiar de ruptura não é atingido e a tensão evolui assintoticamente para um valor intermediário entre $2c$ e $2c_1$. Pode-se notar que no caso 4, quando a taxa de deformação é muito lenta, o modelo possui uma resposta elastoplástica perfeita com o limiar em $2c_1$.
+
+%\section{Modelo constitutivo viscoelástico para o revestimento}
+
+%Existem várias formulações para a previsão da deformação por fluência e retração do concretos disponíveis na literatura e nos códigos de projetos. Grade parte dessas formulações vêm de ajustes com dados experimentais e, como as características dos materiais são em grande parte condicionadas à região do ensaio, há uma certa aproximação devido a dispersão dos dados, com coeficientes de variação de 25,9\% à 67,4\%, dependendo da formulação como demonstrado por Fanourakis \& Ballim (2003). Nessa tese é utilizado o modelo desenvolvido por Dias (2013, et al. 2015) e ajustado e aplicado em problemas de túneis por Quevedo (2017). Esse modelo considera as formulações empíricas do Comité Euro-International du Béton (CEB-FIP Model Code 1990 ou CEB-MC90) com a fluência ajustada à teoria da solidificação de Bazant \& Prasannan (1989a,1989b). Esse ajuste é possível, pois, assim como na formulação de Bazant \& Prasannan, a formulação do CEB-MC90 separa o fator do coeficiente de fluência que depende do envelhecimento (idade do concreto) do fator de fluência que depende do tempo de aplicação da carga (idade da carga). Em vista dessa decomposição, a formulação e algoritmo apresentado por Bazant \& Prasannan permite modelar eficientemente os casos em que há um histórico de tensões variáveis, utilizando um modelo reológico de Kelvin-Generalizado para os parâmetros independnetes da idade do concreto.
