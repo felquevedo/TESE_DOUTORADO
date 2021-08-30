@@ -84,8 +84,8 @@ nu     	    	= 0.00			! (0.2,0.39)[adm] coeficiente de Poisson (1,2,3,4,5,6)
 yield       	= 1.21			! (18,1.4)[MPa] tensão de escoamento   (2,4)
 youngt      	= 0		! [MPa] módulo de elastoplástico tangente (2,4)
 !
-superficief	= 1			! funçaõ de escoamento: 1-VM, 2-DP, 3-TR, 4-MC (6)
-superficieg 	= 1			! função potencial: 1-VM, 2-DP, 3-TR, 4-MC (6)
+superficief	= 2			! funçaõ de escoamento: 1-VM, 2-DP, 3-TR, 4-MC (6)
+superficieg 	= 2			! função potencial: 1-VM, 2-DP, 3-TR, 4-MC (6)
 flag	    	= 1			! 1- DP coincide com as bordas externas MC ou VM circunscreve TR (6) 
 fi	    	= 0			! [graus] angulo de atrito (0 - TR ou VM) (3,6)
 psi	    	= fi			! [graus] angulo de dilatância (3,6)
@@ -187,7 +187,7 @@ PARSAV,ALL,parametros,txt		! salva os parâmetros da análise
 	TBTEMP,0
 	TBDATA,,yield,youngt,,,,
 *ELSEIF,modmat,eq,22,then
-	! Definindo o material elastoplástico VM do Ansys
+	! Definindo o material elastoplástico VM do Ansys multilinear
 	MPTEMP,1,0  		
 	MPDATA,EX,1,,young	!
 	MPDATA,PRXY,1,,nu 	
@@ -217,7 +217,7 @@ PARSAV,ALL,parametros,txt		! salva os parâmetros da análise
 	MPDATA,PRXY,1,,nu 	
 	TB,DP,1  
 	TBTEMP,0
-	TBDATA,1,yield/2*SQRT(3),fi,psi,,,
+	TBDATA,1,yield/2,fi,psi,,,
 *ELSEIF,modmat,eq,4,then
 	! Definindo material usermat3D VM do Ansys
 	TB,USER,1,2,5

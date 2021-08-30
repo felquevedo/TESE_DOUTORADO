@@ -369,31 +369,48 @@ em que $\hl = - \partial h / \partial \ql$ é um vetor que contém os gradientes
 	\end{center}
 	\caption{\label{tipos_endurecimento}Representação dos tipos de endurecimento no plano desviador e na curva tensão-deformação: a) elastoplasticidade perfeita, b) endurecimento isotrópico e c) endurecimento cinemático (adaptado de: \citeauthor{Neto2008}, \citeyear{Neto2008}, p. 178, 179, 186)}
 \end{figure}
-Em um primeiro momento, no presente trabalho, não é considerado a influência da lei de endurecimento e as forças termodinâmicas serão constantes ao longo do histórico de deformações, ou seja, $\dot \ql = \underline 0$. Nesse caso, tem-se a elastoplasticidade perfeita. Em um segundo momento é considerado a lei de endurecimento/amolecimento associada ($h = f$) e isotrópica. A coesão será a força termodinâmica associada, ou seja, $q = c(\bar \epsilon^p)$, sendo a deformação plástica equivalente $\bar \epsilon^p$ a variável de estado. Para tanto, é considerado uma função coesiva multilinear, conforme \autoref{funcao_coesao}, de modo a representar o endurecimento/amolecimento característico do maciço, tal como vistos no Capítulo 4.3.
+Em um primeiro momento, no presente trabalho, não é considerado a influência da lei de endurecimento e as forças termodinâmicas serão constantes ao longo do histórico de deformações, ou seja, $\dot \ql = \underline 0$. Nesse caso, tem-se a elastoplasticidade perfeita. Em um segundo momento é considerado a lei de endurecimento/amolecimento associada ($h = f$) e isotrópica. A força termodinâmica associada é dada pela parcela referente a coesão nas superfícies de escoamento, ou seja, $q = \chi c(\bar \varepsilon^p)$ em que:
+\begin{equation}
+	\label{eq:dfdc}
+	\chi = \left\{ \begin{array}{ll} 
+		2, & \text{para von-Mises} \\
+		\dfrac{6\cos{\phi}}{\sqrt{3}(3\pm \sin(\phi))}, & \text{para Drucker-Prager} \\ 
+		1, & \text{para Tresca}\\
+		\cos(\phi), & \text{para Mohr-Coulomb}\end{array}	
+	\right.
+\end{equation}
+
+
+
+sendo a deformação plástica equivalente $\bar \epsilon^p$ a variável de estado. Para tanto, é considerado uma função coesiva linear definida por partes, conforme \autoref{funcao_coesao}, de modo a representar o endurecimento/amolecimento característico do maciço, tal como vistos no Capítulo 4.3.
 \begin{figure}[H]
 	\begin{center}
 		\includegraphics[scale = 1.0]{0510-lei de endurecimento ou amolecimento_coesao.pdf}
 	\end{center}
-	\caption{\label{funcao_coesao}Função multilinear definida por partes para representar o endurecimento/amolecimento através do parâmetro coesivo (adaptado de: \citeonline[p. 158]{Potts1999}}
+	\caption{\label{funcao_coesao}Função linear definida por partes para representar o endurecimento/amolecimento através do parâmetro coesivo (adaptado de: \citeonline[p. 158]{Potts1999}}
 \end{figure}
 Portanto, usando a regra da cadeia, escreve-se (\ref{eq:amolecimento}) da seguinte forma:
 \begin{equation}
 	\label{eq:expressao_amolecimento}
-	\dot q = - \dot \lambda \dfrac{\partial h}{\partial q} = - \dot \lambda \dfrac{\partial f}{\partial c} = \dot \lambda \left(- \dfrac{\partial f}{\partial c}\dfrac{\partial c}{\partial \bar \epsilon^p}\right)	
+	\dot q = - \dot \lambda \dfrac{\partial h}{\partial q} = - \dot \lambda \dfrac{\partial f}{\partial q} = \dot \lambda \left(- \dfrac{\partial f}{\partial q}\dfrac{\partial q}{\partial c}\dfrac{\partial c}{\partial \bar \epsilon^p}\right)	
 \end{equation}
 sendo, seus termos, conforme (\ref{eq:f_Mohr_Coulomb}), (\ref{eq:f_Drucker_Prager}), (\ref{eq:f_Tresca}), (\ref{eq:f_von-Mises}) e \autoref{funcao_coesao}, dados por:
 \begin{equation}
-	\label{eq:dfdc}
+	\label{eq:dfdq}
+	\dfrac{\partial f}{\partial q} = -1,
+\end{equation}
+\begin{equation}
+	\label{eq:dqdc}
 	\dfrac{\partial f}{\partial c} = \left\{ \begin{array}{ll} 
-		- 1, & \text{para Tresca} \\
-		- 2, & \text{para von-Mises} \\
-		- \cos(\phi), & \text{para Mohr-Coulomb} \\ 
-		- \dfrac{6\cos(\phi)}{\sqrt{3}(3\pm \sin(\phi))}, & \text{para Drucker-Prager}\end{array}	
+		2, & \text{para von-Mises} \\
+		\dfrac{6\cos{\phi}}{\sqrt{3}(3\pm \sin(\phi))}, & \text{para Drucker-Prager} \\
+		1, & \text{para Tresca} \\ 
+		\cos(\phi), & \text{para Mohr-Coulomb}\end{array}	
 	\right.
 \end{equation}
 e
 \begin{equation}
-	\label{eq:dcde}
+	\label{eq:dqde}
 	\dfrac{\partial c}{\partial \bar \epsilon_{p}} = \left\{ \begin{array}{ll} \dfrac{(c_p-c_i)}{\bar \epsilon^p_I} &  \text{para zona I} \\ 
 	0, & \text{para zona II} \\
 	\dfrac{(c_r-c_p)}{\bar \epsilon^p_{r}-\bar \epsilon^p_{II}}, & \text{para zona III} \\	
