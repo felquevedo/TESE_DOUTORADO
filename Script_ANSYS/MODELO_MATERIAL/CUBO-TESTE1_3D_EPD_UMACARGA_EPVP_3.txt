@@ -79,36 +79,44 @@ arqconv = '3D-CUBO-TESTE1'
 !				
 modmat 	    	= 6			! modelo do material
 !				
-young  	    	= 403			! (2250,466.67) [MPa] módulo de elasticidade (1,2,3,4,5,6)
-nu     	    	= 0.00			! (0.2,0.39)[adm] coeficiente de Poisson (1,2,3,4,5,6)
-yield       	= 1.21			! (18,1.4)[MPa] tensão de escoamento   (2,4)
+young  	    	= 1000			! (2250,466.67) [MPa] módulo de elasticidade (1,2,3,4,5,6)
+nu     	    	= 0.498			! (0.2,0.39)[adm] coeficiente de Poisson (1,2,3,4,5,6)
+yield       	= 1.4			! (18,1.4)[MPa] tensão de escoamento   (2,4)
 youngt      	= 0		! [MPa] módulo de elastoplástico tangente (2,4)
 !
-superficief	= 2			! funçaõ de escoamento: 1-VM, 2-DP, 3-TR, 4-MC (6)
-superficieg 	= 2			! função potencial: 1-VM, 2-DP, 3-TR, 4-MC (6)
-flag	    	= 1			! 1- DP coincide com as bordas externas MC ou VM circunscreve TR (6) 
+superficief	= 4			! funçaõ de escoamento: 1-VM, 2-DP, 3-TR, 4-MC (6)
+superficieg 	= 4			! função potencial: 1-VM, 2-DP, 3-TR, 4-MC (6)
+flag	    	= 0			! 1- DP coincide com as bordas externas MC ou VM circunscreve TR (6) 
 fi	    	= 0			! [graus] angulo de atrito (0 - TR ou VM) (3,6)
 psi	    	= fi			! [graus] angulo de dilatância (3,6)
-c1	    	= 1.21/2		! (18,1.4)[MPa]	coesão inicial (3,6)
-c2	    	= 5.2/2			! (27.5,2.6)[MPa] coesão de pico
-c3	    	= 5.2/2			! (11,1.8)[MPa] coesão residual
+c1	    	= 0.866025 !0.866025			! (18,1.4)[MPa]	coesão inicial (3,6)
+c2	    	= 0.866025 !0.866025			! (27.5,2.6)[MPa] coesão de pico
+c3	    	= 0.866025 !0.866025			! (11,1.8)[MPa] coesão residual
 eps1	    	= 0.010			! (0.005, 0.014)deformação equivalente limite da zona 1
 eps2	    	= 0.050			! (0.007, 0.055) deformação equivalente limite da zona 2
 eps3	    	= 0.065			! (0.042, 0.072)deformação equivalente limite da zona 3
 !
+!
+yield		= 2*c1
 Ep 		= 2*(c2-c1)/(eps1)	! [MPa] módulo plástico tangente
 youngt      	= Ep*young/(young+Ep)	! [MPa] módulo de elastoplástico tangente (2,4)
 !
-superficiefvp 	= 2			! função de escoamento: 1- (MC ou TR), 2- (DP ou VM) (7)
-superficiegvp 	= 2			! função potencial: 1- (MC ou TR), 2- (DP ou VM) (7)
+epst0		= 2*c1/young
+epst1		= 2*c2/young + eps1 !2*(c2-c1)/youngt
+epst2		= 2*c2/young + eps2
+epst3		= 2*c3/young + eps3
+!
+!
+superficiefvp 	= 1			! função de escoamento: 1- (MC ou TR), 2- (DP ou VM) (7)
+superficiegvp 	= 1			! função potencial: 1- (MC ou TR), 2- (DP ou VM) (7)
 flagvp	      	= 1			! 1- DP coincide com as bordas externas MC (7) 
 fivp          	= fi			! [graus] angulo de atrito (0 - TR ou VM) (7)
 psivp         	= psi			! [graus] angulo de dilatância (7)
-cvp 	      	= 1.21/2		! (18,1.4)[MPa]	coesão inicial (7)
+cvp 	      	= 0.866025		! (18,1.4)[MPa]	coesão inicial (7)
 n1	      	= 1			! [adm] expoente do modelo de Perzyna
 eta           	= 1E7/(60*60*24)	! [dia] constante de viscosidade dinâmica
 f0     	      	= 1			! [MPa] valor de referência
-thetavp       	= 1			! forma de integração: 0 - totalmente explícito, 1 - semi-implicito
+thetavp       	= 0			! forma de integração: 0 - totalmente explícito, 1 - semi-implicito
 !
 gamma	      	= ((2*cvp/f0)**n1)/eta 	! [dias^-1] coeficiente Gamma do modelo de Perzyna Ansys
 m  	      	= 1/n1			! [adm] coeficiente m do modelo de Perzyna do ANSYS
@@ -120,12 +128,12 @@ lc 		= 1			! [cm] lado c do cubo
 !
 ! Parâmetros do modelo MEF
 modelem 	= 1			! 1 - SOLID185, 2 - SOLID186
-nla 		= 1			! [un] numero de elementos em la
-nlb 		= 1			! [un] numero de elementos em lb
-nlc 		= 1			! [un] numero de elementos em lc
+nla 		= 2			! [un] numero de elementos em la
+nlb 		= 2			! [un] numero de elementos em lb
+nlc 		= 2			! [un] numero de elementos em lc
 !
 ! Dados das condições de contorno 
-tipo_problema	 = 1			! 1 - 3D, 2 - EPD, 3 - AXI
+tipo_problema	 = 3			! 1 - 3D, 2 - EPD, 3 - AXI
 solicitacao 	 = -0.1			! (0.05, 0.1)deslocamento uniaxial aplicado no passo
 pr		 = 0			! (2,0.5) [Mpa] tensões iniciais
 vkbc		 = 0			! 0 - solicitação linearmente interpolada no passo, 1 - solicitação linearmente interpolada no primeiro subpasso
@@ -194,10 +202,10 @@ PARSAV,ALL,parametros,txt		! salva os parâmetros da análise
 	!TB,PLASTIC,,,,MISO
 	TB,MISO,1,1,5,0 
 	TBTEMP,0
-	TBPT,,0.003,2*c1
-	TBPT,,0.015,2*c2
-	TBPT,,0.058,2*c2 
-	TBPT,,0.075,2*c3
+	TBPT,,epst0,2*c1
+	TBPT,,epst1,2*c2
+	TBPT,,epst2,2*c2 
+	TBPT,,epst3,2*c3
 	TBPT,,0.1,2*c3    
 *ELSEIF,modmat,eq,23,then
 	! Definindo o material viscoplastico perzyna VM do Ansys
@@ -217,7 +225,7 @@ PARSAV,ALL,parametros,txt		! salva os parâmetros da análise
 	MPDATA,PRXY,1,,nu 	
 	TB,DP,1  
 	TBTEMP,0
-	TBDATA,1,yield/2,fi,psi,,,
+	TBDATA,1,yield,fi,psi,,,
 *ELSEIF,modmat,eq,4,then
 	! Definindo material usermat3D VM do Ansys
 	TB,USER,1,2,5
@@ -232,13 +240,12 @@ PARSAV,ALL,parametros,txt		! salva os parâmetros da análise
 	TB,STATE,1,,8	
 *ELSEIF,modmat,eq,6,then
 	! Definindo material usermat3D_EP
-	TB,USER,1,2,16
+	TB,USER,1,2,14
 	TBTEMP,1.0 		
 	TBDATA,1,modmat,young,nu
 	TBDATA,4,superficief,superficieg
 	TBDATA,6,flag,fi,psi,
 	TBDATA,9,c1,c2,c3,eps1,eps2,eps3
-	TBDATA,15,yield,youngt
 	TB,STATE,1,,20	
 *ELSEIF,modmat,eq,7,then
 	! Definindo material usermat3D_VP
@@ -393,7 +400,7 @@ SOLVE
 !
 ! Define o tempo
 DELTIM,dt,dt,dt,OFF		! dtime incremento do tempo do passo, incremento mínimo, incremento máximo, chave (ON usa dtime do passo anterior se AUTOTS for ON, OFF - usa dtime no inicio de cada passo)	
-TIME,t			! primeiro tempo
+TIME,t				! primeiro tempo
 !
 ! Aplica a solicitação
 KBC,vkbc

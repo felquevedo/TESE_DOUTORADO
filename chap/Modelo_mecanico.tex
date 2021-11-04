@@ -369,7 +369,7 @@ em que $\hl = - \partial h / \partial \ql$ é um vetor que contém os gradientes
 	\end{center}
 	\caption{\label{tipos_endurecimento}Representação dos tipos de endurecimento no plano desviador e na curva tensão-deformação: a) elastoplasticidade perfeita, b) endurecimento isotrópico e c) endurecimento cinemático (adaptado de: \citeauthor{Neto2008}, \citeyear{Neto2008}, p. 178, 179, 186)}
 \end{figure}
-Em um primeiro momento, no presente trabalho, não é considerado a influência da lei de endurecimento e as forças termodinâmicas serão constantes ao longo do histórico de deformações, ou seja, $\dot \ql = \underline 0$. Nesse caso, tem-se a elastoplasticidade perfeita. Em um segundo momento é considerado a lei de endurecimento/amolecimento associada ($h = f$) e isotrópica. A força termodinâmica associada é dada pela parcela referente a coesão nas superfícies de escoamento, ou seja, $q = \chi c(\bar \varepsilon^p)$ em que:
+Em um primeiro momento, no presente trabalho, não é considerado a influência da lei de endurecimento e as forças termodinâmicas serão constantes ao longo do histórico de deformações, ou seja, $\dot \ql = \underline 0$. Nesse caso, tem-se a elastoplasticidade perfeita. Em um segundo momento é considerado a lei de endurecimento/amolecimento associada ($h = f$) e isotrópica. Portanto, a força termodinâmica associada é dada exclusivamente pela parcela que não depende da parte hidrostática ($I_1$) e nem desviadora ($J_2$) nas superfícies de escoamento. Essa força será controlada pelo parâmetro coesivo, de modo que $q = \chi c(\bar \varepsilon^p)$ em que:
 \begin{equation}
 	\label{eq:dfdc}
 	\chi = \left\{ \begin{array}{ll} 
@@ -382,7 +382,7 @@ Em um primeiro momento, no presente trabalho, não é considerado a influência 
 
 
 
-sendo a deformação plástica equivalente $\bar \epsilon^p$ a variável de estado. Para tanto, é considerado uma função coesiva linear definida por partes, conforme \autoref{funcao_coesao}, de modo a representar o endurecimento/amolecimento característico do maciço, tal como vistos no Capítulo 4.3.
+sendo a deformação plástica equivalente $\bar \epsilon^p$ a variável de estado. Para a coesão, é considerado uma função linear definida por partes, conforme \autoref{funcao_coesao}, de modo a representar o endurecimento/amolecimento característico do maciço, tal como vistos no Capítulo 4.3.
 \begin{figure}[H]
 	\begin{center}
 		\includegraphics[scale = 1.0]{0510-lei de endurecimento ou amolecimento_coesao.pdf}
@@ -397,16 +397,7 @@ Portanto, usando a regra da cadeia, escreve-se (\ref{eq:amolecimento}) da seguin
 sendo, seus termos, conforme (\ref{eq:f_Mohr_Coulomb}), (\ref{eq:f_Drucker_Prager}), (\ref{eq:f_Tresca}), (\ref{eq:f_von-Mises}) e \autoref{funcao_coesao}, dados por:
 \begin{equation}
 	\label{eq:dfdq}
-	\dfrac{\partial f}{\partial q} = -1,
-\end{equation}
-\begin{equation}
-	\label{eq:dqdc}
-	\dfrac{\partial f}{\partial c} = \left\{ \begin{array}{ll} 
-		2, & \text{para von-Mises} \\
-		\dfrac{6\cos{\phi}}{\sqrt{3}(3\pm \sin(\phi))}, & \text{para Drucker-Prager} \\
-		1, & \text{para Tresca} \\ 
-		\cos(\phi), & \text{para Mohr-Coulomb}\end{array}	
-	\right.
+	\dfrac{\partial f}{\partial q} = -1,~\dfrac{\partial q}{\partial c} = \chi,
 \end{equation}
 e
 \begin{equation}

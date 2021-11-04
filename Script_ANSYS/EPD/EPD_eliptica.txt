@@ -1,0 +1,463 @@
+!***********************************************************!
+!** PROGRAMA EPD ELIPTICA		                  **!
+!** Versão: 1.0						  **!
+!**                                                       **!
+!** Objetivo: calcula túnel estado plano de deformações   **!
+!**                                                       **!
+!** Programador: Felipe Quevedo                           **!
+!** Situação   : em teste (01/09/2021)                    **!
+!** Unidades   : MPa,m,s                                  **!
+!**                                                       **!
+!***********************************************************!
+!
+!***********************************************************!
+! 1. Inicializando o Ansys                                  !
+!***********************************************************!
+FINISH 
+/CLEAR,NOSTART
+!
+!***********************************************************!
+! 2. Dados de entrada                                       !
+!***********************************************************!
+!
+! Parametros geométricos
+Rhi		= 1		! [m] raio horizontal externo do túnel
+Rvi		= 1		! [m] raio vertical externo do túnel
+esp		= 0.1		! [m] espessura do revestimento
+R1		= 10*Rvi	! [m] raio da região de refinamento da malha próxima do túnel
+Lx		= 20*Rvi	! [m] dimensão da base do domínio
+Ly		= 20*Rvi	! [m] dimensão da altura do domínio
+!
+! Carga na fronteira
+pi		= 0		! [MPa] pressão em Ri
+pv		= 0.5		! [MPa] pressão vertical
+ph		= 0.5		! [MPa] pressão horizontal
+!
+! Material maciço
+mod1		= 1		! 1 - elastico, 2 - VM, 3 - VP
+E1 		= 500		! [MPa] modulo elasticidade (1,2,3)
+nu1 		= 0.498		! [adm] coeficiente de poisson (1,2,3)
+sy1 		= 100		! [MPa] tensão de escoamento (2,3)
+tg1		= 0		! [MPa] módulo tangente bilinear (2,3)
+m1		= 1		! [adm] coeficiente de viscosidade (3)
+gamma1		= 1.157407	! [d^-1] coeficiente de viscosidade (3)
+!
+! Dados da configuração da solução 
+vkbc		 = 1		! 0 - solicitação linearmente interpolada no passo, 1 - solicitação linearmente interpolada no primeiro subpasso
+t1		 = 1		! [incremento de tempo ou partes inteiras da solicitação] do passo
+dt 		 = t1/10	! [incremento de tempo ou incremento de partes inteiras da solicitação] a cada subpasso
+!
+! Parametros para discretização
+elem 		= 2		! 1 - PLANE182, 2 - PLANE183, 3 - PLANE42
+nrev		= 1 		! [un] divisões na espessura do revestimento
+nRi		= 10		! [un] divisões na interface entre o túnel e o maciço
+nR1		= 15		! [un] divisões ao longo do raio da região de refinamento
+mR1		= 15		! [%] taxa de crescimento de nr1
+nL1		= 5		! [un] divisões na base fora da região de refinamento
+mL1		= 1.2		! [%] taxa de crescimento de mx1
+nRv		= nRi/2		! [un] divisões na vertical da parte interna da seção do túnel
+nRh		= nRi/2		! [un] divisões na horizontal da parte interna da seção do túnel
+!
+! Parametros para pós-processamento
+arqconv = 'D1-ES1-ER1-P1-C1-V1'	! Nome do arquivo de saida de resultados
+!
+! Salva os parâmetros em um arquivo de texto
+PARSAV,ALL,parametros,txt		! salva os parâmetros da análise
+!
+!
+!
+!
+!------------------FIM ENTRADA DE DADOS---------------------!
+!
+!
+!
+!
+!***********************************************************!
+! 3. Pré-Processamento                                      !
+!***********************************************************!
+/PREP7
+!
+!***********************************************************!
+! 3.1 Alguns parâmetros calculados                          !
+!***********************************************************!
+ratio		= Rvi/Rhi		
+Lx1		= Lx-R1		
+Ly1		= Ly-R1
+!
+!***********************************************************!
+! 3.2 Configurando elemento finito                          !
+!***********************************************************!
+*IF,elem,EQ,1,THEN
+	ET,1,PLANE182
+	KEYOPT,1,1,0
+	KEYOPT,1,3,2
+	KEYOPT,1,6,0
+*ELSEIF,elem,EQ,2,THEN
+	ET,1,PLANE183
+	KEYOPT,1,1,0
+	KEYOPT,1,3,2
+	KEYOPT,1,6,0
+*ELSEIF,elem,EQ,3,THEN
+	ET,1,PLANE42
+	KEYOPT,1,1,0
+	KEYOPT,1,2,1
+	KEYOPT,1,3,2
+	KEYOPT,1,5,0
+	KEYOPT,1,6,0
+*ENDIF
+!
+!***********************************************************!
+! 3.3 Configurando o material		                    !
+!***********************************************************!
+*IF,mod1,EQ,1,THEN 
+	MPTEMP,1,0 
+	MPDATA,EX,1,,E1
+	MPDATA,PRXY,1,,nu1
+	MPDATA,DENS,1,,dens1 
+*ELSEIF,mod1,EQ,2,THEN
+	MPTEMP,1,0  
+	MPDATA,EX,1,,E1
+	MPDATA,PRXY,1,,nu1
+	MPDATA,DENS,1,,dens1 
+	TB,BISO,1,1,2,  
+	TBTEMP,0
+	TBDATA,,sy1,tg1,,,,   
+*ELSEIF,mod1,EQ,3,THEN
+	MPTEMP,1,0  
+	MPDATA,EX,1,,E1
+	MPDATA,PRXY,1,,nu1
+	MPDATA,DENS,1,,dens1 
+	TB,BISO,1,1,2,  
+	TBTEMP,0
+	TBDATA,,sy1,tg1,,,,   
+	TB,RATE,1,1,2,1
+	TBTEMP,0
+	TBDATA,,m1,gamma1,,,,,
+*ENDIF
+!
+!***********************************************************!
+! 3.4 Criando o modelo sólido	                            !
+!***********************************************************!
+!
+! Criando pontos chaves
+K,1,0,0,0
+K,2,Rhi-esp,0,0
+K,3,Rhi,0,0
+K,4,R1,0,0
+K,5,Lx,0,0
+K,6,0,Rvi-esp,0
+K,7,0,Rvi,0
+K,8,0,R1,0
+K,9,0,Ly,0
+K,10,Lx,Ly
+!
+! criando linhas
+L,1,2,nRh
+L,2,3,nrev
+L,3,4,nR1,mR1
+L,4,5,nL1,mL1
+LOCAL,11,1,,,,,,,ratio,
+L,6,2,nRi
+L,7,3,nRi
+LOCAL,11,1,,,,,,,1,
+L,8,4,nRi
+LOCAL,11,0
+L,9,10,nRi/2
+L,1,6,nRv
+L,6,7,nrev
+L,7,8,nR1,mR1
+L,8,9,nL1,mL1
+L,5,10,nRi/2
+!
+! criando areas
+LSEL,ALL
+LSEL,S,LINE,,1
+LSEL,A,LINE,,5
+LSEL,A,LINE,,9
+AL,ALL
+!
+LSEL,ALL
+LSEL,S,LINE,,2
+LSEL,A,LINE,,6
+LSEL,A,LINE,,10
+LSEL,A,LINE,,5
+AL,ALL
+!
+LSEL,ALL
+LSEL,S,LINE,,3
+LSEL,A,LINE,,7
+LSEL,A,LINE,,11
+LSEL,A,LINE,,6
+AL,ALL
+!
+LSEL,ALL
+LSEL,S,LINE,,4
+LSEL,A,LINE,,13
+LSEL,A,LINE,,8
+LSEL,A,LINE,,12
+LSEL,A,LINE,,7
+AL,ALL
+!
+!***********************************************************!
+! 3.5 Aplicando condições de contorno                       !
+!***********************************************************!
+ALLSEL,ALL
+LSEL,S,LOC,Y,0,Ly,0
+LSEL,R,LOC,X,0,0,0
+DL,ALL, ,SYMM 
+!
+ALLSEL,ALL
+LSEL,S,LOC,X,0,Lx,0
+LSEL,R,LOC,Y,0,0,0
+DL,ALL, ,SYMM 
+!
+ALLSEL,ALL
+LSEL,S,LOC,X,0,Lx,0
+LSEL,R,LOC,Y,Ly,Ly,0
+SFL,ALL,PRESS,pv 
+!
+ALLSEL,ALL
+LSEL,S,LOC,Y,0,Ly,0
+LSEL,R,LOC,X,Lx,Lx,0
+SFL,ALL,PRESS,ph 
+!
+ALLSEL,ALL
+LSEL,S,LINE,,5
+SFL,ALL,PRESS,pi
+!
+!***********************************************************!
+! 3.6 Criando a malha			                    !
+!***********************************************************!
+ALLSEL,ALL
+LSEL,S,LINE,,13
+LSEL,A,LINE,,8
+LCCAT,ALL
+!
+ALLSEL,ALL
+LSEL,S,LINE,,1
+LSEL,A,LINE,,9
+LCCAT,ALL
+!
+ALLSEL,ALL
+MSHAPE,0,2D
+AMESH,ALL
+!
+!***********************************************************!
+! 3.7 Criando grupos de elementos da região escavada        !
+!***********************************************************!
+!
+! Criando grupos de elementos da escavação
+ALLSEL,ALL
+ASEL,S,AREA,,1
+ESLA,S
+CM,esc1,ELEM
+!
+! Criando grupos de elementos da região do revestimento
+ALLSEL,ALL
+ASEL,S,AREA,,2
+ESLA,S
+CM,rev1,ELEM
+!
+!***********************************************************!
+! 4. Solução			   			    !
+!***********************************************************!
+/SOLU	
+!
+!***********************************************************!
+! 4.1 Configuração da solução   			    !
+!***********************************************************!
+NLGEOM,OFF			! OFF - Ignora grandes deformações, ON - ativa
+NROPT,FULL			! NR - FULL, MODI, INIT, AUTO 			
+OUTRES,ALL,ALL			! Guarda todos os itens de solução a cada subpasso
+OUTRES,SVAR,ALL			! Guarda as variáveis de estado da Usermat a cada subpasso
+PSCONTROL,ALL,OFF		! OFF - Desativa paralelização, ON - liga paralelização
+!AUTOTS,OFF			! ON - Liga subpassos automáticos
+!LNSRCH,1			! 1 - Ativa o recurso de Linesearch
+!CNVTOL,F, ,0.0000001,2, , 	! Tolerância do criterio de convergencia
+!CNVTOL,U, ,0.0000001,0, ,	! Tolerância do critério de convergência
+!
+!***********************************************************!
+! 4.2 Primeira solução 		   			    !
+!***********************************************************!
+ANTYPE,0,NEW			! 0 - Análise estática, New - nova
+!
+! Eliminando elementos da região do túnel
+CMSEL,S,esc1,ELEM
+CMSEL,A,rev1,ELEM	
+EKILL,ALL
+!
+! Define o tempo
+DELTIM,dt,dt,dt,OFF		! dtime incremento do tempo do passo, incremento mínimo, incremento máximo, chave (ON usa dtime do passo anterior se AUTOTS for ON, OFF - usa dtime no inicio de cada passo)	
+TIME,t1
+KBC,vkbc
+!
+! Resolve	
+ALLSEL,ALL
+SOLVE   
+FINISH 
+!
+!***********************************************************!
+! 5. Pós processamento                                      !
+!***********************************************************!
+!
+!***********************************************************!
+! 5.1 Alterando a cor dos elementos para pós processamento  !
+!***********************************************************!
+ALLSEL,ALL
+ASEL,S,AREA,,1
+ASEL,A,AREA,,3
+ESLA,S
+/COLOR,ELEM,13,ALL
+!
+ALLSEL,ALL
+ASEL,S,AREA,,2
+ASEL,A,AREA,,4
+ESLA,S
+/COLOR,ELEM,14,ALL
+ALLSEL,ALL
+! 
+/RGB,INDEX,100,100,100, 0   
+/RGB,INDEX, 80, 80, 80,13   
+/RGB,INDEX, 60, 60, 60,14   
+/RGB,INDEX, 0, 0, 0,15   
+!
+!***********************************************************!
+! 5.2 Saida de gráficos                                     !
+!***********************************************************!
+/POST1 
+RSYS,1		! sistema cilindrico para os resultados
+ESEL,S,LIVE	! só elementos ativos
+!
+! selecionando nós
+ALLSEL,ALL 
+NSEL,S,LOC,Y,0,0
+NSEL,R,LOC,X,Rhi,Lx	
+!
+! dimensionando arrays
+*GET,ncount,NODE,,COUNT			! numero de nós selecionado
+*GET,ntotal,NODE,,NUM,MAX		! número total de nós
+*DIM,results,TABLE,ncount,6		! dimensiona tabela de resultados
+*DIM,coordx,ARRAY,ntotal		! dimensiona um array de 1 até ntotal 
+*DIM,u_x,ARRAY,ntotal			! dimensiona um array ux de 1 até ntotal
+*DIM,sx,ARRAY,ntotal			! dimensiona um array sx de 1 até ntotal
+*DIM,sy,ARRAY,ntotal			! dimensiona um array sy de 1 até ntotal
+*DIM,sz,ARRAY,ntotal			! dimensiona um array sz de 1 até ntotal
+
+*DIM,n_sel,ARRAY,ntotal			! dimensiona um array nsel de 1 até ntotal
+*VGET,results(1,1),node,,nlist		! coloca lista de nós em ordem na primeira coluna de results
+!
+! preenchendo o array com as coordenadas
+*VGET,n_sel(1),NODE,1,NSEL		! marca com 1 os nós selecionados nas linhas de nsel
+*VGET,coordx(1),NODE,1,LOC,x		! coloca as coordenadas x dos nós em ny
+*VOPER,coordx(1),coordx(1),MULT,1	! multiplica as coordenadas por 1
+*VMASK,n_sel(1)				! define nsel como sendo a máscara
+*VFUN,results(1,2),COMP,coordx(1)	! coloca em results apenas os que tem máscara "true"
+SUBSET,LAST				! pega o último subpasso de resultados	
+!
+! Preenchendo o array com os deslocamentos radiais
+*VMASK,n_sel(1)				! define nsel como máscara
+*VGET,u_x(1),NODE,1,U,X			! coloca em ux os resultados nodais	
+*VOPER,u_x(1),u_x(1),MULT,-1		! troca o sinal
+*VMASK,n_sel(1)				! define nsel como sendo a máscara		
+*VFUN,results(1,3),COMP,u_x(1)		! coloca o ux nos resultados
+!
+! Preenchendo o array com as tensões radiais
+*VMASK,n_sel(1)				! define nsel como máscara
+*VGET,sx(1),NODE,1,S,X			! coloca em sx os resultados nodais	
+*VOPER,sx(1),sx(1),MULT,1		! não troca o sinal
+*VMASK,n_sel(1)				! define nsel como sendo a máscara		
+*VFUN,results(1,4),COMP,sx(1)		! coloca o sx no results
+!
+! Preenchendo o array com as tensões ortoradiais
+*VMASK,n_sel(1)				! define nsel como máscara
+*VGET,sy(1),NODE,1,S,Y			! coloca em sy os resultados nodais	
+*VOPER,sy(1),sy(1),MULT,1		! não troca o sinal
+*VMASK,n_sel(1)				! define nsel como sendo a máscara		
+*VFUN,results(1,5),COMP,sy(1)		! coloca o sy no results
+!
+! Preenchendo o array com as tensões em z
+*VMASK,n_sel(1)				! define nsel como máscara
+*VGET,sz(1),NODE,1,S,Z			! coloca em sz os resultados nodais	
+*VOPER,sz(1),sz(1),MULT,1		! não troca o sinal
+*VMASK,n_sel(1)				! define nsel como sendo a máscara		
+*VFUN,results(1,6),COMP,sz(1)		! coloca o sz no results
+!
+! ordena a tabela de acordo com a segunda coluna (das coordenadas)
+*MOPER,ORDER,results,SORT,results(1,2)
+!
+! Coleta o maior valor de coordenada e deslocamento
+*VSCFUN,uxmax,max,results(1,3)
+*VSCFUN,uxmin,max,results(1,3)
+*VSCFUN,sxmax,max,results(1,4)
+*VSCFUN,sxmin,min,results(1,4)
+*VSCFUN,symax,max,results(1,5)
+*VSCFUN,symin,min,results(1,5)
+*VSCFUN,szmax,max,results(1,6)
+*VSCFUN,szmin,min,results(1,6)
+!
+! formatando grafico de deslocamentos
+/RGB,INDEX,100,100,100,0	
+/RGB,INDEX,0,0,0,15 
+/AXLAB,X,r [m]			
+/AXLAB,Y,-u(r) 	
+/XRANGE,0,Lx		
+/YRANGE,uxmax*1.2,uxmin*1.2	
+/GROPT,DIVY,20			
+/GROPT,DIVX,10			
+/GROPT,DIG1,3			
+/GTHK,CURVE,1 			
+/PLOPTS,INFO,off
+*VPLOT,results(1,2),results(1,3)
+!
+! formatando grafico de tensoes radiais
+/RGB,INDEX,100,100,100,0	
+/RGB,INDEX,0,0,0,15 
+/AXLAB,X,r [m] 			
+/AXLAB,Y,sx(r) [MPa] 	
+/XRANGE,0,Lx		
+/YRANGE,sxmax*1.2,sxmin*1.2	
+/GROPT,DIVY,20			
+/GROPT,DIVX,10			
+/GROPT,DIG1,3			
+/GTHK,CURVE,1 			
+/PLOPTS,INFO,off
+*VPLOT,results(1,2),results(1,4)
+!
+! formatando grafico de tensoes ortorradiais
+/RGB,INDEX,100,100,100,0	
+/RGB,INDEX,0,0,0,15 
+/AXLAB,X,r [m] 			
+/AXLAB,Y,sy(r) [MPa] 	
+/XRANGE,0,Lx		
+/YRANGE,symax*1.2,symin*1.2	
+/GROPT,DIVY,20			
+/GROPT,DIVX,10			
+/GROPT,DIG1,3			
+/GTHK,CURVE,1 			
+/PLOPTS,INFO,off
+*VPLOT,results(1,2),results(1,5)
+!
+! formatando grafico de tensoes em z
+/RGB,INDEX,100,100,100,0	
+/RGB,INDEX,0,0,0,15 
+/AXLAB,X,r [m] 			
+/AXLAB,Y,sz(r) [MPa] 	
+/XRANGE,0,Lx		
+/YRANGE,szmax*1.2,szmin*1.2	
+/GROPT,DIVY,20			
+/GROPT,DIVX,10			
+/GROPT,DIG1,3			
+/GTHK,CURVE,1 			
+/PLOPTS,INFO,off
+*VPLOT,results(1,2),results(1,6)
+!
+
+*CREATE,ansuitmp
+*CFOPEN,%arqconv%,'txt',' '
+*VWRITE,results(1,2),results(1,3),results(1,4),results(1,5),results(1,6), , , , , ,   
+(F10.4, '   ' , E10.4, '   ' , E10.4, '   ' , E10.4, '   ' , E10.4, '   ' , E10.4)  
+*CFCLOS 
+*END
+/INPUT,ansuitmp 
+/PLOPTS,INFO,on	
+
