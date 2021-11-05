@@ -209,7 +209,7 @@ e o conjunto de tensões \textbf{plasticamente admissíveis (P. A.)}:
 A \autoref{dominio_plasticamente_admissivel} ilustra de uma forma genérica esse domínio plasticamente admissível no espaço das tensões principais.
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[scale = 1.0]{0504-dominio generico plasticamente admissivel.pdf}
+		\includegraphics[scale = 1.0]{0504-dominio generico plasticamente admissivel_2.pdf}
 	\end{center}
 	\caption{\label{dominio_plasticamente_admissivel}Domínio genérico plasticamente admissível $\Gamma$ no espaço das tensões principais}
 \end{figure}
@@ -235,47 +235,48 @@ sendo $(\xi_H,\rho_H,\theta)$ as coordenadas de Haigh-Westergaard (em que $\thet
 	\sll = \sigmall: \left[ \Umllll-\Umll \otimes \Umll \right] = \sigmall - p\Umll.
 \end{equation}
 
-Quando a função de escoamento não depende de $I_1$   diz-se que a plasticidade é independente da pressão hidrostática, sendo determinada apenas pelo estado de tensões ao longo do plano desviador.
-
-Diversas funções de escoamentos podem ser obtidas na literatura, tal como as apresentadas no resumo de \citeonline{Viladkar1995} que reúne tanto as funções de escoamentos clássicas (von-Mises, Tresca, Drucker-Prager, Mohr-Coulomb) quanto mais sofisticadas (\textit{Cap Models, Critical State Model, Desai’s Generlized Model}). O presente trabalho utilizará as funções de escoamentos de Drucker-Prager (DP) e Mohr-Coulomb (MC) que compreendem também generalizações das funções de von-Mises (VM) e Tresca (TR), respectivamente (\autoref{Funções_escoamento}).
+Quando a função de escoamento não depende de $I_1$   diz-se que a plasticidade é independente da pressão hidrostática, sendo determinada apenas pelo estado de tensões ao longo do plano desviador. Diversas funções de escoamentos podem ser obtidas na literatura, tal como as apresentadas no resumo de \citeonline{Viladkar1995} que reúne tanto as funções de escoamentos clássicas (von-Mises, Tresca, Drucker-Prager, Mohr-Coulomb) quanto mais sofisticadas (\textit{Cap Models, Critical State Model, Desai’s Generlized Model}). O presente trabalho utilizará a função de escoamento de Drucker-Prager (DP) que compreende uma generalização da função de von-Mises (VM) para abarcar a dependência da pressão hidrostática. Essa superfície tem vantagens numéricas pelo fato de não ter vértices e poder aproximar outras superfícies comuns utilizadas para geomateriais (como, por exemplo, Mohr-Coulomb (MC)). (\autoref{Funções_escoamento}).
 \begin{figure}[H]
 	\begin{center}
 		\includegraphics[scale = 1.0]{0505-funções de escoamento.pdf}
 	\end{center}
 	\caption{\label{Funções_escoamento}Funções de escoamento de a) Drucker-Prager e b) Mohr-Coulomb  (adaptado de: \citeonline[p. 824]{Zienkiewicz1974})}
 \end{figure}
-A função de escoamento de Mohr-Coulomb, representada através de invariantes, é dada por \cite[p. 166]{Neto2008}:
-\begin{equation}
-	\label{eq:f_Mohr_Coulomb}
-	f(\sigmall,\ql) = f(I_1,J_2,\theta,c,\phi) = \dfrac{\sin(\phi)}{3}I_1 + \left(\cos(\theta)-\dfrac{1}{\sqrt{3}}\sin(\theta)\sin(\phi)\right)\sqrt{J_2}-c\cos(\phi) 
-\end{equation}
-em que $c$ é a coesão e $\phi$ o ângulo de atrito. De forma análoga, a função de escoamento de Drucker-Prager é dada por \cite[p. 167]{Neto2008}:
+A expressão da função de escoamento de Drucker-Prager é dada por (adaptado de \citeauthor{Bernaud1991}, \citeyear{Bernaud1991}, p. 88-89):
 \begin{equation}
 	\label{eq:f_Drucker_Prager}
-	f(\sigmall,\ql) = f(I_1,J_2,\beta,k) = \beta I_1 +\sqrt{J_2}-k
+	f(\sigmall,\ql) = f(I_1,J_2,\beta_i) = \beta_1 I_1 +\beta_2 \sqrt{J_2}-\beta_3
 \end{equation}
-em que os parâmetros $\beta$ e $k$ podem ser relacionados com a coesão e o ângulo de atrito do modelo de Mohr-Coulomb. Para o caso em que a superfície de Drucker-Prager coincide com as bordas mais externas da superfície de Mohr-Coulomb tem-se \cite[p. 167]{Neto2008}:
+em que os parâmetros $\beta_i$ são relacionados com a coesão $c$ e o ângulo de atrito $\phi$ do modelo de Mohr-Coulomb. Para o caso em que a superfície de Drucker-Prager coincide com a superfície de Mohr-Coulomb pelas bordas mais externas (DP-I), tem-se (adaptado de \citeauthor{Bernaud1991}, \citeyear{Bernaud1991}, p. 88-89):
 \begin{equation}
-	\label{eq:f_DP_bordasexternas_MC}
-	\beta = \dfrac{2\sin{\phi}}{\sqrt{3}(3-\sin(\phi))}, ~~~ k = \dfrac{6\cos{\phi}}{\sqrt{3}(3-\sin(\phi))}c,
+	\label{eq:f_DP_circunscrita_MC}
+	\beta_1 = \dfrac{(k-1)}{3}, ~~~ \beta_2 = \dfrac{(k+2)}{\sqrt{3}}, ~~~
+	\beta_3 = 2\sqrt{k}~c
 \end{equation}
-e para o caso em que a superfície de Drucker-Prager coincide com as bordas mais internas da superfície de Mohr-Coulomb, tem-se \cite[p. 167]{Neto2008}:
+em que $k = (1+sin{\phi})/(1-sin{\phi})$ é o coeficiente de empuxo. Para o caso em que a superfície de Drucker-Prager está inscrita na superfície de Mohr-Coulomb (DP-II), tem-se (adaptado de \citeauthor{Bernaud1991}, \citeyear{Bernaud1991}, p. 88-89):
 \begin{equation}
-	\label{eq:f_DP_bordasinternas_MC}
-	\beta = \dfrac{2\sin{\phi}}{\sqrt{3}(3+\sin(\phi))}, ~~~ k = \dfrac{6\cos{\phi}}{\sqrt{3}(3+\sin(\phi))}c.
+	\label{eq:f_DP_inscrita_MC}
+	\beta_1 = \dfrac{(k-1)}{3}, ~~~ \beta_2 = \dfrac{(2k+1)}{\sqrt{3}}, ~~~
+\beta_3 = 2\sqrt{k}~c
+\end{equation}
+Encontra-se ainda um terceiro caso em que a superfície de Drucker-Prager coincide com as bordas mais internas da superfície de Mohr-Coulomb (DP-III) \cite[p. 167]{Neto2008}:
+\begin{equation}
+	\label{eq:f_DP_bordainterna_MC}
+	\beta_1 = \dfrac{2\sin{\phi}}{\sqrt{3}(3+\sin(\phi))}, ~~~ \beta_2 = 1, ~~~ \beta_3 = \dfrac{6\cos{\phi}}{\sqrt{3}(3+\sin(\phi))}c.
 \end{equation}
 
-Essa aproximação pode ser vista no plano desviador conforme a \autoref{DP-MC-plano_desviador}.
+
+Essas aproximações podem ser vistas no plano desviador conforme a \autoref{DP-MC-plano_desviador}.
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[scale = 1.0]{0506-representação no plano desviador da aproximação da superficie de MC com DP.pdf}
+		\includegraphics[scale = 1.0]{0506-representação no plano desviador da aproximação da superficie de MC com DP_2.pdf}
 	\end{center}
 	\caption{\label{DP-MC-plano_desviador}Representação no plano desviador da aproximação da superfície de Mohr-Coulomb pela superfície de Drucker-Prager  (adaptado de: \citeauthor{Neto2008}, \citeyear{Neto2008}, p. 169)}
 \end{figure}
-Quando $\phi = 0$ a superfície de Mohr-Coulomb e a de Drucker-Prager se tornam independentes da pressão hidrostática e se particularizam, respectivamente, para a superfície de Tresca e von-Mises (adaptado de: \citeauthor{Neto2008}, \citeyear{Neto2008}, p. 162-163):
+Quando $\phi = 0$ a superfície de Mohr-Coulomb e a de Drucker-Prager se tornam independentes da pressão hidrostática e se particularizam, respectivamente, para a superfície de Tresca e von-Mises (adaptado de: \citeauthor{Neto2008}, \citeyear{Neto2008}, p. 160, 162-163):
 \begin{equation}
 	\label{eq:f_Tresca}
-	f(\sigmall,\ql) = f(J_2,\theta,c) = \sqrt{J_2}\cos{\theta} - c,
+	f(\sigmall,\ql) = f(J_2,\theta,c) = 2\sqrt{J_2}\cos{\theta} - 2c,
 \end{equation}
 \begin{equation}
 	\label{eq:f_von-Mises}
@@ -287,14 +288,14 @@ Igualando-se as expressões (\ref{eq:f_von-Mises}) e (\ref{eq:f_Tresca}) à zero
 	\label{eq:ctr_cvm}
 	c_{\text{TR}} = \dfrac{2}{\sqrt{3}}\cos(\theta)c_{\text{VM}} = \left\{
 	\begin{array}{lcl}
-		\dfrac{2}{\sqrt{3}}c_{\text{VM}}, ~~~\text{se}~\theta = 0^\circ \\ 
-		c_{\text{VM}},~~~~~~~~~\text{se}~\theta = 30^\circ
+		\dfrac{2}{\sqrt{3}}c_{\text{VM}}, ~~~\text{se}~\theta = 0^\circ ~~~ \text{(VM) inscrito em (TR)} \\ 
+		c_{\text{VM}},~~~~~~~~~\text{se}~\theta = \pm 30^\circ  ~~~ \text{(VM) circunscreve (TR)}
 	\end{array}
 	\right..
 \end{equation}
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[scale = 1.0]{0507-representação no plano desviador da aproximação da superfície de TR e VM.pdf}
+		\includegraphics[scale = 1.0]{0507-representação no plano desviador da aproximação da superfície de TR e VM_2.pdf}
 	\end{center}
 	\caption{\label{TR-VM-plano_desviador}Representação no plano desviador da aproximação da superfície de Tresca pela superfície de von-Mises (adaptado de: \citeauthor{Neto2008}, \citeyear{Neto2008}, p. 159, 164)}
 \end{figure}
@@ -327,31 +328,9 @@ Tal como a função de escoamento, o potencial plástico geralmente é descrito 
 		C_1 = \dfrac{\partial g}{\partial I_1},~~~C_2=\dfrac{\partial g}{\partial \sqrt{J_2}}-\dfrac{\tan{(3\theta)}}{\sqrt{J_2}}\dfrac{\partial g}{\partial \theta},~~~C_3 = -\dfrac{\sqrt{3}}{2\cos{(3\theta})}\dfrac{1}{J_2^{3/2}}\dfrac{\partial g}{\partial \theta},
 	\end{array}
 \end{equation}
-sendo que nessa descrição, apenas as constantes $C_1$, $C_2$  e $C_3$ são particularidades das diferentes superfícies potenciais, conforme \autoref{tab:c1c2c3}. 
+sendo que nessa descrição, apenas as constantes $C_1$, $C_2$  e $C_3$ são particularidades das diferentes superfícies potenciais como pode ser visto em \citeonline{Viladkar1995}. No caso da superfície de Drucker-Prager utilizada na tese tem-se $C_1 = \beta_1$, $C_2 = \beta_2$, $C_3 = 0$. 
 
-\begin{table}[H]
-	\caption{Constantes para o cálculo do gradiente do potencial plástico (adaptado de \citeonline[p. 231]{Owen1980}}
-	\label{tab:c1c2c3}
-	\centering
-	\small
-	\renewcommand{\arraystretch}{1.25}
-	\begin{tabular}{c c c c}
-		\hline
-		\multicolumn{1}{c}{\textbf{SUPERFÍCIE}} &
-		\multicolumn{1}{c}{{$\mathbf C_1$}} &
-		\multicolumn{1}{c}{{$\mathbf C_2$}} &
-		\multicolumn{1}{c}{{$\mathbf C_3$}} \\
-		\hline
-		TR & $0$ & $2\cos{\theta}(1+\tan{\theta}\tan{3\theta})$ & $\dfrac{\sqrt{3}}{J_2}\dfrac{\sin{\theta}}{\cos{3\theta}}$ \\		
-		VM & $0$ & $\sqrt{3}$ & $0$ \\
-		MC & $\dfrac{1}{3}\sin(\phi)$ &  $\scriptstyle \cos(\theta)\left[1 +\tan(\theta)\tan(3\theta)+\dfrac{\scriptstyle \sin(\phi)\left[\tan(3\theta)-\tan(\theta)\right]}{\scriptstyle \sqrt{3}}\right]$ & $\dfrac{\sqrt{3}\sin(\theta)+\cos(\theta)\sin(\phi)}{2J_2\cos(3\theta)}$ \\		
-		DP & $\beta$ & $1$ & $0$ \\			
-		\hline
-	\end{tabular}
-	\normalsize
-\end{table}
-
-Nas expressões de $C_2$ e $C_3$, pode-se ver que o vetor de fluxo de Mohr-Coulomb, e consequentemente o de Tresca, possui uma singularidade quando $\theta = \pm \pi/6$. Isso ocorre devido a essas superfícies apresentarem um vértice nessas coordenadas no plano desviador. Há diversas formas de se resolver esse problema, sendo que a adotada no presente trabalho, dada por \citeonline[p. 234]{Owen1980}, será utilizar os valores de $C_1$,$C_2$ e $C_3$ de Drucker-Prager (ou von-Mises) quando $\theta = \pm \pi/6$.
+Nas superfícies que apresentam vértices, como Morh-Coulomb e Tresca em $\theta = \pm \pi/6$, ocorre singularidade no cálculo do vetor de fluxo, pois a derivada não é definida nesses vértices. Utilizando a superfície de Drucker-Prager esse problema não aparece. Contudo, há formas de se resolver esse problema, como, por exemplo, pode ser visto em \citeonline[p. 234]{Owen1980} em que se utiliza $C_1$,$C_2$ e $C_3$ de Drucker-Prager ou von-Mises quando $\theta = \pm \pi/6$ nessas superfícies.
 
 Um aspecto comum na geomecânica é a variação do volume do material durante a evolução das deformações plásticas. Esse efeito é comumente introduzido através da plasticidade não associada, adotando, ao invés do ângulo de atrito, um ângulo de dilatância $0<\psi<\phi$  na função potencial $g$.
 
@@ -373,10 +352,8 @@ Em um primeiro momento, no presente trabalho, não é considerado a influência 
 \begin{equation}
 	\label{eq:dfdc}
 	\chi = \left\{ \begin{array}{ll} 
-		2, & \text{para von-Mises} \\
-		\dfrac{6\cos{\phi}}{\sqrt{3}(3\pm \sin(\phi))}, & \text{para Drucker-Prager} \\ 
-		1, & \text{para Tresca}\\
-		\cos(\phi), & \text{para Mohr-Coulomb}\end{array}	
+		2\sqrt{k}, & \text{para DP-I e DP-II} \\
+		\dfrac{6\cos{\phi}}{\sqrt{3}(3 + \sin(\phi))}, & \text{para DP-III}\end{array}	
 	\right.
 \end{equation}
 
@@ -394,7 +371,7 @@ Portanto, usando a regra da cadeia, escreve-se (\ref{eq:amolecimento}) da seguin
 	\label{eq:expressao_amolecimento}
 	\dot q = - \dot \lambda \dfrac{\partial h}{\partial q} = - \dot \lambda \dfrac{\partial f}{\partial q} = \dot \lambda \left(- \dfrac{\partial f}{\partial q}\dfrac{\partial q}{\partial c}\dfrac{\partial c}{\partial \bar \epsilon^p}\right)	
 \end{equation}
-sendo, seus termos, conforme (\ref{eq:f_Mohr_Coulomb}), (\ref{eq:f_Drucker_Prager}), (\ref{eq:f_Tresca}), (\ref{eq:f_von-Mises}) e \autoref{funcao_coesao}, dados por:
+sendo, seus termos, conforme, (\ref{eq:f_Drucker_Prager}) e \autoref{funcao_coesao}, dados por:
 \begin{equation}
 	\label{eq:dfdq}
 	\dfrac{\partial f}{\partial q} = -1,~\dfrac{\partial q}{\partial c} = \chi,
@@ -423,7 +400,7 @@ em que
 e $C$ a rigor depende da superfície de plasticidade, do gradiente do potencial plástico e do estado de tensões ao qual está submetido a amostra no ensaio. Sua dedução é feita através do trabalho plástico por unidade de volume. Para o presente trabalho, será utilizado a seguinte expressão deduzida para Drucker-Prager, que considera plasticidade associada e estados de tensões gerais (adaptado de \citeauthor{Chen1988}, \citeyear{Chen1988}, p. 257-259):
 \begin{equation}
 	\label{eq:Czao}
-	C = \dfrac{\beta+1/\sqrt{3}}{\sqrt{3\beta^2+1/2}}.
+	C = \dfrac{\beta_1+1/\sqrt{3}}{\sqrt{3\beta_1^2+1/2}}.
 \end{equation}
 Quando $\phi = 0$ o material é independente da pressão hidrostática, ou seja, $\beta = 0$ e tem-se $C = \sqrt{2/3}$.
 
@@ -506,18 +483,7 @@ Como as deformações viscoplásticas ocorrem quando $f>0$ não há a imposiçã
 	\label{eq:sobretensao}
 	\Phi = \left\langle  \dfrac{f(\sigmall,\ql)}{f_0} \right\rangle^n
 \end{equation}
-em que $\eta$ é a constante de viscosidade dinâmica (unidade de tempo), $\Phi$ é a função de sobretensão, nesse caso, uma função potencial com expoente $n$, $f_0$ parâmetro de tensão convenientemente adotado a partir do qual se inicia o fenômeno viscoso e $\left\langle * \right\rangle$ é a função de McCauley, que é nulo quando $*<0$, ou seja, apenas ocorrerá fluxo viscoplástico quando o critério $f/f_0$ for positivo. O valor de $f_0$ a rigor depende da superfície viscoplástica adotada, conforme (adaptado de \citeonline[p. 239, 273]{Owen1980}:
-
-\begin{equation}
-	\label{eq:f0}
-	f_0 = \left\{ \begin{array}{ll} 
-		c, & \text{para Tresca} \\
-		2c, & \text{para von-Mises} \\
-		c\cos(\phi), & \text{para Mohr-Coulomb} \\ 
-		 k, & \text{para Drucker-Prager}\end{array}	
-	\right.
-\end{equation}
-
+em que $\eta$ é a constante de viscosidade dinâmica (unidade de tempo), $\Phi$ é a função de sobretensão, nesse caso, uma função potencial com expoente $n$, $f_0$ parâmetro de tensão convenientemente adotado a partir do qual se inicia o fenômeno viscoso e $\left\langle * \right\rangle$ é a função de McCauley, que é nulo quando $*<0$, ou seja, apenas ocorrerá fluxo viscoplástico quando o critério $f/f_0$ for positivo. O valor de $f_0$ a rigor depende da superfície viscoplástica adotada, que no caso da superfície adotada seu valor fica sendo $f_0 = \beta_3$. Contudo, o valor de $f_0$ também pode depender de ajuste juntamente com $n$ o que o torna um dado de entrada para o modelo.
 
 Muitas vezes o parâmetro $f_0$ não consta na expressão como, por exemplo, em \citeonline[p. 222]{Rousset1988}. Nesse caso, seu valor está implícito na constante $\eta$ que possuí unidade de tempo vezes tensão elevada na potência $n$, ao invés de apenas a unidade de tempo, como em \citeonline{Zienkiewicz1974}. Isso não constitui um problema, pois, é mantida a consistência dimensional da expressão. Contudo, essa sutileza é importante no momento de adimensionalizar resultados com a expressão (\ref{eq:parametros_admensionais_vp}) da velocidade. Nessa expressão, \citeonline{Bernaud1991} utiliza a constante de viscosidade dinâmica conforme \citeonline{Rousset1988}.
 

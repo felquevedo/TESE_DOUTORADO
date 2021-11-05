@@ -474,11 +474,11 @@ O fluxograma desse algoritmo pode ser visto na \autoref{algoritmo_EP_semiimplici
 
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[scale = 1.0]{0608_2-integração EP semi-implicito.pdf}
+		\includegraphics[scale = 1.0]{0608_3-integração EP semi-implicito.pdf}
 	\end{center}
 	\caption{\label{algoritmo_EP_semiimplicito}Algoritmo de integração para elastoplasticidade utilizando um esquema de Euler semi-implícito (omitindo o índice $n$+1).}
 \end{figure}
-Como visto no fluxograma da \autoref{NR-fluxograma}, após a atualização das tensões e variáveis internas tem-se a possibilidade de atualizar o módulo constitutivo. Segundo \citeonline[p. 287]{Belytschko2000}, devido à abrupta transição do comportamento plástico durante o escoamento, o módulo elastoplástico tangente contínuo pode causar carregamentos e descarregamentos espúrios (que não são reais). Para evitar esse problema, é recomendado utilizar um módulo tangente consistente com a linearização feita durante o algoritmo de integração das leis constitutivas (por isso também esse módulo é conhecido como módulo algorítmico). Além disso, como comentado no \autoref{cap: solução do sistema} sua utilização aumenta a taxa de convergência das iterações de equilíbrio. Sua expressão geral é definida por:
+Como visto no fluxograma da \autoref{NR-fluxograma}, após a atualização das tensões e variáveis internas tem-se a possibilidade de atualizar o módulo constitutivo. É possível utilizar o módulo tangente consistente com a linearização feita durante o algoritmo de integração das leis constitutivas (por isso também esse módulo é conhecido como módulo algorítmico). Como comentado no \autoref{cap: solução do sistema} sua utilização aumenta a taxa de convergência das iterações de equilíbrio. Sua expressão geral é definida por:
 \begin{equation}
 	\label{eq:D_alg1}
 	\Dll^{alg} = \left(\dfrac{d\sigmal}{d\varepsilonl} \right)_{n+1}.
@@ -489,7 +489,7 @@ Para derivar a expressão de $\Dll^{alg}$  escreve-se (\ref{eq:constitutiva_ep})
 	\label{eq:D_alg_ep}
 	\Dll^{alg} = \Dll - \dfrac{\Dll~\dgdsl_i~\dfdsl^T \Dll}{\dfdsl^T\Dll~\dgdsl_i-\dfdql \hl_i}
 \end{equation}
-Adotar o módulo tangente consistente faz com que a convergência seja atingida com menos iterações de equilíbrio globais, contudo, o procedimento tem um custo para sistemas grandes, uma vez que a cada iteração é exigida a montagem e fatorização da matriz de rigidez global (caso seja utilizado a opção de Newton-Raphson completo). Portanto, é comum para sistemas grandes utilizar o módulo elástico $\Dll \leftarrow \Dll^e$ , exceto quando se tem problemas de convergência.
+Adotar o módulo tangente consistente faz com que a convergência seja atingida com menos iterações de equilíbrio globais, contudo, o procedimento tem um custo para sistemas grandes, uma vez que a cada iteração é exigida a montagem e fatorização da matriz de rigidez global (caso seja utilizado a opção de Newton-Raphson completo).  Portanto, é comum para sistemas grandes utilizar o módulo elástico $\Dll \leftarrow \Dll^e$. No presente trabalho foi escolhido não fazer essa atualização do módulo constitutivo.
 
 \subsection{Integração das equações constitutivas viscoplásticas}
 
@@ -582,7 +582,7 @@ e para Mohr-Coulomb:
 sendo $\Phi' = d\Phi / d(f/f_0)$. Quando $\phi = 0$ têm-se os casos específicos para as superfícies de von-Mises e Tresca. Esses limites são deduzidos considerando viscoplasticidade associada e com esquema de integração totalmente explícito. O fluxograma para o algoritmo de integração das equações viscoplásticas pode ser visto na \autoref{algoritmo_VP_semiimplicito}.
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[scale = 1.0]{0609_2-integração VP semi-implicito sem endurecimento.pdf}
+		\includegraphics[scale = 1.0]{0609_3-integração VP semi-implicito sem endurecimento.pdf}
 	\end{center}
 	\caption{\label{algoritmo_VP_semiimplicito}Algoritmo de integração para viscoplasticidade utilizando um esquema de Euler semi-implícito ou totalmente explícito (quando $\Theta = 0$) sem endurecimento/amolecimento (omitindo o índice $n+1$).}
 \end{figure}

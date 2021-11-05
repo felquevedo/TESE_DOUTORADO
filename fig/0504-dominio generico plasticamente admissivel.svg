@@ -9,9 +9,9 @@
    xmlns:xlink="http://www.w3.org/1999/xlink"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="244.66476pt"
+   width="294.08472pt"
    height="212.59843pt"
-   viewBox="0 0 244.66476 212.59844"
+   viewBox="0 0 294.08471 212.59844"
    version="1.2"
    id="svg9799"
    sodipodi:docname="0504-dominio generico plasticamente admissivel.svg"
@@ -24,7 +24,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -41,9 +41,9 @@
      inkscape:window-height="1017"
      id="namedview9801"
      showgrid="false"
-     inkscape:zoom="2.1599676"
-     inkscape:cx="167.08149"
-     inkscape:cy="105.52326"
+     inkscape:zoom="1.7580027"
+     inkscape:cx="252.97802"
+     inkscape:cy="128.45861"
      inkscape:window-x="-8"
      inkscape:window-y="-8"
      inkscape:window-maximized="1"
@@ -2994,10 +2994,24 @@
            id="id-e2d0ca99-a9cf-4429-8aca-614ca581ffb4-2" />
       </symbol>
     </g>
+    <marker
+       style="overflow:visible"
+       id="Arrow1Lstart-7-8-5"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lstart"
+       inkscape:isstock="true">
+      <path
+         transform="matrix(0.8,0,0,0.8,10,0)"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path13396-5-1-4" />
+    </marker>
   </defs>
   <g
      id="surface155132"
-     transform="translate(-207.50945,-117.48)">
+     transform="translate(-158.08949,-117.48)">
     <g
        style="fill:#000000;fill-opacity:1"
        id="g9590">
@@ -3110,7 +3124,7 @@
        id="path9408"
        inkscape:connector-curvature="0" />
     <path
-       style="fill:none;stroke:#000000;stroke-width:0.547384;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:10;stroke-opacity:1"
+       style="fill:none;stroke:#000000;stroke-width:0.5475;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:3.285, 0.5475;stroke-dashoffset:0;stroke-opacity:1"
        d="M 318.12512,224.43363 300.26171,186.00542"
        id="path9410"
        inkscape:connector-curvature="0" />
@@ -3130,7 +3144,7 @@
        height="100%" />
     <path
        style="fill:none;stroke:#000000;stroke-width:0.570192;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:10;stroke-opacity:1"
-       d="m 309.2617,217.72696 c 0.1366,-2.37911 2.24184,-4.19687 4.7034,-4.06024"
+       d="m 310.45966,222.15629 c -0.50904,-2.32803 1.02901,-4.64551 3.43645,-5.17671"
        id="path9432"
        inkscape:connector-curvature="0" />
     <g
@@ -3470,7 +3484,7 @@
        ns8:scale="1.0"
        ns8:alignment="middle center"
        ns8:inkscapeversion="0.92.1"
-       transform="translate(207.75281,185.30837)"
+       transform="translate(210.80675,180.49254)"
        ns8:jacobian_sqrt="1.0"
        id="g2016-0">
       <defs
@@ -3938,7 +3952,7 @@
        ns8:scale="1.0"
        ns8:alignment="middle center"
        ns8:inkscapeversion="0.92.1"
-       transform="translate(312.92921,204.65052)"
+       transform="translate(305.35315,222.38631)"
        ns8:jacobian_sqrt="1.0"
        id="g2016-0-5-0-8-1">
       <defs
@@ -3987,18 +4001,18 @@
     <ellipse
        style="fill:#ff0000;fill-opacity:1;fill-rule:evenodd;stroke:#ff0000;stroke-width:0.435;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        id="path13739"
-       cx="302.55975"
-       cy="211.00711"
+       cx="304.20419"
+       cy="206.54366"
        rx="1.1712052"
        ry="1.0193822" />
     <path
        style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.435;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-start:url(#Arrow1Lstart-7)"
-       d="m 300.37318,210.42436 -45.96782,-12.59493 -46.89551,-0.086"
+       d="M 303.42712,205.60853 257.4593,193.0136 210.56379,192.9276"
        id="path12571-6"
        sodipodi:nodetypes="ccc" />
     <path
        style="fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.760256"
-       d="m 318.91496,225.4524 -16.0551,-13.84699 0.50182,-0.57621 16.0551,13.84401 z m -14.45167,-9.01747 -1.92115,-5.61365 5.82877,1.08115 c 0.20489,0.0386 0.34444,0.23464 0.30584,0.4485 -0.0386,0.20494 -0.23755,0.34157 -0.44243,0.30296 l -5.19036,-0.96531 0.42461,-0.50196 1.71923,4.99584 c 0.0683,0.199 -0.0386,0.4188 -0.23754,0.48711 -0.19597,0.0683 -0.41571,-0.0386 -0.48697,-0.23464 z m 0,0"
+       d="m 317.8055,225.1347 -12.47611,-17.14212 0.61995,-0.44665 12.47679,17.13921 z m -12.01575,-12.07425 -0.59098,-5.90378 5.42889,2.38132 c 0.19069,0.0843 0.28188,0.30698 0.19555,0.50641 -0.0843,0.19075 -0.30915,0.27843 -0.49984,0.19414 l -4.83368,-2.12301 0.52785,-0.39196 0.5352,5.25621 c 0.0211,0.20933 -0.13305,0.39897 -0.34232,0.42014 -0.20638,0.0218 -0.39597,-0.13234 -0.42067,-0.33947 z m 0,0"
        id="path9426"
        inkscape:connector-curvature="0" />
     <text
@@ -4037,7 +4051,7 @@
        ns8:scale="1.0"
        ns8:alignment="middle center"
        ns8:inkscapeversion="1.0.1"
-       transform="translate(278.452, 234.861)"
+       transform="translate(278.452,234.861)"
        ns8:jacobian_sqrt="1.0"
        id="g2016-0-5-0-8-1-0">
       <defs
@@ -4080,12 +4094,12 @@
       </defs>
       <g
          id="id-2b55e41e-f72d-4584-88db-541d90782347"
-         transform="translate(-149.286, -127.124)">
+         transform="translate(-149.286,-127.124)">
         <g
            style="fill:#000000;fill-opacity:1"
            id="id-858d7ff0-8e0c-4d37-8626-278cd994e5e2">
           <g
-             transform="translate(148.712, 134.765)"
+             transform="translate(148.712,134.765)"
              id="g2785">
             <path
                style="stroke:none"
@@ -4097,7 +4111,7 @@
            style="fill:#000000;fill-opacity:1"
            id="id-0ae06a9b-d7cb-4567-b69b-0efe7e9c067c">
           <g
-             transform="translate(153.624, 136.259)"
+             transform="translate(153.624,136.259)"
              id="g2789">
             <path
                style="stroke:none"
@@ -4116,7 +4130,7 @@
        ns8:scale="1.0"
        ns8:alignment="middle center"
        ns8:inkscapeversion="1.0.1"
-       transform="translate(303.27187,219.24022)"
+       transform="translate(313.37336,204.79273)"
        ns8:jacobian_sqrt="1.0"
        id="g2016-0-5-0-8-1-7">
       <defs
@@ -4357,5 +4371,42 @@
         </g>
       </g>
     </g>
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.547384;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:2.18954, 0.547384;stroke-dashoffset:0;stroke-opacity:1"
+       d="M 317.8055,225.1347 298.64941,211.91168"
+       id="path9410-7"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:9.99998px;line-height:1.25;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, ';stroke-width:0.75"
+       x="202.97221"
+       y="211.30991"
+       id="text1204-2-1"><tspan
+         sodipodi:role="line"
+         id="tspan1202-6-69"
+         x="202.97221"
+         y="211.30991"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, ';text-align:center;text-anchor:middle;stroke-width:0.75">intersecção do plano </tspan><tspan
+         sodipodi:role="line"
+         x="202.97221"
+         y="223.80988"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, ';text-align:center;text-anchor:middle;stroke-width:0.75"
+         id="tspan1887">desviador com</tspan><tspan
+         sodipodi:role="line"
+         x="202.97221"
+         y="236.30986"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, ';text-align:center;text-anchor:middle;stroke-width:0.75"
+         id="tspan1883">plano do meridiano de</tspan><tspan
+         sodipodi:role="line"
+         x="202.97221"
+         y="248.80983"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, ';text-align:center;text-anchor:middle;stroke-width:0.75"
+         id="tspan1885">cisalhamento</tspan></text>
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.435;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-start:url(#Arrow1Lstart-7-8-5)"
+       d="m 307.0569,218.56761 -62.60202,-3.44326 -82.86779,0.16073"
+       id="path12571-6-7-1"
+       sodipodi:nodetypes="ccc" />
   </g>
 </svg>
