@@ -1,0 +1,612 @@
+!
+! 3D_ELIPTICA_MALHA_ANSYS
+!
+FINISH 
+/CLEAR,NOSTART
+!
+/PREP7 
+!
+! Parametros geométricos
+rh		= 2		! [m] raio horizontal externo do túnel
+rv		= 1		! [m] raio vertical externo do túnel
+esp		= 0.1		! [m] espessura do revestimento
+r1		= 10*rv		! [m] raio da região de refinamento da malha próxima do túnel
+lx		= 20*rv		! [m] dimensão da base do domínio
+ly		= 20*rv		! [m] dimensão da altura do domínio
+lp		= 1/3*rv	! [m] tamanho do passo de escavação
+np		= 39		! [un] numero de passos de escavação
+lz1		= np*lp		! [m] dimensão do trecho escavado
+lz2		= 25*lp		! [m] dimensão do trecho não escavado
+d0		= 1*lp		! [m] dimensão não suportada (multiplo do passo)
+!
+! Parametros para discretização
+nesp		= 1 		! [un] divisões na espessura do revestimento
+nre		= 10		!16 [un] divisões na interface entre o túnel e o maciço
+nr1		= 15		! [un] divisões ao longo do raio da região de refinamento
+mr1		= 15		!20 [%] taxa de crescimento de nr1
+nx1		= 5		! [un] divisões na base fora da região de refinamento
+mx1		= 1.2		! [%] taxa de crescimento de mx1
+ny1		= nx1		! [un] divisões na altura fora da região de refinamento
+my1		= mx1		! [%] taxa de crescimento de my1
+nrvi		= nre/2		! [un] divisões na vertical da parte interna da seção do túnel
+nrhi		= nre/2		! [un] divisões na horizontal da parte interna da seção do túnel
+nz1		= np		! [un] numero de elementos no trecho escavado
+nz2		= 8		!12 [un] numero de elementos no trecho não escavado
+mz2		= 5		! [%] taxa de crescimento em lz2
+!
+! Elemento finito e comportamento
+elem 	= 2			! 1 - SOLID185, 2 - SOLID186, 3 - SOLID45
+!
+! Material maciço
+mod1		= 1		! 1 - elastico, 2 - VM, 3 - VP
+E1 		= 500		! [kN/m²] modulo elasticidade (1,2,3)
+nu1 		= 0.498		! [adm] coeficiente de poisson (1,2,3)
+dens1 		= 2		! [kg/m³] densidade (1,2,3)
+sy1 		= 100		! [kN/m²] tensão de escoamento (2,3)
+tg1		= 0		! [kN/m²] módulo tangente bilinear (2,3)
+m1		= 1		! [adm] coeficiente de viscosidade (3)
+gamma1		= 1.157407	! [d^-1] coeficiente de viscosidade (3)
+!
+! Propriedades revestimento
+mod2		= 1		! 0 - não possui, 1 - elastico, 2 - VM, 3 - VP
+E2 		= 500		! [kN/m²] modulo elasticidade (1,2,3)
+nu2 		= 0.498		! [adm] coeficiente de poisson (1,2,3)
+dens2 		= 2		! [kg/m³] densidade (1,2,3)
+sy2 		= 100		! [kN/m²] tensão de escoamento (2,3)
+tg2		= 0		! [kN/m²] módulo tangente bilinear (2,3)
+m2		= 1		! [adm] coeficiente de viscosidade (3)
+gamma2		= 1.157407	! [d^-1] coeficiente de viscosidade (3)
+!
+! Carga na fronteira
+pi		= 0		! [kN/m²] pressão em Ri
+pv		= 0.5		! [kN/m²] pressão vertical
+ph		= 0.5		! [kN/m²] pressão horizontal
+!
+! Aceleração
+ax 		= 0		! [cm/s] aceleracao em x
+ay 		= 0		! [cm/s] aceleracao em y
+!
+! Tensões iniciais [kN/m²]
+dir		= 'LINY'	! direcao da tensão linear (LINX,LINY ou LINZ)
+C1		= 0		! sigix = C1 + C2*dir
+C2		= 0		! sigix = C1 + C2*dir
+C3		= 0		! sigiy = C3 + C4*dir
+C4		= 0		! sigiy = C3 + C4*dir
+C5		= 0		! sigiz = C5 + C6*dir
+C6		= 0		! sigiz = C5 + C6*dir
+C7		= 0		! sigixy = C7 + C8*dir
+C8		= 0		! sigixy = C7 + C8*dir
+C9		= 0		! sigiyz = C9 + C10*dir
+C10		= 0		! sigiyz = C9 + C10*dir
+C11		= 0		! sigixz = C10 + C11*dir
+C12		= 0		! sigixz = C10 + C11*dir
+!
+! Discretização do tempo
+n		= 3		! [un] numero de passos
+ns		= 1		! [un] numero de subpassos a cada passo
+tp		= 1		! [d] tempo de cada passo de solucao
+dt		= tp/ns		! [d] incremento de tempo a cada subpasso
+nr		= 1		! Newton-Raphson (0 - INIT, 1 - FULL)
+bi		= 0		! Tempo automático (0 - não, 1- sim)
+!
+! Pos-processamento
+arqmef		= 1		! 1 - gera arquivos para o MEF18
+timeres1	= 1		! tempo para sair o resultado
+timeres2	= n*tp		! tempo para sair o resultado
+sis		= 0		! 1 - gera arquivo com o sistema de equações
+!
+!
+! **************************************************************************
+/PREP7
+!
+! Parametros calculados
+ratio		= Rv/Rh		
+Lx1		= Lx-R1		
+Ly1		= Ly-R1
+Lz 		= Lz1+Lz2
+!  
+! Elemento finito
+*IF,elem,EQ,1,THEN
+	ET,1,SOLID185  
+	KEYOPT,1,2,0
+	KEYOPT,1,3,0
+	KEYOPT,1,6,0
+	KEYOPT,1,8,0
+*ELSEIF,elem,EQ,2,THEN
+	ET,1,SOLID186  
+	KEYOPT,1,2,0
+	KEYOPT,1,3,0
+	KEYOPT,1,6,0
+	KEYOPT,1,8,0
+*ELSEIF,elem,EQ,3,THEN
+	ET,1,SOLID45
+	KEYOPT,1,1,1	
+	KEYOPT,1,2,0
+	KEYOPT,1,4,0
+	KEYOPT,1,5,0
+	KEYOPT,1,6,0
+*ENDIF
+!
+! definicao material do maciço
+*IF,mod1,EQ,1,THEN 
+	MPTEMP,1,0 
+	MPDATA,EX,1,,E1
+	MPDATA,PRXY,1,,nu1
+	MPDATA,DENS,1,,dens1 
+*ELSEIF,mod1,EQ,2,THEN
+	MPTEMP,1,0  
+	MPDATA,EX,1,,E1
+	MPDATA,PRXY,1,,nu1
+	MPDATA,DENS,1,,dens1 
+	TB,BISO,1,1,2,  
+	TBTEMP,0
+	TBDATA,,sy1,tg1,,,,   
+*ELSEIF,mod1,EQ,3,THEN
+	MPTEMP,1,0  
+	MPDATA,EX,1,,E1
+	MPDATA,PRXY,1,,nu1
+	MPDATA,DENS,1,,dens1 
+	TB,BISO,1,1,2,  
+	TBTEMP,0
+	TBDATA,,sy1,tg1,,,,   
+	TB,RATE,1,1,2,1
+	TBTEMP,0
+	TBDATA,,m1,gamma1,,,,,
+*ENDIF
+!
+! definicao material do revestimento
+*IF,mod2,EQ,1,THEN 
+	MPTEMP,1,0 
+	MPDATA,EX,2,,E2
+	MPDATA,PRXY,2,,nu2
+	MPDATA,DENS,2,,dens2 
+*ELSEIF,mod2,EQ,2,THEN
+	MPTEMP,1,0  
+	MPDATA,EX,2,,E2
+	MPDATA,PRXY,2,,nu2
+	MPDATA,DENS,2,,dens2 
+	TB,BISO,2,1,2,  
+	TBTEMP,0
+	TBDATA,,sy2,tg2,,,,   
+*ELSEIF,mod2,EQ,3,THEN
+	MPTEMP,1,0  
+	MPDATA,EX,2,,E2
+	MPDATA,PRXY,2,,nu2
+	MPDATA,DENS,2,,dens2 
+	TB,BISO,2,1,2,  
+	TBTEMP,0
+	TBDATA,,sy2,tg2,,,,   
+	TB,RATE,2,1,2,1
+	TBTEMP,0
+	TBDATA,,m2,gamma2,,,,,
+*ENDIF
+!
+! Geometria
+K,1,0,0,0
+K,2,Rh-esp,0,0
+K,3,Rh,0,0
+K,4,R1,0,0
+K,5,Lx,0,0
+K,6,Lx,Ly,0
+K,7,0,Ly,0
+K,8,0,R1,0
+K,9,0,Rv,0
+K,10,0,Rv-esp,0
+!
+! criando linhas
+L,1,2
+L,2,3
+L,3,4
+L,4,5
+L,5,6
+L,7,6
+L,1,10
+L,10,9
+L,9,8
+L,8,7
+LOCAL,11,1,,,,,,,1,
+L,8,4
+LOCAL,11,1,,,,,,,ratio,
+L,2,10
+L,9,3
+LOCAL,11,0
+NUMCMP,ALL
+!
+! criando grupo de linhas
+ALLSEL,ALL
+LOCAL,11,0,,,,,,,1,
+LSEL,S,LOC,X,0,Rh-esp
+LSEL,R,LOC,Y,0
+CM,L1,line
+!
+ALLSEL,ALL
+LOCAL,11,0,,,,,,,1,
+LSEL,S,LOC,X,Rh-esp,Rh
+LSEL,R,LOC,Y,0
+CM,L2,line
+!
+ALLSEL,ALL
+LOCAL,11,0,,,,,,,1,
+LSEL,S,LOC,X,Rh,R1
+LSEL,R,LOC,Y,0
+CM,L3,line
+!
+ALLSEL,ALL
+LOCAL,11,0,,,,,,,1,
+LSEL,S,LOC,X,R1,Lx
+LSEL,R,LOC,Y,0
+CM,L4,line
+!
+ALLSEL,ALL
+LOCAL,11,0,,,,,,,1,
+LSEL,S,LOC,X,Lx
+LSEL,R,LOC,Y,0,Ly
+CM,L5,line
+!
+ALLSEL,ALL
+LOCAL,11,0,,,,,,,1,
+LSEL,S,LOC,X,0,Lx
+LSEL,R,LOC,Y,Ly
+CM,L6,line
+!
+ALLSEL,ALL
+LOCAL,11,0,,,,,,,1,
+LSEL,S,LOC,X,0
+LSEL,R,LOC,Y,R1,Ly
+CM,L7,line
+!
+ALLSEL,ALL
+LOCAL,11,0,,,,,,,1,
+LSEL,S,LOC,X,0
+LSEL,R,LOC,Y,Rv,R1
+CM,L8,line
+!
+ALLSEL,ALL
+LOCAL,11,0,,,,,,,1,
+LSEL,S,LOC,X,0
+LSEL,R,LOC,Y,Rv-esp,Rv
+CM,L9,line
+!
+ALLSEL,ALL
+LOCAL,11,0,,,,,,,1,
+LSEL,S,LOC,X,0
+LSEL,R,LOC,Y,0,Rv-esp
+CM,L10,line
+!
+ALLSEL,ALL
+LOCAL,11,1,,,,,,,ratio,
+LSEL,S,LOC,X,Rh
+LSEL,R,LOC,Y,0,90
+CM,L12,line
+!
+ALLSEL,ALL
+LOCAL,11,1,,,,,,,ratio,
+LSEL,S,LOC,X,0,Rh
+LSEL,R,LOC,Y,0.01,89.9
+CMSEL,U,L12,LINE
+CM,L11,line
+!
+ALLSEL,ALL
+LOCAL,11,1,,,,,,,1,
+LSEL,S,LOC,X,R1
+LSEL,R,LOC,Y,0,90
+CM,L13,line
+!
+! criando areas
+CMSEL,S,L1,LINE
+CMSEL,A,L11,LINE
+CMSEL,A,L10,LINE
+AL,ALL
+!
+CMSEL,S,L2,LINE
+CMSEL,A,L12,LINE
+CMSEL,A,L9,LINE
+CMSEL,A,L11,LINE
+AL,ALL
+!
+CMSEL,S,L3,LINE
+CMSEL,A,L13,LINE
+CMSEL,A,L8,LINE
+CMSEL,A,L12,LINE
+AL,ALL
+!
+CMSEL,S,L4,LINE
+CMSEL,A,L5,LINE
+CMSEL,A,L6,LINE
+CMSEL,A,L7,LINE
+CMSEL,A,L13,LINE
+AL,ALL
+!
+! definindo volumes
+VOFFST,1,-lz
+CM,V1,VOLUME
+VOFFST,2,-lz
+CMSEL,U,V1
+CM,V2,VOLUME
+VOFFST,3,-lz
+CMSEL,U,V2
+CM,V3,VOLUME
+VOFFST,4,-lz
+CMSEL,U,V3
+CM,V4,VOLUME
+!
+! dividindo o volume
+ALLSEL,ALL
+WPOFFS,0,0,-lz1
+VSBW,ALL
+WPOFFS,0,0,lz1
+!
+!
+! eliminando geometrias duplicadas
+AOVLAP,ALL
+NUMMRG,KP, , , ,LOW
+NUMCMP,KP
+NUMCMP,LINE
+NUMCMP,AREA
+NUMCMP,VOLU
+!
+! adicionando as novas linhas para divisoes
+fol = 0.01	! folga para selecao de linhas
+ALLSEL,ALL
+LOCAL,11,0,,,,,,,1,
+LSEL,S,LOC,X,fol,Rh-esp-fol
+LSEL,R,LOC,Y,0
+LSEL,R,LOC,Z,-lz1,-lz
+CMSEL,A,L1,LINE
+CM,L1,line
+!
+ALLSEL,ALL
+LOCAL,11,0,,,,,,,1,
+LSEL,S,LOC,X,Rh-esp+fol,Rh-fol
+LSEL,R,LOC,Y,0
+LSEL,R,LOC,Z,-lz1,-lz
+CMSEL,A,L2,LINE
+CM,L2,line
+!
+ALLSEL,ALL
+LOCAL,11,0,,,,,,,1,
+LSEL,S,LOC,X,Rh+esp,R1-esp
+LSEL,R,LOC,Y,0
+LSEL,R,LOC,Z,-lz1,-lz
+CMSEL,A,L3,LINE
+CM,L3,line
+!
+ALLSEL,ALL
+LOCAL,11,0,,,,,,,1,
+LSEL,S,LOC,X,R1+fol,Lx-fol
+LSEL,R,LOC,Y,0
+LSEL,R,LOC,Z,-lz1,-lz
+CMSEL,A,L4,LINE
+CM,L4,line
+!
+ALLSEL,ALL
+LOCAL,11,0,,,,,,,1,
+LSEL,S,LOC,X,Lx
+LSEL,R,LOC,Y,0+fol,Ly-fol
+LSEL,R,LOC,Z,-lz1,-lz
+CMSEL,A,L5,LINE
+CM,L5,line
+!
+ALLSEL,ALL
+LOCAL,11,0,,,,,,,1,
+LSEL,S,LOC,X,0+fol,Lx-fol
+LSEL,R,LOC,Y,Ly
+LSEL,R,LOC,Z,-lz1,-lz
+CMSEL,A,L6,LINE
+CM,L6,line
+!
+ALLSEL,ALL
+LOCAL,11,0,,,,,,,1,
+LSEL,S,LOC,X,0
+LSEL,R,LOC,Y,R1+fol,Ly-fol
+LSEL,R,LOC,Z,-lz1,-lz
+CMSEL,A,L7,LINE
+CM,L7,line
+!
+ALLSEL,ALL
+LOCAL,11,0,,,,,,,1,
+LSEL,S,LOC,X,0
+LSEL,R,LOC,Y,Rv+fol,R1-fol
+LSEL,R,LOC,Z,-lz1,-lz
+CMSEL,A,L8,LINE
+CM,L8,line
+!
+ALLSEL,ALL
+LOCAL,11,0,,,,,,,1,
+LSEL,S,LOC,X,0
+LSEL,R,LOC,Y,Rv-esp+fol,Rv-fol
+LSEL,R,LOC,Z,-lz1,-lz
+CMSEL,A,L9,LINE
+CM,L9,line
+!
+ALLSEL,ALL
+LOCAL,11,0,,,,,,,1,
+LSEL,S,LOC,X,0
+LSEL,R,LOC,Y,0+fol,Rv-esp-fol
+LSEL,R,LOC,Z,-lz1,-lz
+CMSEL,A,L10,LINE
+CM,L10,line
+!
+ALLSEL,ALL
+LOCAL,11,0,,,,,,,1,
+LSEL,S,LOC,X,0,lx
+LSEL,R,LOC,Y,0,ly
+LSEL,R,LOC,Z,0-fol,-lz1+fol
+CM,L101,line
+!
+ALLSEL,ALL
+LOCAL,11,0,,,,,,,1,
+LSEL,S,LOC,X,0,lx
+LSEL,R,LOC,Y,0,ly
+LSEL,R,LOC,Z,-lz1-fol,-lz+fol
+CM,L102,line
+!
+ALLSEL,ALL
+LOCAL,11,1,,,,,,,ratio,
+LSEL,S,LOC,X,Rh
+LSEL,R,LOC,Y,0+fol,90-fol
+LSEL,R,LOC,Z,0,-lz
+CM,L12,line
+!
+ALLSEL,ALL
+LOCAL,11,1,,,,,,,ratio,
+LSEL,S,LOC,X,0,Rh
+LSEL,R,LOC,Y,0+fol,90-fol
+LSEL,R,LOC,Z,0,-lz
+CMSEL,U,L12,LINE
+CM,L11,line
+!
+ALLSEL,ALL
+LOCAL,11,1,,,,,,,1,
+LSEL,S,LOC,X,R1
+LSEL,R,LOC,Y,0+fol,90-fol
+LSEL,R,LOC,Z,0,-lz
+CM,L13,line
+!
+ALLSEL,ALL
+LOCAL,11,0,,,,,,,1,
+LSEL,S,LOC,X,0
+LSEL,R,LOC,Y,Rv+fol,R1-fol
+LSEL,R,LOC,Z,-lz
+LREVERSE,ALL
+!
+ALLSEL,ALL
+LOCAL,11,0,,,,,,,1,
+LSEL,S,LOC,X,0
+LSEL,R,LOC,Y,R1+fol,Ly-fol
+LSEL,R,LOC,Z,-lz
+LREVERSE,ALL
+!
+! definindo espaçamentos da malha
+ALLSEL,ALL
+LESIZE,L1, , ,nrhi,  , , , ,1
+LESIZE,L2, , ,nesp,  , , , ,1
+LESIZE,L3, , ,nR1,mR1, , , ,1
+LESIZE,L4, , ,nx1,mx1, , , ,1
+LESIZE,L5, , ,nRe/2, , , , ,1
+LESIZE,L6, , ,nRe/2, , , , ,1
+LESIZE,L7, , ,ny1,my1, , , ,1
+LESIZE,L8, , ,nR1,mR1, , , ,1
+LESIZE,L9, , ,nesp, , , , ,1
+LESIZE,L10, , ,nrvi, , , , ,1
+LESIZE,L11, , ,nRe, , , , ,1
+LESIZE,L12, , ,nRe, , , , ,1
+LESIZE,L13, , ,nRe, , , , ,1
+LESIZE,L101, , ,nz1, , , , ,1
+LESIZE,L102, , ,nz2,1/mz2, , , ,1
+!
+! criando grupo de areas da fronteira
+ALLSEL,ALL
+ASEL,S,LOC,Z,0
+CM,AF1,AREA
+!
+ALLSEL,ALL
+ASEL,S,LOC,Z,-Lz
+CM,AF2,AREA
+!
+ALLSEL,ALL
+ASEL,S,LOC,X,0
+CM,AF3,AREA
+!
+ALLSEL,ALL
+ASEL,S,LOC,X,Lx
+ASEL,R,LOC,Z,0,-Lz1
+CM,AF41,AREA
+ALLSEL,ALL
+ASEL,S,LOC,X,Lx
+ASEL,R,LOC,Z,-lz1,-Lz
+CM,AF42,AREA
+ALLSEL,ALL
+CMSEL,S,AF41,AREA
+CMSEL,A,AF42,AREA
+CM,AF4,AREA
+!
+ALLSEL,ALL
+ASEL,S,LOC,Y,0
+CM,AF5,AREA
+!
+ALLSEL,ALL
+ASEL,S,LOC,Y,Ly
+ASEL,R,LOC,Z,0,-Lz1
+CM,AF61,AREA
+ALLSEL,ALL
+ASEL,S,LOC,Y,Ly
+ASEL,R,LOC,Z,-lz1,-Lz
+CM,AF62,AREA
+ALLSEL,ALL
+CMSEL,S,AF61,AREA
+CMSEL,A,AF62,AREA
+CM,AF6,AREA
+!
+ALLSEL,ALL
+CMSEL,S,AF41,AREA
+CMSEL,A,AF61,AREA
+ACCAT,ALL
+!
+ALLSEL,ALL
+CMSEL,S,AF42,AREA
+CMSEL,A,AF62,AREA
+ACCAT,ALL
+!
+! criando a malha
+ALLSEL,ALL
+!MSHAPE,0,3D
+VMESH,ALL
+!
+! Colorindo elementos
+ALLSEL,ALL
+VSEL,S,VOLU,,1
+ESLV,S
+/COLOR,ELEM,13,ALL
+!
+ALLSEL,ALL
+VSEL,S,VOLU,,2
+ESLV,S
+/COLOR,ELEM,13,ALL
+!
+ALLSEL,ALL
+VSEL,S,VOLU,,4
+ESLV,S
+/COLOR,ELEM,13,ALL
+!
+ALLSEL,ALL
+VSEL,S,VOLU,,6
+ESLV,S
+/COLOR,ELEM,13,ALL
+!
+ALLSEL,ALL
+VSEL,S,VOLU,,3
+ESLV,S
+/COLOR,ELEM,14,ALL
+!
+ALLSEL,ALL
+VSEL,S,VOLU,,5
+ESLV,S
+/COLOR,ELEM,14,ALL
+!
+ALLSEL,ALL
+VSEL,S,VOLU,,7
+ESLV,S
+/COLOR,ELEM,14,ALL
+!
+ALLSEL,ALL
+VSEL,S,VOLU,,8
+ESLV,S
+/COLOR,ELEM,14,ALL
+!
+! visao ISO
+/VIEW,1,,,1 
+/ANG,1  
+/ANG, 1 ,35,YS,1 
+/ANG, 1 ,15,XS,1
+/AUTO,1 
+/REP,FAST
+!
+! visao detalhe
+/ANG, 1 ,-15,XS,1 
+/FOC, 1 ,,-0.05*16,,1 
+/DIST, 1 ,0.948683/5,1 
+/FOC, 1 ,,14*0.050000,,1   
+/FOC, 1 ,-0.050000*18,,,1
+/ANG, 1 ,1*5,XS,1 
+/REP,FAST

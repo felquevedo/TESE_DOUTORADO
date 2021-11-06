@@ -322,19 +322,22 @@ O ANSYS possui ainda três variações do método de Newton-Raphson de acordo co
 	
 	\item \textbf{Inicial} (\textit{Inicial Stiffness}): quando é utilizada a mesma matriz para todos os subpassos e iterações, ou seja, $\Kll_{n,i} \leftarrow \Kll_{0,0}$. 
 	
+	\item \textbf{Completo Assimétrico} (\textit{Full unsymmetric}): é a mesma opção da Completo porém monta a matriz de rigidez não a considerando simétrica.
+	
 \end{alineas}
 
-Além dessas opções, para problemas estáticos, o ANSYS possui três técnicas para melhorar a convergência do método de Newton-Raphson, que são \cite[p. 668-673]{ANSYS2018}:
+A convergência quadrática da opção de Newton-Raphson Completo só é efetivamente obtida se for utilizado o módulo consistente $\Dll^{alg}$ após o algoritmo de integração das tensões, conforme \citeonline{Simo1985}. A opção de Newton-Raphson Completo Assimétrico é importante para os casos em que se calcula o módulo consistente e se tem plasticidade não associada. A plasticidade não associada leva a módulos constitutivos não simétricos e pode não convergir com o Newton-Raphson Completo, pois este monta a matriz de rigidez considerando-a simétrica. Uma forma de contornar esse problema é não utilizar o módulo consistente, porém será necessária mais iterações de equilíbrio para a convergência. Nessa tese, como será visto mais adiante, foi programado o módulo constitutivo consistente, mas o seu uso é opcional.
+
+Apesar de não terem sido utilizadas nessa tese, o ANSYS possui três técnicas para melhorar a convergência do método de Newton-Raphson em problemas estáticos, que são \cite[p. 668-673]{ANSYS2018}:
 
 \begin{alineas}
-	\item \textbf{Preditor} (\textit{Predictor}): extrapola o vetor de deslocamentos iniciais de cada subpasso utilizando os incrementos de deslocamentos acumulados do subpasso anterior multiplicados pela relação entre os incrementos de tempo entre ambos subpassos;
+	\item \textbf{Preditor} (\textit{Predictor}): extrapola o vetor de deslocamentos iniciais de cada subpasso utilizando os incrementos de deslocamentos acumulados do subpasso anterior multiplicados pela relação entre os incrementos de tempo de ambos subpassos;
 	
 	\item \textbf{Descida Adaptativa} (\textit{Adaptative Descent}): consiste em alternar entre a matriz de rigidez tangente e secante conforme o andamento do resíduo durante as iterações de equilíbrio. Só é utilizada em conjunto com o método de Newton-Raphson Completo;
 	
 	\item \textbf{Pesquisa de linha} (\textit{Line Search}): tenta melhorar a solução multiplicando o incremento de deslocamentos por um escalar determinado pela minimização da energia do sistema;
 	
-	\item \textbf{Método do comprimento de arco} (\textit{Arc-Length Method}): utilizado para solução de equilíbrio estático não-linear de problemas instáveis como flambagem e pós-flambagem.
-	
+	\item \textbf{Método do comprimento de arco} (\textit{Arc-Length Method}): utilizado para solução de equilíbrio estático não-linear de problemas instáveis como flambagem e pós-flambagem.	
 \end{alineas}
 
 Na \autoref{NR-fluxograma} tem-se o fluxograma do método de Newton-Raphson, mostrando as três opções de atualização da matriz de rigidez, o método da bisseção e os laços das iterações de equilíbrio e de subpassos.
@@ -344,9 +347,7 @@ Na \autoref{NR-fluxograma} tem-se o fluxograma do método de Newton-Raphson, mos
 	\end{center}
 	\caption{\label{NR-fluxograma}Fluxograma do método de Newton-Raphson para solução do sistema de equações globais não lineares}
 \end{figure}
-Ainda na \autoref{NR-fluxograma} está detalhado a parte de atualização das tensões e variáveis internas e do módulo constitutivo, que serão os temas do próximo capítulo. É importante que esteja nesse fluxograma o detalhe dos laços nos elementos e nos pontos de Gauss, pois a customização do modelo do material, através da subrotina USERMAT, como veremos, estará justamente aninhado nesse laço mais interno dos pontos de Gauss.
-
-A convergência quadrática da opção de Newton-Raphson Completo só é efetivamente obtida se for utilizado o módulo consistente $\Dll^{alg}$ após o algoritmo de integração das tensões, conforme \citeonline{Simo1985}.
+Ainda na \autoref{NR-fluxograma} está detalhado a parte de atualização das tensões, variáveis internas e do módulo constitutivo, que serão os temas do próximo capítulo. É importante nesse fluxograma o detalhe dos laços nos elementos e pontos de Gauss, pois a customização do modelo do material, através da subrotina USERMAT está justamente aninhado nesse laço mais interno dos pontos de Gauss.
 
 \section{Algoritmo de atualização das tensões e variáveis internas}
 
@@ -355,7 +356,7 @@ Como visto no capítulo anterior, durante as iterações de equilíbrio é neces
 	\label{eq:Fint}
 	\Fl_{int_{n,i}} = \int_{\Omega}\Bll^T\sigmal_{n}d\Omega = \sum_{i_e=1}^{n_e}\sum_{i_p=1}^{n_p}\left( \Bll^T\sigmal_{n}WJ\right)_{i_p,i_e}
 \end{equation}
-sendo $\sigmal_{n}$ dado pela relação constitutiva do material. Contudo, as relações constitutivas, por dependerem da trajetória das tensões e/ou do tempo, estão descritas em forma de taxas, conforme visto no \autoref{cap: modelo mecanico}. E, portanto, é necessária a solução desse sistema de equações diferenciais ordinárias por algum método de integração juntamente com as iterações de equilíbrio. Essa etapa de integração, no esquema de elementos finitos, é conhecida como \textbf{algoritmo de atualização das tensões e variáveis internas}. Tal como ilustrado na \autoref{NR-fluxograma}, esse algoritmo ocorre para cada ponto de Gauss de cada elemento e tem por finalidade obter o incremento de tensão $\Delta \sigmal$ e de forças associadas às variáveis internas $\Delta \ql$ através do incremento de deformação total $\Delta \varepsilonl$ acumulado de cada iteração de equilíbrio.
+sendo $\sigmal_{n}$ dado pela relação constitutiva do material. Contudo, as relações constitutivas, por dependerem da trajetória das tensões e/ou do tempo, estão descritas em forma de taxas, conforme visto no \autoref{cap: modelo mecanico}. E, portanto, é necessária a solução desse sistema de equações diferenciais ordinárias por algum método de integração juntamente com as iterações de equilíbrio. Essa etapa de integração, no esquema de elementos finitos, é conhecida como \textbf{algoritmo de atualização das tensões e variáveis internas}. Tal como ilustrado na \autoref{NR-fluxograma}, esse algoritmo ocorre para cada ponto de Gauss de cada elemento e tem por finalidade obter o incremento de tensão $\Delta \sigmal$ e de forças associadas às variáveis internas $\Delta \ql$ através do incremento de deformação total $\Delta \varepsilonl$ do subpasso.
 
 \subsection{Integração das equações constitutivas elastoplásticas}
 
@@ -574,12 +575,7 @@ O esquema de integração representado por (\ref{eq:esquema_int_constitutiva_vp}
 			\dfrac{\eta f_0}{\Phi'}\dfrac{(1+\nu)(1-2\nu)}{E}\dfrac{(3-\sin{\phi})^2}{\frac{3}{4}(1-2\nu)(3-\sin{\phi})^2 + 6(1+\nu)\sin{\phi}^2}
 		\end{array} \right.
 \end{equation}
-e para Mohr-Coulomb:
-\begin{equation}
-	\label{eq:deltatmin_mc}
-	\Delta t \leq \dfrac{\eta f_0}{\Phi'}\dfrac{(1+\nu)(1-2\nu)}{E}\dfrac{1}{1-2\nu + \sin{\phi}^2}
-\end{equation}
-sendo $\Phi' = d\Phi / d(f/f_0)$. Quando $\phi = 0$ têm-se os casos específicos para as superfícies de von-Mises e Tresca. Esses limites são deduzidos considerando viscoplasticidade associada e com esquema de integração totalmente explícito. O fluxograma para o algoritmo de integração das equações viscoplásticas pode ser visto na \autoref{algoritmo_VP_semiimplicito}.
+Quando $\phi = 0$ têm-se os casos específicos para as superfícies de von-Mises. Esse limite é deduzido considerando viscoplasticidade associada e com esquema de integração totalmente explícito. O fluxograma para o algoritmo de integração das equações viscoplásticas pode ser visto na \autoref{algoritmo_VP_semiimplicito}.
 \begin{figure}[H]
 	\begin{center}
 		\includegraphics[scale = 1.0]{0609_3-integração VP semi-implicito sem endurecimento.pdf}
