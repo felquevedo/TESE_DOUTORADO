@@ -705,7 +705,7 @@ e para o estado plano de deformações e axissimetria, tem-se (adaptado de \cite
 	\end{array} \right\}.
 \end{equation}
 
-\section{Domínios, discretização, condições de contorno e ciclo construtivo para os modelos de verificação}
+\section{Domínios, discretização espacial e temporal, condições de contorno, ciclo construtivo e seus parâmetros}
 
 Tal como visto na \autoref{cap:Discretização espacial em elementos finitos} o domínio $\Omega$ é discretizado em um conjunto de elementos contíguos $\Omega_e$ estabelecendo a malha de elementos finitos. No presente estudo, o domínio discretizado é o entorno de um túnel profundo, conforme \autoref{dominio_tunel}.
 \begin{figure}[H]
@@ -822,7 +822,7 @@ A cada passo $1 \leq i_p \leq n_p$ de escavação é desativado os elementos at�
 	\label{eq:tp}
 	t_p = \dfrac{L_p}{V_p}
 \end{equation}
-em que $V_p$ é a velocidade do passo em m/dias. A cada passo, conforme o \autoref{cap: solução do sistema} e a \autoref{NR-fluxograma}, esse tempo é dividido em subpassos e feita as iterações de equilíbrio de Newton-Raphson em cada subpasso. Após a convergência, segue-se o próximo passo e assim por diante. Após o término dos passos de escavação e revestimento do túnel, para os modelos dependentes do tempo, a análise roda um último passo até o tempo final da análise ou até o tempo em que se obteve a convergência das iterações globais de Newton-Raphson.
+em que $V_p$ é a velocidade do passo em m/dias. A cada passo, conforme o \autoref{cap: solução do sistema} e a \autoref{NR-fluxograma}, esse tempo é dividido em subpassos e feita as iterações de equilíbrio de Newton-Raphson em cada subpasso. Após a convergência, segue-se o próximo passo e assim por diante. Após o término dos passos de escavação e revestimento do túnel, para os modelos dependentes do tempo, a análise roda uma série de passos até que os efeitos viscosos cessem. O incremento de tempo em cada passo é adotado como sendo metade do tempo do passo. Contudo, o método da bisseção, em busca da convergência, pode diminuir o incremento de tempo no passo.
 
 Como pode-se notar, o modelo tridimensional possui a vantagem de considerar tanto o processo construtivo quanto seções diferentes da circular, contudo, tem um custo computacional elevado. Nesse aspecto as análises axissimétricas possuem vantagem, apesar da restrição de simetria axial. Pelo baixo custo computacional, são ideais para estudos paramétricos. O domínio para o modelo axissimétrico, seus parâmetros, condições de contorno e sua malha podem ser vistos na \autoref{malhaAXI_tunel}.
 
@@ -894,6 +894,8 @@ Para simular o ciclo contrutivo de escavação e revestimento é utilizado o rec
 	
 \end{alineas}
 
+No ANSYS esse recurso é conhecido como \textit{Birth and Death} e seu uso se dá através da seleção dos elementos e um comando APDL (EKILL e EALIVE) que identifica se estarão ativados ou desativados no passo.
+
 O custo computacional desses modelos é refletido diretamente no tempo de processamento de cada subpasso durante a solução do sistema global. Esse tempo é função de diversos fatores. Dentre os mais simples estão a quantidade de operações em ponto flutuante (precisão simples ou dupla) necessários para a fatoração e solução do sistema frente à tecnologia de processamento (velocidade do processador e recursos de paralelização). A ordem de grandeza da quantidade de operações em ponto flutuante pode ser estimada através do tamanho do sistema. Portanto, a \autoref{tamanho_sistemas}, resume o tamanho do sistema para as malhas desses três modelos. Porém, para o tempo global, é necessário considerar as estratégias de atualização da matriz de rigidez e a quantidade de passos, sendo que este último aumenta tempo computacional linearmente.
 
 \begin{table}[H]
@@ -916,3 +918,55 @@ O custo computacional desses modelos é refletido diretamente no tempo de proces
 	\end{tabular}
 	\normalsize
 \end{table}
+
+\section{Parâmetros referentes aos modelos constitutivos}
+Além dos parâmetros referente ao domínio para a construção da malha, condições de contorno e discretização do tempo tem-se os parâmetros para o modelo constitutivo do maciço e do revestimento. Como o revestimento possuí apenas comportamento elástico, ele apresenta apenas dois parâmetros E2 (módulo de Young) e nu2 (Coeficiente de Poisson). A \autoref{parametros_EPVP} apresenta a definição dos parâmetros referente ao modelo constitutivo elastoplástico-viscoplástico.
+\begin{table}[H]
+	\caption{Parâmetros para o modelo constitutivo elastoplástico-viscoplástico}
+	\label{parametros_EPVP}
+	\centering
+	\small
+	\renewcommand{\arraystretch}{1.25}
+	\begin{tabular}{c c c}
+		\hline
+		\multicolumn{1}{c}{\textbf{PARÂMETROS}} &
+		\multicolumn{1}{c}{\textbf{DEFINIÇÃO}} &
+		\multicolumn{1}{c}{\textbf{UNIDADE}} \\
+		\hline
+		\multicolumn{3}{c}{REFERENTE A PARTE ELASTICA} \\
+		\hline
+		E1 & Módulo de Young $E$  & MPa \\			
+		nu1 & Coeficiente de Poisson $0 \leq \nu<0.5$  & adm \\		
+		\hline
+		\multicolumn{3}{c}{REFERENTE A PARTE ELASTOPLÁSTICA} \\
+		\hline
+		superficef & função de escoamento: 1-DPI, 2-DPII, 3-DPIII  & - \\		
+		superficieg & função potencial: 1-DPI, 2-DPII, 3-DPIII & - \\
+		fi & angulo de atrito $\phi$ (0 - VM ou TR) & graus \\		
+		psi & dilatância $0<\psi<\phi$ (se $=\phi$ - plasticidade associada) & graus \\	
+		ci & coesão inicial $c_i$ & MPa \\
+		cp & coesão pico $c_p$ & MPa \\
+		cr & coesão residual $c_r$ & MPa \\ 
+		epspI & deformação equivalente que delimita a zona I $\bar \varepsilon^p_{I}$ & adm \\
+		epspII & deformação equivalente que delimita a zona II $\bar \varepsilon^p_{II}$ & adm \\
+		epspr & deformação equivalente que delimita a zona III $\bar \varepsilon^p_{r}$ & adm \\	
+		Dalg & atualização do módulo: 0 - elástico, 1 - consistente & - \\					
+		\hline
+		\multicolumn{3}{c}{REFERENTE A PARTE VISCOPLASTICA} \\
+		\hline
+		superficefvp & função de escoamento: 1-DPI, 2-DPII, 3-DPIII  & - \\
+		superficiegvp & função potencial: 1-DPI, 2-DPII, 3-DPIII & - \\
+		fivp & angulo de atrito $\phi^{vp}$ (0 - VM ou TR) & graus \\
+		psivp & dilatância $0<\psi^{vp}<\phi{vp}$ (se $=\phi^{vp}$ - viscoplasticidade associada) & graus \\
+		cvp & coesão $c^{vp}$ & MPa \\
+		n & expoente do modelo de Perzyna $n$ & adm \\
+		eta & constante de viscosidade dinâmica $\eta$ & dia \\
+		f0 & parâmetro de tensão a partir do qual inicia o fenômeno viscoso $f_0$ & MPa \\
+		thetavp & $\Theta$: $\Theta=0$ - totalmente explícito, $0<\Theta<1$ - semi-implicito & adm \\
+		\hline
+	\end{tabular}
+	\normalsize
+\end{table}
+Durante o processo de programação foi também programado cada comportamento em separado. Contudo, o modelo constitutivo elastoplástico-viscoplástico é geral e capaz de reproduzir cada comportamento em separado dependendo do valor de alguns parâmetros. Por exemplo, ao colocar valores de coesão elevados as funções de escoamento (ora da elastoplasticidade ou viscoplasticidade) não são atingidas podendo dessa forma selecionar o comportamento apenas elástico (quando todas coesões são elevadas), elastoplástico (quando a coesão viscoplástica é elevada) ou viscoplástico (quando as coesões elastoplásticas são elevadas). Outro aspecto se as coesões $c_i, c_p$ e $c_r$ tiverem o mesmo valor, tem-se na parte elastoplástica um comportamento plástico perfeito.
+
+
