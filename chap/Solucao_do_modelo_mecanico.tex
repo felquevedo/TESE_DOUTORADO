@@ -258,7 +258,7 @@ As soluções indiretas, implementadas no ANSYS, se baseiam na família de Méto
 
 Maiores explicações dessas soluções indiretas, podem ser encontrados em \citeonline[p. 316]{Mendonca2019}. Cabe salientar que, tanto os métodos diretos quanto indiretos, são implementados buscando a eficiência computacional, evitando-se trabalhar com os elementos nulos, diminuindo o armazenamento e o número de operações. Alguns métodos que compreendem reordenamento e armazenamento eficiente do sistema, utilizados pelo ANSYS, podem ser encontrados em \citeonline{George1981}. Além disso, uma vantagem do ANSYS é a possibilidade de trabalhar com computação de alto desempenho (\textit{High Performance Computing}) com opções de aceleração usando placas de vídeo da Nvidia, memória compartilhada (SMP - \textit{Shared-Memory Parallel}) ou computação distribuída (MPI - \textit{Message Passing Interface}). Para o presente trabalho, foi utilizado a opção de SMP com 12 processadores.
 
-A rigor para um problema não linear a escolha do melhor método de solução vai depender de testagem. Por padrão o ANSYS utiliza o SPARSE. Contudo, recomenda utilizar o método PCG para estruturas sólidas 3D que possuem mais de 200.000 graus de liberdade. Para problemas mal condicionados, seja pela forma dos elementos, grandes diferenças entre as propriedades dos materiais ou ainda por insuficiente condições de contorno, recomenda-se o SPARSE \cite[p. 242]{ANSYS2018b}.
+A rigor para um problema não linear a escolha do melhor método de solução vai depender de testagem. Por padrão o ANSYS utiliza o SPARSE. Contudo, recomenda utilizar o método PCG para estruturas sólidas 3D que possuem mais de 200.000 graus de liberdade. Para problemas mal condicionados, seja pela forma dos elementos, grandes diferenças entre as propriedades dos materiais ou ainda por insuficiente condições de contorno, recomenda-se o SPARSE \cite[p. 242]{ANSYS2018b}. Esse foi o método de solução escolhido para o presente trabalho.
 
 Para incorporar a dependência do histórico de cargas/tempo, para um dado passo de carga/tempo $p$, a expressão (\ref{eq:NR}) é discretizada em $1 \leq n \leq n_s$ subpassos em que a carga externa e o tempo do passo são incrementados linearmente. Dessa forma, itera-se o sistema (\ref{eq:NR}) repetidas vezes para cada subpasso $n$ tendo-se:
 \begin{equation}
@@ -305,7 +305,7 @@ em que $\varepsilon_R$ e $\varepsilon_u$ são as tolerâncias para o resíduo (d
 	\end{array}
 	\right..
 \end{equation}
-em que $j$ é o índice da componente do vetor $\underline * = \Rl$ ou $\underline * = \Delta \ul$. Para o presente trabalho foi escolhida a norma euclidiana que era o padrão do ANSYS. A \autoref{NR} ilustra o andamento da solução ao longo dos subpassos. Pode-se ver que o resíduo e o incremento de deformações vão ficando cada vez menores ao longo das iterações de equilíbrio.
+em que $j$ é o índice da componente do vetor $\underline * = \Rl$ ou $\underline * = \Delta \ul$. Para o presente trabalho foi escolhida a norma euclidiana para o resíduo e a norma infinita para o incremento de deslocamento. Essas opções já eram o padrão do ANSYS. A \autoref{NR} ilustra o andamento da solução ao longo dos subpassos. Pode-se ver, caso haja a convergência entre os subpassos, que o resíduo e o incremento de deformações vão ficando cada vez menores ao longo das iterações de equilíbrio.
 \begin{figure}[H]
 	\begin{center}
 		\includegraphics[scale = 1.0]{0605_2-ilustracao das iteracoes do método de NR.pdf}
@@ -313,7 +313,7 @@ em que $j$ é o índice da componente do vetor $\underline * = \Rl$ ou $\underli
 	\caption{\label{NR}Ilustração das iterações do método de Newton-Raphson (adaptado de: \citeonline[p. 301]{Chen1988})}
 \end{figure}
 
-O ANSYS possui ainda três variações do método de Newton-Raphson de acordo com a estratégia de atualização da matriz de rigidez $\Kll_{n,i}$ (\citeyear{ANSYS2018}, p. 666): 
+O ANSYS possui ainda quatro variações do método de Newton-Raphson de acordo com a estratégia de atualização da matriz de rigidez $\Kll_{n,i}$ (\citeyear{ANSYS2018}, p. 666): 
 \begin{alineas}
 	
 	\item \textbf{Completo} (\textit{Full}): quando a matriz de rigidez é atualizada a cada iteração $i$, ou seja, $\Kll_{n,i} \leftarrow \Kll_{n,i}$. Essa opção reduz o número de iterações de equilíbrio (convergência quadrática), porém, exige a montagem, fatorização e inversão da matriz a cada iteração;
@@ -326,9 +326,9 @@ O ANSYS possui ainda três variações do método de Newton-Raphson de acordo co
 	
 \end{alineas}
 
-A convergência quadrática da opção de Newton-Raphson Completo só é efetivamente obtida se for utilizado o módulo consistente $\Dll^{alg}$ após o algoritmo de integração das tensões, conforme \citeonline{Simo1985}. A opção de Newton-Raphson Completo Assimétrico é importante para os casos em que se calcula o módulo consistente e se tem plasticidade não associada. A plasticidade não associada leva a módulos constitutivos não simétricos e pode não convergir com o Newton-Raphson Completo, pois este monta a matriz de rigidez considerando-a simétrica. Uma forma de contornar esse problema é não utilizar o módulo consistente, porém será necessária mais iterações de equilíbrio para a convergência. Nessa tese, como será visto mais adiante, foi programado o módulo constitutivo consistente, mas o seu uso é opcional.
+A convergência quadrática da opção de Newton-Raphson Completo só é efetivamente obtida se for utilizado o módulo consistente $\Dll^{alg}$ após o algoritmo de integração das tensões, conforme \citeonline{Simo1985}. A opção de Newton-Raphson Completo Assimétrico é importante para os casos em que se calcula o módulo consistente e se tem plasticidade não associada. A plasticidade não associada pode levar a módulos constitutivos não simétricos e pode não convergir com o Newton-Raphson Completo, pois este monta a matriz de rigidez considerando-a simétrica. Uma forma de contornar esse problema é não utilizar o módulo consistente, porém será necessária mais iterações de equilíbrio para a convergência. Nessa tese, como será visto mais adiante, foi programado o módulo constitutivo consistente, mas o seu uso é opcional.
 
-Apesar de não terem sido utilizadas nessa tese, o ANSYS possui três técnicas para melhorar a convergência do método de Newton-Raphson em problemas estáticos, que são \cite[p. 668-673]{ANSYS2018}:
+Apesar de não terem sido utilizadas nessa tese, o ANSYS possui ainda quatro técnicas para melhorar a convergência do método de Newton-Raphson em problemas estáticos, que são \cite[p. 668-673]{ANSYS2018}:
 
 \begin{alineas}
 	\item \textbf{Preditor} (\textit{Predictor}): extrapola o vetor de deslocamentos iniciais de cada subpasso utilizando os incrementos de deslocamentos acumulados do subpasso anterior multiplicados pela relação entre os incrementos de tempo de ambos subpassos;
@@ -347,7 +347,7 @@ Na \autoref{NR-fluxograma} tem-se o fluxograma do método de Newton-Raphson, mos
 	\end{center}
 	\caption{\label{NR-fluxograma}Fluxograma do método de Newton-Raphson para solução do sistema de equações globais não lineares}
 \end{figure}
-Ainda na \autoref{NR-fluxograma} está detalhado a parte de atualização das tensões, variáveis internas e do módulo constitutivo, que serão os temas do próximo capítulo. É importante nesse fluxograma o detalhe dos laços nos elementos e pontos de Gauss, pois a customização do modelo do material, através da subrotina USERMAT está justamente aninhado nesse laço mais interno dos pontos de Gauss.
+Ainda na \autoref{NR-fluxograma} está detalhado a parte de atualização das tensões, variáveis internas e do módulo constitutivo, que serão os temas do próximo capítulo. É importante nesse fluxograma o detalhe dos laços nos elementos e pontos de Gauss, pois a customização do modelo do material, através da subrotina \textit{Usermat} está justamente aninhado nesse laço mais interno dos pontos de Gauss.
 
 \section{Algoritmo de atualização das tensões e variáveis internas}
 
@@ -475,10 +475,12 @@ O fluxograma desse algoritmo pode ser visto na \autoref{algoritmo_EP_semiimplici
 
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[scale = 1.0]{0608_3-integração EP semi-implicito.pdf}
+		\includegraphics[scale = 1.0]{0608_4-integração EP semi-implicito.pdf}
 	\end{center}
 	\caption{\label{algoritmo_EP_semiimplicito}Algoritmo de integração para elastoplasticidade utilizando um esquema de Euler semi-implícito (omitindo o índice $n$+1).}
 \end{figure}
+No fluxograma da \autoref{algoritmo_EP_semiimplicito} aparecem três parâmetros que exigem uma explicação: $TOL$, $nr_{max}$ e $k_{cut}$. O primeiro diz respeito a tolerância exigida para o $f$ que indicará que houve a convergência do Newton-Raphson local. Como se trata de um processo iterativo o $f_k=0$ não é necessariamente atingido. Dessa forma, foi utilizado uma tolerância $TOL = 10^{-14}$. O segundo parâmetro diz respeito ao limite máximo de iterações locais que indicará a não convergência. O valor escolhido foi $nr_{max} = 10000$. Por fim, o último parâmetro $k_{cut}$ é de suma importância, pois seu valor igual a unidade indicará para o ANSYS que é necessário dividir o passo pela metade e repetir o processo de modo a buscar a convergência. Também nesse fluxograma aparece as tensões iniciais $\sigma_{INI}$ que é adicionada ao preditor elástico.
+
 Como visto no fluxograma da \autoref{NR-fluxograma}, após a atualização das tensões e variáveis internas tem-se a possibilidade de atualizar o módulo constitutivo. É possível utilizar o módulo tangente consistente com a linearização feita durante o algoritmo de integração das leis constitutivas (por isso também esse módulo é conhecido como módulo algorítmico). Como comentado no \autoref{cap: solução do sistema} sua utilização aumenta a taxa de convergência das iterações de equilíbrio. Sua expressão geral é definida por:
 \begin{equation}
 	\label{eq:D_alg1}
@@ -490,7 +492,7 @@ Para derivar a expressão de $\Dll^{alg}$  escreve-se (\ref{eq:constitutiva_ep})
 	\label{eq:D_alg_ep}
 	\Dll^{alg} = \Dll - \dfrac{\Dll~\dgdsl_i~\dfdsl^T \Dll}{\dfdsl^T\Dll~\dgdsl_i-\dfdql \hl_i}
 \end{equation}
-Adotar o módulo tangente consistente faz com que a convergência seja atingida com menos iterações de equilíbrio globais, contudo, o procedimento tem um custo para sistemas grandes, uma vez que a cada iteração é exigida a montagem e fatorização da matriz de rigidez global (caso seja utilizado a opção de Newton-Raphson completo).  Portanto, é comum para sistemas grandes utilizar o módulo elástico $\Dll \leftarrow \Dll^e$. No presente trabalho foi escolhido não fazer essa atualização do módulo constitutivo.
+Adotar o módulo tangente consistente faz com que a convergência seja atingida com menos iterações de equilíbrio globais, contudo, o procedimento tem um custo para sistemas grandes, uma vez que a cada iteração é exigida a montagem e fatorização da matriz de rigidez global (caso seja utilizado a opção de Newton-Raphson completo).  Portanto, é comum para sistemas grandes utilizar o módulo elástico $\Dll \leftarrow \Dll^e$. No presente trabalho essa atualização foi implementada e é opcional controlada por um parâmetro.
 
 \subsection{Integração das equações constitutivas viscoplásticas}
 
@@ -566,19 +568,19 @@ em que,
 
 sendo $\Dll^{alg}$ o módulo constitutivo algorítmico e $\underline p$ uma pseudo-tensão que independe do incremento de deformação total.
 
-O esquema de integração representado por (\ref{eq:esquema_int_constitutiva_vp})$_5$ é incondicionalmente estável para valor de $\Theta \geq 1/2$. Contudo, isso não garante a precisão da solução. Dessa forma, tal como para valores $\Theta < 1/2$ deve-se utilizar um valor limite para o incremento de tempo. Esse limite é obtido de forma empírica, e depende dos parâmetros do material, do esquema de integração, da superfície de escoamento e regra de fluxo. Caso o algoritmo encontre dificuldades de estabilidade numérica e precisão, nesse trabalho, utilizaram-se os limites de \citeonline[p. 829]{Cormeau1975}, em que para superfície de Drucker-Prager tem-se:
+O esquema de integração representado por (\ref{eq:esquema_int_constitutiva_vp})$_5$ é incondicionalmente estável para valor de $\Theta \geq 1/2$. Contudo, isso não garante a precisão da solução. Dessa forma, tal como para valores $\Theta < 1/2$ deve-se utilizar um valor limite para o incremento de tempo $\Delta t \leq \Delta t_{\text{lim}}$. Esse limite de uma forma geral pode ser obtido reduzindo o incremento de tempo até que a solução não varie. A rigor depende dos parâmetros do material, do esquema de integração, da superfície de escoamento e da regra de fluxo e existem algumas soluções analíticas para as superfícies clássicas. Para evitar esse problema de precisão, nesse trabalho, utilizaram-se os limites de \citeonline[p. 829]{Cormeau1975}, em que para superfície de Drucker-Prager tem-se:
 \begin{equation}
 	\label{eq:deltatmin_dp}
-	\Delta t \leq \left\{ 
+	\Delta t_{\text{lim}} \leq \left\{ 
 		\begin{array}{lcl} 
 			\dfrac{4}{3}\dfrac{\eta}{\Phi}\dfrac{(1+\nu)}{E} {\sqrt{3J_2}} \\
 			\dfrac{\eta f_0}{\Phi'}\dfrac{(1+\nu)(1-2\nu)}{E}\dfrac{(3-\sin{\phi})^2}{\frac{3}{4}(1-2\nu)(3-\sin{\phi})^2 + 6(1+\nu)\sin{\phi}^2}
 		\end{array} \right.
 \end{equation}
-Quando $\phi = 0$ têm-se os casos específicos para as superfícies de von-Mises. Esse limite é deduzido considerando viscoplasticidade associada e com esquema de integração totalmente explícito. O fluxograma para o algoritmo de integração das equações viscoplásticas pode ser visto na \autoref{algoritmo_VP_semiimplicito}.
+em que $\phi'= \dfrac{d \phi}{d(f/f0)} = n(f/f0)^{n-1}$. Quando $\phi = 0$ tem-se o caso específico para a superfície de von-Mises. Esse limite é deduzido considerando viscoplasticidade associada e com esquema de integração totalmente explícito. O fluxograma para o algoritmo de integração das equações viscoplásticas pode ser visto na \autoref{algoritmo_VP_semiimplicito}.
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[scale = 1.0]{0609_3-integração VP semi-implicito sem endurecimento.pdf}
+		\includegraphics[scale = 1.0]{0609_4-integração VP semi-implicito sem endurecimento.pdf}
 	\end{center}
 	\caption{\label{algoritmo_VP_semiimplicito}Algoritmo de integração para viscoplasticidade utilizando um esquema de Euler semi-implícito ou totalmente explícito (quando $\Theta = 0$) sem endurecimento/amolecimento (omitindo o índice $n+1$).}
 \end{figure}
@@ -589,7 +591,7 @@ Como visto no \autoref{cap: modelo mecanico}, considerando a hipótese das trans
 O algoritmo para integração das equações constitutivas elastoplástica-viscoplástica pode ser visto no fluxograma da \autoref{algoritmo_EPVP}.
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[scale = 1.0]{0610_2-integração EPVP.pdf}
+		\includegraphics[scale = 1.0]{0610_4-integração EPVP.pdf}
 	\end{center}
 	\caption{\label{algoritmo_EPVP}Algoritmo de integração do modelo constitutivo elastoplástico-viscoplástico (omitindo o índice $n$+1).}
 \end{figure}

@@ -815,7 +815,7 @@ c     !*************************************************************************
      &                dPHIds_m(1,ncomp),dgdsVP_m(ncomp,1),
      &                epsVP(ncomp),depsVP(ncomp),
      &                dgPHItD(ncomp,ncomp),
-     &                sigmap(ncomp)
+     &                sigmap(ncomp),dt1,dt2
       INTEGER         
      &                superficiefVP,superficiegVP   
       DOUBLE PRECISION
@@ -853,6 +853,8 @@ c     !
 c     ! Limpando variáveis
       depsVP      = 0.0d0
       fVP         = 0.0d0
+      dt1         = 0.0d0
+      dt2         = 0.0d0
 c     !
 c     !**************************************************************************! 
 c     ! Coletando variáveis de estado e deformações plásticas                    !
@@ -860,7 +862,7 @@ c     !*************************************************************************
       epsVP       = 0.0d0
       epsVPeq     = 0.0d0
       epsVPeq     = ustatev(1)
-      CALL vmove(ustatev(2), epsVP(1), ncomp)
+      CALL vmove(ustatev(4), epsVP(1), ncomp)
 c     ! 
 c     !**************************************************************************! 
 c     ! Calculo da matriz constitutiva                                           !
@@ -912,6 +914,22 @@ c     !*************************************************************************
       IF(PHI.LE.0.0d0)dPHIds = 0.0d0
 c     !
 c     !**************************************************************************! 
+c     ! Verificação do incremento de tempo                                       !
+c     !**************************************************************************!
+      IF(PHI.GT.0.0d0)THEN
+      dt1 = 4.0d0/3.0d0*eta/PHI*(1.0d0+posn)/young*DSQRT(3.0d0*J2)
+      dt2 = eta*f0/(n*(fVP/f0)**(n-1))*
+     &        (1.0d0+posn)*(1.0d0-2.0d0*posn)/young*
+     &        ((3.0d0-DSIN(fiVP))**2)/
+     &        (3.0d0/4.0d0*(1.0d0-2.0d0*posn)*(3.0d0-DSIN(fiVP))**2+
+     &        6.0d0*(1.0d0+posn)*DSIN(fiVP)**2)     
+      IF(dtime.GT.dt1.OR.dtime.GT.dt2)THEN
+          keycut = 1
+          RETURN
+      ENDIF
+      ENDIF
+c
+c     !**************************************************************************! 
 c     ! Atualização do módulo constitutivo                                       !
 c     !**************************************************************************! 
       PHItDg = DOT_PRODUCT(dPHIds,MATMUL(dsdeEl,dgdsVP))
@@ -955,12 +973,14 @@ c     ! Retorna as deformações inelasticas totais e equivalentes
 c     !
 c     ! Guarda deformação viscoplastica equivalente
       ustatev(1) = epsVPeq
+      ustatev(2) = dt1
+      ustatev(3) = dt2
 c     !
 c     ! Guarda deformações viscoplasticas
-      CALL vmove(epsVP(1), ustatev(2), ncomp)
+      CALL vmove(epsVP(1), ustatev(4), ncomp)
 c     !
 c     ! Guarda tensões
-      CALL vmove(stress(1), ustatev(8), ncomp)
+      CALL vmove(stress(1), ustatev(10), ncomp)
 c     !
       RETURN
       END
@@ -1054,7 +1074,7 @@ c     !
      &                dPHIds_m(1,ncomp),dgdsVP_m(ncomp,1),
      &                epsVP(ncomp),depsVP(ncomp),
      &                dgPHItD(ncomp,ncomp),
-     &                sigmap(ncomp)
+     &                sigmap(ncomp),dt1,dt2
       INTEGER         
      &                superficiefVP,superficiegVP   
       DOUBLE PRECISION
@@ -1136,6 +1156,8 @@ c     !
 c     ! Limpando variáveis do modelo VP
       depsVP      = 0.0d0
       fVP         = 0.0d0
+      dt1         = 0.0d0
+      dt2         = 0.0d0
 c     !
 c     !**************************************************************************! 
 c     ! Coletando variáveis de estado e deformações plásticas do passo convergido!
@@ -1145,7 +1167,7 @@ c     ! Modelo EP
       dlam    = ustatev(2)
       c       = ustatev(3)
       q       = ustatev(5)
-      CALL vmove(ustatev(7), epsEP(1), ncomp)
+      CALL vmove(ustatev(9), epsEP(1), ncomp)
 c     !
 c     ! Inicializa o valor da coesão
       IF(c.EQ.0.0d0)c=ci
@@ -1156,7 +1178,7 @@ c     ! Inicializa o valor da coesão
 c     !
 c     ! Modelo VP
       epsVPeq = ustatev(6)
-      CALL vmove(ustatev(13), epsVP(1), ncomp)
+      CALL vmove(ustatev(15), epsVP(1), ncomp)
 c     ! 
 c     !**************************************************************************! 
 c     ! Calculo da matriz constitutiva                                           !
@@ -1209,6 +1231,22 @@ c     !*************************************************************************
       IF(PHI.LE.0.0d0)dPHIds = 0.0d0
 c     !
 c     !**************************************************************************! 
+c     ! Verificação do incremento de tempo                                       !
+c     !**************************************************************************!
+      IF(PHI.GT.0.0d0)THEN
+      dt1 = 4.0d0/3.0d0*eta/PHI*(1.0d0+posn)/young*DSQRT(3.0d0*J2)
+      dt2 = eta*f0/(n*(fVP/f0)**(n-1))*
+     &        (1.0d0+posn)*(1.0d0-2.0d0*posn)/young*
+     &        ((3.0d0-DSIN(fiVP))**2)/
+     &        (3.0d0/4.0d0*(1.0d0-2.0d0*posn)*(3.0d0-DSIN(fiVP))**2+
+     &        6.0d0*(1.0d0+posn)*DSIN(fiVP)**2)
+      IF(dtime.GT.dt1.OR.dtime.GT.dt2)THEN
+          keycut = 1
+          RETURN
+      ENDIF
+      ENDIF
+c
+c     !**************************************************************************! 
 c     ! Atualização do módulo constitutivo                                       !
 c     !**************************************************************************! 
       PHItDg = DOT_PRODUCT(dPHIds,MATMUL(dsdeEl,dgdsVP))
@@ -1224,14 +1262,6 @@ c     ! Calculo do p                                                            
 c     !**************************************************************************!     
       sigmap = PHI*MATMUL(dsdeEl(1:ncomp,1:ncomp),
      &        dgdsVP(1:ncomp))/aux1    
-c     !         
-c     !**************************************************************************! 
-c     ! Calculo do incremento de tensão                                          !
-c     !**************************************************************************!       
-c      dstress = MATMUL(dsdePl(1:ncomp,1:ncomp),
-c     &        dstrain(1:ncomp)) - sigmap 
-c     !
-c      stress = stress + dstress
 c     !
 c     !**************************************************************************! 
 c     ! Calculo da deformação viscoplastica                                      !
@@ -1400,8 +1430,10 @@ c     ! Guarda valores nas variáveis de estado
       ustatev(4) = q
       ustatev(5) = f
       ustatev(6) = epsVPeq
-      CALL vmove(epsEP(1), ustatev(7), ncomp)
-      CALL vmove(epsVP(1), ustatev(13), ncomp)
+      ustatev(7) = dt1
+      ustatev(8) = dt2
+      CALL vmove(epsEP(1), ustatev(9), ncomp)
+      CALL vmove(epsVP(1), ustatev(15), ncomp)
 c     !
       RETURN      
       END      

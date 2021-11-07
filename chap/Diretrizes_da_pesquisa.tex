@@ -17,18 +17,17 @@ O \textbf{objetivo principal} desta pesquisa consiste em formular e programar um
 Como \textbf{objetivos secundários} têm-se:
 
 \begin{alineas}
+	 
+
+	\item formular e desenvolver um modelo constitutivo capaz de lidar conjuntamente com o comportamento diferido e instantâneo do maciço;
 	
-	\item desenvolvimento de um \textit{software} na linguagem de programação \textit{Fortran90} baseado no método dos elementos finitos capaz de fazer análises tridimensionais considerando as etapas construtivas; 
+	\item generalizar esse modelo constitutivo para análises em estado plano de deformações, axissimetria (uma vez que essas análises são rápidas do ponto de vista computacional e comuns em diversos estudos na literatura) e tridimensional;
 	
-	\item generalizar esse \textit{software} para análises em estado plano de deformações e axissimetria, uma vez que essas análises são rápidas, do ponto de vista computacional, e comuns em diversos estudos na literatura;
+	\item implementar o modelo constitutivo acoplado através da customização do \textit{software} ANSYS utilizando a subrotina \textit{Usermat};
 	
-	\item formular um algoritmo de integração das leis constitutivas capaz de lidar conjuntamente com o comportamento diferido e instantâneo do maciço;
+	\item generalizar o modelo constitutivo para reproduzir tanto o comportamento elástico, elastoplástico, viscoplástico e elastoplástico-viscoplástico, com a possibilidade de implementação de diversas leis de comportamento.
 	
-	\item incorporar diversas leis de comportamento (elásticas, elastoplásticas, viscoplásticas e elastoplásticas-viscoplásticas) no \textit{software} para verificações e validações;
-	
-	\item verificar o \textit{software} desenvolvido com problemas mais simples utilizando os programas GEOMEC91 e ANSYS;
-	
-	\item calibração do \textit{software} com ensaios reais e validação com estudos de casos envolvendo túneis profundos que constam na literatura.
+	\item verificar o modelo constitutivo com soluções analíticas e numéricas (através do programa GEOMEC91) na problemática de túneis profundos;
 	
 \end{alineas}
 
@@ -37,17 +36,17 @@ Como \textbf{objetivos secundários} têm-se:
 % ---
 Os túneis podem sofrer influência da superfície como, por exemplo, deformações adicionais devido às cargas superficiais, e, inclusive, intervirem nelas e suas estruturas através de recalques superficiais ocasionados pela execução do túnel. Contudo, apesar da generalidade dos modelos desenvolvidos no presente trabalho, será dado enfoque nos túneis profundos, portanto, \textbf{não é considerada a influência de estruturas superficiais ou recalques na superfície induzidos pela escavação}.
 
-Embora o maciço em que um túnel está imerso possa apresentar descontinuidades, em muitos casos, seu comportamento global pode ser simulado efetivamente como um \textbf{meio contínuo}. Apesar do comportamento complexo do maciço, que é função também de diversas propriedades que variam espacialmente, nesse trabalho é considerado um \textbf{maciço homogêneo e isotrópico}. Em vista disso, o \textbf{maciço é considerado monofásico} com seu comportamento instantâneo e diferido \textbf{modelado fenomenologicamente através de uma lei reológica} elástica, elastoplástica, viscoplástica e elastoplástica-viscoplástica, \textbf{não considerando, portanto, outras abordagens como, por exemplo, as da poro mecânica e as que tratam da influência do fluxo de água}.
+Embora o maciço em que um túnel está imerso possa apresentar descontinuidades, em muitos casos, seu comportamento global pode ser simulado efetivamente como um \textbf{meio contínuo}. Apesar do comportamento complexo do maciço, que é função também de diversas propriedades que variam espacialmente, nesse trabalho é considerado um \textbf{maciço homogêneo e isotrópico}. Em vista disso, o \textbf{maciço é considerado monofásico} com seu comportamento instantâneo e diferido \textbf{modelado fenomenologicamente através de uma lei reológica} elástica, elastoplástica, viscoplástica e elastoplástica-viscoplástica, \textbf{não considerando, portanto, outras abordagens como, por exemplo, as da poro mecânica, as que tratam da influência do fluxo de água ou da temperatura}.
 
-É também sabido que, em geral, o estado de tensões internas em um maciço é extremamente complexo, devido aos movimentos tectônicos, descontinuidades e heterogeneidades. Em busca de generalidade do \textit{software} nesse sentido, almejando também análises de casos reais, é implementado um \textbf{estado anisotrópico de tensões iniciais}. Além disso, as análises iniciam de \textbf{uma configuração de referência indeformada}.
+É também sabido que, em geral, o estado de tensões internas em um maciço é extremamente complexo, devido aos movimentos tectônicos, descontinuidades e heterogeneidades. Em busca de generalidade do \textit{software} nesse sentido é implementado um \textbf{estado anisotrópico de tensões iniciais}. Contudo, as análises e verificações são feitas considerando um estado geostático hidrostático de tensões. Além disso, as análises iniciam de  \textbf{uma configuração de referência indeformada}.
 
-Como é visto no Capítulo 4, a velocidade de escavação e colocação do revestimento é uma variável importante quando se tem fenômenos diferidos no tempo. Essa velocidade depende de diversos fatores relacionados à dificuldade de escavação do maciço e ao cronograma de execução da obra. Contudo, nesse trabalho, apesar da generalidade, diferentemente da prática usual de execução de túneis, \textbf{a velocidade de avanço da face de escavação é considerada constante}.
+Como é visto no Capítulo 4, a velocidade de escavação e colocação do revestimento é uma variável importante quando se tem fenômenos diferidos no tempo. Essa velocidade depende de diversos fatores relacionados à dificuldade de escavação do maciço e ao cronograma de execução da obra. Contudo, nesse trabalho, apesar da generalidade do modelo, diferentemente da prática usual de execução de túneis, \textbf{a velocidade de avanço da face de escavação é considerada constante}.
 
 Apesar de um túnel poder atravessar um perfil litológico heterogêneo, o que pode exigir um revestimento e técnicas de pré-suporte especializados para cada região, no presente estudo, o \textbf{revestimento consiste em um modelo único de espessura constante} (sem distinção entre revestimento primário e secundário) ao longo de todo o eixo longitudinal do túnel.
 
 Principalmente em escavações não mecanizadas, é comum a frente de escavação apresentar parcializações de modo a estabilizar ou diminuir as deformações dessa zona. Apesar disso, nesse trabalho a \textbf{escavação é feita à seção plena, plana e vertical sem considerar nenhuma técnica ou elemento de pré-suporte}.
 
-Os modelos incorporados no programa são: \textbf{elástico, elastoplástico, viscoplástico e elastoplástico-viscoplástico}. Estão implementados para o maciço os modelos clássicos elastoplásticos (von-Mises, Drucker-Prager, Tresca e Mohr-Coulomb) e o modelo viscoplástico de Perzyna (1966) com as mesmas superfícies de escoamento do modelo elastoplástico, contudo, não necessariamente com os mesmos parâmetros. \textbf{Para o revestimento é utilizado o modelo elástico linear}.
+Os modelos incorporados no programa são: \textbf{elástico, elastoplástico, viscoplástico e elastoplástico-viscoplástico}. Estão implementados para o maciço o modelo clássico elastoplástico de Drucker-Prager e o modelo viscoplástico de Perzyna (1966) com as mesma superfície de escoamento do modelo elastoplástico, contudo, não necessariamente com os mesmos valores dos parâmetros. De qualquer forma o modelo permite a implementação de outras superfícies de escoamento. \textbf{Para o revestimento é utilizado o modelo elástico linear}.
 
 A evolução das deformações se dá de forma \textbf{quase-estática}, portanto, não são considerados os termos inerciais (densidade e aceleração) ou excitações dinâmicas (como seria, por exemplo, em uma análise considerando terremotos e explosões). Além disso, é considerada a \textbf{hipótese das pequenas perturbações}.
 
@@ -61,15 +60,19 @@ O trabalho foi realizado através das seguintes etapas:
 
 	\item pesquisa bibliográfica sobre túneis e o tema da tese;
 	
-	\item pesquisa bibliográfica sobre os modelos constitutivos elastoplásticos e viscoplásticos que foram implementados;
+	\item pesquisa bibliográfica sobre os modelos constitutivos elastoplásticos e viscoplásticos que são comumente utilizados para modelagem de túneis profundos;
 	
-	\item pesquisa bibliográfica sobre a solução do problema no contexto de elementos finitos;
+	\item pesquisa bibliográfica sobre a formulação e solução do problema no contexto de elementos finitos;
 	
-	\item desenvolvimento do \textit{software} de elementos finitos;
+	\item desenvolvimento do modelo constitutivo e sua solução numérica considerando o comportamento instantâneo elastoplástico acoplado com o comportamento diferido viscoplástico;
 	
-	\item verificação do \textit{software} com soluções analíticas, GEOMEC91 e ANSYS;
+	\item generalização do modelo constitutivo para abordar problemas em estado plano de deformações, axissimetria e tridimensional;	
 	
-	\item validação do modelo em estudos de casos que constam na literatura;
+	\item implementação do modelo desenvolvido na subrotina responsável pelo modelo constitutivo do \textit{software} ANSYS;	
+	
+	\item desenvolvimento dos domínios de túneis profundos no \textit{software} ANSYS através da linguagem APDL (\textit{ANSYS Parametric Desing Lenguage});
+	
+	\item verificação e validação da solução numérica com soluções analíticas e numéricas (através do GEOMEC91);
 	
 	\item estudo da diferença entre considerar o modelo elastoplástico-viscoplástico em relação a outros modelos mais simples.
 
@@ -79,7 +82,7 @@ O organograma da \autoref{organograma} ilustra a relação entre as etapas duran
 
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[scale = 0.8]{0201-organograma das etapas da pesquisa.pdf}
+		\includegraphics[scale = 1.2]{0201_2-organograma das etapas da pesquisa.pdf}
 	\end{center}
 	\caption{\label{organograma}Organograma das etapas da pesquisa}
 \end{figure}
