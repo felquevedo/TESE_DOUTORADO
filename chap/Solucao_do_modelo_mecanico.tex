@@ -920,7 +920,7 @@ O custo computacional desses modelos é refletido diretamente no tempo de proces
 \end{table}
 
 \section{Parâmetros referentes aos modelos constitutivos}
-Além dos parâmetros referente ao domínio para a construção da malha, condições de contorno e discretização do tempo tem-se os parâmetros para o modelo constitutivo do maciço e do revestimento. Como o revestimento possuí apenas comportamento elástico, ele apresenta apenas dois parâmetros E2 (módulo de Young) e nu2 (Coeficiente de Poisson). A \autoref{parametros_EPVP} apresenta a definição dos parâmetros referente ao modelo constitutivo elastoplástico-viscoplástico.
+Além dos parâmetros referente ao domínio para a construção da malha, condições de contorno e discretização do tempo tem-se os parâmetros para o modelo constitutivo do maciço e do revestimento. Como o revestimento possuí apenas comportamento elástico, ele apresenta apenas dois parâmetros $E_{rev}$ (módulo de Young) e $\nu_{rev}$ (Coeficiente de Poisson). A \autoref{parametros_EPVP} apresenta a definição dos parâmetros referente ao modelo constitutivo elastoplástico-viscoplástico.
 \begin{table}[H]
 	\caption{Parâmetros para o modelo constitutivo elastoplástico-viscoplástico}
 	\label{parametros_EPVP}
@@ -935,8 +935,8 @@ Além dos parâmetros referente ao domínio para a construção da malha, condi�
 		\hline
 		\multicolumn{3}{c}{REFERENTE A PARTE ELASTICA} \\
 		\hline
-		E1 & Módulo de Young $E$  & MPa \\			
-		nu1 & Coeficiente de Poisson $0 \leq \nu<0.5$  & adm \\		
+		E & Módulo de Young $E$  & MPa \\			
+		nu & Coeficiente de Poisson $0 \leq \nu<0.5$  & adm \\		
 		\hline
 		\multicolumn{3}{c}{REFERENTE A PARTE ELASTOPLÁSTICA} \\
 		\hline
