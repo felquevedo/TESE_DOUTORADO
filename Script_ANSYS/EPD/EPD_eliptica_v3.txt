@@ -20,7 +20,11 @@ FINISH
 ! 2. Dados de entrada                                       !
 !***********************************************************!
 !
-! Parametros geométricos
+! Nessa seção define-se todos os dados de entrada necessarios
+!
+!***********************************************************!
+! 2.1 Parâmetros geométricos                          	    !
+!***********************************************************! 
 Rhi		= 1		! [m] raio horizontal externo do túnel
 Rvi		= 1		! [m] raio vertical externo do túnel
 esp		= 0.1		! [m] espessura do revestimento
@@ -28,33 +32,107 @@ R1		= 10*Rvi	! [m] raio da região de refinamento da malha próxima do túnel
 Lx		= 20*Rvi	! [m] dimensão da base do domínio
 Ly		= 20*Rvi	! [m] dimensão da altura do domínio
 !
-! Carga na fronteira
-pi		= 0		! [MPa] pressão em Ri
-pv		= 5		! [MPa] pressão vertical
-ph		= 5		! [MPa] pressão horizontal
+!***********************************************************!
+! 2.2 Modelos e parâmetros para o material do maciço        !
+!***********************************************************! 
 !
-! Material maciço
-mod1		= 1		! 1 - elastico, 2 - VM, 3 - VP
-E1 		= 500		! [MPa] modulo elasticidade (1,2,3)
-nu1 		= 0.498		! [adm] coeficiente de poisson (1,2,3)
-sy1 		= 100		! [MPa] tensão de escoamento (2,3)
-tg1		= 0		! [MPa] módulo tangente bilinear (2,3)
-m1		= 1		! [adm] coeficiente de viscosidade (3)
-gamma1		= 1.157407	! [d^-1] coeficiente de viscosidade (3)
+! Modelo do material do maciço
+! matmacico = 1				! elastico do ANSYS
+! matmacico = 2				! elastoplastico VM do ANSYS (BISO)
+! matmacico = 22			! elastoplastico VM do ANSYS (MISO)
+! matmacico = 23			! viscoplastico Perzyna VM do ANSYS
+! matmacico = 4				! usermat3D_VM do ANSYS (BISO)
+! matmacico = 5				! usermat3D_elastico
+! matmacico = 6				! usermat3D_EP
+! matmacico = 7				! usermat3D_VP
+! matmacico = 8				! usermat3D_EPVP
 !
-! Dados da configuração da solução 
+matmacico	= 6			! Tipo de modelo escolhido
+!
+! Parâmetros de todos os modelos
+E1 		= 1430			! [MPa] modulo elasticidade (1,2,22,23,4,5,6,7,8)
+nu1 		= 0.498			! [adm] coeficiente de poisson (1,2,22,23,4,5,6,7,8)
+!
+! Parametros para o modelo 6 e 8
+superficief	= 2			! função de escoamento: 1-DPI, 2-DPII, 3-DPIII (6,8)
+superficieg 	= 2			! função potencial: 1-DPI, 2-DPII, 3-DPIII (6,8)
+fi	    	= 0			! [graus] angulo de atrito (0 - VM ou TR) (6,8)
+psi	    	= 0			! [graus] angulo de dilatância (6,8)
+c1	    	= 0.21*SQRT(3)/2 !4*SQRT(3)/2 !0.866025		! [MPa]	coesão inicial (6,8)
+c2	    	= 0.56*SQRT(3)/2 !4*SQRT(3)/2 !1.0			! [MPa] coesão de pico (6,8)
+c3	    	= 0.56*SQRT(3)/2 !0.56*SQRT(3)/2 !4*SQRT(3)/2 !0.866025		! [MPa] coesão residual (6,8)
+eps1	    	= 0.024			! [adm] deformação equivalente limite da zona 1 (6,8)
+eps2	    	= 0.024			! [adm] deformação equivalente limite da zona 2 (6,8)
+eps3	    	= 0.024			! [adm] deformação equivalente limite da zona 3 (6,8)
+Dalg		= 0			! 0 - módulo elastico, 1 - módulo algoritmíco
+!
+! Parametros para o modelo 7 e 8
+superficiefvp 	= 2			! função de escoamento: 1-DPI, 2-DPII, 3-DPIII (7,8)
+superficiegvp 	= 2			! função potencial: 1-DPI, 2-DPII, 3-DPIII (7,8)
+fivp          	= 0			! [graus] angulo de atrito (0 - VM ou TR)(7,8)
+psivp         	= 0			! [graus] angulo de dilatância (7,8)
+cvp 	      	= 1000 !3*SQRT(3)/2			! [MPa]	coesão inicial (7,8)
+n1	      	= 1			! [adm] expoente do modelo de Perzyna (7,8)
+eta           	= 4*10000	!1E7/(60*60*24)	! [dia] constante de viscosidade dinâmica (7,8)
+f0     	      	= 1			! [MPa] valor de referência (7,8)
+thetavp       	= 0			! forma de integração: 0 - totalmente explícito, 1 - semi-implicito (7,8)
+!
+! Parametros para o modelo 2, 22, 23, 4
+yield	    	= 2*c1			! [MPa]	tensão de escoamento (2,22,23,4)
+Ep 		= 2*(c2-c1)/(eps1)	! [MPa] módulo plástico tangente (2,22,23,4)
+youngt      	= Ep*E1/(E1+Ep)		! [MPa] módulo de elastoplástico tangente (2,22,23,4)
+epst0		= 2*c1/E1		! [adm] deformação total no escoamento (22)
+epst1		= 2*c2/E1 + eps1 	! [adm] deformação total na zona 1 (22)	
+epst2		= 2*c2/E1 + eps2	! [adm] deformação total na zona 2 (22)	
+epst3		= 2*c3/E1 + eps3	! [adm] deformação total na zona 3 (22)	
+gamma	      	= ((2*cvp/f0)**n1)/eta 	! [dias^-1] coeficiente Gamma do modelo de Perzyna Ansys (23)
+m  	      	= 1/n1			! [adm] coeficiente m do modelo de Perzyna do ANSYS (23)
+!
+!***********************************************************!
+! 2.3 Condições de contorno				    !
+!***********************************************************! 
+!
+! Pressão geostática
+pi		= 2.5		! [MPa] pressão em Ri
+pv		= 4.5		! [MPa] pressão vertical
+ph		= 4.5		! [MPa] pressão horizontal
+!
+!***********************************************************!
+! 2.4 Discretização do tempo nos passos			    !
+!***********************************************************! 
+!
 vkbc		 = 1		! 0 - solicitação linearmente interpolada no passo, 1 - solicitação linearmente interpolada no primeiro subpasso
 t1		 = 1		! [incremento de tempo ou partes inteiras da solicitação] do passo
-dt 		 = t1/10	! [incremento de tempo ou incremento de partes inteiras da solicitação] a cada subpasso
+dt 		 = t1/100	! [incremento de tempo ou incremento de partes inteiras da solicitação] a cada subpasso
 !
-! Parametros para discretização
-elem 		= 2		! 1 - PLANE182, 2 - PLANE183, 3 - PLANE42
+!***********************************************************!
+! 2.5 Discretização da malha 			    	    !
+!***********************************************************! 
+!
+tipoelem	= 2		! 1 - PLANE182, 2 - PLANE183, 3 - PLANE42
 nrev		= 1 		! [un] divisões na espessura do revestimento
 nRi		= 10		! [un] divisões na interface entre o túnel e o maciço
 nR1		= 15		! [un] divisões ao longo do raio da região de refinamento
 mR1		= 15		! [%] taxa de crescimento de nr1
 nL1		= 5		! [un] divisões na base fora da região de refinamento
 mL1		= 1.2		! [%] taxa de crescimento de mx1
+!
+!***********************************************************!
+! 2.6 Configurações da solução			    	    !
+!***********************************************************! 
+!
+nr		= 2		! Newton-Raphson
+!				! 	1 - INIT matriz de rigidez não é atualizada
+!				! 	2 - FULL matriz de rigidez atualizada a cada iteração
+!				! 	3 - UNSYM matriz de rigidez atualizada a cada iteração
+!
+psc		= 0		! 1 - Ativa, 0 - desativa a opção de paralelização SMP
+nlg		= 0		! 1 - Ativa, 0 - desativa a não lineariedade geométrica
+soleq		= 1		! 1 - calcula o equilibrio do maciço antes de iniciar
+!
+!***********************************************************!
+! 2.7 Configurações do pós processamento	    	    !
+!***********************************************************! 
 !
 ! Parametros para pós-processamento
 arqconv = 'results'	! Nome do arquivo de saida de resultados
@@ -87,17 +165,17 @@ Ly1		= Ly-R1
 !***********************************************************!
 ! 3.2 Configurando elemento finito                          !
 !***********************************************************!
-*IF,elem,EQ,1,THEN
+*IF,tipoelem,EQ,1,THEN
 	ET,1,PLANE182
 	KEYOPT,1,1,0
-	KEYOPT,1,3,2
+	KEYOPT,1,3,1
 	KEYOPT,1,6,0
-*ELSEIF,elem,EQ,2,THEN
+*ELSEIF,tipoelem,EQ,2,THEN
 	ET,1,PLANE183
 	KEYOPT,1,1,0
-	KEYOPT,1,3,2
+	KEYOPT,1,3,1
 	KEYOPT,1,6,0
-*ELSEIF,elem,EQ,3,THEN
+*ELSEIF,tipoelem,EQ,3,THEN
 	ET,1,PLANE42
 	KEYOPT,1,1,0
 	KEYOPT,1,2,1
@@ -107,32 +185,91 @@ Ly1		= Ly-R1
 *ENDIF
 !
 !***********************************************************!
-! 3.3 Configurando o material		                    !
+! 3.3 Material do maciço                                    !
 !***********************************************************!
-*IF,mod1,EQ,1,THEN 
-	MPTEMP,1,0 
-	MPDATA,EX,1,,E1
-	MPDATA,PRXY,1,,nu1
-	MPDATA,DENS,1,,dens1 
-*ELSEIF,mod1,EQ,2,THEN
-	MPTEMP,1,0  
-	MPDATA,EX,1,,E1
-	MPDATA,PRXY,1,,nu1
-	MPDATA,DENS,1,,dens1 
+*IF,matmacico,eq,1,then
+	! Definindo o material elastico do Ansys
+	MPTEMP,1,0  		
+	MPDATA,EX,1,,E1	
+	MPDATA,PRXY,1,,nu1 	
+*ELSEIF,matmacico,eq,2,then
+	! Definindo o material elastoplástico VM do Ansys
+	MPTEMP,1,0  		
+	MPDATA,EX,1,,E1	
+	MPDATA,PRXY,1,,nu1 	
 	TB,BISO,1,1,2,  
 	TBTEMP,0
-	TBDATA,,sy1,tg1,,,,   
-*ELSEIF,mod1,EQ,3,THEN
-	MPTEMP,1,0  
-	MPDATA,EX,1,,E1
-	MPDATA,PRXY,1,,nu1
-	MPDATA,DENS,1,,dens1 
+	TBDATA,,yield,youngt,,,,
+*ELSEIF,matmacico,eq,22,then
+	! Definindo o material elastoplástico VM do Ansys multilinear
+	MPTEMP,1,0  		
+	MPDATA,EX,1,,E1	
+	MPDATA,PRXY,1,,nu1 	
+	!TB,PLASTIC,,,,MISO
+	TB,MISO,1,1,5,0 
+	TBTEMP,0
+	TBPT,,epst0,2*c1
+	TBPT,,epst1,2*c2
+	TBPT,,epst2,2*c2 
+	TBPT,,epst3,2*c3
+	TBPT,,0.1,2*c3    
+*ELSEIF,matmacico,eq,23,then
+	! Definindo o material viscoplastico perzyna VM do Ansys
+	MPTEMP,1,0  		
+	MPDATA,EX,1,,E1	
+	MPDATA,PRXY,1,,nu1	
 	TB,BISO,1,1,2,  
 	TBTEMP,0
-	TBDATA,,sy1,tg1,,,,   
+	TBDATA,,2*cvp,0,,,,
 	TB,RATE,1,1,2,1
 	TBTEMP,0
-	TBDATA,,m1,gamma1,,,,,
+	TBDATA,,m,gamma,,,,	
+*ELSEIF,matmacico,eq,4,then
+	! Definindo material usermat3D VM do Ansys
+	TB,USER,1,2,5
+	TBTEMP,1.0 		
+	TBDATA,1,matmacico,E1,nu1,yield,youngt ! modelo, E, posn, sigy, H
+	TB,STATE,1,,8
+*ELSEIF,matmacico,eq,5,then
+	! Definindo material usermat3D_elastico
+	TB,USER,1,2,3
+	TBTEMP,1.0 		
+	TBDATA,1,matmacico,E1,nu1
+	TB,STATE,1,,8	
+*ELSEIF,matmacico,eq,6,then
+	! Definindo material usermat3D_EP
+	TB,USER,1,2,14
+	TBTEMP,1.0 		
+	TBDATA,1,matmacico,E1,nu1
+	TBDATA,4,superficief,superficieg
+	TBDATA,6,fi,psi,
+	TBDATA,8,c1,c2,c3,eps1,eps2,eps3
+	TBDATA,14,Dalg
+	TB,STATE,1,,20	
+*ELSEIF,matmacico,eq,7,then
+	! Definindo material usermat3D_VP
+	TB,USER,1,2,13
+	TBTEMP,1.0 		
+	TBDATA,1,matmacico,E1,nu1
+	TBDATA,4,superficiefvp,superficiegvp
+	TBDATA,6,fivp,psivp,
+	TBDATA,8,cvp,n1,eta,f0,thetavp	
+	TB,STATE,1,,20		
+*ELSEIF,matmacico,eq,8,then
+	! Definindo material usermat3D_EPVP
+	TB,USER,1,2,23
+	TBTEMP,1.0 		
+	TBDATA,1,matmacico,E1,nu1
+	TBDATA,4,superficief,superficieg
+	TBDATA,6,fi,psi,
+	TBDATA,8,c1,c2,c3,eps1,eps2,eps3
+	TBDATA,14,Dalg
+	TBDATA,15,superficiefvp,superficiegvp
+	TBDATA,17,fivp,psivp
+	TBDATA,19,cvp
+	TBDATA,20,n1,eta,f0
+	TBDATA,23,thetavp	
+	TB,STATE,1,,20	
 *ENDIF
 !
 !***********************************************************!
@@ -201,6 +338,10 @@ AL,ALL
 !***********************************************************!
 ! 3.5 Aplicando condições de contorno                       !
 !***********************************************************!
+! Aplicação das tensões iniciais
+ALLSEL,ALL
+INISTATE, DEFINE,,,,,-pv,-ph,-ph,0,0,0		
+!
 ALLSEL,ALL
 LSEL,S,LOC,Y,0,Ly,0
 LSEL,R,LOC,X,0,0,0
@@ -222,7 +363,7 @@ LSEL,R,LOC,X,Lx,Lx,0
 SFL,ALL,PRESS,ph 
 !
 ALLSEL,ALL
-LSEL,S,LINE,,5
+LSEL,S,LINE,,6
 SFL,ALL,PRESS,pi
 !
 !***********************************************************!
@@ -266,15 +407,29 @@ CM,rev1,ELEM
 !***********************************************************!
 ! 4.1 Configuração da solução   			    !
 !***********************************************************!
-NLGEOM,OFF			! OFF - Ignora grandes deformações, ON - ativa
-NROPT,FULL			! NR - FULL, MODI, INIT, AUTO 			
-OUTRES,ALL,ALL			! Guarda todos os itens de solução a cada subpasso
-OUTRES,SVAR,ALL			! Guarda as variáveis de estado da Usermat a cada subpasso
-PSCONTROL,ALL,OFF		! OFF - Desativa paralelização, ON - liga paralelização
-!AUTOTS,OFF			! ON - Liga subpassos automáticos
-!LNSRCH,1			! 1 - Ativa o recurso de Linesearch
-!CNVTOL,F, ,0.0000001,2, , 	! Tolerância do criterio de convergencia
-!CNVTOL,U, ,0.0000001,0, ,	! Tolerância do critério de convergência
+/SOL			
+!
+! Configurações iniciais
+*IF,nlg,eq,0,then		
+	NLGEOM,OFF
+*ELSEIF,nlg,eq,1,then		
+	NLGEOM,ON
+*ENDIF
+*IF,nr,eq,1,then		
+	NROPT,INIT
+*ELSEIF,nr,eq,2,then		
+	NROPT,FULL
+*ELSEIF,nr,eq,3,then		
+	NROPT,UNSYM
+*ENDIF	
+*IF,psc,eq,0,then		
+	PSCONTROL,ALL,OFF
+*ELSEIF,nlg,eq,1,then		
+	PSCONTROL,ALL,ON
+*ENDIF
+OUTRES,SVAR,ALL	
+OUTRES,ALL,ALL		
+ALLSEL,ALL
 !
 !***********************************************************!
 ! 4.2 Primeira solução 		   			    !
@@ -292,7 +447,8 @@ TIME,t1
 KBC,vkbc
 !
 ! Resolve	
-ALLSEL,ALL
+ESEL,S,LIVE
+ESEL,ALL
 SOLVE   
 FINISH 
 !
