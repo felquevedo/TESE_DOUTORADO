@@ -1,4 +1,4 @@
-\chapter{Algumas verificações e validações}\label{Algumas_verificacoes_validacoes}
+\chapter{Verificações, validações e análises}\label{Algumas_verificacoes_validacoes}
 
 \section{Validação referente ao endurecimento e amolecimento da parte elastoplástica através de um ensaio}
 
@@ -173,35 +173,99 @@ Nesse caso, pode-se notar que o revestimento elástico bloqueou a evolução da 
 
 \section{Verificação do modelo elastoplástico -viscoplástico com uma solução analítica}
 
-Como exemplo de verificação do algoritmo acoplado implementado é feita a comparação de sua solução com a solução analítica deduzida por \citeonline[p. 61]{Piepi1995} para um túnel profundo em condições geostáticas hidrostáticos no interior de um maciço com comportamento elastoplástico-viscoplástico perfeito obedecendo ao critério de Tresca. Essa solução analítica foi escolhida por utilizar o mesmo princípio de associação da \autoref{lei_endurecimento_rousset}, como pode ser visto em \citeonline[p. 35]{Piepi1995}. Contudo, não apresenta a mesma generalidade da solução numérica implementada e possui algumas hipóteses simplificativas, dentre elas, a consideração da mesma superfície de escoamento para plasticidade e viscoplasticidade e vetores de fluxo totalmente associados, ou seja, $\fl^p = \gl^{p} = \fl^{vp} = \gl^{vp}$. Para essa verificação é utilizado o modelo axissimétrico com os seguintes parâmetros: $E=1500$MPa e $2000$MPa, $c^{vp}$=3MPa $\nu=0.498$, $p_v=p_h=9$MPa, $c^i=c^p=c^r =4$MPa, $\eta = 4 \cdot 10^4$dia, $n=1$ e $f_0=1$MPa. Esses parâmetros são os mesmos utilizado por \citeonline[p. 131]{Piepi1995} na validação do seu algoritmo numérico.
+Como exemplo de verificação do algoritmo acoplado implementado é feita a comparação com a solução analítica deduzida por \citeonline[p. 61]{Piepi1995} para um túnel profundo em condições geostáticas-hidrostáticas no interior de um maciço com comportamento elastoplástico-viscoplástico perfeito obedecendo ao critério de Tresca. Essa solução analítica foi escolhida por utilizar o mesmo princípio de associação da \autoref{lei_endurecimento_rousset}, como pode ser visto em \citeonline[p. 35]{Piepi1995}. Contudo, não apresenta a mesma generalidade da solução numérica implementada e possui algumas hipóteses simplificativas, dentre elas, a consideração da mesma superfície de escoamento para plasticidade e viscoplasticidade e vetores de fluxo totalmente associados, ou seja, $\fl^p = \gl^{p} = \fl^{vp} = \gl^{vp}$. Para essa verificação é utilizado o modelo axissimétrico com os seguintes parâmetros: $E=1500$MPa e $2000$MPa, $\nu=0.498$, $c^i=c^p=c^r =4\sqrt{3}/2$MPa, $c^{vp}=3\sqrt{3}/2$MPa, $\eta = 4 \cdot 10^4$dia, $n=1$, $f_0=1$MPa e $p_v=p_h=9$MPa. Esses parâmetros são os mesmos utilizado por \citeonline[p. 131]{Piepi1995} que chegou nas convergências de $U=2,16$ para $E=1500$MPa e $U=1,6$ para $E=2000$MPa.
 
-Como a solução analítica está deduzida para superfície de Tresca e aqui será utilizado a de Drucker-Prager (que se particulariza para von-Mises devido a ausência de ângulo de atrito) foi adotado a relação (\ref{eq:ctr_cvm}) considerando von-Mises inscrito em Tresca. A solução analítica obtém o perfil de convergência apenas no longo prazo. Contudo, é conveniente para mostrar as diferenças entre os modelos apresentar também a solução considerando apenas comportamento elástico (E), elastoplástico (EP) e viscoplástico (VP), juntamente com o modelo elastoplástico-viscoplástico (EP-VP), tanto no final da escavação quanto no longo prazo. Para ver a influência da velocidade de escavação no curto prazo será considerado três velocidades $V_p=0,1; 0,2$ e 10m/dia.
+Como a solução analítica está deduzida para superfície de Tresca e aqui será utilizado a de Drucker-Prager (que se particulariza para von-Mises devido a ausência de ângulo de atrito) foi adotado a relação (\ref{eq:ctr_cvm}) considerando von-Mises inscrito em Tresca nos valores das coesões. A solução analítica obtém o perfil de convergência apenas no longo prazo. Contudo, para mostrar as diferenças entre os modelos, além da solução numérica elastoplástica-viscoplástica (EP-VP), foi feito também a solução considerando cada comportamento separado, ou seja, elástico (E), elastoplástico (EP) e viscoplástico (VP) tanto no final da escavação quanto no longo prazo. Para ver a influência da velocidade de escavação será considerado três velocidades $V_p=0,1; 0,2$ e 10m/dia.
+
+A \autoref{PIEPI-E1500-FINALESCAVACAO} apresenta os resultados no final da escavação. Pode-se notar que os perfis de convergência para o modelo viscoplástico (VP) são intermediários entre o modelo elástico (E) e elastoplástico (EP), sendo que quanto mais rápida a escavação, mais a resposta desse modelo se  aproxima da convergência do maciço em elasticidade. Isso é um resultado esperado, pois quanto maior a velocidade de escavação menos tempo transcorreu para a evolução das deformações viscosas. O modelo elastoplástico-viscoplástico (EP-VP) apresentou a mesma relação com a velocidade (quanto mais rápido menos tempo para as deformações viscosas evoluírem), porém, iniciou suas deformações próximas do perfil de convergências do modelo elastoplástico (EP). Isso ocorre, pois, o maciço atingiu a plastificação durante a escavação. \textbf{Esse é um dos principais objetivos e vantagem desse modelo acoplado}, pois geralmente a escavação induz um comportamento elastoplástico no maciço próximo à abertura e esse efeito não é captado pelos modelos que consideram apenas a viscoplasticidade.
 
 \begin{figure}[H]
 	\begin{center}
 		\includegraphics[scale = 1.0]{0717-PIEPI-E1500-FINALESCAVACAO.pdf}
 	\end{center}
-	\caption{\label{VISCO-D2-E1000-ER3000-P4-C1-V5}Perfil de convergências no final da escavação para os diversos comportamentos implementados, considerando os parâmetros físicos do maciço de acordo com \citeonline{Piepi1995} com $E=1500$MPa}
+	\caption{\label{PIEPI-E1500-FINALESCAVACAO}Perfil de convergências no final da escavação para os diversos comportamentos implementados, considerando os parâmetros físicos do maciço de acordo com \citeonline{Piepi1995} com $E=1500$MPa}
 \end{figure}
+
+Após o final da escavação, os perfis de convergências dos modelos (VP) e (EP-VP) continuam evoluindo com uma taxa cada vez menor devido a redistribuição de tensões no interior do maciço, até estabilizarem (no longo prazo). A \autoref{PIEPI-E1500-LONGOPRAZO} mostra o perfil de convergência no longo prazo (cerca de 500 dias). Pode-se ver que independente da velocidade de escavação, os perfis de convergêncais viscoplásticos (VP) se estabilizam sobre o perfil da elastoplasticidade (EP). Isso ocorre pois é utilizado a mesma superfície de escoamento em ambos os modelos. Contudo, os perfis do modelo elastoplástico-viscoplástico (EP-VP) encontram a estabilização bem acima do perfil do modelo elastoplástico (EP), o que mostra, mais uma vez a importância da magnitude desse comportamento acoplado. Pode-se ver também que a solução numérica no longo prazo ficou satisfatória com a solução analítica.
 
 \begin{figure}[H]
 	\begin{center}
 		\includegraphics[scale = 1.0]{0718-PIEPI-E1500-LONGOPRAZO.pdf}
 	\end{center}
-	\caption{\label{VISCO-D2-E1000-ER3000-P4-C1-V5}Perfil de convergências no longo prazo para os diversos comportamentos implementados, considerando os parâmetros físicos do maciço de acordo com \citeonline{Piepi1995} com $E=1500$MPa}
+	\caption{\label{PIEPI-E1500-LONGOPRAZO}Perfil de convergências no longo prazo para os diversos comportamentos implementados, considerando os parâmetros físicos do maciço de acordo com \citeonline{Piepi1995} com $E=1500$MPa}
 \end{figure}
+
+A \autoref{PIEPI-E2000-FINALESCAVACAO} e \autoref{PIEPI-E2000-LONGOPRAZO} mostram os resultados para $E=2000$MPa. O mesmo raciocínio se aplica nesse caso, porém, como tem maior módulo de elasticidade, os perfis possuem menores convergências.
 
 \begin{figure}[H]
 	\begin{center}
 		\includegraphics[scale = 1.0]{0719-PIEPI-E2000-FINALESCAVACAO.pdf}
 	\end{center}
-	\caption{\label{VISCO-D2-E1000-ER3000-P4-C1-V5}Perfil de convergências no final da escavação para os diversos comportamentos implementados, considerando os parâmetros físicos do maciço de acordo com \citeonline{Piepi1995} com $E=2000$MPa}
+	\caption{\label{PIEPI-E2000-FINALESCAVACAO}Perfil de convergências no final da escavação para os diversos comportamentos implementados, considerando os parâmetros físicos do maciço de acordo com \citeonline{Piepi1995} com $E=2000$MPa}
 \end{figure}
 
 \begin{figure}[H]
 	\begin{center}
 		\includegraphics[scale = 1.0]{0720-PIEPI-E2000-LONGOPRAZO.pdf}
 	\end{center}
-	\caption{\label{VISCO-D2-E1000-ER3000-P4-C1-V5}Perfil de convergências no longo prazo para os diversos comportamentos implementados, considerando os parâmetros físicos do maciço de acordo com \citeonline{Piepi1995} com $E=2000$MPa}
+	\caption{\label{PIEPI-E2000-LONGOPRAZO}Perfil de convergências no longo prazo para os diversos comportamentos implementados, considerando os parâmetros físicos do maciço de acordo com \citeonline{Piepi1995} com $E=2000$MPa}
 \end{figure}
+
+Os mesmos resultados foram obtidos utilizando o modelo 3D. A \autoref{PIEPI-E1500-CAMPO_DESLOCAMENTO} mostra o campo de deslocamentos no longo prazo para o caso EP-VP com velocidade de escavação $V_p=0,1$m/dia e $E=1500$MPa.
+
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[scale = 1.0]{0721-PIEPI-E1500-CAMPO_DESLOCAMENTO.pdf
+		}
+	\end{center}
+	\caption{\label{PIEPI-E1500-CAMPO_DESLOCAMENTO}Campo de deslocamentos no longo prazo para o caso elastoplástico-viscoplástico com $E=1500$MPa e $V_p=0,1$m/dia}
+\end{figure}
+
+A \autoref{PIEPI-E1500-CAMPO_DEFORMACOES} mostra o campo de deformações plásticas e viscosas equivalentes para o mesmo caso.
+
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[scale = 1.0]{0722-PIEPI-E1500-CAMPO_DEFORMACOES.pdf
+		}
+	\end{center}
+	\caption{\label{PIEPI-E1500-CAMPO_DEFORMACOES}Campo de deformações plásticas e viscosas no longo prazo para o caso elastoplástico-viscoplástico com $E=1500$MPa e $V_p=0,1$m/dia}
+\end{figure}
+
+\section{Análise paramétrica da influência do revestimento}
+
+Nessa seção é apresentada uma análise paramétrica para averiguar a influência do revestimento sobre o perfil de convergência do modelo elastoplástico-viscoplástico. As propriedades do maciço são as mesmas da análise anterior com $E=1500$MPa. É utilizado o modelo em axissimetria, de início sem revestimento e então colocando o revestimento alterando o seu módulo de elasticidade $E_{rev} = 3000$MPa e $E_{rev} = 30000$MPa e a distância não suportada $d0 = 0$ e $d0 = 4L_p$. A Figura XX mostra os resultados considerando d0 = 4Lp
+
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[scale = 1.0]{0723-PARAMETRICO-D0-FINALCONSTRUÇÃO.pdf
+		}
+	\end{center}
+	\caption{\label{PIEPI-E1500-CAMPO_DEFORMACOES}Campo de deformações plásticas e viscosas no longo prazo para o caso elastoplástico-viscoplástico com $E=1500$MPa e $V_p=0,1$m/dia}
+\end{figure}
+
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[scale = 1.0]{0724-PARAMETRICO-D0-LONGOPRAZO.pdf
+		}
+	\end{center}
+	\caption{\label{PIEPI-E1500-CAMPO_DEFORMACOES}Campo de deformações plásticas e viscosas no longo prazo para o caso elastoplástico-viscoplástico com $E=1500$MPa e $V_p=0,1$m/dia}
+\end{figure}
+
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[scale = 1.0]{0725-PARAMETRICO-D4-FINALCONSTRUÇÃO.pdf
+		}
+	\end{center}
+	\caption{\label{PIEPI-E1500-CAMPO_DEFORMACOES}Campo de deformações plásticas e viscosas no longo prazo para o caso elastoplástico-viscoplástico com $E=1500$MPa e $V_p=0,1$m/dia}
+\end{figure}
+
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[scale = 1.0]{0726-PARAMETRICO-D4-LONGOPRAZO.pdf
+		}
+	\end{center}
+	\caption{\label{PIEPI-E1500-CAMPO_DEFORMACOES}Campo de deformações plásticas e viscosas no longo prazo para o caso elastoplástico-viscoplástico com $E=1500$MPa e $V_p=0,1$m/dia}
+\end{figure}
+
+
 
