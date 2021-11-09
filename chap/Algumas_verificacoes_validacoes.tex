@@ -233,14 +233,16 @@ A \autoref{PIEPI-E1500-CAMPO_DEFORMACOES} mostra o campo de deformações plást
 
 \section{Análise paramétrica da influência do revestimento}
 
-Nessa seção é apresentada uma análise paramétrica para averiguar a influência do revestimento sobre o perfil de convergência do modelo elastoplástico-viscoplástico. As propriedades do maciço são as mesmas da análise anterior com $E=1500$MPa. É utilizado o modelo em axissimetria, de início sem revestimento e então colocando o revestimento alterando o seu módulo de elasticidade $E_{rev} = 3000$MPa e $E_{rev} = 30000$MPa e a distância não suportada $d0 = 0$ e $d0 = 4L_p$. A Figura XX mostra os resultados considerando d0 = 4Lp
+Nessa seção é apresentada uma análise paramétrica para averiguar a influência do revestimento sobre o perfil de convergência do modelo elastoplástico-viscoplástico. As propriedades do maciço são as mesmas da análise anterior com $E=1500$MPa. É utilizado o modelo em axissimetria, de início sem revestimento e então colocando o revestimento alterando o seu módulo de elasticidade $E_{rev} = 3000$MPa e $E_{rev} = 30000$MPa e a distância não suportada $d0 = 0$ e $d0 = 4L_p$. A \autoref{PARAMETRICO-D0-FINALCONSTRUÇÃO} e \autoref{PARAMETRICO-D0-LONGOPRAZO} mostram os resultados considerando $d_0 = 0$ e a \autoref{PARAMETRICO-D0-LONGOPRAZO} e \autoref{PARAMETRICO-D4-FINALCONSTRUÇÃO} considerando $d_0=4L_p$. A convergência ao equilíbrio é medida em $y/R_i = 6$. 
+
+Comparando o modelo elastoplástico-viscoplástico com o modelo viscoplástico, no final da construção, o primeiro teve, uma convergência 33\% maior sem revestimento. Com revestimento aplicado a $d0=0$ uma convergência entre 17\% e 20\% e para $d0=4L_p$ entre 25\% a 28\% maior. E no longo prazo, o primeiro teve, uma convergência 54\% maior sem revestimento. Com revestimento aplicado a $d0=0$ uma convergência entre 17\% e 23\% e para $d0=4L_p$ entre 26\% a 30\% maior.
 
 \begin{figure}[H]
 	\begin{center}
 		\includegraphics[scale = 1.0]{0723-PARAMETRICO-D0-FINALCONSTRUÇÃO.pdf
 		}
 	\end{center}
-	\caption{\label{PIEPI-E1500-CAMPO_DEFORMACOES}Campo de deformações plásticas e viscosas no longo prazo para o caso elastoplástico-viscoplástico com $E=1500$MPa e $V_p=0,1$m/dia}
+	\caption{\label{PARAMETRICO-D0-FINALCONSTRUÇÃO}Convergência no final da construção \textit{versus} módulo de elasticidade do revestimento para uma distância não revestida $d0=0$}
 \end{figure}
 
 \begin{figure}[H]
@@ -248,7 +250,7 @@ Nessa seção é apresentada uma análise paramétrica para averiguar a influên
 		\includegraphics[scale = 1.0]{0724-PARAMETRICO-D0-LONGOPRAZO.pdf
 		}
 	\end{center}
-	\caption{\label{PIEPI-E1500-CAMPO_DEFORMACOES}Campo de deformações plásticas e viscosas no longo prazo para o caso elastoplástico-viscoplástico com $E=1500$MPa e $V_p=0,1$m/dia}
+	\caption{\label{PARAMETRICO-D0-LONGOPRAZO}Convergência no longo prazo \textit{versus} módulo de elasticidade do revestimento para uma distância não revestida $d0=0$}
 \end{figure}
 
 \begin{figure}[H]
@@ -256,7 +258,7 @@ Nessa seção é apresentada uma análise paramétrica para averiguar a influên
 		\includegraphics[scale = 1.0]{0725-PARAMETRICO-D4-FINALCONSTRUÇÃO.pdf
 		}
 	\end{center}
-	\caption{\label{PIEPI-E1500-CAMPO_DEFORMACOES}Campo de deformações plásticas e viscosas no longo prazo para o caso elastoplástico-viscoplástico com $E=1500$MPa e $V_p=0,1$m/dia}
+	\caption{\label{PARAMETRICO-D4-FINALCONSTRUÇÃO}Convergência no final da construção \textit{versus} módulo de elasticidade do revestimento para uma distância não revestida $d0=4L_p$}
 \end{figure}
 
 \begin{figure}[H]
@@ -264,8 +266,8 @@ Nessa seção é apresentada uma análise paramétrica para averiguar a influên
 		\includegraphics[scale = 1.0]{0726-PARAMETRICO-D4-LONGOPRAZO.pdf
 		}
 	\end{center}
-	\caption{\label{PIEPI-E1500-CAMPO_DEFORMACOES}Campo de deformações plásticas e viscosas no longo prazo para o caso elastoplástico-viscoplástico com $E=1500$MPa e $V_p=0,1$m/dia}
+	\caption{\label{PARAMETRICO-D4-LONGOPRAZO}Convergência no longo prazo \textit{versus} módulo de elasticidade do revestimento para uma distância não revestida $d0=4L_p$}
 \end{figure}
 
-
+\section{Análise da influência de uma seção elíptica}
 
