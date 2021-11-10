@@ -175,7 +175,7 @@ Nesse caso, pode-se notar que o revestimento elástico bloqueou a evolução da 
 
 Como exemplo de verificação do algoritmo acoplado implementado é feita a comparação com a solução analítica deduzida por \citeonline[p. 61]{Piepi1995} para um túnel profundo em condições geostáticas-hidrostáticas no interior de um maciço com comportamento elastoplástico-viscoplástico perfeito obedecendo ao critério de Tresca. Essa solução analítica foi escolhida por utilizar o mesmo princípio de associação da \autoref{lei_endurecimento_rousset}, como pode ser visto em \citeonline[p. 35]{Piepi1995}. Contudo, não apresenta a mesma generalidade da solução numérica implementada e possui algumas hipóteses simplificativas, dentre elas, a consideração da mesma superfície de escoamento para plasticidade e viscoplasticidade e vetores de fluxo totalmente associados, ou seja, $\fl^p = \gl^{p} = \fl^{vp} = \gl^{vp}$. Para essa verificação é utilizado o modelo axissimétrico com os seguintes parâmetros: $E=1500$MPa e $2000$MPa, $\nu=0.498$, $c^i=c^p=c^r =4\sqrt{3}/2$MPa, $c^{vp}=3\sqrt{3}/2$MPa, $\eta = 4 \cdot 10^4$dia, $n=1$, $f_0=1$MPa e $p_v=p_h=9$MPa. Esses parâmetros são os mesmos utilizado por \citeonline[p. 131]{Piepi1995} que chegou nas convergências de $U=2,16$ para $E=1500$MPa e $U=1,6$ para $E=2000$MPa.
 
-Como a solução analítica está deduzida para superfície de Tresca e aqui será utilizado a de Drucker-Prager (que se particulariza para von-Mises devido a ausência de ângulo de atrito) foi adotado a relação (\ref{eq:ctr_cvm}) considerando von-Mises inscrito em Tresca nos valores das coesões. A solução analítica obtém o perfil de convergência apenas no longo prazo. Contudo, para mostrar as diferenças entre os modelos, além da solução numérica elastoplástica-viscoplástica (EP-VP), foi feito também a solução considerando cada comportamento separado, ou seja, elástico (E), elastoplástico (EP) e viscoplástico (VP) tanto no final da escavação quanto no longo prazo. Para ver a influência da velocidade de escavação será considerado três velocidades $V_p=0,1; 0,2$ e 10m/dia.
+Como a solução analítica está deduzida para superfície de Tresca e aqui será utilizado a de Drucker-Prager (que se particulariza para von-Mises devido a ausência de ângulo de atrito) foi adotado a relação (\ref{eq:ctr_cvm}) considerando von-Mises inscrito em Tresca nos valores das coesões. A solução analítica obtém o perfil de convergência apenas no longo prazo. Contudo, para mostrar as diferenças entre os modelos, além da solução numérica elastoplástica-viscoplástica (EP-VP), foi feito também a solução considerando cada comportamento separado, ou seja, elástico (E), elastoplástico (EP) e viscoplástico (VP) tanto no final da escavação quanto no longo prazo. O modelo viscoplástico (VP) é utilizada a coesão de $4\sqrt{3}/2$. Para ver a influência da velocidade de escavação será considerado três velocidades $V_p=0,1; 0,2$ e 10m/dia.
 
 A \autoref{PIEPI-E1500-FINALESCAVACAO} apresenta os resultados no final da escavação. Pode-se notar que os perfis de convergência para o modelo viscoplástico (VP) são intermediários entre o modelo elástico (E) e elastoplástico (EP), sendo que quanto mais rápida a escavação, mais a resposta desse modelo se  aproxima da convergência do maciço em elasticidade. Isso é um resultado esperado, pois quanto maior a velocidade de escavação menos tempo transcorreu para a evolução das deformações viscosas. O modelo elastoplástico-viscoplástico (EP-VP) apresentou a mesma relação com a velocidade (quanto mais rápido menos tempo para as deformações viscosas evoluírem), porém, iniciou suas deformações próximas do perfil de convergências do modelo elastoplástico (EP). Isso ocorre, pois, o maciço atingiu a plastificação durante a escavação. \textbf{Esse é um dos principais objetivos e vantagem desse modelo acoplado}, pois geralmente a escavação induz um comportamento elastoplástico no maciço próximo à abertura e esse efeito não é captado pelos modelos que consideram apenas a viscoplasticidade.
 
@@ -269,5 +269,139 @@ Comparando o modelo elastoplástico-viscoplástico com o modelo viscoplástico, 
 	\caption{\label{PARAMETRICO-D4-LONGOPRAZO}Convergência no longo prazo \textit{versus} módulo de elasticidade do revestimento para uma distância não revestida $d0=4L_p$}
 \end{figure}
 
-\section{Análise da influência de uma seção elíptica}
+\section{Análise paramétrica considerando uma seção elíptica}
 
+Uma vez que o modelo constitutivo acoplado (EPVP) está generalizado para o caso tridimensional é interessante fazer uma análise paramétrica considerando algum aspecto que não pode ser analisado com o modelo axissimétrico. O aspecto escolhido nessa análise foi a razão entre o raio horizontal e vertical. Dessa forma, foram considerados três razões de aspecto: 1 (R1), ou seja, circular, 1.5 (R1,5) e 2 (R2). Além disso, os cálculos foram executados sem revestimento (S/R) e com revestimento (C/R) afastado de $d0=4L_p$ da face de escavação. As propriedades do maciço são: $E=1500$MPa, $\nu=0.498$, $c^i=c^p=c^r =4\sqrt{3}/2$MPa, $c^{vp}=3\sqrt{3}/2$MPa, $\eta = 4 \cdot 10^4$dia, $n=1$, $f_0=1$MPa e $p_v=p_h=9$MPa. E do revestimento: $E_{rev}=3000$MPa e $\nu_{rev}$=0,3. Para evidenciar a diferença que o modelo acoplado pode representar os resultados foram comparados com modelo viscoplástico (VP) com uma coesão de $4\sqrt{3}/2$.
+
+Como a seção transversal é eliptica as convergências são medidas ao longo do maior e menor eixo da seção, portanto,  tem-se $U_y = -u_y(r=R_{vi})/R_{vi}$ e $U_x = -u_x(r=R_{hi})/R_{hi}$. A \autoref{VP-FINAL-ESCAVACAO-UY} e \autoref{EPVP-FINAL-ESCAVACAO-UY} mostram os perfis de convergências na direção $y$ para ambos os modelos (VP) e (EPVP) no final da escavação do túnel. O valor numérico da convergência no equilíbrio está na legenda.
+
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[scale = 1.0]{0727-VP-FINAL-ESCAVACAO-UY.pdf
+		}
+	\end{center}
+	\caption{\label{VP-FINAL-ESCAVACAO-UY}Perfis de convergência na direção y ao final da escavação sem e com revestimento para diferentes razões de aspecto da seção transversal para o modelo viscoplástico}
+\end{figure}
+
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[scale = 1.0]{0728-EPVP-FINAL-ESCAVACAO-UY.pdf
+		}
+	\end{center}
+	\caption{\label{EPVP-FINAL-ESCAVACAO-UY}Perfis de convergência na direção y ao final da escavação sem e com revestimento para diferentes razões de aspecto da seção transversal para o modelo elastoplástico-viscoplástico}
+\end{figure}
+
+Pode-se notar, como esperado, que as convergências do modelo acoplado foram maiores que o modelo viscoplástico. A \autoref{VP-FINAL-ESCAVACAO-UX} e \autoref{EPVP-FINAL-ESCAVACAO-UX} mostram os perfis de convergências na direção $x$ para ambos os modelos (VP) e (EPVP) no final da escavação do túnel.
+
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[scale = 1.0]{0729-VP-FINAL-ESCAVACAO-UX.pdf
+		}
+	\end{center}
+	\caption{\label{VP-FINAL-ESCAVACAO-UX}Perfis de convergência na direção x ao final da escavação sem e com revestimento para diferentes razões de aspecto da seção transversal para o modelo viscoplástico}
+\end{figure}
+
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[scale = 1.0]{0730-EPVP-FINAL-ESCAVACAO-UX.pdf
+		}
+	\end{center}
+	\caption{\label{EPVP-FINAL-ESCAVACAO-UX}Perfis de convergência na direção x ao final da escavação sem e com revestimento para diferentes razões de aspecto da seção transversal para o modelo elastoplástico-viscoplástico}
+\end{figure}
+As convergências ainda foram maiores para o modelo (EPVP), contudo, houve uma inversão. As maiores convergências ocorreram com razão de aspecto menor. Isso ocorre pois a convergência é dividida pelo raio horizontal que está maior. Se multiplicar a convergência pelo raio, tem-se uma maior deformação para uma maior razão de aspecto.
+
+O longo prazo seguiu a mesma tendência do final da escavação, ou seja, modelo (EPVP) com maiores convergências. A \autoref{VP-LONGO-PRAZO-UY}, \autoref{EPVP-LONGO-PRAZO-UY}, \autoref{VP-LONGO-PRAZO-UX} e \autoref{EPVP-LONGO-PRAZO-UX} mostram esses resultados.
+
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[scale = 1.0]{0731-VP-LONGO-PRAZO-UY.pdf
+		}
+	\end{center}
+	\caption{\label{VP-LONGO-PRAZO-UY}Perfis de convergência na direção y no longo prazo sem e com revestimento para diferentes razões de aspecto da seção transversal para o modelo viscoplástico}
+\end{figure}
+
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[scale = 1.0]{0732-EPVP-LONGO-PRAZO-UY.pdf
+		}
+	\end{center}
+	\caption{\label{EPVP-LONGO-PRAZO-UY}Perfis de convergência na direção y no longo prazo sem e com revestimento para diferentes razões de aspecto da seção transversal para o modelo elastoplástico-viscoplástico}
+\end{figure}
+
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[scale = 1.0]{0733-VP-LONGO-PRAZO-UX.pdf
+		}
+	\end{center}
+	\caption{\label{VP-LONGO-PRAZO-UX}Perfis de convergência na direção x no longo prazo sem e com revestimento para diferentes razões de aspecto da seção transversal para o modelo viscoplástico}
+\end{figure}
+
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[scale = 1.0]{0734-EPVP-LONGO-PRAZO-UX.pdf
+		}
+	\end{center}
+	\caption{\label{EPVP-LONGO-PRAZO-UX}Perfis de convergência na direção x no longo prazo sem e com revestimento para diferentes razões de aspecto da seção transversal para o modelo elastoplástico-viscoplástico}
+\end{figure}
+
+A tabela XX resume a razão entre as convergências.
+
+\begin{table}[H]
+	\caption{Razão entre as convergências ao equilíbrio do modelo (EPVP) com (VP)}
+	\label{convergencias_analise_secao_eliptica}
+	\centering
+	\small
+	\renewcommand{\arraystretch}{1.25}
+	\begin{tabular}{c c c c c}
+		\hline
+		\multicolumn{5}{c}{\textbf{EPVP / VP}}\\	
+		\hline
+		\multicolumn{1}{c}{} &
+		\multicolumn{2}{c}{\textbf{CURTO PRAZO}} &
+		\multicolumn{2}{c}{\textbf{LONGO PRAZO}}	\\
+		\multicolumn{1}{c}{} &
+		\multicolumn{1}{c}{\textbf{Ux}} &
+		\multicolumn{1}{c}{\textbf{Uy}} &
+		\multicolumn{1}{c}{\textbf{Ux}} &
+		\multicolumn{1}{c}{\textbf{Ux}} \\
+		\hline
+		S/R-R1	 &	1,31 &	1,31 &	1,57 &	1,57 \\
+		S/R-R1,5 &	1,48 &	1,30 &	1,61 &	1,49 \\
+		S/R-R2	 &	1,65 &	1,29 &	1,67 &	1,44 \\
+		C/R-R1	 &	1,11 &	1,13 &	1,14 &	1,14 \\
+		C/R-R1,5 &	1,16 &	1,13 &	1,17 &	1,18 \\
+		C/R-R2	 &	1,19 &	1,14 &	1,24 &	1,21 \\
+		\hline
+	\end{tabular}
+	\normalsize
+\end{table}
+A tabela 7.1 mostra a relevância que um modelo acoplado pode ter nas análises de túneis profundos. Sem revestimento um aumento de 31\% (no curto prazo) a 57\% (no longo prazo) em relação ao modelo viscoplástico. Com o revestimento os valores ficaram entre 10\% e 20\%.
+\begin{table}[H]
+	\caption{Razão entre as convergências no equilíbrio de longo prazo pelo curto prazo do modelo (VP) e (EPVP)}
+	\label{convergencias_analise_secao_eliptica}
+	\centering
+	\small
+	\renewcommand{\arraystretch}{1.25}
+	\begin{tabular}{c c c c c}
+		\hline
+		\multicolumn{5}{c}{\textbf{LONGO PRAZO / CURTO PRAZO}}\\	
+		\hline
+		\multicolumn{1}{c}{} &
+		\multicolumn{2}{c}{\textbf{VP}} &
+		\multicolumn{2}{c}{\textbf{EPVP}}	\\
+		\multicolumn{1}{c}{} &
+		\multicolumn{1}{c}{\textbf{Ux}} &
+		\multicolumn{1}{c}{\textbf{Uy}} &
+		\multicolumn{1}{c}{\textbf{Ux}} &
+		\multicolumn{1}{c}{\textbf{Ux}} \\
+		\hline
+		S/R-R1	 &	1,13 &	1,13 &	1,35 &	1,35 \\
+		S/R-R1,5 &	1,23 &	1,09 &	1,34 &	1,25 \\
+		S/R-R2	 &	1,35 &	1,09 &	1,37 &	1,22 \\
+		C/R-R1	 &	1,00 &	1,01 &	1,03 &	1,03 \\
+		C/R-R1,5 &	1,02 &	1,01 &	1,04 &	1,05 \\
+		C/R-R2	 &	1,03 &	1,02 &	1,08 &	1,08 \\
+		\hline
+	\end{tabular}
+	\normalsize
+\end{table}

@@ -24,7 +24,7 @@
 %
 % Imprimir anexo pdf: \imprimiranexopdf{nome do arquivo}{título do anexo}{primeirapagina}{proximaspaginas}
 \newcommand{\imprimiranexopdf}[4]{
-	\includepdf[pages=#3,pagecommand=\chapter{#2},scale=0.92,offset=0 -95]{#1}
+	\includepdf[pages=#3,pagecommand=\chapter{#2},scale=1,offset=0 -95]{#1}
 	\includepdf[pages=#4,pagecommand={}]{#1}
 }
 %

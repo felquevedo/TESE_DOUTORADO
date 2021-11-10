@@ -62,6 +62,9 @@
 %	
 % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
+\usepackage{multirow}
+
+
 % Preencha o arquivo dados.tex com os teus dados
 \include{dados}
 %
@@ -103,6 +106,7 @@
 \include{./chap/Modelo_mecanico}
 \include{./chap/Solucao_do_modelo_mecanico}
 \include{./chap/Algumas_verificacoes_validacoes}
+\include{./chap/Conclusoes}
 %
 % Carrega configuração dos elementos pós textuais
 \postextualconfig
@@ -113,20 +117,22 @@
 % Imprimir apêndices
 % Comente os comandos abaixo na ausência de apêndices
 %\imprimircapaapendices
-%\include{./pos/apeA}	
+% \include{./pos/apeA}	
 %\include{./pos/apeB}
 %\include{./pos/apeC}
 %
 % Imprimir anexos
 % Comente os comandos abaixo na ausência de anexos
-%\imprimircapaanexos
+\imprimircapaanexos
 %\include{./pos/aneA}	
 %\include{./pos/aneB}
 %\include{./pos/aneC}
 %
 % Imprimir anexos em pdf: \imprimiranexopdf{nome do arquivo}{título do anexo}{primeirapagina}{proximaspaginas}
 % Comente oo comando abaixo para remover páginas com símbolos em latex
-%\imprimiranexopdf{./pos/latex_symbols}{Símbolos matemáticos}{1}{2-}
+\imprimiranexopdf{./pos/SCRIPT_AXI_CONVERTIDO}{Script APDL Túnel Axissimétrico}{1}{2-}
+\imprimiranexopdf{./pos/USERMAT_PDF_CONVERTIDO}{Subrotina elastoplástica-viscoplástica}{1}{2-}
+%
 %
 %
 \end{document}

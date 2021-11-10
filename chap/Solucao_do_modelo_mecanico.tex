@@ -202,9 +202,9 @@ sendo $\xi_{r_{i_p}}$ a coordenada radial natural do ponto de Gauss. A equação
 Os elementos finitos que serão utilizados nesse trabalho com suas funções de interpolação, pesos e coordenadas dos pontos de integração podem ser vistos na \autoref{PLANE183}, para análises em estado plano de deformações e axissimetria e, para análises tridimensionais, que consomem maior tempo de processamento, será utilizado o elemento da \autoref{SOLID185}.
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[scale = 1.0]{0603-quadrilatero quadratico.pdf}
+		\includegraphics[scale = 1.0]{0603b-quadrilatero linear.pdf}
 	\end{center}
-	\caption{\label{PLANE183}Funções de interpolação, pesos e coordenadas dos pontos de Gauss para o elemento quadrilátero quadrático \textit{serendipity} isoparamétrico (adaptado de: \citeonline[p. 337, 369-370]{ANSYS2018})}
+	\caption{\label{PLANE183}Funções de interpolação, pesos e coordenadas dos pontos de Gauss para o elemento quadrilátero quadrático \textit{serendipity} isoparamétrico (adaptado de: \citeonline[p. 334, 369-370]{ANSYS2018})}
 \end{figure}
 \begin{figure}[H]
 	\begin{center}
@@ -213,9 +213,9 @@ Os elementos finitos que serão utilizados nesse trabalho com suas funções de 
 	\caption{\label{SOLID185}Funções de interpolação, pesos e coordenadas dos pontos de Gauss para o elemento hexaedro trilinear isoparamétrico (adaptado de: \citeonline[p. 345, 369-370]{ANSYS2018})}
 \end{figure}
 
-No ANSYS, ambos elementos possuem a opção degenerada em que é possível trabalhar de forma colapsada, triangular, por exemplo, no caso do PLANE183, e prisma, tetraédrica ou piramidal, no caso do SOLID185. Nas análises não serão utilizadas essas formas. 
+No ANSYS, ambos elementos possuem a opção degenerada em que é possível trabalhar de forma colapsada, triangular, por exemplo, no caso do PLANE182, e prisma, tetraédrica ou piramidal, no caso do SOLID185. Nas análises não serão utilizadas essas formas. No \textit{script} APDL foi colocado a opção de se trabalhar com os elmentos quadráticos (PLANE183 e SOLID186), contudo, visando uma melhor eficiência computacional, principalmente para os domínios tridimensionais, optou-se por fazer o estudo da malha com elementos lineares.
 
-O elemento SOLID185 possuí também opções que lidam com problemas de travamento (\textit{Locking}) e modos espúrios (\textit{Hourglass}). O travamento é caracterizado por uma rigidez excessiva do elemento, e ocorre principalmente em elementos de primeira ordem com integração completa que estão sujeitos a flexão. Ou ainda, quando o material é quase incompressível. Também podem ocorrer em elementos de segunda ordem, quando as deformações plásticas são da ordem das deformações elásticas. Esse problema evita-se com refinamento da malha, técnicas de subintegração e funções de formas extras. O ANSYS possuí as duas últimas técnicas para o SOLID185 (\textit{Uniform Reduced Integration with Hourglass Control} e \textit{Enhanced Strain Formulation}). Já os modos espúrios ocorrem quando se utiliza as técnicas de subintegração e é caracterizado por uma distorção no elemento porém com zero deformação. Esse problema é evitado utilizando integração completa ou refinamento da malha. No presente trabalho utilizou-se a \textbf{integração completa} (\textit{Full integration}) e esses problemas foram evitados com o \textbf{refinamento da malha}. 
+O elemento PLANE182 e SOLID185 possuem também opções que lidam com problemas de travamento (\textit{Locking}) e modos espúrios (\textit{Hourglass}). O travamento é caracterizado por uma rigidez excessiva do elemento, e ocorre principalmente em elementos de primeira ordem com integração completa que estão sujeitos a flexão. Ou ainda, quando o material é quase incompressível. Também podem ocorrer em elementos de segunda ordem, quando as deformações plásticas são da ordem das deformações elásticas. Esse problema evita-se com refinamento da malha, técnicas de subintegração e funções de formas extras. O ANSYS possuí as duas últimas técnicas para o SOLID185 (\textit{Uniform Reduced Integration with Hourglass Control} e \textit{Enhanced Strain Formulation}). Já os modos espúrios ocorrem quando se utiliza as técnicas de subintegração e é caracterizado por uma distorção no elemento porém com zero deformação. Esse problema é evitado utilizando integração completa ou refinamento da malha. No presente trabalho utilizou-se a \textbf{integração completa} (\textit{Full integration}) e esses problemas foram evitados com o \textbf{refinamento da malha}. 
 
 \section{Solução do sistema não linear}
 \label{cap: solução do sistema}
@@ -322,7 +322,7 @@ O ANSYS possui ainda quatro variações do método de Newton-Raphson de acordo c
 	
 	\item \textbf{Inicial} (\textit{Inicial Stiffness}): quando é utilizada a mesma matriz para todos os subpassos e iterações, ou seja, $\Kll_{n,i} \leftarrow \Kll_{0,0}$. 
 	
-	\item \textbf{Completo Assimétrico} (\textit{Full unsymmetric}): é a mesma opção da Completo porém monta a matriz de rigidez não a considerando simétrica.
+	\item \textbf{Completo Assimétrico} (\textit{Full with unsymmetric matrix}): atualiza a matriz de rigidez a cada iteração, ou seja, $\Kll_{n,i} \leftarrow \Kll_{n,i}$, porém é utilizada a matriz cheia ao invés de explorar a simetria.
 	
 \end{alineas}
 
