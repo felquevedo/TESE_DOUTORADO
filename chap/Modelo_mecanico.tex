@@ -3,7 +3,7 @@
 \label{cap: modelo mecanico}
 % ----------------------------------------------------------
 
-Esse capítulo traz uma descrição geral do modelo mecânico que será utilizado neste trabalho. Portanto, são apresentadas as equações de equilíbrio e constitutivas que foram utilizadas, sem aprofundar, no entanto, nas particularidades que compreendem o domínio de um túnel profundo. Essas serão vistas no final do Capitulo 6, após a descrição da solução desse modelo mecânico. 
+Esse capítulo traz uma descrição geral do modelo mecânico que foi utilizado neste trabalho. Portanto, são apresentadas as equações de equilíbrio e constitutivas que foram utilizadas, sem aprofundar, no entanto, nas particularidades que compreendem o domínio de um túnel profundo. Essas serão vistas no final do Capitulo 6, após a descrição da solução desse modelo mecânico. 
 
 \section{Equações de Equilíbrio local e a hipótese da evolução quase estática}
 
@@ -335,7 +335,7 @@ Nas superfícies que apresentam vértices, como Morh-Coulomb e Tresca em $\theta
 Um aspecto comum na geomecânica é a variação do volume do material durante a evolução das deformações plásticas. Esse efeito é comumente introduzido através da plasticidade não associada, adotando, ao invés do ângulo de atrito, um ângulo de dilatância $0<\psi<\phi$  na função potencial $g$.
 
 \subsection{Lei de endurecimento/amolecimento}
-A lei de endurecimento/amolecimento fornece a regra de evolução da superfície de escoamento ao longo das deformações plásticas (\textit{strain-hardening/softening}) ou do trabalho plástico (\textit{work-hardening/softening}). Para a presente tese, será adotado o primeiro caso e a lei é então postulada da seguinte forma \cite[p. 249]{Belytschko2000}:
+A lei de endurecimento/amolecimento fornece a regra de evolução da superfície de escoamento ao longo das deformações plásticas (\textit{strain-hardening/softening}) ou do trabalho plástico (\textit{work-hardening/softening}). Para a presente tese, é adotado o primeiro caso e a lei é então postulada da seguinte forma \cite[p. 249]{Belytschko2000}:
 \begin{equation}
 	\label{eq:amolecimento}
 	\dot \ql = \dot \lambda \hl = - \dot \lambda \dfrac{\partial h}{\partial \ql}
@@ -348,7 +348,7 @@ em que $\hl = - \partial h / \partial \ql$ é um vetor que contém os gradientes
 	\end{center}
 	\caption{\label{tipos_endurecimento}Representação dos tipos de endurecimento no plano desviador e na curva tensão-deformação: a) elastoplasticidade perfeita, b) endurecimento isotrópico e c) endurecimento cinemático (adaptado de: \citeauthor{Neto2008}, \citeyear{Neto2008}, p. 178, 179, 186)}
 \end{figure}
-Em um primeiro momento, no presente trabalho, não é considerado a influência da lei de endurecimento e as forças termodinâmicas serão constantes ao longo do histórico de deformações, ou seja, $\dot \ql = \underline 0$. Nesse caso, tem-se a elastoplasticidade perfeita. Em um segundo momento é considerado a lei de endurecimento/amolecimento associada ($h = f$) e isotrópica. Portanto, a força termodinâmica associada é dada exclusivamente pela parcela que não depende da parte hidrostática ($I_1$) e nem desviadora ($J_2$) nas superfícies de escoamento. Essa força será controlada pelo parâmetro coesivo, de modo que $q = \chi c(\bar \varepsilon^p)$ em que:
+Em um primeiro momento, no presente trabalho, não é considerado a influência da lei de endurecimento e as forças termodinâmicas são histórico de deformações, ou seja, $\dot \ql = \underline 0$. Nesse caso, tem-se a elastoplasticidade perfeita. Em um segundo momento é considerado a lei de endurecimento/amolecimento associada ($h = f$) e isotrópica. Portanto, a força termodinâmica associada é dada exclusivamente pela parcela que não depende da parte hidrostática ($I_1$) e nem desviadora ($J_2$) nas superfícies de escoamento. Essa força foi controlada pelo parâmetro coesivo, de modo que $q = \chi c(\bar \varepsilon^p)$ em que:
 \begin{equation}
 	\label{eq:dfdc}
 	\chi = \left\{ \begin{array}{ll} 
@@ -397,7 +397,7 @@ em que
 	||\dot \varepsilonll^p|| = \sqrt{(\dot{\varepsilon}^{p}_{11})^2 + (\dot{\varepsilon}^{p}_{22})^2 + (\dot{\varepsilon}^{p}_{33})^2 + 2(\dot{\varepsilon}^{p}_{12})^2 + 2(\dot{\varepsilon}^{p}_{23})^2 + 2(\dot{\varepsilon}^{p}_{13})^2}
 \end{equation}
 
-e $C$ a rigor depende da superfície de plasticidade, do gradiente do potencial plástico e do estado de tensões ao qual está submetido a amostra no ensaio. Sua dedução é feita através do trabalho plástico por unidade de volume. Para o presente trabalho, será utilizado a seguinte expressão deduzida para Drucker-Prager, que considera plasticidade associada e estados de tensões gerais (adaptado de \citeauthor{Chen1988}, \citeyear{Chen1988}, p. 257-259):
+e $C$ a rigor depende da superfície de plasticidade, do gradiente do potencial plástico e do estado de tensões ao qual está submetido a amostra no ensaio. Sua dedução é feita através do trabalho plástico por unidade de volume. Para o presente trabalho, foi utilizada a seguinte expressão deduzida para Drucker-Prager, que considera plasticidade associada e estados de tensões gerais (adaptado de \citeauthor{Chen1988}, \citeyear{Chen1988}, p. 257-259):
 \begin{equation}
 	\label{eq:Czao}
 	C = \dfrac{\beta_1+1/\sqrt{3}}{\sqrt{3\beta_1^2+1/2}}.
@@ -449,7 +449,7 @@ em que $\Dllll^{vp}$ é o tensor de quarta ordem que representa o módulo elasto
 
 \subsection{Superfície de escoamento}
 
-Em viscoplasticidade nem sempre se tem um regime elástico, por exemplo, a altas temperaturas certos materiais podem fluir sempre sobre tensão, ou seja, a função de escoamento é zero \cite[p. 448]{Neto2008}. Para esses casos, existem modelos como o de \citeonline{Norton1929}, \citeonline{Lemaitre1994}, e também funções provenientes de ajustes empíricos que descrevem o fluxo viscoplástico através da tensão, tempo e temperatura, como por exemplo, as resumidas por \citeonline{Skrzypek1993}. Porém, em geral, o comportamento viscoso do maciço em túneis evidencia-se após um determinado nível de tensões, conforme visto na \autoref{curva_caracteristica_fluencia_ensaio}. Para esses casos são adotadas superfícies de escoamento análogas as da elastoplasticidade. No presente trabalho serão utilizadas as mesmas superfícies do capítulo 5.5.2. Porém, ao contrário da elastoplasticidade, essa superfície não delimita um domínio plasticamente admissível podendo $f(\sigmall,\ql) > 0$.
+Em viscoplasticidade nem sempre se tem um regime elástico, por exemplo, a altas temperaturas certos materiais podem fluir sempre sobre tensão, ou seja, a função de escoamento é zero \cite[p. 448]{Neto2008}. Para esses casos, existem modelos como o de \citeonline{Norton1929}, \citeonline{Lemaitre1994}, e também funções provenientes de ajustes empíricos que descrevem o fluxo viscoplástico através da tensão, tempo e temperatura, como por exemplo, as resumidas por \citeonline{Skrzypek1993}. Porém, em geral, o comportamento viscoso do maciço em túneis evidencia-se após um determinado nível de tensões, conforme visto na \autoref{curva_caracteristica_fluencia_ensaio}. Para esses casos são adotadas superfícies de escoamento análogas as da elastoplasticidade. No presente trabalho foram utilizadas as mesmas superfícies do capítulo 5.5.2. Porém, ao contrário da elastoplasticidade, essa superfície não delimita um domínio plasticamente admissível podendo $f(\sigmall,\ql) > 0$.
 
 \subsection{Regra de fluxo viscoplástico}
 Tal como na elastoplasticidade, a regra de fluxo viscoplástico é postulada da seguinte forma:
@@ -471,10 +471,10 @@ em que
 	\bar{\varepsilon}^{vp} = \int_{0}^{t}|\dot \lambda|dt.
 \end{equation}
 
-Contudo, no presente trabalho, apesar da generalidade dos algoritmos descritos na seção posterior, não será incorporado o endurecimento/amolecimento, se tratando, portanto, de uma viscoplasticidade perfeita.
+Contudo, no presente trabalho, apesar da generalidade dos algoritmos descritos na seção posterior, não foi incorporado o endurecimento/amolecimento, se tratando, portanto, de uma viscoplasticidade perfeita.
 
 \subsection{Multiplicador viscoplástico}
-Como as deformações viscoplásticas ocorrem quando $f>0$ não há a imposição da condição de consistência. Dessa forma, tem-se que a taxa do multiplicador viscoplástico $\dot \lambda$ não pode ser obtida de uma condição do tipo $\dot f = 0$. Para contornar esse aspecto, existem modelos que fornecem uma expressão explícita para $\dot \lambda$, e no presente trabalho será adotado o modelo de Perzyna \cite[p. 823]{Zienkiewicz1974}:
+Como as deformações viscoplásticas ocorrem quando $f>0$ não há a imposição da condição de consistência. Dessa forma, tem-se que a taxa do multiplicador viscoplástico $\dot \lambda$ não pode ser obtida de uma condição do tipo $\dot f = 0$. Para contornar esse aspecto, existem modelos que fornecem uma expressão explícita para $\dot \lambda$, e no presente trabalho foi adotado o modelo de Perzyna \cite[p. 823]{Zienkiewicz1974}:
 \begin{equation}
 	\label{eq:lambdavp}
 	\dot \lambda = \dfrac{\Phi(f/f_0)}{\eta}
@@ -507,7 +507,7 @@ Dessa forma, dentro das mesmas hipóteses dos modelos anteriores, a relação co
 	\dot \sigmall = \Dllll^{epvp}:\dot \varepsilonll = \Dllll:\dot \varepsilonll^e = \Dllll:\left(\dot \varepsilonll - \dot \varepsilonll^{p} - \dot \varepsilonll^{vp} \right).
 \end{equation}
 
-Uma observação importante é que as superfícies de escoamentos e as variáveis internas que definem a parcela elastoplástica e viscoplástica desse modelo podem ser diferentes entre si, incluindo a associação das suas respectivas funções potenciais com suas superfícies de escoamento. Apesar dessa abordagem genérica, na presente tese será adotada inicialmente a proposta seguida pelas soluções analíticas de \citeonline{Rousset1988} em que as forças termodinâmicas associadas às variáveis internas que governam a lei de endurecimento/amolecimento instantâneas e diferidas $\ql^p$ e $\ql^{vp}$, respectivamente, são funções multilineares de parâmetros coesivos em função da deformação plástica e viscoplástica equivalentes. Por exemplo para ilustrar esse comportamento, de forma unidimensional, segue-se as seguintes expressões \cite[p. 220]{Rousset1988}:
+Uma observação importante é que as superfícies de escoamentos e as variáveis internas que definem a parcela elastoplástica e viscoplástica desse modelo podem ser diferentes entre si, incluindo a associação das suas respectivas funções potenciais com suas superfícies de escoamento. Apesar dessa abordagem genérica, na presente tese foi adotada inicialmente a proposta seguida pelas soluções analíticas de \citeonline{Rousset1988} em que a força termodinâmica associada às variáveis internas que governam a lei de endurecimento/amolecimento instantânea $\ql^p$ é uma função definida por partes através do parâmetro coesivo em função da deformação plástica equivalente. Por outro lado, a força termodinâmica associada com a lei viscoplástica é constante. Por exemplo para ilustrar esse comportamento, de forma unidimensional, segue-se as seguintes expressões \cite[p. 220]{Rousset1988}:
 \begin{equation}
 	\label{eq:qp_rousset}
 	c(\varepsilon^p) = \left\{
