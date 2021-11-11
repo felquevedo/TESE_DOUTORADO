@@ -1168,10 +1168,10 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="1.6379804"
-     inkscape:cx="312.54344"
-     inkscape:cy="157.42038"
+     inkscape:cx="196.27387"
+     inkscape:cy="149.73248"
      inkscape:document-units="mm"
-     inkscape:current-layer="layer1"
+     inkscape:current-layer="g2574"
      inkscape:document-rotation="0"
      showgrid="false"
      inkscape:window-width="1920"
@@ -1609,17 +1609,6 @@
            id="text2544">20</text>
       </g>
       <g
-         clip-path="url(#clip37-5)"
-         id="g2550">
-        <text
-           fill="#595959"
-           font-family="'Times New Roman', 'Times New Roman_MSFontService', sans-serif"
-           font-weight="400"
-           font-size="13px"
-           transform="rotate(-90,400.141,-203.141)"
-           id="text2548">-</text>
-      </g>
-      <g
          clip-path="url(#clip38-2)"
          id="g2554">
         <text
@@ -1627,8 +1616,16 @@
            font-family="'Times New Roman', 'Times New Roman_MSFontService', sans-serif"
            font-weight="400"
            font-size="13px"
-           transform="rotate(-90,398.141,-205.141)"
-           id="text2552">u(r)</text>
+           transform="rotate(-90)"
+           id="text2552"
+           x="-189"
+           y="603.28198"><tspan
+   style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Times New Roman', 'Times New Roman_MSFontService', sans-serif;-inkscape-font-specification:'Times New Roman, Times New Roman_MSFontService, sans-serif Italic'"
+   id="tspan1179">U</tspan><tspan
+   style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:65%;font-family:'Times New Roman', 'Times New Roman_MSFontService', sans-serif;-inkscape-font-specification:'Times New Roman, Times New Roman_MSFontService, sans-serif Italic';baseline-shift:sub"
+   id="tspan1177">i</tspan> (%)<tspan
+   style="font-size:65%;baseline-shift:sub"
+   id="tspan1175" /></text>
       </g>
       <g
          clip-path="url(#clip39-3)"
@@ -1639,7 +1636,13 @@
            font-weight="400"
            font-size="13px"
            transform="translate(851.464,322)"
-           id="text2556">r/Ri</text>
+           id="text2556"><tspan
+   style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Times New Roman', 'Times New Roman_MSFontService', sans-serif;-inkscape-font-specification:'Times New Roman, Times New Roman_MSFontService, sans-serif Italic'"
+   id="tspan1183">r</tspan>/<tspan
+   style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Times New Roman', 'Times New Roman_MSFontService', sans-serif;-inkscape-font-specification:'Times New Roman, Times New Roman_MSFontService, sans-serif Italic'"
+   id="tspan1185">R<tspan
+   style="font-size:65%;baseline-shift:sub"
+   id="tspan1187">i</tspan></tspan></text>
       </g>
       <g
          clip-path="url(#clip40-6)"

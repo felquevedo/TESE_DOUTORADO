@@ -3875,9 +3875,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1.6405211"
-     inkscape:cx="325.8185"
-     inkscape:cy="187.18959"
+     inkscape:zoom="1.5405857"
+     inkscape:cx="334.03904"
+     inkscape:cy="43.569288"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      inkscape:document-rotation="0"
@@ -4178,6 +4178,11 @@
          d="M 175.85229,48.957787 V 59.345742"
          id="path3783-86" />
     </g>
+    <path
+       style="fill:#ff0000;fill-opacity:0.389558;fill-rule:evenodd;stroke:#ff0000;stroke-width:0.600001;stroke-miterlimit:10;stroke-opacity:1"
+       d="M 2.7688401,61.424692 30.213737,45.547138 57.380892,61.389928 30.213737,77.605566 Z"
+       id="path2124"
+       sodipodi:nodetypes="ccccc" />
     <text
        xml:space="preserve"
        style="font-size:3.52777px;line-height:1.25;font-family:times;-inkscape-font-specification:times;letter-spacing:0px;stroke-width:0.264583"
@@ -5015,13 +5020,13 @@
     <text
        xml:space="preserve"
        style="font-size:3.52777px;line-height:1.25;font-family:times;-inkscape-font-specification:times;letter-spacing:0px;fill:#ff0000;fill-opacity:1;stroke-width:0.264583"
-       x="31.845789"
-       y="75.458252"
+       x="30.491337"
+       y="81.483841"
        id="text12126"><tspan
          sodipodi:role="line"
          id="tspan12124"
-         x="31.845789"
-         y="75.458252"
+         x="30.491337"
+         y="81.483841"
          style="fill:#ff0000;fill-opacity:1;stroke-width:0.264583">A</tspan></text>
     <text
        xml:space="preserve"
@@ -5045,5 +5050,13 @@
          x="139.30089"
          y="66.734093"
          style="fill:#ff0000;fill-opacity:1;stroke-width:0.264583">A</tspan></text>
+    <path
+       style="fill:#ff0000;fill-opacity:0.389558;fill-rule:evenodd;stroke:#ff0000;stroke-width:0.600001;stroke-miterlimit:10;stroke-opacity:1"
+       d="M 75.978861,55.854621 103.80537,71.920263"
+       id="path2174" />
+    <path
+       style="fill:#ff0000;fill-opacity:0.389558;fill-rule:evenodd;stroke:#ff0000;stroke-width:0.600001;stroke-miterlimit:10;stroke-opacity:1"
+       d="m 124.93351,60.122516 14.35976,8.290607"
+       id="path2176" />
   </g>
 </svg>
