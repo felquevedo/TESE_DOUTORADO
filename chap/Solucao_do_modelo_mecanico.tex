@@ -752,8 +752,8 @@ Conforme a \autoref{malhaEPD_tunel}, essa malha possui quatro regiões de refina
 		Largura transversal do domínio & $L_x$ & m & 20$R_{v_i}$ \\
 		Altura do domínio & $L_y$ & m & 20$R_{v_i}$ \\
 		Raio da região $A3$ & $R_1$ & m & 10$R_{v_i}$ \\
-		Largura além da região $A3$ & $L_{x_1}$ & m & $L_x-R_1$ \\
-		Altura além da região $A3$ & $L_{y_1}$ & m & $L_y-R_1$ \\
+		Largura além da região $A4$ & $L_{x_1}$ & m & $L_x-R_1$ \\
+		Altura além da região $A4$ & $L_{y_1}$ & m & $L_y-R_1$ \\
 		\hline
 		\multicolumn{4}{c}{DISCRETIZAÇÃO} \\
 		\hline
@@ -883,6 +883,8 @@ Conforme \autoref{malhaAXI_tunel}, no modelo axissimétrico o eixo longitudinal 
 	\normalsize
 \end{table}
 
+O \textit{script} APDL do modelo escolhido para constar no Apêndice A foi justamente o modelo axissimétrico. A entrada dos parâmetros pode ser vista nas linhas 24-153.
+
 Para simular o ciclo contrutivo de escavação e revestimento é utilizado o recurso de \textbf{ativação/desativação de elementos} em cada passo de solução. A desativação, à rigor, compreende três modificações:
 \begin{alineas}
 	
@@ -919,7 +921,7 @@ O custo computacional desses modelos é refletido diretamente no tempo de proces
 	\normalsize
 \end{table}
 
-\section{Parâmetros referentes aos modelos constitutivos}
+\section{Propriedades e parâmetros do modelo constitutivo}
 Além dos parâmetros referente ao domínio para a construção da malha, condições de contorno e discretização do tempo tem-se os parâmetros para o modelo constitutivo do maciço e do revestimento. Como o revestimento possuí apenas comportamento elástico, ele apresenta apenas dois parâmetros $E_{rev}$ (módulo de Young) e $\nu_{rev}$ (Coeficiente de Poisson). A \autoref{parametros_EPVP} apresenta a definição dos parâmetros referente ao modelo constitutivo elastoplástico-viscoplástico.
 \begin{table}[H]
 	\caption{Parâmetros para o modelo constitutivo elastoplástico-viscoplástico}
@@ -967,6 +969,9 @@ Além dos parâmetros referente ao domínio para a construção da malha, condi�
 	\end{tabular}
 	\normalsize
 \end{table}
-Durante o processo de programação foi também programado cada comportamento em separado. Contudo, o modelo constitutivo elastoplástico-viscoplástico é geral e capaz de reproduzir cada comportamento em separado dependendo do valor de alguns parâmetros. Por exemplo, ao colocar valores de coesão elevados as funções de escoamento (ora da elastoplasticidade ou viscoplasticidade) não são atingidas podendo dessa forma selecionar o comportamento apenas elástico (quando todas coesões são elevadas), elastoplástico (quando a coesão viscoplástica é elevada) ou viscoplástico (quando as coesões elastoplásticas são elevadas). Outro aspecto se as coesões $c_i, c_p$ e $c_r$ tiverem o mesmo valor, tem-se na parte elastoplástica um comportamento plástico perfeito.
+
+Esse modelo constitutivo e os parâmetros entram no \textit{script} através de três comandos APDL na definição do material: TB,USER (utilizado para definir o material como sendo do usuário e onde é declarado o número total de parâmetros, no caso, 23), TBDATA (que atribui os parâmetros para o \textit{array} de propriedades do material utilizado dentro da \textit{Usermat}) e TB,STATE (que dimensiona o vetor de variáveis de estado). No Apêndice A, nas linhas 238-251, é ilustrado a declaração desse modelo constitutivo. É possível plotar algumas variáveis calculadas desse modelo através do comando APDL PLNSOL,SVAR,[componente]. As componentes são mostradas nas linhas 115-134 no Apêndice B. De maior importância talvez sejam as deformações equivalentes elastoplásticas (componente 1) e viscoplásticas (componente 6). Também, quando se tem amolecimento/endurecimento, pode ser interessante plotar a coesão (componente 3).
+ 
+Cada comportamento (elástico, elastoplástico e viscoplástico) foi programado em separado. Contudo, o modelo constitutivo elastoplástico-viscoplástico é geral e capaz de reproduzir cada comportamento em separado dependendo do valor de alguns parâmetros. Por exemplo, ao colocar valores de coesão elevados as funções de escoamento (ora da elastoplasticidade ou viscoplasticidade) não são atingidas podendo dessa forma selecionar o comportamento apenas elástico (quando todas coesões são elevadas), elastoplástico (quando a coesão viscoplástica é elevada) ou viscoplástico (quando as coesões elastoplásticas são elevadas). Outro aspecto se as coesões $c_i, c_p$ e $c_r$ tiverem o mesmo valor, tem-se na parte elastoplástica um comportamento plástico perfeito.
 
 

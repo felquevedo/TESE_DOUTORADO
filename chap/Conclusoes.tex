@@ -1,7 +1,26 @@
 \chapter{Conclusões}\label{Conclusoes}
 
-Durante o desenvolvimento dessa tese foi formulado e implementado em um \textit{software} de elementos finitos (ANSYS) uma relação constitutiva capaz de abordar as deformações instantâneas (sejam elásticas ou elastoplásticas) induzidas pelo processo construtivo juntamente com as deformações viscosas que ocorrem ao longo do tempo. 
 
-O ponto central desse trabalho foi justamente o desenvolvimento da relação constitutiva elastoplástica-viscoplástica generalizada para abordar casos em estado plano de deformações, axissimetria e tridimensionais. Os esquemas de integração numérica descritos no Capitulo 6.5, para resolver o problema constitutivo se mostraram eficientes na busca da solução desse modelo.
+O campo de deformações e tensões ao redor da cavidade de um túnel profundo depende de diversos fatores inter-relacionados, tais como, a profundidade, a geometria da seção, a anisotropia das tensões in situ, a heterogeneidade do maciço, o processo construtivo e a interação com o revestimento. Somado a essa complexidade um dos maiores desafios é modelar o comportamento reológico do maciço. Os túneis podem apresentar tanto deformações instantâneas quanto diferidas ao longo do tempo. Durante o desenvolvimento dessa tese foi formulado e implementado em um \textit{software} de elementos finitos (ANSYS) uma relação constitutiva capaz de abordar as deformações instantâneas (sejam elásticas ou elastoplásticas) induzidas pelo processo construtivo juntamente com as deformações viscosas que ocorrem ao longo do tempo.
 
-Verificações com soluções analíticas e outro \textit{software} (GEOMEC91) demonstraram que esse modelo, bastante geral, consegue reproduzir cada comportamento em separado (elástico, viscoplástico e elastoplástico) e também abordar o aspecto do amolecimento/endurecimento característico do maciço.
+O ponto central desse trabalho foi justamente o desenvolvimento de uma solução para o problema constitutivo elastoplástico-viscoplástico que pudesse abordar problemas em estado plano de deformações, axissimetria e tridimensionais. Os esquemas de integração numérica que resolvem esse problema estão descritos no Capitulo 6.5 e se mostraram eficientes e eficazes na solução do problema. Verificações com soluções analíticas e outro \textit{software} (GEOMEC91) demonstraram que esse modelo, bastante geral, consegue reproduzir cada comportamento em separado (elástico, viscoplástico e elastoplástico) e também abordar o aspecto do amolecimento/endurecimento característico do maciço. O modelo constitutivo conseguiu reproduzir com bastante sucesso a solução analítica de PIEPI (1995) para um problema elastoplástico-viscoplástico com critério de plasticidade de Tresca.
+
+Foram feitas algumas análises paramétricas para mostrar as diferenças desse modelo frente ao modelo viscoplástico comumente usado para análises de longo prazo. Nessa análise foram utilizadas as mesmas propriedades da solução analítica de Piepi. Sem a presença do revestimento foram encontradas diferenças significativas de cerca de 30\% (no final da construção) e 50\% no longo prazo para mais em relação ao modelo viscoplástico. Com a presença do revestimento a diferença foi de 17\% a 23\% para uma distância não suportada $d0=0$ e de 26\% a 30\% para uma distância não suportada $d0=4L_p$. Essa diferença ocorre pois o modelo constitutivo acoplado considera a plastificação do maciço nas deformações instantâneas, enquanto que o modelo viscoplástico considera elástico.
+
+Uma vez que o modelo constitutivo foi generalizado para o caso tridimensional, foi feita uma análise paramétrica considerando a variação da razão de aspecto de uma seção transversal elípitca. Nessa análise também foi constatada a relevância do modelo constitutivo acoplado frente ao modelo viscoplástico.
+
+Contudo, essa implementação é apenas o início dos estudos desse modelo acoplado. Como sugestões para serem adicionadas em trabalhos futuros, pode-se citar:
+
+\begin{alineas}
+	
+	\item adicionar outras superfícies de plasticidade e viscoplasticidade dentro do algoritmo da \textit{Usermat} além da superfície de Drucker-Prager. Apesar dessa superfície ser bastante geral, incluir a dependência da pressão hidrostática, há superfícies especializadas em captar aspectos próprios da geotecnia de túneis;
+	
+	\item adicionar uma lei de amolecimento e endurecimento que considere a variação do ângulo de atrito conforme ocorre a deformação plástica;
+	
+	\item generalizar o algoritmo de integração elastoplástico para um esquema totalmente implícito ao invés de semi-implícito;
+	
+	\item fazer validações com estudo de casos;
+	
+	\item ...
+	
+\end{alineas}

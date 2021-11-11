@@ -8,6 +8,7 @@
 \item[$c_1$]			Coesão para o modelo viscoplástico;
 \item[$d_0$]			Distância não revestida que acompanha a frente de escavação;
 \item[$d_0^*$]			Distância não revestida adimensional que acompanha a frente de escavação;
+\item[$e_{rev}$]		Espessura do revestimento;
 \item[$ \greenll $] 	Tensor de deformações de Green-Lagrange;
 \item[$\euml, \edoisl, \etresl$] Vetores ortonormais da base que define o espaço $\mathbb{R}^3$;
 \item[$f$]				Função de escoamento;
@@ -28,17 +29,39 @@
 \item[$h_s$]			Profundidade do fenômeno de \textit{Spalling} no perímetro do túnel;
 \item[$i$] 				Contador de iterações de equilíbrio;
 \item[$i_p$]			Ponto de integração;
+\item[$i_p$]			Contador do passo de escavação;
 \item[$k$] 				Parâmetro da superfície de Drucker-Prager;
+\item[$k_{cut}$] 		Indica que é necessário dividir o passo pela metade;
 \item[$l_0$] 			Dimensão característica para hipótese das pequenas perturbações;
+\item[$l_a,~l_b,~l_c$] 			Dimensão do modelo de ensaio triaxial;
+\item[$mL_{1}$] 				Razão entre o primeiro e último elemento além da região de refinamento próximo ao túnel;
+\item[$mL_{x_1}$] 				Razão entre o primeiro e último elemento na largura do domínio além da região de refinamento próxima ao túnel;
+\item[$mL_{y_2}$] 				Razão entre o primeiro e último elemento na altura do domínio além da região de refinamento próxima ao túnel;
+\item[$mL_{z_2}$] 				Razão entre o primeiro e último elemento no trecho não escavado do modelo 3D;
+\item[$mR_{1}$] 				Razão entre o primeiro e último elemento na região de refinamento próximo ao túnel;
 \item[$n$] 				Parâmetro adimensional que dá a forma potencial na lei viscoplástica;
 \item[$n$] 				Contador de subpassos;
 \item[$n_e$] 				Número de elementos;
+\item[$nL_{1}$] 				Número de elementos além da região de refinamento próximo ao túnel do domínio 3D;
+\item[$nL_{x_1}$] 				Número de elementos na largura do domínio além da região de refinamento próxima ao túnel;
+\item[$nL_{y_2}$] 				Número de elementos na altura do domínio além da região de refinamento próxima ao túnel;
+\item[$nL_{z_2}$] 				Número de elementos no trecho não escavado do domínio 3D;
 \item[$n_p$] 				Número de pontos de integração;
+\item[$n_p$] 				Número de passos de escavação;
+\item[$n_{p_1}$] 				Número de passos na primeira escavação;
+\item[$nR_{i}$] 				Número de elementos na direção ortoradial ao longo de $Ri$;
+\item[$n_{rev}$] 				Número de elementos na espessura do revestimento;
+\item[$nr_{max}$] 				Limite de iterações de Newton-Raphson locais no algoritmo elastoplástico;
+\item[$nR_{1}$] 				Número de elementos na região de refinamento próximo ao túnel;
+\item[$nR_{v}$] 				Número de elementos na altura da seção escavada;
+\item[$nR_{h}$] 				Número de elementos na largura da seção escavada;
 \item[$n_{eqit}$] 				Limite de iterações de equilíbrio por subpasso;
 \item[$ p $]			Pressão hidrostática;
+\item[$ p_{eq} $] 		Pressão de equilíbrio de um túnel revestido;
 \item[$ p_i $]			Pressão interna no interior da seção do túnel;
 \item[$ p_{lim} $] 		Pressão limite de plastificação do maciço;
-\item[$ p_{eq} $] 		Pressão de equilíbrio de um túnel revestido;
+\item[$ p_{v} $] 		Pressão vertical no domínio;
+\item[$ p_{h} $] 		Pressão horizontal no domínio;
 \item[$ p_\infty $]		Pressão geostática-hidrostática;
 \item[$ p_\infty^* $]	Pressão geostática-hidrostática adimensional;
 \item[$ q $]	Tensão equivalente de von-Mises;
@@ -47,6 +70,7 @@
 \item[$ r $]			Coordenada radial no plano da seção transversal do túnel;
 \item[$ \sll $]			Tensor de tensões desviadoras;
 \item[$ t $] 			Tempo;
+\item[$ \Delta t_{min} $] 	 incremento de tempo limite para precisão do algoritmo viscoplástico;
 \item[$ t_p $] 			Tempo do passo;
 \item[$ \ul $] 		    Deslocamento da partícula material;
 \item[$ \ul $] 		    Vetor deslocamentos nodais;
@@ -63,7 +87,11 @@
 \item[$\xl$]			Vetor posição da partícula material;
 \item[$x$]				Eixo x;
 \item[$y$]				Eixo y;
+\item[$y_f$]			Cota no eixo y da face de escavação no domínio AXI;
+\item[$y_r$]			Cota no eixo y da face do revestimento no domínio AXI;
 \item[$z$]				Eixo z;
+\item[$z_f$]			Cota no eixo z da face de escavação no domínio 3D;
+\item[$z_r$]			Cota no eixo z da face do revestimento no domínio 3D;
 
 \item[\textbf{Latino maiúsculo:}]
 \item[$\All$]	Matriz algorítmica do esquema de integração;
@@ -113,7 +141,17 @@
 \item[$K_r^*$]			Rigidez equivalente adimensional do revestimento;
 \item[$\Kll_e$]			Matriz de rigidez do elemento;
 \item[$\Kll$]			Matriz de rigidez global;
+\item[$L_p$]			Tamanho do passo de escavação;
+\item[$L_{p_e}$]		Tamanho do elemento finito no trecho escavado;
 \item[$L_s$]			Comprimento de \textit{Spalling} no perímetro de uma seção;
+\item[$L_x$]			Largura transversal do domínio EPD e 3D ou raio total do modelo AXI;
+\item[$L_{x_1}$]			Largura do domínio além da região de refinamento próxima ao túnel;
+\item[$L_y$]			Altura do domínio EPD e comprimento longitudinal do domínio AXI;
+\item[$L_{y_1}$]			Altura do modelo EPD e 3D além da região de refinamento próxima ao túnel ou comprimento do trecho escavado no domínio AXI;
+\item[$L_{y_2}$]		Comprimento longitudinal do trecho não escavado no domínio AXI;
+\item[$L_z$]			Comprimento longitudinal do domínio 3D;
+\item[$L_{z_1}$]		Comprimento longitudinal do trecho escavado no domínio 3D;
+\item[$L_{z_2}$]		Comprimento longitudinal do trecho não escavado no domínio 3D;
 \item[$\Lll$]			Matriz triangular inferior da fatorização de Cholesky;
 \item[$\Mll$]			Pré-condicionador do Método dos Gradientes Conjugados Pré-Condicionado;
 \item[$\Nll$]			Matriz contendo as funções de interpolação;
@@ -121,6 +159,10 @@
 \item[$ P_0 $] 			Tensão média no interior do maciço;
 \item[$ Q $] 			Pressão axial em um ensaio triaxial;
 \item[$ R $]			Raio da seção transversal do túnel;
+\item[$ R_1 $]			Raio da região de refinamento próxima ao túnel;
+\item[$R_{i}$]			Raio da interface entre o túnel e o maciço;
+\item[$R_{h_i}$]		Raio horizontal na interface entre o túnel e o maciço;
+\item[$R_{v_i}$]		Raio vertical na interface entre o túnel e o maciço;
 \item[$ R^p $]			Raio da zona plástica ao redor da seção do túnel;
 \item[$\Rl_i$]			Vetor resíduo global do método de Newton-Raphson;
 \item[$ S $] 			Superfície que atua o vetor tensão;
@@ -128,6 +170,7 @@
 \item[$ S_T $] 			Região da superfície do domínio com condição de contorno imposta;
 \item[$ \Tl $] 			Vetor tensão;
 \item[$ \Tl^d $] 		Vetor tensão imposto na fronteira $S_T$;
+\item[$ TOL $] 			Tolerância de convergência do algoritmo de Newton-Raphson local;
 \item[$ U $] 			Convergência da seção do túnel;
 \item[$ U_{0} $] 		Convergência da seção do túnel na cota não revestida a partir da face de escavação;
 \item[$ U_{eq} $] 		Convergência de equilíbrio de um túnel revestido;
@@ -139,6 +182,7 @@
 \item[$ V^* $] 			Velocidade adimensional de avanço do túnel;
 \item[$ V_a $] 			Volume de uma amostra em um ensaio triaxial;
 \item[$ V_{bacia} $]	Volume recalcado da bacia de assentamento de um túnel raso;
+\item[$ V_{p} $]	Velocidade do passo de escavação;
 \item[$V(\Delta \ul)$]	Potencial do Método dos Gradientes Conjugados;
 
 \item[\textbf{Grego minúsculo:}]
@@ -182,6 +226,7 @@
 \item[$ \rho $] 		Densidade do domínio;
 \item[$ \rho_{H} $] 		Coordenada do espaço de Haigh-Westergaard;
 
+\item[$ \sigmal^{INI} $] 	Tensor de tensões iniciais;
 \item[$ \sigma_{oct} $] 	Tensão normal octaédrica;
 \item[$ \sigma_{v} $] 	Tensão vertical no interior do maciço;
 \item[$ \sigma_{\theta \theta} $] Tensão no maciço na direção ortorradial;
@@ -193,10 +238,11 @@
 \item[$ \sigmal_0 $] 	Tensor de tensões iniciais (notação de Voigt);
 \item[$ \sigmal^{trial} $] 	Preditor elástico (notação de Voigt);
 \item[$ \tau_{oct} $] 	Tensão cisalhante octaédrica;
-\item[$\psi$] energia livre específica;
+\item[$\psi$] energia livre específica ou ângulo de dilatância;
 
 \item[\textbf{Grego maiúsculo:}]
 \item[$ \Gamma $]		Conjunto de tensões plasticamente admissíveis;
+\item[$ \Theta $]		Parâmetro que controla um esquema de integração totalmente explícito ou semi-implicito no modelo viscoplástico;
 \item[$ \Sigma $]		Superfície de descontinuidade no interior do domínio;
 \item[$ \Phi $]		Função de sobretensão;
 \item[$ \Omega $] 		Domínio contínuo;

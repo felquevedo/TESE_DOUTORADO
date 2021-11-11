@@ -231,6 +231,41 @@ A \autoref{PIEPI-E1500-CAMPO_DEFORMACOES} mostra o campo de deformações plást
 	\caption{\label{PIEPI-E1500-CAMPO_DEFORMACOES}Campo de deformações plásticas e viscosas no longo prazo para o caso elastoplástico-viscoplástico com $E=1500$MPa e $V_p=0,1$m/dia}
 \end{figure}
 
+
+\section{Análise considerando amolecimento}
+
+Como o modelo constitutivo elastoplástico-viscoplástico comporta a característica de endurecimento/amolecimento, nessa seção é apresentada uma pequena análise da influência que se pode ter em considerar esse fenômeno. Para tanto, é utilizado o exemplo anterior em axissimetria com as seguintes propriedades para o maciço: $E=1500$MPa, $\nu=0.498$, $c^{vp}=3\sqrt{3}/2$MPa, $\eta = 4 \cdot 10^4$dia, $n=1$, $f_0=1$MPa e $p_v=p_h=9$MPa. Vendo o campo de deformações plásticas equivalentes da \autoref{PIEPI-E1500-CAMPO_DEFORMACOES}, vamos adotar uma coesão inicial $c_i=4\sqrt{3}/2$MPa, contudo, um amolecimento linear até $\bar \varepsilon^p_{I} = 0,02$, para metade da coesão $c_p=2\sqrt{3}/2$MPa (\autoref{AMOLECIMENTO}).
+
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[scale = 0.8]{0723-AMOLECIMENTO.pdf
+		}
+	\end{center}
+	\caption{\label{AMOLECIMENTO}Curva tensão versus deformação obtido pelo modelo com amolecimento}
+\end{figure}
+
+A \autoref{EP-EFEITO-AMOLECIMENTO} mostra a diferença entre os perfis de convergências com e sem amolecimento para o modelo elastoplástico.
+
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[scale = 1.0]{0724-EP-EFEITO-AMOLECIMENTO.pdf
+		}
+	\end{center}
+	\caption{\label{EP-EFEITO-AMOLECIMENTO}Efeito do amolecimento no perfil de convergências para o caso elastoplástico}
+\end{figure}
+
+A \autoref{EPVP-EFEITO-AMOLECIMENTO} mostra a diferença entre os perfis de convergências com e sem amolecimento para o modelo elastoplástico-viscoplástico no final da construção do túnel, ou seja, no curto prazo (CP) e no longo prazo (LP). É adotado uma velocidade $V_p=0.1$m/dia.
+
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[scale = 1.0]{0725-EPVP-EFEITO-AMOLECIMENTO.pdf}
+	\end{center}
+	\caption{\label{EPVP-EFEITO-AMOLECIMENTO}Efeito do amolecimento no perfil de convergências para o caso elastoplástico-viscoplástico}
+\end{figure}
+
+Para o modelo elastoplástico, a redução na coesão pela metade devido ao amolecimento se traduziu em uma convergência 37\% maior. Já para o modelo elastoplástico-viscoplástico, no final da construção do túnel o amolecimento representou uma convergência 28\% maior no curto prazo e 24\% maior no longo prazo.
+
+
 \section{Análise paramétrica da influência do revestimento}
 
 Nessa seção é apresentada uma análise paramétrica para averiguar a influência do revestimento sobre o perfil de convergência do modelo elastoplástico-viscoplástico. As propriedades do maciço são as mesmas da análise anterior com $E=1500$MPa. É utilizado o modelo em axissimetria, primeiramente sem revestimento e então com revestimento alterando o seu módulo de elasticidade $E_{rev} = 3000$MPa e $E_{rev} = 30000$MPa e a distância não suportada $d0 = 0$ e $d0 = 4L_p$. A \autoref{PARAMETRICO-D0-FINALCONSTRUÇÃO} e \autoref{PARAMETRICO-D0-LONGOPRAZO} mostram os resultados considerando $d_0 = 0$ e a \autoref{PARAMETRICO-D0-LONGOPRAZO} e \autoref{PARAMETRICO-D4-FINALCONSTRUÇÃO} considerando $d_0=4L_p$. A convergência ao equilíbrio é medida em $y/R_i = 6$. 
