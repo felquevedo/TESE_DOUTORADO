@@ -416,10 +416,16 @@ Um aspecto importante derivado das soluções analíticas é a identificação d
 Segundo \citeonline[p. 5]{Bernaud1994}, nas soluções analíticas em estado plano de deformações, considerando tanto o maciço quanto o revestimento com leis constitutivas elásticas, obtêm-se os seguintes parâmetros adimensionais:
 
 \begin{equation}
-	p_\infty^* = \frac{p_\infty}{E},~~~ K_r^* = \frac{K_r}{E},~~~ d_0^* = \frac{d_0}{R} 
+	p_\infty^* = \frac{p_\infty}{E},~~~ K_{rev}^* = \frac{K_{rev}}{E},~~~ d_0^* = \frac{d_0}{R_i} 
 \end{equation}
 
-em que $E$ é o módulo de elasticidade do maciço, $p_\infty$ a pressão geostática hidrostástica, $K_r$ a rigidez equivalente do revestimento, $d_0$ a distância não revestida logo atrás da frente de escavação e $R$ o raio externo da abertura circular do túnel. Quando o maciço possuí lei constitutiva elastoplástica de Tresca ou von-Mises, acrescenta-se mais um parâmetro adimensional:
+em que $E$ é o módulo de elasticidade do maciço, $p_\infty$ a pressão geostática hidrostástica, $K_{rev}$ a rigidez equivalente do revestimento, $d_0$ a distância não revestida logo atrás da frente de escavação e $R_i$ o raio externo da abertura circular do túnel. A rigidez equivalente do maciço pode ser calculada através da seguinte expressão:
+
+\begin{equation}
+	K_{rev} = \dfrac{E_{rev}}{(1+\nu_{rev})}\dfrac{R_i^2-(R_i-e)^2}{\left[(1-2\nu_{rev})R_i^2+(R_i-e)^2)\right]} 
+\end{equation}
+
+em que $E_{rev}$ é o módulo de elasticidade do revestimento, $\nu_{rev}$ o seu coeficiente de Poisson, $R_i$ o raio do túnel e $e$ a espessura do revestimento. Quando o maciço possuí lei constitutiva elastoplástica de Tresca ou von-Mises, acrescenta-se mais um parâmetro adimensional:
 
 \begin{equation}
 	c^* = \frac{c}{E} 
@@ -429,10 +435,10 @@ sendo $c$ a coesão do maciço. Além disso, quando o túnel se encontra imerso 
 
 \begin{equation}
 	\label{eq:parametros_admensionais_vp}
-	E^* = \frac{E}{c},~~~ p_\infty^* = \frac{p_\infty}{c},~~~ K_r^* = \frac{K_r}{c},~~~ d_0^* = \frac{d_0}{R},~~~ V^*=\frac{\eta V}{Rc}
+	E^* = \frac{E}{c},~~~ p_\infty^* = \frac{p_\infty}{c},~~~ K_{rev}^* = \frac{K_{rev}}{c},~~~ d_0^* = \frac{d_0}{R_i},~~~ V^*=\frac{\eta V_p}{R_i~c}
 \end{equation}
 
-em que $\eta$ é a constante de viscosidade dinâmica (em unidade de tensão vezes tempo) e $V$ a velocidade de avanço do túnel.
+em que $\eta$ é a constante de viscosidade dinâmica (em unidade de tensão vezes tempo) e $V_p$ a velocidade do passo de escavação do túnel.
 
 Contudo, a principal dificuldade na determinação do estado de equilíbrio de um túnel revestido está no fato de que o maciço já possui uma convergência $U_0$ no instante de instalação do revestimento. E essa convergência é dependente da interação entre o maciço e o revestimento que já foi aplicado. Uma forma de lidar com essa complexidade é através do método Convergência-Confinamento (também conhecido como o método das Curvas Características).
 
