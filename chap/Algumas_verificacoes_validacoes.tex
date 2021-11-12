@@ -258,7 +258,7 @@ Piepi também desenvolveu o seu modelo numérico em axissimetria. Nesse
 
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[scale = 0.8]{0723-AMOLECIMENTO.pdf
+		\includegraphics[scale = 0.8]{0725-AMOLECIMENTO.pdf
 		}
 	\end{center}
 	\caption{\label{AMOLECIMENTO}Curva tensão \textit{versus} deformação obtido pelo modelo com amolecimento}
@@ -268,7 +268,7 @@ A \autoref{EP-EFEITO-AMOLECIMENTO} mostra a diferença entre os perfis de conver
 
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[scale = 1.0]{0724-EP-EFEITO-AMOLECIMENTO.pdf
+		\includegraphics[scale = 1.0]{0726-EP-EFEITO-AMOLECIMENTO.pdf
 		}
 	\end{center}
 	\caption{\label{EP-EFEITO-AMOLECIMENTO}Efeito do amolecimento no perfil de convergências para o caso elastoplástico}
@@ -296,7 +296,7 @@ Comparando o modelo elastoplástico-viscoplástico com o modelo viscoplástico, 
 
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[scale = 1.0]{0723-PARAMETRICO-D0-FINALCONSTRUÇÃO.pdf
+		\includegraphics[scale = 1.0]{0728-PARAMETRICO-D0-FINALCONSTRUÇÃO.pdf
 		}
 	\end{center}
 	\caption{\label{PARAMETRICO-D0-FINALCONSTRUÇÃO}Convergência no final da construção \textit{versus} módulo de elasticidade do revestimento para uma distância não revestida $d0=0$}
@@ -304,7 +304,7 @@ Comparando o modelo elastoplástico-viscoplástico com o modelo viscoplástico, 
 
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[scale = 1.0]{0724-PARAMETRICO-D0-LONGOPRAZO.pdf
+		\includegraphics[scale = 1.0]{0729-PARAMETRICO-D0-LONGOPRAZO.pdf
 		}
 	\end{center}
 	\caption{\label{PARAMETRICO-D0-LONGOPRAZO}Convergência no longo prazo \textit{versus} módulo de elasticidade do revestimento para uma distância não revestida $d0=0$}
@@ -312,7 +312,7 @@ Comparando o modelo elastoplástico-viscoplástico com o modelo viscoplástico, 
 
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[scale = 1.0]{0725-PARAMETRICO-D4-FINALCONSTRUÇÃO.pdf
+		\includegraphics[scale = 1.0]{0730-PARAMETRICO-D4-FINALCONSTRUÇÃO.pdf
 		}
 	\end{center}
 	\caption{\label{PARAMETRICO-D4-FINALCONSTRUÇÃO}Convergência no final da construção \textit{versus} módulo de elasticidade do revestimento para uma distância não revestida $d0=4L_p$}
@@ -320,7 +320,7 @@ Comparando o modelo elastoplástico-viscoplástico com o modelo viscoplástico, 
 
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[scale = 1.0]{0726-PARAMETRICO-D4-LONGOPRAZO.pdf
+		\includegraphics[scale = 1.0]{0731-PARAMETRICO-D4-LONGOPRAZO.pdf
 		}
 	\end{center}
 	\caption{\label{PARAMETRICO-D4-LONGOPRAZO}Convergência no longo prazo \textit{versus} módulo de elasticidade do revestimento para uma distância não revestida $d0=4L_p$}
@@ -328,77 +328,53 @@ Comparando o modelo elastoplástico-viscoplástico com o modelo viscoplástico, 
 
 \section{Análise paramétrica considerando uma seção elíptica}
 
-Uma vez que o modelo constitutivo acoplado (EPVP) está generalizado para o caso tridimensional é interessante fazer uma análise paramétrica considerando algum aspecto que não pode ser analisado com o modelo axissimétrico. O aspecto escolhido nessa análise foi a razão entre o raio horizontal e vertical. Dessa forma, foram considerados três razões de aspecto: 1 (R1), ou seja, circular, 1.5 (R1,5) e 2 (R2). Além disso, os cálculos foram executados sem revestimento (S/R) e com revestimento (C/R) afastado de $d0=4L_p$ da face de escavação. As propriedades do maciço são: $E=1500$MPa, $\nu=0,498$, $c^i=c^p=c^r =4\sqrt{3}/2$MPa, $c^{vp}=3\sqrt{3}/2$MPa, $\eta = 4 \cdot 10^4$dia, $n=1$, $f_0=1$MPa e $p_v=p_h=9$MPa. E do revestimento: $E_{rev}=3000$MPa, $\nu_{rev}$=0,3, colocado a $d0=4L_p$ da face de escavação. A velocidade de escavação foi $V_p=0,1$m/dia. Para evidenciar a diferença que o modelo acoplado pode representar os resultados foram comparados com modelo viscoplástico (VP) com uma coesão de $4\sqrt{3}/2$MPa.
+Uma vez que o modelo constitutivo acoplado (EPVP) está generalizado para o caso tridimensional é interessante fazer uma análise paramétrica considerando algum aspecto que não pode ser analisado com o modelo axissimétrico. O aspecto escolhido nessa análise foi a razão entre o raio horizontal e vertical. Dessa forma, foram consideradas duas razões de aspecto $R_{h_i}/R_{vi}$: 1, ou seja, circular e 2. Além disso, os cálculos foram executados sem revestimento (S/REV) e com revestimento (C/REV) afastado de $d0=2L_p$ da face de escavação. As propriedades do maciço são: $E=1500$MPa, $\nu=0,498$, $c^i=c^p=c^r =4\sqrt{3}/2$MPa, $c^{vp}=2\sqrt{3}/2$MPa, $\eta = 4 \cdot 10^4$dia, $n=1$, $f_0=1$MPa e $p_v=p_h=9$MPa. E do revestimento: $E_{rev}=2968.1$MPa, $\nu_{rev}$=0,3 com uma velocidade de escavação e colocação de $V_p=1$m/dia. Para evidenciar a diferença que o modelo acoplado pode representar os resultados foram comparados com modelo viscoplástico (VP) com uma coesão de $2\sqrt{3}/2$MPa.
 
-Como a seção transversal é eliptica as convergências são medidas ao longo do maior e menor eixo da seção, portanto,  tem-se $U_y = -u_y(r=R_{vi})/R_{vi}$ e $U_x = -u_x(r=R_{hi})/R_{hi}$. A \autoref{VP-FINAL-ESCAVACAO-UY} e \autoref{EPVP-FINAL-ESCAVACAO-UY} mostram os perfis de convergências na direção $y$ para ambos os modelos (VP) e (EPVP) no final da construção do túnel. O valor numérico da convergência no equilíbrio está na legenda.
+Como a seção transversal é eliptica as convergências são medidas ao longo do maior e menor eixo da seção, portanto,  tem-se $U_{yi} = -u_y(r=R_{vi})/R_{vi}$ e $U_{xi} = -u_x(r=R_{hi})/R_{hi}$.  A \autoref{ELIPTICO-CONVERGENCIAS-UX-SREV} e \autoref{ELIPTICO-CONVERGENCIAS-UX-CREV} mostram as convergências no equilíbrio na direção $x$ para ambos os modelos (VP) e (EPVP), no curto prazo (CP), ou seja, no final da construção do túnel e no longo prazo (LP) sem revestimento e com revestimento, respectivamente.
+
 
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[scale = 1.0]{0727-VP-FINAL-ESCAVACAO-UY.pdf
+		\includegraphics[scale = 1.0]{0732-ELIPTICO-CONVERGENCIAS-UX-SREV.pdf
 		}
 	\end{center}
-	\caption{\label{VP-FINAL-ESCAVACAO-UY}Perfis de convergências na direção y ao final da construção sem e com revestimento para diferentes razões de aspecto da seção transversal para o modelo viscoplástico}
+	\caption{\label{ELIPTICO-CONVERGENCIAS-UX-SREV}Convergências na direção $x$ \textit{versus} razão de aspecto da seção sem revestimento}
 \end{figure}
 
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[scale = 1.0]{0728-EPVP-FINAL-ESCAVACAO-UY.pdf
+		\includegraphics[scale = 1.0]{0733-ELIPTICO-CONVERGENCIAS-UX-CREV.pdf
 		}
 	\end{center}
-	\caption{\label{EPVP-FINAL-ESCAVACAO-UY}Perfis de convergências na direção y ao final da construção sem e com revestimento para diferentes razões de aspecto da seção transversal para o modelo elastoplástico-viscoplástico}
+	\caption{\label{ELIPTICO-CONVERGENCIAS-UX-CREV}Convergências na direção $x$ \textit{versus} razão de aspecto da seção com revestimento}
 \end{figure}
 
-Pode-se notar, como esperado, que as convergências do modelo acoplado foram maiores que o modelo viscoplástico. A \autoref{VP-FINAL-ESCAVACAO-UX} e \autoref{EPVP-FINAL-ESCAVACAO-UX} mostram os perfis de convergências na direção $x$ para ambos os modelos (VP) e (EPVP), respectivamente, no final da construção do túnel.
+De uma forma geral, quando se aumenta a razão de aspecto os deslocamentos $u_x$ aumentam. Contudo, a convergência diminui, pois, está sendo dividida pelo raio horizontal do túnel. De qualquer forma, pode-se ver, ao comparar, a \autoref{ELIPTICO-CONVERGENCIAS-UX-SREV} com a \autoref{ELIPTICO-CONVERGENCIAS-UX-CREV} a influência significativa do revestimento nas convergências. Sem revestimento uma maior razão de aspecto leva a maiores convergências do modelo (EPVP) e isso é esperado uma vez que nessa borda, contígua ao eixo $x$, tem-se as maiores plastificações. O revestimento, contudo, bloqueia a maior parte dessas deformações plásticas, fazendo com que tenha apenas as deformações viscosas e dessa forma, ambas as curvas (VP) e (EPVP) se aproximam no longo prazo. 
+
+A \autoref{ELIPTICO-CONVERGENCIAS-UX-SREV} e \autoref{ELIPTICO-CONVERGENCIAS-UX-SREV} mostra as convergências ao equilíbrio para a direção $y$. Nesse caso, no longo prazo, não há diferença entre os modelos. Isso ocorre, pois, nessa direção, apesar de se ter as maiores convergências, não há plastificações tão significativas conforme a razão de aspecto aumenta. Isso faz com que ambas as curvas deem o mesmo resultado no longo prazo, tanto sem quanto com revestimento. Isso pode ser verificado pelo nível de plastificação que ocorre na seção. A Figura XX mostra o campo de deformações inelásticas equivalentes comparando o modelo (VP) e (EPVP), sem revestimento, com razão de aspecto 2 e no longo prazo.
 
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[scale = 1.0]{0729-VP-FINAL-ESCAVACAO-UX.pdf
+		\includegraphics[scale = 1.0]{0734-ELIPTICO-CONVERGENCIAS-UY-SREV.pdf
 		}
 	\end{center}
-	\caption{\label{VP-FINAL-ESCAVACAO-UX}Perfis de convergências na direção x ao final da construção sem e com revestimento para diferentes razões de aspecto da seção transversal para o modelo viscoplástico}
-\end{figure}
-
-\begin{figure}[H]
-	\begin{center}
-		\includegraphics[scale = 1.0]{0730-EPVP-FINAL-ESCAVACAO-UX.pdf
-		}
-	\end{center}
-	\caption{\label{EPVP-FINAL-ESCAVACAO-UX}Perfis de convergências na direção x ao final da construção sem e com revestimento para diferentes razões de aspecto da seção transversal para o modelo elastoplástico-viscoplástico}
-\end{figure}
-As convergências ainda foram maiores para o modelo (EPVP), contudo, houve uma inversão. As maiores convergências ocorreram com razão de aspecto menor. Isso ocorre pois a convergência é dividida pelo raio horizontal que está maior. Se multiplicar a convergência por esse raio, tem-se uma maior deformação para uma maior razão de aspecto.
-
-O longo prazo seguiu a mesma tendência do final da escavação, ou seja, modelo (EPVP) com maiores convergências. A \autoref{VP-LONGO-PRAZO-UY}, \autoref{EPVP-LONGO-PRAZO-UY}, \autoref{VP-LONGO-PRAZO-UX} e \autoref{EPVP-LONGO-PRAZO-UX} mostram esses resultados.
-
-\begin{figure}[H]
-	\begin{center}
-		\includegraphics[scale = 1.0]{0731-VP-LONGO-PRAZO-UY.pdf
-		}
-	\end{center}
-	\caption{\label{VP-LONGO-PRAZO-UY}Perfis de convergências na direção y no longo prazo sem e com revestimento para diferentes razões de aspecto da seção transversal para o modelo viscoplástico}
+	\caption{\label{ELIPTICO-CONVERGENCIAS-UY-SREV}Convergências na direção $y$ \textit{versus} razão de aspecto da seção sem revestimento}
 \end{figure}
 
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[scale = 1.0]{0732-EPVP-LONGO-PRAZO-UY.pdf
+		\includegraphics[scale = 1.0]{0735-ELIPTICO-CONVERGENCIAS-UY-CREV.pdf
 		}
 	\end{center}
-	\caption{\label{EPVP-LONGO-PRAZO-UY}Perfis de convergências na direção y no longo prazo sem e com revestimento para diferentes razões de aspecto da seção transversal para o modelo elastoplástico-viscoplástico}
+	\caption{\label{ELIPTICO-CONVERGENCIAS-UY-CREV}Convergências na direção $y$ \textit{versus} razão de aspecto da seção com revestimento}
 \end{figure}
 
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[scale = 1.0]{0733-VP-LONGO-PRAZO-UX.pdf
+		\includegraphics[scale = 1.0]{0736-campo_deformacoes_eliptico.pdf
 		}
 	\end{center}
-	\caption{\label{VP-LONGO-PRAZO-UX}Perfis de convergências na direção x no longo prazo sem e com revestimento para diferentes razões de aspecto da seção transversal para o modelo viscoplástico}
-\end{figure}
-
-\begin{figure}[H]
-	\begin{center}
-		\includegraphics[scale = 1.0]{0734-EPVP-LONGO-PRAZO-UX.pdf
-		}
-	\end{center}
-	\caption{\label{EPVP-LONGO-PRAZO-UX}Perfis de convergências na direção x no longo prazo sem e com revestimento para diferentes razões de aspecto da seção transversal para o modelo elastoplástico-viscoplástico}
+	\caption{\label{ELIPTICO-CONVERGENCIAS-UY-SREV}Campo de deformações equivalentes para o modelo (VP) e (EPVP), sem revestimento, com razão de aspecto 2 e no longo prazo}
 \end{figure}
 
 A \autoref{convergencias_analise_secao_eliptica} resume a razão entre as convergências dessas análises.
@@ -422,21 +398,19 @@ A \autoref{convergencias_analise_secao_eliptica} resume a razão entre as conver
 		\multicolumn{1}{c}{\textbf{Ux}} &
 		\multicolumn{1}{c}{\textbf{Uy}} \\
 		\hline
-		S/R-R1	 &	1,31 &	1,31 &	1,57 &	1,57 \\
-		S/R-R1,5 &	1,48 &	1,30 &	1,61 &	1,49 \\
-		S/R-R2	 &	1,65 &	1,29 &	1,67 &	1,44 \\
-		C/R-R1	 &	1,11 &	1,13 &	1,14 &	1,14 \\
-		C/R-R1,5 &	1,16 &	1,13 &	1,17 &	1,18 \\
-		C/R-R2	 &	1,19 &	1,14 &	1,24 &	1,21 \\
+		S/REV-R1	 &	1,39 &	1,39 &	1,01 &	1,01 \\
+		S/REV-R2	 &	2,05 &	1,22 &	1,11 &	1,00 \\
+		C/REV-R1	 &	1,04 &	1,04 &	1,01 &	1,01 \\
+		C/REV-R2	 &	1,13 &	1,05 &	1,00 &	1,00 \\
 		\hline
 	\end{tabular}
 	\normalsize
 \end{table}
-Com valores acima de 10\% a \autoref{convergencias_analise_secao_eliptica} mostra a relevância que o modelo acoplado pode ter em análises de túneis profundos. Na ausência de revestimento um aumento de 30\% (final da construção) e 50\% (longo prazo). Com revestimento os valores ficaram entre 10\% e 20\% causado pelo bloqueio das deformações viscosas pelo revestimento. Para $U_x$ a razão de aspecto maior levou a uma maior diferença entre os modelos tanto no final da construção quanto no longo prazo. Isso pois a plastificação começa nas bordas do maior eixo da elipse e o modelo (EPVP) já está em processo de plastificação antes do modelo (VP). Contudo, em $U_y$ essa relação não acontece necessariamente. Sem revestimento tem uma relação inversa significando que a diferença entre os modelos diminui com uma maior razão de aspecto da seção. Contudo, quando se tem o revestimento a relação ficou direta.
 
-De forma geral, quanto maior a razão de aspecto, maiores serão as deformações na direção y e, dessa forma, o modelo (VP) tende a resposta elastoplástica diminuindo sua diferença em relação ao modelo (EPVP) que já pode estar em processo de plastificação. Por outro lado, o revestimento bloqueia as deformações plásticas que ocorreriam no modelo (EPVP). Mesmo assim, conforme a razão de aspecto da seção aumenta, maiores deformações na direção y, induzem o modelo (EPVP) a plastificação, aumentando assim sua diferença em relação ao modelo (VP). E esse efeito é mais pronunciado no longo prazo.
+Como pode-se ver as maiores diferenças ocorrem sem a presença do revestimento. Mas isso porque houve uma contenção das deformações plásticas. Sem revestimento, para razão de aspecto 1, o modelo (EPVP) causa um aumento de 39\% na convergência. Sem revestimento, para a razão de aspecto 2, na direção $x$, tem-se um aumento de 105\% (curto prazo) e 11\% (no longo prazo). E na direção $y$ um aumento no curto prazo de 22\%.
 
 A \autoref{convergencias_analise_secao_eliptica_2} mostra a razão entre as convergências no equilíbrio de longo prazo e curto prazo para ambos os modelos em ambas direções.
+
 \begin{table}[H]
 	\caption{Razão entre as convergências no equilíbrio de longo prazo pelo curto prazo do modelo (VP) e (EPVP)}
 	\label{convergencias_analise_secao_eliptica_2}
@@ -456,17 +430,16 @@ A \autoref{convergencias_analise_secao_eliptica_2} mostra a razão entre as conv
 		\multicolumn{1}{c}{\textbf{Ux}} &
 		\multicolumn{1}{c}{\textbf{Uy}} \\
 		\hline
-		S/R-R1	 &	1,13 &	1,13 &	1,35 &	1,35 \\
-		S/R-R1,5 &	1,23 &	1,09 &	1,34 &	1,25 \\
-		S/R-R2	 &	1,35 &	1,09 &	1,37 &	1,22 \\
-		C/R-R1	 &	1,00 &	1,01 &	1,03 &	1,03 \\
-		C/R-R1,5 &	1,02 &	1,01 &	1,04 &	1,05 \\
-		C/R-R2	 &	1,03 &	1,02 &	1,08 &	1,08 \\
+		S/R-R1	 &	4,95 &	4,95 &	3,57 &	1,00 \\
+		S/R-R2	 &	5,85 &	4,17 &	3,16 &	2,31 \\
+		C/R-R1	 &	1,42 &	1,42 &	1,37 &	1,37 \\
+		C/R-R2	 &	1,87 &	2,11 &	1,66 &	2,02 \\
 		\hline
 	\end{tabular}
 	\normalsize
 \end{table}
-De forma geral, pode-se ver que o modelo elastoplástico-viscoplástico apresenta uma maior relação entre as convergências de longo prazo e curto prazo. Sem revestimento, cerca de 35\% (EPVP) contra 13\% (VP), como uma maior razão de aspecto na direção y, tem-se 22\% (EPVP) contra 9\% (VP). Pode-se ver também a grande diminuição da relação frente ao uso do revestimento, indicando que este realmente bloqueia essas convergências.
+
+Pode-se ver que nesse caso, o modelo (EPVP) apresentou menores relações. Isso é esperado, uma vez que, algum nível de plastificação ocorre no curto prazo.
 
 
 
