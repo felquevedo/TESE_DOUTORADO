@@ -1509,9 +1509,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1.144132"
-     inkscape:cx="303.04808"
-     inkscape:cy="78.965725"
+     inkscape:zoom="1.8397587"
+     inkscape:cx="181.0335"
+     inkscape:cy="118.5656"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      inkscape:document-rotation="0"
@@ -1519,7 +1519,7 @@
      inkscape:window-width="1618"
      inkscape:window-height="1040"
      inkscape:window-x="163"
-     inkscape:window-y="24"
+     inkscape:window-y="0"
      inkscape:window-maximized="0" />
   <metadata
      id="metadata5">
@@ -2340,14 +2340,17 @@
       </g>
       <g
          clip-path="url(#clip66-4)"
-         id="g2531">
+         id="g2531"
+         transform="translate(0,2)">
         <text
            font-family="'Times New Roman', 'Times New Roman_MSFontService', sans-serif"
            font-style="italic"
            font-weight="400"
            font-size="13px"
            transform="rotate(-90,106.83335,78.16665)"
-           id="text2529">U</text>
+           id="text2529">U<tspan
+   style="font-size:65%;baseline-shift:sub"
+   id="tspan1344">i</tspan></text>
       </g>
       <g
          clip-path="url(#clip67-2)"
@@ -2579,5 +2582,17 @@
            y="29.677496"
            style="fill:#ff0000;fill-opacity:1;stroke-width:0.264583">0,150</tspan></text>
     </g>
+    <text
+       xml:space="preserve"
+       style="font-size:3.52777px;line-height:1.25;font-family:times;-inkscape-font-specification:times;letter-spacing:0px;stroke-width:0.264583"
+       x="-119.05903"
+       y="33.557522"
+       id="text1171"
+       transform="rotate(-90)"><tspan
+         sodipodi:role="line"
+         id="tspan1169"
+         x="-119.05903"
+         y="33.557522"
+         style="stroke-width:0.264583">(%)</tspan></text>
   </g>
 </svg>

@@ -349,7 +349,7 @@ Na \autoref{NR-fluxograma} tem-se o fluxograma do método de Newton-Raphson, mos
 \end{figure}
 Ainda na \autoref{NR-fluxograma} está detalhada a parte de atualização das tensões, variáveis internas e do módulo constitutivo, que serão os temas do próximo capítulo. É importante nesse fluxograma o detalhe dos laços nos elementos e pontos de Gauss, pois a customização do modelo do material, através da subrotina \textit{Usermat}, está justamente aninhada nesse laço mais interno dos pontos de Gauss.
 
-\section{Algoritmo de atualização das tensões e variáveis internas}
+\section{Algoritmo de atualização das tensões e variáveis internas}\label{algoritmo de atualização das tensões e variáveis internas}
 
 Como visto no capítulo anterior, durante as iterações de equilíbrio é necessário fazer a integração espacial das forças internas no contexto do método dos elementos finitos. Essa integração pode ser escrita da seguinte maneira:
 \begin{equation}

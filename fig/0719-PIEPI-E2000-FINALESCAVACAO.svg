@@ -13347,6 +13347,114 @@
          height="302"
          id="rect17633-0" />
     </clipPath>
+    <clipPath
+       id="clip66-4-2">
+      <rect
+         x="0"
+         y="0"
+         width="531"
+         height="302"
+         id="rect2214" />
+    </clipPath>
+    <clipPath
+       id="clip67-2-0">
+      <rect
+         x="0"
+         y="0"
+         width="531"
+         height="302"
+         id="rect2217" />
+    </clipPath>
+    <clipPath
+       id="clip68-1-5">
+      <rect
+         x="0"
+         y="0"
+         width="531"
+         height="302"
+         id="rect2220" />
+    </clipPath>
+    <clipPath
+       id="clip69-6-2">
+      <rect
+         x="0"
+         y="0"
+         width="531"
+         height="302"
+         id="rect2223" />
+    </clipPath>
+    <clipPath
+       id="clip70-4-0">
+      <rect
+         x="0"
+         y="0"
+         width="531"
+         height="302"
+         id="rect2226" />
+    </clipPath>
+    <clipPath
+       id="clip71-6">
+      <rect
+         x="0"
+         y="0"
+         width="531"
+         height="302"
+         id="rect2229" />
+    </clipPath>
+    <clipPath
+       id="clip72-4">
+      <rect
+         x="0"
+         y="0"
+         width="531"
+         height="302"
+         id="rect2232" />
+    </clipPath>
+    <clipPath
+       id="clip73-7-8">
+      <rect
+         x="0"
+         y="0"
+         width="531"
+         height="302"
+         id="rect2235" />
+    </clipPath>
+    <clipPath
+       id="clip74-7-8">
+      <rect
+         x="0"
+         y="0"
+         width="531"
+         height="302"
+         id="rect2238" />
+    </clipPath>
+    <clipPath
+       id="clip75-9-4">
+      <rect
+         x="0"
+         y="0"
+         width="531"
+         height="302"
+         id="rect2241" />
+    </clipPath>
+    <clipPath
+       id="clip76-3-6">
+      <rect
+         x="0"
+         y="0"
+         width="531"
+         height="302"
+         id="rect2244" />
+    </clipPath>
+    <clipPath
+       id="clip77-2-1">
+      <rect
+         x="0"
+         y="0"
+         width="531"
+         height="302"
+         id="rect2247" />
+    </clipPath>
   </defs>
   <sodipodi:namedview
      id="base"
@@ -13355,9 +13463,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1.1602095"
-     inkscape:cx="476.57208"
-     inkscape:cy="-9.1629262"
+     inkscape:zoom="1.8989047"
+     inkscape:cx="282.72756"
+     inkscape:cy="90.129787"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      inkscape:document-rotation="0"
@@ -13937,144 +14045,158 @@
          fill="none"
          id="rect4156" />
       <g
-         clip-path="url(#clip30-7-4)"
-         id="g17815-0"
-         transform="translate(-1244,-2777)">
+         clip-path="url(#clip66-4-2)"
+         id="g2531"
+         transform="translate(77.500099,32.500099)">
         <text
            font-family="'Times New Roman', 'Times New Roman_MSFontService', sans-serif"
            font-style="italic"
            font-weight="400"
            font-size="13px"
-           transform="rotate(-90,2171.165,820.835)"
-           id="text17813-3">U</text>
+           transform="rotate(-90,106.83335,78.16665)"
+           id="text2529">U<tspan
+   style="font-size:65%;baseline-shift:sub"
+   id="tspan1344">i</tspan></text>
       </g>
       <g
-         clip-path="url(#clip31-249-5)"
-         id="g17819-2"
-         transform="translate(-1244,-2777)">
+         clip-path="url(#clip67-2-0)"
+         id="g2535"
+         transform="translate(77.500099,30.500099)">
         <text
            font-family="'Times New Roman', 'Times New Roman_MSFontService', sans-serif"
            font-weight="400"
            font-size="13px"
-           transform="rotate(-90,2164.665,814.335)"
-           id="text17817-9">=</text>
+           transform="rotate(-90,100.33335,71.66665)"
+           id="text2533">=</text>
       </g>
       <g
-         clip-path="url(#clip32-22-2)"
-         id="g17823-9"
-         transform="translate(-1244,-2777)">
+         clip-path="url(#clip68-1-5)"
+         id="g2539"
+         transform="translate(77.500099,30.500099)">
         <text
            font-family="'Times New Roman', 'Times New Roman_MSFontService', sans-serif"
            font-weight="400"
            font-size="13px"
-           transform="rotate(-90,2159.165,808.835)"
-           id="text17821-7">-</text>
+           transform="rotate(-90,94.83335,66.16665)"
+           id="text2537">-</text>
       </g>
       <g
-         clip-path="url(#clip33-6-5)"
-         id="g17827-5"
-         transform="translate(-1244,-2777)">
+         clip-path="url(#clip69-6-2)"
+         id="g2543"
+         transform="translate(77.500099,30.500099)">
         <text
            font-family="'Times New Roman', 'Times New Roman_MSFontService', sans-serif"
            font-style="italic"
            font-weight="400"
            font-size="13px"
-           transform="rotate(-90,2157.165,806.835)"
-           id="text17825-6">u</text>
+           transform="rotate(-90,92.33335,63.66665)"
+           id="text2541">u</text>
       </g>
       <g
-         clip-path="url(#clip34-63-1)"
-         id="g17831-6"
-         transform="translate(-1244,-2777)">
+         clip-path="url(#clip70-4-0)"
+         id="g2547"
+         transform="translate(77.500099,30.500099)">
         <text
            font-family="'Times New Roman', 'Times New Roman_MSFontService', sans-serif"
            font-weight="400"
            font-size="13px"
-           transform="rotate(-90,2153.665,803.335)"
-           id="text17829-8">(</text>
+           transform="rotate(-90,89.33335,60.66665)"
+           id="text2545">(</text>
       </g>
       <g
-         clip-path="url(#clip35-265-1)"
-         id="g17835-6"
-         transform="translate(-1244,-2777)">
+         clip-path="url(#clip71-6)"
+         id="g2551"
+         transform="translate(77.500099,30.500099)">
         <text
            font-family="'Times New Roman', 'Times New Roman_MSFontService', sans-serif"
            font-style="italic"
            font-weight="400"
            font-size="13px"
-           transform="rotate(-90,2151.665,801.335)"
-           id="text17833-8">r</text>
+           transform="rotate(-90,86.83335,58.16665)"
+           id="text2549">r</text>
       </g>
       <g
-         clip-path="url(#clip36-05-5)"
-         id="g17839-0"
-         transform="translate(-1244,-2777)">
+         clip-path="url(#clip72-4)"
+         id="g2555"
+         transform="translate(77.500099,30.500099)">
         <text
            font-family="'Times New Roman', 'Times New Roman_MSFontService', sans-serif"
            font-weight="400"
            font-size="13px"
-           transform="rotate(-90,2149.165,798.835)"
-           id="text17837-5">=</text>
+           transform="rotate(-90,84.33335,55.66665)"
+           id="text2553">=</text>
       </g>
       <g
-         clip-path="url(#clip37-49-5)"
-         id="g17843-7"
-         transform="translate(-1244,-2777)">
+         clip-path="url(#clip73-7-8)"
+         id="g2559"
+         transform="translate(77.500099,30.500099)">
         <text
            font-family="'Times New Roman', 'Times New Roman_MSFontService', sans-serif"
            font-style="italic"
            font-weight="400"
            font-size="13px"
-           transform="rotate(-90,2145.165,794.835)"
-           id="text17841-4">R</text>
+           transform="rotate(-90,80.83335,52.16665)"
+           id="text2557">R</text>
       </g>
       <g
-         clip-path="url(#clip38-37-7)"
-         id="g17847-8"
-         transform="translate(-1244,-2777)">
-        <text
-           font-family="'Times New Roman', 'Times New Roman_MSFontService', sans-serif"
-           font-style="italic"
-           font-weight="400"
-           font-size="11px"
-           transform="rotate(-90,2141.165,790.835)"
-           id="text17845-3">i</text>
-      </g>
-      <g
-         clip-path="url(#clip39-25-0)"
-         id="g17851-2"
-         transform="translate(-1244,-2777)">
-        <text
-           font-family="'Times New Roman', 'Times New Roman_MSFontService', sans-serif"
-           font-weight="400"
-           font-size="13px"
-           transform="rotate(-90,2139.665,789.335)"
-           id="text17849-6">)/</text>
-      </g>
-      <g
-         clip-path="url(#clip40-25-3)"
-         id="g17855-2"
-         transform="translate(-1244,-2777)">
-        <text
-           font-family="'Times New Roman', 'Times New Roman_MSFontService', sans-serif"
-           font-style="italic"
-           font-weight="400"
-           font-size="13px"
-           transform="rotate(-90,2135.665,785.335)"
-           id="text17853-9">R</text>
-      </g>
-      <g
-         clip-path="url(#clip41-48-1)"
-         id="g17859-9"
-         transform="translate(-1244,-2777)">
+         clip-path="url(#clip74-7-8)"
+         id="g2563"
+         transform="translate(77.500099,30.500099)">
         <text
            font-family="'Times New Roman', 'Times New Roman_MSFontService', sans-serif"
            font-style="italic"
            font-weight="400"
            font-size="11px"
-           transform="rotate(-90,2131.665,781.335)"
-           id="text17857-2">i</text>
+           transform="rotate(-90,76.33335,47.66665)"
+           id="text2561">i</text>
       </g>
+      <g
+         clip-path="url(#clip75-9-4)"
+         id="g2567"
+         transform="translate(77.500099,30.500099)">
+        <text
+           font-family="'Times New Roman', 'Times New Roman_MSFontService', sans-serif"
+           font-weight="400"
+           font-size="13px"
+           transform="rotate(-90,74.83335,46.16665)"
+           id="text2565">)/</text>
+      </g>
+      <g
+         clip-path="url(#clip76-3-6)"
+         id="g2571"
+         transform="translate(77.500099,30.500099)">
+        <text
+           font-family="'Times New Roman', 'Times New Roman_MSFontService', sans-serif"
+           font-style="italic"
+           font-weight="400"
+           font-size="13px"
+           transform="rotate(-90,70.83335,42.16665)"
+           id="text2569">R</text>
+      </g>
+      <g
+         clip-path="url(#clip77-2-1)"
+         id="g2575"
+         transform="translate(77.500099,30.500099)">
+        <text
+           font-family="'Times New Roman', 'Times New Roman_MSFontService', sans-serif"
+           font-style="italic"
+           font-weight="400"
+           font-size="11px"
+           transform="rotate(-90,66.83335,38.16665)"
+           id="text2573">i</text>
+      </g>
+      <text
+         xml:space="preserve"
+         style="font-size:13.3333px;line-height:1.25;font-family:times;-inkscape-font-specification:times;letter-spacing:0px;stroke-width:0.999999"
+         x="-129.6357"
+         y="105.7065"
+         id="text1171"
+         transform="rotate(-90)"><tspan
+           sodipodi:role="line"
+           id="tspan1169"
+           x="-129.6357"
+           y="105.7065"
+           style="stroke-width:0.999999">(%)</tspan></text>
     </g>
     <text
        xml:space="preserve"

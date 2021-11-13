@@ -17,7 +17,7 @@ Os valores dos parâmetros do modelo constitutivo adotado na análise foram $E =
  	\begin{center}
  		\includegraphics[scale = 0.9]{0702-ensaio triaxial argila ductil_coletando_parametros.pdf}
  	\end{center}
- 	\caption{\label{ensaio_triaxial_parametros}Domínio e discretização de um ensaio triaxial com modelo 3D, EPD e AXI}
+ 	\caption{\label{ensaio_triaxial_parametros}Detalhe da determinação dos valores dos parâmetros para simulação do ensaio}
 \end{figure}
 
 \begin{figure}[H]
@@ -37,7 +37,7 @@ Essa verificação considerará uma das soluções analíticas deduzidas por \ci
 	\begin{center}
 		\includegraphics[scale = 1.2]{0704-lei de endurecimento ou amolecimento_coesao_solucao_analitca.pdf}
 	\end{center}
-	\caption{\label{coesao_solucao_analitca_LAJSS}Variação da coesão: I - trecho de endurecimento linear e II - comportamento perfeitamente plástico ( \citeonline[p.  4]{Bernaud2020})}
+	\caption{\label{coesao_solucao_analitca_LAJSS}Variação da coesão: I - trecho de endurecimento linear e II - comportamento perfeitamente plástico (\citeonline[p.  4]{Bernaud2020})}
 \end{figure}
 A expressão (\ref{eq:LAJSS1}) apresenta a solução analítica da convergência quando $r=R_i$.
 \begin{equation}
@@ -292,7 +292,7 @@ Nessa seção é apresentada uma análise paramétrica para averiguar a influên
 
 Quando a rigidez do revestimento é alta o modelo (VP) se aproxima do (EL). Isso ocorre, pois as deformações viscosas do modelo viscoplástico são resistidas pelo revestimento e impedidas de ocorrer. Já o modelo (EPVP) se aproxima do (EP). Isso, pois durante a escavação e colocação do revestimento, alguma plastificação ocorre, mas as deformações viscosas do modelo (EPVP) são resistidas pelo revestimento.
 
-Comparando o modelo elastoplástico-viscoplástico com o modelo viscoplástico, no final da construção, sem revestimento, o primeiro teve uma convergência 33\%. Com revestimento aplicado a $d0=0$ uma convergência entre 17\% e 20\% e para $d0=4L_p$ entre 25\% a 28\% maior. No longo prazo, sem revestimento, o primeiro teve, uma convergência 54\% maior. Com revestimento aplicado a $d0=0$ uma convergência entre 17\% e 23\% e para $d0=4L_p$ entre 26\% a 30\% maior. Isso é uma grande diferença com relação a modelos que procuram estimar a convergência no longo prazo, mas não consideram a plastificação do maciço no comportamento instantâneo.
+Comparando o modelo elastoplástico-viscoplástico com o modelo viscoplástico, no final da construção, sem revestimento, o primeiro teve uma convergência 33\% maior. Com revestimento aplicado a $d0=0$ uma convergência entre 17\% e 20\% e para $d0=4L_p$ entre 25\% a 28\% maior. No longo prazo, sem revestimento, o primeiro teve, uma convergência 54\% maior. Com revestimento aplicado a $d0=0$ uma convergência entre 17\% e 23\% e para $d0=4L_p$ entre 26\% a 30\% maior. Isso é uma grande diferença com relação a modelos que procuram estimar a convergência no longo prazo, mas não consideram a plastificação do maciço no comportamento instantâneo.
 
 \begin{figure}[H]
 	\begin{center}
@@ -351,7 +351,7 @@ Como a seção transversal é eliptica as convergências são medidas ao longo d
 
 De uma forma geral, quando se aumenta a razão de aspecto os deslocamentos $u_x$ aumentam. Contudo, a convergência diminui, pois, está sendo dividida pelo raio horizontal do túnel. De qualquer forma, pode-se ver, ao comparar, a \autoref{ELIPTICO-CONVERGENCIAS-UX-SREV} com a \autoref{ELIPTICO-CONVERGENCIAS-UX-CREV} a influência significativa do revestimento nas convergências. Sem revestimento uma maior razão de aspecto leva a maiores convergências do modelo (EPVP) e isso é esperado uma vez que nessa borda, contígua ao eixo $x$, tem-se as maiores plastificações. O revestimento, contudo, bloqueia a maior parte dessas deformações plásticas, fazendo com que tenha apenas as deformações viscosas e dessa forma, ambas as curvas (VP) e (EPVP) se aproximam no longo prazo. 
 
-A \autoref{ELIPTICO-CONVERGENCIAS-UX-SREV} e \autoref{ELIPTICO-CONVERGENCIAS-UX-SREV} mostra as convergências ao equilíbrio para a direção $y$. Nesse caso, no longo prazo, não há diferença entre os modelos. Isso ocorre, pois, nessa direção, apesar de se ter as maiores convergências, não há plastificações tão significativas conforme a razão de aspecto aumenta. Isso faz com que ambas as curvas deem o mesmo resultado no longo prazo, tanto sem quanto com revestimento. Isso pode ser verificado pelo nível de plastificação que ocorre na seção. A Figura XX mostra o campo de deformações inelásticas equivalentes comparando o modelo (VP) e (EPVP), sem revestimento, com razão de aspecto 2 e no longo prazo.
+A \autoref{ELIPTICO-CONVERGENCIAS-UX-SREV} e \autoref{ELIPTICO-CONVERGENCIAS-UX-SREV} mostra as convergências ao equilíbrio para a direção $y$. Nesse caso, no longo prazo, não há diferença entre os modelos. Isso ocorre, pois, nessa direção, apesar de se ter as maiores convergências, não há plastificações tão significativas conforme a razão de aspecto aumenta. Isso faz com que ambas as curvas deem o mesmo resultado no longo prazo, tanto sem quanto com revestimento. Isso pode ser verificado pelo nível de plastificação que ocorre na seção. A \autoref{campo_deformacoes_eliptico} mostra o campo de deformações inelásticas equivalentes comparando o modelo (VP) e (EPVP), sem revestimento, com razão de aspecto 2 e no longo prazo.
 
 \begin{figure}[H]
 	\begin{center}
@@ -374,7 +374,7 @@ A \autoref{ELIPTICO-CONVERGENCIAS-UX-SREV} e \autoref{ELIPTICO-CONVERGENCIAS-UX-
 		\includegraphics[scale = 1.0]{0736-campo_deformacoes_eliptico.pdf
 		}
 	\end{center}
-	\caption{\label{ELIPTICO-CONVERGENCIAS-UY-SREV}Campo de deformações equivalentes para o modelo (VP) e (EPVP), sem revestimento, com razão de aspecto 2 e no longo prazo}
+	\caption{\label{campo_deformacoes_eliptico}Campo de deformações equivalentes para o modelo (VP) e (EPVP), sem revestimento, com razão de aspecto 2 e no longo prazo}
 \end{figure}
 
 A \autoref{convergencias_analise_secao_eliptica} resume a razão entre as convergências elastoplásticas-viscplástica e viscoplástica.

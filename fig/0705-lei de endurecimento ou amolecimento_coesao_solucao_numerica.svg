@@ -1167,9 +1167,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1.6379804"
-     inkscape:cx="196.27387"
-     inkscape:cy="149.73248"
+     inkscape:zoom="2.5013845"
+     inkscape:cx="248.41781"
+     inkscape:cy="161.99404"
      inkscape:document-units="mm"
      inkscape:current-layer="g2574"
      inkscape:document-rotation="0"
@@ -1610,7 +1610,8 @@
       </g>
       <g
          clip-path="url(#clip38-2)"
-         id="g2554">
+         id="g2554"
+         transform="translate(1.8868796,13.477712)">
         <text
            fill="#595959"
            font-family="'Times New Roman', 'Times New Roman_MSFontService', sans-serif"
@@ -1618,14 +1619,17 @@
            font-size="13px"
            transform="rotate(-90)"
            id="text2552"
-           x="-189"
-           y="603.28198"><tspan
-   style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Times New Roman', 'Times New Roman_MSFontService', sans-serif;-inkscape-font-specification:'Times New Roman, Times New Roman_MSFontService, sans-serif Italic'"
-   id="tspan1179">U</tspan><tspan
-   style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:65%;font-family:'Times New Roman', 'Times New Roman_MSFontService', sans-serif;-inkscape-font-specification:'Times New Roman, Times New Roman_MSFontService, sans-serif Italic';baseline-shift:sub"
-   id="tspan1177">i</tspan> (%)<tspan
+           x="-191.58797"
+           y="599.11682"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Times New Roman', 'Times New Roman_MSFontService', sans-serif;-inkscape-font-specification:'Times New Roman, Times New Roman_MSFontService, sans-serif'">-<tspan
+   style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Times New Roman', 'Times New Roman_MSFontService', sans-serif;-inkscape-font-specification:'Times New Roman, Times New Roman_MSFontService, sans-serif Italic';baseline-shift:baseline"
+   id="tspan1215">u</tspan>(<tspan
+   style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Times New Roman', 'Times New Roman_MSFontService', sans-serif;-inkscape-font-specification:'Times New Roman, Times New Roman_MSFontService, sans-serif Italic';baseline-shift:baseline"
+   id="tspan1213">r</tspan>)/<tspan
+   style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Times New Roman', 'Times New Roman_MSFontService', sans-serif;-inkscape-font-specification:'Times New Roman, Times New Roman_MSFontService, sans-serif Italic';baseline-shift:baseline"
+   id="tspan1208">R<tspan
    style="font-size:65%;baseline-shift:sub"
-   id="tspan1175" /></text>
+   id="tspan1220">i</tspan></tspan> (%)</text>
       </g>
       <g
          clip-path="url(#clip39-3)"
@@ -1687,16 +1691,6 @@
          stroke-miterlimit="10"
          fill="none"
          id="rect2572" />
-      <text
-         xml:space="preserve"
-         style="font-size:13.3333px;line-height:1.25;font-family:times;-inkscape-font-specification:times;letter-spacing:0px"
-         x="655.48102"
-         y="107.12727"
-         id="text1442-3"><tspan
-           sodipodi:role="line"
-           id="tspan1440-9"
-           x="655.48102"
-           y="107.12727">5,87</tspan></text>
       <path
          style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.755906;stroke-miterlimit:10;stroke-dasharray:4.53543, 4.53543;stroke-dashoffset:0;stroke-opacity:1"
          d="M 663.86987,113.5 H 641.5"
@@ -1705,6 +1699,20 @@
          style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.755906;stroke-miterlimit:10;stroke-dasharray:4.53543, 4.53543;stroke-dashoffset:0;stroke-opacity:1"
          d="M 663.86987,113.5 V 279.78272"
          id="path2269-7" />
+      <text
+         xml:space="preserve"
+         style="font-size:13.3333px;line-height:1.25;font-family:times;-inkscape-font-specification:times;letter-spacing:0px"
+         x="666.04767"
+         y="109.3868"
+         id="text1192"><tspan
+           sodipodi:role="line"
+           id="tspan1190"
+           x="666.04767"
+           y="109.3868"><tspan
+   style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:times;-inkscape-font-specification:'times Italic'"
+   id="tspan1194">U</tspan><tspan
+   style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:65%;font-family:times;-inkscape-font-specification:'times Italic';baseline-shift:sub"
+   id="tspan1196">i</tspan> = 5,87</tspan></text>
     </g>
   </g>
 </svg>
