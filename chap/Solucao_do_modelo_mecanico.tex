@@ -1,7 +1,7 @@
 % ----------------------------------------------------------
 \chapter{Solução do modelo mecânico}
 % ----------------------------------------------------------
-A solução do modelo mecânico será é através do \textit{software} ANSYS e a primeira parte desse capítulo descreverá a solução numérica pelo método dos elementos finitos (de forma mais genérica possível) comentando as opções do ANSYS, quando pertinente. Posteriormente, é dada ênfase na solução numérica do modelo constitutivo do material (que é o foco principal do trabalho). 
+A solução do modelo mecânico será é através do \textit{software} ANSYS e a primeira parte desse capítulo descreverá a solução numérica pelo método dos elementos finitos (de forma mais genérica possível) comentando as funcionalidades do ANSYS, quando pertinente. Posteriormente, é dada ênfase na solução numérica do modelo constitutivo do material (que é o foco principal do trabalho). 
 
 \section{Forma fraca das equações de campo}
 No contexto da evolução quase estática e da hipótese das pequenas perturbações podem-se escrever as equações de campo na sua forma fraca através do princípio dos trabalhos virtuais. Sendo assim, aplicando um campo de deslocamento virtual $\dul$, cinematicamente admissível, em (\ref{eq:equilibrio_estatico_local}), porém ao longo de todo o volume $\Omega$ tem-se que:
@@ -96,7 +96,7 @@ Essa é a notação adotada para o restante do trabalho. Logo, o teorema dos tra
 \end{equation}
 \section{Discretização espacial em elementos finitos}
 \label{cap:Discretização espacial em elementos finitos}
-A solução por elementos finitos consiste em discretizar o domínio $\Omega$ em um conjunto de elementos contíguos $\Omega_e$, estabelecendo o que se chama de malha de elementos finitos (\autoref{discretizacao_MEF}). Cada elemento da malha tem um formato simples: linha, triângulo ou quadrilátero, tetraedro ou hexaedro, dependendo da dimensão (1D, 2D ou 3D) do domínio a ser discretizado. Cada elemento está conectado a outros elementos compartilhando "nós" sendo que a principal incógnita do problema são os deslocamentos nodais.
+A solução por elementos finitos consiste em discretizar o domínio $\Omega$ em um conjunto de elementos contíguos $\Omega_e$, estabelecendo o que se chama de malha de elementos finitos (\autoref{discretizacao_MEF}). Cada elemento da malha tem um formato simples: de linha, de triângulo ou quadrilátero, de tetraedro ou hexaedro, dependendo da dimensão (1D, 2D ou 3D) do domínio a ser discretizado. Cada elemento está conectado a outros elementos compartilhando "nós" sendo que a principal incógnita do problema são os deslocamentos nodais.
 \begin{figure}[H]
 	\begin{center}
 		\includegraphics[scale = 1.0]{0601-discretizacao_dominio.pdf}
@@ -197,25 +197,25 @@ em que $n_p$ é o número de pontos de integração (ou pontos de Gauss), $W_{i_
 	\end{array}
 \right..
 \end{equation}
-sendo $\xi_{r_{i_p}}$ a coordenada radial natural do ponto de Gauss. A equação (6.26) integra  exatamente se este for um polinômio de ordem menor ou igual a $2n_p-1$.
+sendo $\xi_{r_{i_p}}$ a coordenada radial natural do ponto de Gauss. A equação (\ref{eq:troca_variavel_integral_volume}) possuí a integração exata se a função for um polinômio de ordem menor ou igual a $2n_p-1$.
 
 Os elementos finitos que são utilizados nesse trabalho com suas funções de interpolação, pesos e coordenadas dos pontos de integração podem ser vistos na \autoref{PLANE183}, para análises em estado plano de deformações e axissimetria e, para análises tridimensionais, que consomem maior tempo de processamento, é utilizado o elemento da \autoref{SOLID185}.
 \begin{figure}[H]
 	\begin{center}
 		\includegraphics[scale = 1.0]{0603b-quadrilatero linear.pdf}
 	\end{center}
-	\caption{\label{PLANE183}Funções de interpolação, pesos e coordenadas dos pontos de Gauss para o elemento quadrilátero quadrático \textit{serendipity} isoparamétrico (adaptado de: \citeonline[p. 334, 369-370]{ANSYS2018})}
+	\caption{\label{PLANE183}Funções de interpolação, pesos e coordenadas dos pontos de Gauss para o elemento quadrilátero quadrático \textit{serendipity} isoparamétrico PLANE182 (adaptado de: \citeonline[p. 334, 369-370]{ANSYS2018})}
 \end{figure}
 \begin{figure}[H]
 	\begin{center}
 		\includegraphics[scale = 1.0]{0604-hexaedro linear.pdf}
 	\end{center}
-	\caption{\label{SOLID185}Funções de interpolação, pesos e coordenadas dos pontos de Gauss para o elemento hexaedro trilinear isoparamétrico (adaptado de: \citeonline[p. 345, 369-370]{ANSYS2018})}
+	\caption{\label{SOLID185}Funções de interpolação, pesos e coordenadas dos pontos de Gauss para o elemento hexaedro trilinear isoparamétrico SOLID185 (adaptado de: \citeonline[p. 345, 369-370]{ANSYS2018})}
 \end{figure}
 
-No ANSYS, ambos elementos possuem a opção degenerada em que é possível trabalhar de forma colapsada, triangular, por exemplo, no caso do PLANE182, e prisma, tetraédrica ou piramidal, no caso do SOLID185. Nas análises apresentadas ao final dessa tese, não foram utilizadas essas formas. Além disso, apesar do \textit{script} APDL ter sido construído com a opção de se trabalhar com os elmentos quadráticos (PLANE183 e SOLID186), visando uma melhor eficiência computacional, principalmente para os domínios tridimensionais, optou-se por fazer o estudo de convergência da malha com elementos lineares.
+No \textit{software} ANSYS, ambos elementos possuem a opção degenerada em que é possível trabalhar de forma colapsada, triangular, por exemplo, no caso do elemento PLANE182, e prisma, tetraédrica ou piramidal, no caso do elemento SOLID185. Nas análises apresentadas ao final dessa tese, não foram utilizadas essas formas. Além disso, apesar do \textit{script} APDL ter sido construído com a opção de se trabalhar com os elementos quadráticos (PLANE183 e SOLID186), visando uma melhor eficiência computacional, principalmente para os domínios tridimensionais, optou-se por fazer o estudo de convergência da malha com elementos lineares.
 
-O elemento PLANE182 e SOLID185 possuem também opções que lidam com problemas de travamento (\textit{Locking}) e modos espúrios (\textit{Hourglass}). O travamento é caracterizado por uma rigidez excessiva do elemento, e ocorre principalmente em elementos de primeira ordem com integração completa que estão sujeitos a flexão. Ou ainda, quando o material é quase incompressível. Também podem ocorrer em elementos de segunda ordem, quando as deformações plásticas são da ordem das deformações elásticas. Esse problema evita-se com refinamento da malha, técnicas de subintegração e funções de formas extras. O ANSYS possuí as duas últimas técnicas para o SOLID185 (\textit{Uniform Reduced Integration with Hourglass Control} e \textit{Enhanced Strain Formulation}). Já os modos espúrios ocorrem quando se utiliza as técnicas de subintegração e é caracterizado por uma distorção no elemento porém com zero deformação. Esse problema é evitado utilizando integração completa ou refinamento da malha. No presente trabalho utilizou-se a \textbf{integração completa} (\textit{Full integration}) e esses problemas foram evitados com o \textbf{refinamento da malha}. 
+Os elementos PLANE182 e SOLID185 possuem também opções que lidam com problemas de travamento (\textit{Locking}) e modos espúrios (\textit{Hourglass}). O travamento é caracterizado por uma rigidez excessiva do elemento, e ocorre principalmente em elementos de primeira ordem com integração completa que estão sujeitos a flexão. Ou ainda, quando o material é quase incompressível. Também podem ocorrer em elementos de segunda ordem, quando as deformações plásticas são da ordem das deformações elásticas. Esse problema evita-se com refinamento da malha, técnicas de subintegração e funções de formas extras. O ANSYS possuí as duas últimas técnicas para o SOLID185 (\textit{Uniform Reduced Integration with Hourglass Control} e \textit{Enhanced Strain Formulation}). Já os modos espúrios ocorrem quando se utiliza as técnicas de subintegração e é caracterizado por uma distorção no elemento porém com zero deformação. Esse problema é evitado utilizando integração completa ou refinamento da malha. No presente trabalho utilizou-se a \textbf{integração completa} (\textit{Full integration}) e esses problemas foram evitados com o \textbf{refinamento da malha}. 
 
 \section{Solução do sistema não linear}
 \label{cap: solução do sistema}
@@ -227,7 +227,7 @@ Após o processo de discretização do domínio $\Omega$ é necessário fazer a 
 \end{equation}
 em que $\Kll$ é a matriz de rigidez global resultante da montagem das matrizes de rigidezes $\Kll_e$ de cada elemento, $\ul$ é o vetor incógnito de deslocamentos nodais global proveniente da montagem dos deslocamentos nodais $\ul_e$ de cada elemento, $\left\{\Fl_V,\Fl_S,\Fl_N,\Fl_{\varepsilon_0},\Fl_{\sigma_0} \right\}$ são as forças globais resultantes da montagem das forças em cada elemento, conforme (\ref{eq:elementos_forca_interna}) e (\ref{eq:elementos_forca_externa}). Evidentemente não há um vetor de forças de contato global $\Fl_C$, uma vez que as forças de contato entre elementos vizinhos possuem a mesma magnitude e sentidos contrários e, portanto, se anulam no somatório global.
 
-Quando há uma não linearidade envolvendo as leis constitutivas do material (tal como na plasticidade ou viscoplasticidade, em que o problema é dependente da trajetória das tensões), a matriz de coeficientes $\Kll$ passa a depender dos deslocamentos nodais incógnitos  $\ul$, tornando o sistema (\ref{eq:sistema_global}) não linear. O \textbf{método de Newton-Raphson} (NR) é o processo iterativo comumente utilizado para resolver esse sistema e é utilizado pelo ANSYS. Dessa forma, aproximando (\ref{eq:sistema_global}) por uma série de Taylor truncada na primeira ordem (linearização) tem-se:
+Quando há uma não linearidade envolvendo as leis constitutivas do material (tal como na plasticidade ou viscoplasticidade, em que o problema é dependente da trajetória das tensões), a matriz de coeficientes $\Kll$ passa a depender dos deslocamentos nodais incógnitos  $\ul$, tornando o sistema (\ref{eq:sistema_global}) não linear. O \textbf{método de Newton-Raphson} (NR) é o processo iterativo comumente utilizado para resolver esse sistema e é utilizado pelo \textit{software} ANSYS. Dessa forma, aproximando (\ref{eq:sistema_global}) por uma série de Taylor truncada na primeira ordem (linearização) tem-se:
 \begin{equation}
 	\label{eq:taylor}
 	\fl(\ul) \approx \fl(\ul_i) + \fl'(\ul_i)(\ul_{i+1}-\ul_i).
@@ -258,7 +258,7 @@ As soluções indiretas, implementadas no ANSYS, se baseiam na família de Méto
 
 Maiores explicações dessas soluções indiretas, podem ser encontrados em \citeonline[p. 316]{Mendonca2019}. Cabe salientar que, tanto os métodos diretos quanto indiretos, são implementados buscando a eficiência computacional, evitando-se trabalhar com os elementos nulos, diminuindo o armazenamento e o número de operações. Alguns métodos que compreendem reordenamento e armazenamento eficiente do sistema, utilizados pelo ANSYS, podem ser encontrados em \citeonline{George1981}. Além disso, uma vantagem do ANSYS é a possibilidade de trabalhar com computação de alto desempenho (\textit{High Performance Computing}) com opções de aceleração usando placas de vídeo da Nvidia, memória compartilhada (SMP - \textit{Shared-Memory Parallel}) ou computação distribuída (MPI - \textit{Message Passing Interface}). Para o presente trabalho, foi utilizado a opção de SMP com 12 processadores.
 
-A rigor para um problema não linear a escolha do melhor método de solução vai depender de testagem. Por padrão o ANSYS utiliza o SPARSE. Contudo, recomenda utilizar o método PCG para estruturas sólidas 3D que possuem mais de 200.000 graus de liberdade. Para problemas mal condicionados, seja pela forma dos elementos, grandes diferenças entre as propriedades dos materiais ou ainda por insuficiente condições de contorno, recomenda-se o SPARSE \cite[p. 242]{ANSYS2018b}. Esse foi o método de solução escolhido para o presente trabalho.
+A rigor para um problema não linear a escolha do melhor método de solução vai depender de testagem. Por padrão o ANSYS utiliza o SPARSE. Contudo, o manual do \textit{software} recomenda utilizar o método PCG para estruturas sólidas 3D que possuem mais de 200.000 graus de liberdade. Para problemas mal condicionados, seja pela forma dos elementos, grandes diferenças entre as propriedades dos materiais ou ainda por insuficiente condições de contorno, recomenda-se o SPARSE \cite[p. 242]{ANSYS2018b}. Esse foi o método de solução escolhido para o presente trabalho.
 
 Para incorporar a dependência do histórico de cargas/tempo, para um dado passo de carga/tempo $p$, a expressão (\ref{eq:NR}) é discretizada em $1 \leq n \leq n_s$ subpassos em que a carga externa e o tempo do passo são incrementados linearmente. Dessa forma, itera-se o sistema (\ref{eq:NR}) repetidas vezes para cada subpasso $n$ tendo-se:
 \begin{equation}
@@ -305,7 +305,7 @@ em que $\varepsilon_R$ e $\varepsilon_u$ são as tolerâncias para o resíduo (d
 	\end{array}
 	\right..
 \end{equation}
-em que $j$ é o índice da componente do vetor $\underline * = \Rl$ ou $\underline * = \Delta \ul$. Para o presente trabalho foi escolhida a norma euclidiana para o resíduo e a norma infinita para o incremento de deslocamento. Essas opções já eram o padrão do ANSYS. A \autoref{NR} ilustra o andamento da solução ao longo dos subpassos. Pode-se ver, caso haja a convergência entre os subpassos, que o resíduo e o incremento de deformações vão ficando cada vez menores ao longo das iterações de equilíbrio.
+em que $j$ é o índice da componente do vetor $\underline * = \Rl$ ou $\underline * = \Delta \ul$. Para o presente trabalho foi escolhida a norma euclidiana para o resíduo e a norma infinita para o incremento de deslocamento. A \autoref{NR} ilustra o andamento da solução ao longo dos subpassos. Pode-se ver, caso haja a convergência entre os subpassos, que o resíduo e o incremento de deformações vão ficando cada vez menores ao longo das iterações de equilíbrio.
 \begin{figure}[H]
 	\begin{center}
 		\includegraphics[scale = 1.0]{0605_2-ilustracao das iteracoes do método de NR.pdf}
@@ -326,7 +326,7 @@ O ANSYS possui ainda quatro variações do método de Newton-Raphson de acordo c
 	
 \end{alineas}
 
-A convergência quadrática da opção de Newton-Raphson Completo só é efetivamente obtida se for utilizado o módulo consistente $\Dll^{alg}$ após o algoritmo de integração das tensões, conforme \citeonline{Simo1985}. A opção de Newton-Raphson Completo Assimétrico é importante para os casos em que se calcula o módulo consistente e se tem plasticidade não associada. A plasticidade não associada pode levar a módulos constitutivos não simétricos e pode não convergir com o Newton-Raphson Completo, pois este monta a matriz de rigidez considerando-a simétrica. Uma forma de contornar esse problema é não utilizar o módulo consistente, porém serão necessárias mais iterações de equilíbrio para a convergência. Nessa tese, como será visto mais adiante, foi programado o módulo constitutivo consistente, mas o seu uso é opcional.
+A convergência quadrática da opção de Newton-Raphson Completo só é efetivamente obtida se for utilizado o módulo consistente $\Dll^{alg}$ após o algoritmo de integração das tensões, conforme \citeonline{Simo1985}. A opção de Newton-Raphson Completo Assimétrico é importante para os casos em que se calcula o módulo consistente e se tem plasticidade não associada. A plasticidade não associada pode levar a módulos constitutivos não simétricos e pode não convergir com o Newton-Raphson Completo, pois este monta a matriz de rigidez considerando-a simétrica. Uma forma de contornar esse problema é não utilizar o módulo consistente, porém serão necessárias mais iterações de equilíbrio para a convergência. Nessa tese, como será visto mais adiante, foi programado o módulo constitutivo consistente, mas o autor optou por manter esse recurso opcional para o usuário.
 
 Apesar de não terem sido utilizadas nessa tese, o ANSYS possui ainda quatro técnicas para melhorar a convergência do método de Newton-Raphson em problemas estáticos, que são \cite[p. 668-673]{ANSYS2018}:
 
@@ -347,7 +347,7 @@ Na \autoref{NR-fluxograma} tem-se o fluxograma do método de Newton-Raphson, mos
 	\end{center}
 	\caption{\label{NR-fluxograma}Fluxograma do método de Newton-Raphson para solução do sistema de equações globais não lineares}
 \end{figure}
-Ainda na \autoref{NR-fluxograma} está detalhado a parte de atualização das tensões, variáveis internas e do módulo constitutivo, que serão os temas do próximo capítulo. É importante nesse fluxograma o detalhe dos laços nos elementos e pontos de Gauss, pois a customização do modelo do material, através da subrotina \textit{Usermat} está justamente aninhado nesse laço mais interno dos pontos de Gauss.
+Ainda na \autoref{NR-fluxograma} está detalhada a parte de atualização das tensões, variáveis internas e do módulo constitutivo, que serão os temas do próximo capítulo. É importante nesse fluxograma o detalhe dos laços nos elementos e pontos de Gauss, pois a customização do modelo do material, através da subrotina \textit{Usermat}, está justamente aninhada nesse laço mais interno dos pontos de Gauss.
 
 \section{Algoritmo de atualização das tensões e variáveis internas}
 
@@ -411,7 +411,7 @@ O \textbf{corretor plástico}, nada mais é do que o procedimento de solução d
 
 Uma dificuldade do método totalmente implícito é a necessidade da obtenção de gradientes de segunda ordem das funções potenciais, o que levou ao desenvolvimento e utilização de algoritmos semi-implícitos. No presente trabalho foi implementado o algoritmo de \citeonline{Moran1990} descrito em \citeonline[p. 287]{Belytschko2000} que adotam para o multiplicador plástico um esquema implícito e para o vetor de fluxo e módulo de endurecimento um esquema explícito.
 
-Portanto, para resolver por Newton-Raphson o sistema que dá origem ao corretor plástico, se escreve as equações (\ref{eq:esquema_int_constitutiva_ep})$_{2,3,5}$ da seguinte forma residual (omitindo-se o índice $n+1$):
+Portanto, para resolver por Newton-Raphson o sistema que dá origem ao corretor plástico, se escrevem as equações (\ref{eq:esquema_int_constitutiva_ep})$_{2,3,5}$ da seguinte forma residual (omitindo-se o índice $n+1$):
 \begin{equation}
 	\label{eq:algoritmo_ep_1}
 	\left\{
@@ -479,7 +479,7 @@ O fluxograma desse algoritmo pode ser visto na \autoref{algoritmo_EP_semiimplici
 	\end{center}
 	\caption{\label{algoritmo_EP_semiimplicito}Algoritmo de integração para elastoplasticidade utilizando um esquema de Euler semi-implícito (omitindo o índice $n$+1).}
 \end{figure}
-No fluxograma da \autoref{algoritmo_EP_semiimplicito} aparecem três parâmetros que exigem uma explicação: $TOL$, $nr_{max}$ e $k_{cut}$. O primeiro diz respeito a tolerância exigida para o $f$ que indicará que houve a convergência do Newton-Raphson local. Como se trata de um processo iterativo o $f_k=0$ não é necessariamente atingido. Dessa forma, foi utilizado uma tolerância $TOL = 10^{-14}$. O segundo parâmetro diz respeito ao limite máximo de iterações locais que indicará a não convergência. O valor escolhido foi $nr_{max} = 10000$. Por fim, o último parâmetro $k_{cut}$ é de suma importância, pois seu valor igual a unidade indicará para o ANSYS que é necessário dividir o passo pela metade e repetir o processo de modo a buscar a convergência. Também nesse fluxograma aparece as tensões iniciais $\sigma_{INI}$ que é adicionada ao preditor elástico.
+No fluxograma da \autoref{algoritmo_EP_semiimplicito} aparecem três parâmetros que exigem uma explicação: $TOL$, $nr_{max}$ e $k_{cut}$. O primeiro diz respeito a tolerância exigida para o $f$ que indicará que houve a convergência do Newton-Raphson local. Como se trata de um processo iterativo o $f_k=0$ não é necessariamente atingido. Dessa forma, foi utilizado uma tolerância $TOL = 10^{-14}$. O segundo parâmetro diz respeito ao limite máximo de iterações locais que indicará a não convergência. O valor escolhido foi $nr_{max} = 10000$. Por fim, o último parâmetro $k_{cut}$ é de suma importância, pois seu valor igual a unidade indicará para o ANSYS que é necessário dividir o passo pela metade e repetir o processo de modo a buscar a convergência. Também nesse fluxograma aparece as tensões iniciais $\sigma_{INI}$ que são adicionadas ao preditor elástico.
 
 Como visto no fluxograma da \autoref{NR-fluxograma}, após a atualização das tensões e variáveis internas tem-se a possibilidade de atualizar o módulo constitutivo. É possível utilizar o módulo tangente consistente com a linearização feita durante o algoritmo de integração das leis constitutivas (por isso também esse módulo é conhecido como módulo algorítmico). Como comentado no \autoref{cap: solução do sistema} sua utilização aumenta a taxa de convergência das iterações de equilíbrio. Sua expressão geral é definida por:
 \begin{equation}
@@ -653,7 +653,7 @@ Particularizando essa relação para problemas em estado plano de deformações 
 		\varepsilon_{21}
 	\end{array}\right\}
 \end{equation}
-sendo que em axissimetria as direções 1,2 e 3 correspondem respectivamente as direções $r, \theta$ e $z$ em coordenadas polares. Além disso, em problemas axissimétricos, a expressão (\ref{eq:gradiente_simetrico}) particulariza-se para (adaptado de \citeonline[p. 41]{Smith2014}):
+sendo que em axissimetria as direções 1, 2 e 3 correspondem respectivamente as direções $r, \theta$ e $z$ em coordenadas polares. Além disso, em problemas axissimétricos, a expressão (\ref{eq:gradiente_simetrico}) particulariza-se para (adaptado de \citeonline[p. 41]{Smith2014}):
 \begin{equation}
 	\label{eq:gradiente_simetrico_AXI_EPD}
 	\nabla^s = 	\begin{bmatrix}
@@ -667,11 +667,11 @@ sendo que em axissimetria as direções 1,2 e 3 correspondem respectivamente as 
 Ademais, para o gradiente da função potencial em (\ref{eq:invariantes_tensores})$_2$, na notação de Voigt, para o caso 3D, tem-se (adaptado de \citeonline[p. 231]{Owen1980}):
 \begin{equation}
 	\label{eq:g1_3D}
-	\gl_1 = \left\{1,1,1,0,0,0\right\}^T
+	\gl_1 = \left\{1,1,1,0,0,0\right\}^T,
 \end{equation}
 \begin{equation}
 	\label{eq:g2_3D}
-	\gl_2 = \dfrac{1}{2\sqrt{J_2}} \left\{s_{11},s_{22},s_{33},2\sigma_{12},2\sigma_{23},2\sigma_{13}\right\}^T
+	\gl_2 = \dfrac{1}{2\sqrt{J_2}} \left\{s_{11},s_{22},s_{33},2\sigma_{12},2\sigma_{23},2\sigma_{13}\right\}^T,
 \end{equation}
 \begin{equation}
 	\label{eq:g3_3D}
@@ -683,7 +683,7 @@ Ademais, para o gradiente da função potencial em (\ref{eq:invariantes_tensores
 	2(\sigma_{23}\sigma_{13}-s_{33}\sigma_{12}) \\
 	2(\sigma_{13}\sigma_{12}-s_{11}\sigma_{23}) \\
 	2(\sigma_{12}\sigma_{23}-s_{22}\sigma_{13})
-	\end{array} \right\}.
+	\end{array} \right\}
 \end{equation}
 e para o estado plano de deformações e axissimetria, tem-se (adaptado de \citeonline[p. 233]{Owen1980}):
 \begin{equation}
@@ -705,7 +705,9 @@ e para o estado plano de deformações e axissimetria, tem-se (adaptado de \cite
 	\end{array} \right\}.
 \end{equation}
 
-\section{Domínios, discretização espacial e temporal, condições de contorno, ciclo construtivo e seus parâmetros}
+Essas expressões podem ser vistas programadas no Apêndice B entre as linhas de código 640 e 694.
+
+\section{Domínios, discretização espacial e temporal, condições de contorno, ciclo construtivo e seus parâmetros}\label{secao_dominio}
 
 Tal como visto na \autoref{cap:Discretização espacial em elementos finitos} o domínio $\Omega$ é discretizado em um conjunto de elementos contíguos $\Omega_e$ estabelecendo a malha de elementos finitos. No presente estudo, o domínio discretizado é o entorno de um túnel profundo, conforme \autoref{dominio_tunel}.
 \begin{figure}[H]
@@ -890,9 +892,9 @@ Para simular o ciclo contrutivo de escavação e revestimento é utilizado o rec
 	
 	\item a primeira consiste em substituir o valor do módulo de elasticidade do elemento por um valor pequeno, ou seja, 1E-12, isso fará com que durante as iterações de equilíbrio esses elementos pouco contribuam na matriz de rigidez e no incremento de forças internas, distribuindo então as tensões para os elementos vizinhos ativados;
 	
-	\item a segunda alteração consiste em zerar as tensões internas nos pontos de Gauss do elemento, que estavam acumuladas dos passos anteriores; 
+	\item a segunda alteração consiste igualar a zero as tensões internas nos pontos de Gauss do elemento, que estavam acumuladas dos passos anteriores; 
 	
-	\item a terceira alteração consiste em zerar as forças externas (se houver forças, na fronteira desses elementos) para que não entrem no cálculo do resíduo no método de Newton-Raphson.
+	\item a terceira alteração consiste em igualar a zero as forças externas (se houver forças, na fronteira desses elementos) para que não entrem no cálculo do resíduo no método de Newton-Raphson.
 	
 \end{alineas}
 
@@ -972,6 +974,6 @@ Além dos parâmetros referente ao domínio para a construção da malha, condi�
 
 Esse modelo constitutivo e os parâmetros entram no \textit{script} através de três comandos APDL na definição do material: TB,USER (utilizado para definir o material como sendo do usuário e onde é declarado o número total de parâmetros, no caso, 23), TBDATA (que atribui os parâmetros para o \textit{array} de propriedades do material utilizado dentro da \textit{Usermat}) e TB,STATE (que dimensiona o vetor de variáveis de estado). No Apêndice A, nas linhas 238-251, é ilustrado a declaração desse modelo constitutivo. É possível plotar algumas variáveis calculadas desse modelo através do comando APDL PLNSOL,SVAR,[componente]. As componentes são mostradas nas linhas 115-134 no Apêndice B. De maior importância talvez sejam as deformações equivalentes elastoplásticas (componente 1) e viscoplásticas (componente 6). Também, quando se tem amolecimento/endurecimento, pode ser interessante plotar a coesão (componente 3).
  
-Cada comportamento (elástico, elastoplástico e viscoplástico) foi programado em separado. Contudo, o modelo constitutivo elastoplástico-viscoplástico é geral e capaz de reproduzir cada comportamento em separado dependendo do valor de alguns parâmetros. Por exemplo, ao colocar valores de coesão elevados as funções de escoamento (ora da elastoplasticidade ou viscoplasticidade) não são atingidas podendo dessa forma selecionar o comportamento apenas elástico (quando todas coesões são elevadas), elastoplástico (quando a coesão viscoplástica é elevada) ou viscoplástico (quando as coesões elastoplásticas são elevadas). Outro aspecto se as coesões $c_i, c_p$ e $c_r$ tiverem o mesmo valor, tem-se na parte elastoplástica um comportamento plástico perfeito.
+Cada comportamento (elástico, elastoplástico e viscoplástico) foi programado em separado. Contudo, o modelo constitutivo elastoplástico-viscoplástico é geral e capaz de reproduzir cada comportamento em separado dependendo do valor de alguns parâmetros. Por exemplo, ao colocar valores de coesão elevados as funções de escoamento (ora da elastoplasticidade ou viscoplasticidade) não são atingidas podendo dessa forma selecionar o comportamento apenas elástico (quando todas coesões são elevadas), elastoplástico (quando a coesão viscoplástica é elevada) ou viscoplástico (quando as coesões elastoplásticas são elevadas). Se as coesões $c_i, c_p$ e $c_r$ tiverem o mesmo valor, tem-se na parte elastoplástica um comportamento plástico perfeito.
 
 

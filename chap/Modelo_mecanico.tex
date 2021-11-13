@@ -3,7 +3,7 @@
 \label{cap: modelo mecanico}
 % ----------------------------------------------------------
 
-Esse capítulo traz uma descrição geral do modelo mecânico que foi utilizado neste trabalho. Portanto, são apresentadas as equações de equilíbrio e constitutivas que foram utilizadas, sem aprofundar, no entanto, nas particularidades que compreendem o domínio de um túnel profundo. Essas serão vistas no final do Capitulo 6, após a descrição da solução desse modelo mecânico. 
+Esse capítulo traz uma descrição geral do modelo mecânico que foi utilizado neste trabalho. Portanto, são apresentadas as equações de equilíbrio e constitutivas que foram utilizadas, sem aprofundar, no entanto, nas particularidades que compreendem o domínio de um túnel profundo. Essas serão vistas na \autoref{secao_dominio}, após a descrição da solução desse modelo mecânico. 
 
 \section{Equações de Equilíbrio local e a hipótese da evolução quase estática}
 
@@ -84,7 +84,7 @@ em que $\nabla$ é o operador gradiente e $\Umll$ o tensor de segunda ordem unit
 	\greenll = \frac{1}{2} \left(\Fll^T \cdot \Fll - \Umll \right) = \frac{1}{2} \left(\nabla \ul + \nabla\ul^T + \nabla\ul^T \cdot \nabla \ul \right).
 \end{equation}
 
-Em problemas quase-estáticos isotérmicos, quando os deslocamentos, as deformações e as rotações são pequenas, a determinação dos campos de tensões e deformações durante a evolução do sistema pode ser simplificada descrevendo os elementos da admissibilidade estática (\ref{eq:EA}) em termos da configuração de referência ao invés da atual. Para tanto, é necessário verificar-se a hipótese das pequenas perturbações.
+Em problemas quase-estáticos isotérmicos, quando os deslocamentos, as deformações e as rotações são pequenas, a determinação dos campos de tensões e deformações durante a evolução do sistema pode ser simplificada descrevendo os elementos da admissibilidade estática (\ref{eq:EA}) em termos da configuração de referência em vez da atual. Para tanto, é necessário verificar-se a hipótese das pequenas perturbações.
 
 \section{Hipótese das pequenas perturbações e a descrição Lagrangeana}
 
@@ -149,7 +149,7 @@ sendo $\underline{\underline 1} \otimes \underline{\underline 1}$ o tensor de qu
 
 \section{Modelo constitutivo elastoplástico}
 
-Para problemas com evolução isotérmica, quase-estáticos em transformações infinitesimais, o modelo constitutivo elastoplástico pode ser completamente descrito através da:
+Para problemas com evolução isotérmica, quase-estáticos em transformações infinitesimais, o modelo constitutivo elastoplástico pode ser completamente descrito através de:
 \begin{alineas}
 	\item decomposição do tensor de deformação total;
 	\item superfície de escoamento;
@@ -159,7 +159,7 @@ Para problemas com evolução isotérmica, quase-estáticos em transformações 
 \end{alineas}
 
 \subsection{Decomposição do tensor de deformação total}
-Considerando a hipótese das pequenas transformações (que inclui a hipótese das pequenas deformações) é válida a decomposição do tensor de deformação total em uma componente elástica e outra plástica, de modo que:
+Considerando a hipótese das pequenas transformações, que inclui a hipótese das pequenas deformações, logo é válida a decomposição do tensor de deformação total em uma componente elástica e outra plástica, de modo que:
 \begin{equation}
 	\label{eq:decomposicao_deformacoes}
 	\dot \varepsilonll = \dot \varepsilonll^e + \dot \varepsilonll^p 
@@ -332,7 +332,7 @@ sendo que nessa descrição, apenas as constantes $C_1$, $C_2$  e $C_3$ são par
 
 Nas superfícies que apresentam vértices, como Morh-Coulomb e Tresca em $\theta = \pm \pi/6$, ocorre singularidade no cálculo do vetor de fluxo, pois a derivada não é definida nesses vértices. Utilizando a superfície de Drucker-Prager esse problema não aparece. Contudo, há formas de se resolver esse problema, como, por exemplo, pode ser visto em \citeonline[p. 234]{Owen1980} em que se utiliza $C_1$,$C_2$ e $C_3$ de Drucker-Prager ou von-Mises quando $\theta = \pm \pi/6$ nessas superfícies.
 
-Um aspecto comum na geomecânica é a variação do volume do material durante a evolução das deformações plásticas. Esse efeito é comumente introduzido através da plasticidade não associada, adotando, ao invés do ângulo de atrito, um ângulo de dilatância $0<\psi<\phi$  na função potencial $g$.
+Um aspecto comum na geomecânica é a variação do volume do material durante a evolução das deformações plásticas. Esse efeito é comumente introduzido através da plasticidade não associada, adotando, em vez do ângulo de atrito, um ângulo de dilatância $0<\psi<\phi$  na função potencial $g$.
 
 \subsection{Lei de endurecimento/amolecimento}
 A lei de endurecimento/amolecimento fornece a regra de evolução da superfície de escoamento ao longo das deformações plásticas (\textit{strain-hardening/softening}) ou do trabalho plástico (\textit{work-hardening/softening}). Para a presente tese, é adotado o primeiro caso e a lei é então postulada da seguinte forma \cite[p. 249]{Belytschko2000}:
@@ -485,7 +485,7 @@ Como as deformações viscoplásticas ocorrem quando $f>0$ não há a imposiçã
 \end{equation}
 em que $\eta$ é a constante de viscosidade dinâmica (unidade de tempo), $\Phi$ é a função de sobretensão, nesse caso, uma função potencial com expoente $n$, $f_0$ parâmetro de tensão convenientemente adotado a partir do qual se inicia o fenômeno viscoso e $\left\langle * \right\rangle$ é a função de McCauley, que é nulo quando $*<0$, ou seja, apenas ocorrerá fluxo viscoplástico quando o critério $f/f_0$ for positivo. O valor de $f_0$ a rigor depende da superfície viscoplástica adotada, que no caso da superfície adotada seu valor fica sendo $f_0 = \beta_3$. Contudo, o valor de $f_0$ também pode depender de ajuste juntamente com $n$ o que o torna um dado de entrada para o modelo.
 
-Muitas vezes o parâmetro $f_0$ não consta na expressão como, por exemplo, em \citeonline[p. 222]{Rousset1988}. Nesse caso, seu valor está implícito na constante $\eta$ que possuí unidade de tempo vezes tensão elevada na potência $n$, ao invés de apenas a unidade de tempo, como em \citeonline{Zienkiewicz1974}. Isso não constitui um problema, pois, é mantida a consistência dimensional da expressão. Contudo, essa sutileza é importante no momento de adimensionalizar resultados com a expressão (\ref{eq:parametros_admensionais_vp}) da velocidade. Nessa expressão, \citeonline{Bernaud1991} utiliza a constante de viscosidade dinâmica conforme \citeonline{Rousset1988}.
+Muitas vezes o parâmetro $f_0$ não consta na expressão como, por exemplo, em \citeonline[p. 222]{Rousset1988}. Nesse caso, seu valor está implícito na constante $\eta$ cuja unidade de medida é tempo vezes tensão elevada na potência $n$, ao invés de apenas a unidade de tempo, como em \citeonline{Zienkiewicz1974}. Isso não constitui um problema, pois, é mantida a consistência dimensional da expressão. Contudo, essa sutileza é importante no momento de adimensionalizar resultados com a expressão (\ref{eq:parametros_admensionais_vp}) da velocidade. Nessa expressão, \citeonline{Bernaud1991} utiliza a constante de viscosidade dinâmica conforme \citeonline{Rousset1988}.
 
 \section{Modelo constitutivo elastoplástico viscoplástico}
 O modelo elastoplástico-viscoplástico proposto nessa tese, dentro das hipóteses de pequenas transformações, compreende justamente a associação em série dos modelos constitutivos acima, portanto:
@@ -536,9 +536,9 @@ O comportamento desse modelo reológico pode ainda ser melhor entendido através
 	\begin{center}
 		\includegraphics[scale = 1.0]{0513-resposta_epvp_deformacao_constante.pdf}
 	\end{center}
-	\caption{\label{resposta_epvp_deformacao_constante}Resposta do sistema a uma solicitação $\dot \varepsilon = \text{const}$ (adaptado de: \citeonline[p. 221]{Rousset1988})}
+	\caption{\label{resposta_epvp_deformacao_constante}Resposta do sistema a uma solicitação $\dot \varepsilon = \text{const}$. Ruptura frágil (à esquerda) e ruptura dútcil (à direita) (adaptado de: \citeonline[p. 221]{Rousset1988})}
 \end{figure}
-Para altas taxas de deformação (caso 1 e 2), a tensão aumenta rapidamente até atingir o valor limite de $2c$ e em seguida diminui abruptamente (ruptura frágil) ou gradualmente (ruptura dúctil) mantendo uma tensão residual de $2c_0$. Pode-se notar que no caso 1, quando a taxa de deformação é muito alta, ao contrário do caso 2, os efeitos viscosos praticamente não ocorrem, tendo apenas o comportamento elastoplástico. Contudo, para taxas menores de deformação (caso 3) o limiar de ruptura não é atingido e a tensão evolui assintoticamente para um valor intermediário entre $2c$ e $2c_1$. Pode-se notar que no caso 4, quando a taxa de deformação é muito lenta, o modelo possui uma resposta elastoplástica perfeita com o limiar em $2c_1$.
+Para altas taxas de deformação (caso 1 e 2), a tensão aumenta rapidamente até atingir o valor limite de $2c$ e em seguida diminui abruptamente (ruptura frágil) ou gradualmente (ruptura dúctil) mantendo uma tensão residual de $2c_0$. Pode-se notar que no caso 1, que possui a taxa de deformação muito alta os efeitos viscosos praticamente não ocorrem, ocorrendo apenas o comportamento elastoplástico, ao contrário do caso 2, no qual os efeitos viscosos ocorrem. Contudo, para taxas menores de deformação (caso 3) o limiar de ruptura não é atingido e a tensão evolui assintoticamente para um valor intermediário entre $2c$ e $2c_1$. Pode-se notar que no caso 4, quando a taxa de deformação é muito lenta, o modelo possui uma resposta elastoplástica perfeita com o limiar em $2c_1$.
 
 %\section{Modelo constitutivo viscoelástico para o revestimento}
 
