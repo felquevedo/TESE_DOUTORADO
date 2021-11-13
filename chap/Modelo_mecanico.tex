@@ -100,9 +100,11 @@ em que $\varepsilonll$ é um tensor simétrico conhecido como tensor de deforma�
 \end{equation}
 sendo det($*$) e tr($*$) as funções determinante e traço, respectivamente. Como  $\left| \nabla \ul \right| \ll 1$ tem-se também que $\left| \nabla \varepsilonll \right| \ll 1$, ou seja, \textbf{pequenas deformações}, o que implica $\text{tr}(\varepsilonll) \ll 1$ e, portanto, mudanças infinitesimais no volume e na densidade durante a evolução do sistema, fazendo com que $\Omega \approxeq \Omega_0$ e $\rho \approxeq \rho_0$, respectivamente. Supondo que também ocorram \textbf{pequenos deslocamentos} $\left| \ul / l_0 \right| \ll 1$, em que $l_0$ é uma dimensão característica do problema tal que os efeitos sobre os esforços internos devido a mudança de geometria sejam desprezíveis, tem-se a \textbf{hipótese das pequenas perturbações (HPP)}. Com as consequências dessa hipótese, pode-se adotar a configuração inicial (de referência) ao invés da atual para expressar os termos da admissibilidade estática  (\ref{eq:EA}).
 
+Quando os túneis sofrem convergências pequenas, essa hipótese permite em muito simplificar as análises, e será adotada no presente trabalho. Contudo, para casos em que se tem convergências grandes é necessário reformular o problema considerando grandes deformações e/ou deslocamentos e rotações.
+
 \section{Modelo constitutivo elástico}
 
-De uma forma geral, a energia interna específica $w$  necessária para deformar um material elástico não depende do trajeto e nem da velocidade de deformação durante a evolução do sistema, dependendo apenas do estado atual das deformações. Com isso a energia interna específica pode ser caracterizada pelas deformações e direções principais do tensor de deformações, de modo que:
+De uma forma geral, a energia interna específica $w$  necessária para deformar um material elástico não depende do trajeto e nem da velocidade de deformação durante a evolução do sistema, dependendo apenas do estado atual das deformações. Com isso a energia interna específica pode ser caracterizada apenas pelas deformações e direções principais do tensor de deformações, de modo que:
 \begin{equation}
 	\label{eq:energia_interna_elastica}
 	w(\varepsilonll) = w(\varepsilon_1,\varepsilon_2,\varepsilon_3,\eta_1,\eta_2,\eta_3).
@@ -189,8 +191,8 @@ em que $\ql$ é o conjunto das forças termodinâmicas (escalares ou tensoriais)
 \end{equation}
 em que $\Dllll^{ep}$ é um tensor de quarta ordem que representa o módulo elastoplástico contínuo.
 
-\subsection{Superfície de escoamento}
-Uma característica fenomenológica dos materiais elastoplásticos é a existência de um limite dentro do qual o material se comporta elasticamente. Em problemas tridimensionais isotrópicos esse domínio é delimitado por uma hiper superfície no espaço das tensões principais, chamada de \textbf{superfície de escoamento}, pois, assim que o estado de tensões atinge essa superfície tem inicio a evolução das deformações plásticas. Essa superfície é definida como \cite[p. 150]{Neto2008}:
+\subsection{Superfície de escoamento}\label{secao_superficie_escoamento}
+Uma característica fenomenológica dos materiais elastoplásticos é a existência de um limite dentro do qual o material se comporta em elasticidade. Em problemas tridimensionais isotrópicos esse domínio é delimitado por uma hiper superfície no espaço das tensões principais, chamada de \textbf{superfície de escoamento}, pois, assim que o estado de tensões atinge essa superfície tem inicio a evolução das deformações plásticas. Essa superfície é definida como \cite[p. 150]{Neto2008}:
 \begin{equation}
 	\label{eq:superficie_escoamento}
 	\partial \Gamma = \left\{ \sigmall | f(\sigmall,\ql) = 0 \right\}
@@ -348,7 +350,7 @@ em que $\hl = - \partial h / \partial \ql$ é um vetor que contém os gradientes
 	\end{center}
 	\caption{\label{tipos_endurecimento}Representação dos tipos de endurecimento no plano desviador e na curva tensão-deformação: a) elastoplasticidade perfeita, b) endurecimento isotrópico e c) endurecimento cinemático (adaptado de: \citeauthor{Neto2008}, \citeyear{Neto2008}, p. 178, 179, 186)}
 \end{figure}
-Em um primeiro momento, no presente trabalho, não é considerado a influência da lei de endurecimento e as forças termodinâmicas são histórico de deformações, ou seja, $\dot \ql = \underline 0$. Nesse caso, tem-se a elastoplasticidade perfeita. Em um segundo momento é considerado a lei de endurecimento/amolecimento associada ($h = f$) e isotrópica. Portanto, a força termodinâmica associada é dada exclusivamente pela parcela que não depende da parte hidrostática ($I_1$) e nem desviadora ($J_2$) nas superfícies de escoamento. Essa força foi controlada pelo parâmetro coesivo, de modo que $q = \chi c(\bar \varepsilon^p)$ em que:
+Em um primeiro momento, no presente trabalho, não é considerado a influência da lei de endurecimento e as forças termodinâmicas não variam com o histórico de deformações, ou seja, $\dot \ql = \underline 0$. Nesse caso, tem-se a elastoplasticidade perfeita. Em um segundo momento é considerado a lei de endurecimento/amolecimento associada ($h = f$) e isotrópica. Dessa forma, a força termodinâmica associada é dada exclusivamente pela parcela que não depende da parte hidrostática ($I_1$) e nem desviadora ($J_2$) nas superfícies de escoamento. Essa força foi controlada pelo parâmetro coesivo, de modo que $q = \chi c(\bar \varepsilon^p)$ em que:
 \begin{equation}
 	\label{eq:dfdc}
 	\chi = \left\{ \begin{array}{ll} 
@@ -359,7 +361,7 @@ Em um primeiro momento, no presente trabalho, não é considerado a influência 
 
 
 
-sendo a deformação plástica equivalente $\bar \epsilon^p$ a variável de estado. Para a coesão, é considerado uma função linear definida por partes, conforme \autoref{funcao_coesao}, de modo a representar o endurecimento/amolecimento característico do maciço, tal como vistos no Capítulo 4.3.
+sendo a deformação plástica equivalente $\bar \epsilon^p$ a variável de estado. Para a coesão, é considerado uma função linear definida por partes, conforme \autoref{funcao_coesao}, de modo a representar o endurecimento/amolecimento característico do maciço, tal como vistos na \autoref{comportamento_instantaneo}.
 \begin{figure}[H]
 	\begin{center}
 		\includegraphics[scale = 1.0]{0510-lei de endurecimento ou amolecimento_coesao.pdf}
@@ -386,7 +388,7 @@ e
 \end{array}\right..
 \end{equation}
 
-O valor da deformação plástica efetiva é calculada a partir da seguinte expressão:
+O valor da deformação plástica equivalente é calculada a partir da seguinte expressão:
 \begin{equation}
 	\label{eq:epsPeq}
 	\dot{{\bar \epsilon}}^p = C||\dot \varepsilonll^p||
@@ -449,7 +451,7 @@ em que $\Dllll^{vp}$ é o tensor de quarta ordem que representa o módulo elasto
 
 \subsection{Superfície de escoamento}
 
-Em viscoplasticidade nem sempre se tem um regime elástico, por exemplo, a altas temperaturas certos materiais podem fluir sempre sobre tensão, ou seja, a função de escoamento é zero \cite[p. 448]{Neto2008}. Para esses casos, existem modelos como o de \citeonline{Norton1929}, \citeonline{Lemaitre1994}, e também funções provenientes de ajustes empíricos que descrevem o fluxo viscoplástico através da tensão, tempo e temperatura, como por exemplo, as resumidas por \citeonline{Skrzypek1993}. Porém, em geral, o comportamento viscoso do maciço em túneis evidencia-se após um determinado nível de tensões, conforme visto na \autoref{curva_caracteristica_fluencia_ensaio}. Para esses casos são adotadas superfícies de escoamento análogas as da elastoplasticidade. No presente trabalho foram utilizadas as mesmas superfícies do capítulo 5.5.2. Porém, ao contrário da elastoplasticidade, essa superfície não delimita um domínio plasticamente admissível podendo $f(\sigmall,\ql) > 0$.
+Em viscoplasticidade nem sempre se tem um regime elástico, por exemplo, a altas temperaturas certos materiais podem fluir sempre sobre tensão, ou seja, a função de escoamento é zero \cite[p. 448]{Neto2008}. Para esses casos, existem modelos como o de \citeonline{Norton1929}, \citeonline{Lemaitre1994}, e também funções provenientes de ajustes empíricos que descrevem o fluxo viscoplástico através da tensão, tempo e temperatura, como por exemplo, as resumidas por \citeonline{Skrzypek1993}. Porém, em geral, o comportamento viscoso do maciço em túneis evidencia-se após um determinado nível de tensões, conforme visto na \autoref{curva_caracteristica_fluencia_ensaio}. Para esses casos são adotadas superfícies de escoamento análogas as da elastoplasticidade. No presente trabalho foram utilizadas as mesmas superfícies da \autoref{secao_superficie_escoamento}. Porém, ao contrário da elastoplasticidade, essa superfície não delimita um domínio plasticamente admissível podendo $f(\sigmall,\ql) > 0$.
 
 \subsection{Regra de fluxo viscoplástico}
 Tal como na elastoplasticidade, a regra de fluxo viscoplástico é postulada da seguinte forma:
@@ -538,8 +540,4 @@ O comportamento desse modelo reológico pode ainda ser melhor entendido através
 	\end{center}
 	\caption{\label{resposta_epvp_deformacao_constante}Resposta do sistema a uma solicitação $\dot \varepsilon = \text{const}$. Ruptura frágil (à esquerda) e ruptura dútcil (à direita) (adaptado de: \citeonline[p. 221]{Rousset1988})}
 \end{figure}
-Para altas taxas de deformação (caso 1 e 2), a tensão aumenta rapidamente até atingir o valor limite de $2c$ e em seguida diminui abruptamente (ruptura frágil) ou gradualmente (ruptura dúctil) mantendo uma tensão residual de $2c_0$. Pode-se notar que no caso 1, que possui a taxa de deformação muito alta os efeitos viscosos praticamente não ocorrem, ocorrendo apenas o comportamento elastoplástico, ao contrário do caso 2, no qual os efeitos viscosos ocorrem. Contudo, para taxas menores de deformação (caso 3) o limiar de ruptura não é atingido e a tensão evolui assintoticamente para um valor intermediário entre $2c$ e $2c_1$. Pode-se notar que no caso 4, quando a taxa de deformação é muito lenta, o modelo possui uma resposta elastoplástica perfeita com o limiar em $2c_1$.
-
-%\section{Modelo constitutivo viscoelástico para o revestimento}
-
-%Existem várias formulações para a previsão da deformação por fluência e retração do concretos disponíveis na literatura e nos códigos de projetos. Grade parte dessas formulações vêm de ajustes com dados experimentais e, como as características dos materiais são em grande parte condicionadas à região do ensaio, há uma certa aproximação devido a dispersão dos dados, com coeficientes de variação de 25,9\% à 67,4\%, dependendo da formulação como demonstrado por Fanourakis \& Ballim (2003). Nessa tese é utilizado o modelo desenvolvido por Dias (2013, et al. 2015) e ajustado e aplicado em problemas de túneis por Quevedo (2017). Esse modelo considera as formulações empíricas do Comité Euro-International du Béton (CEB-FIP Model Code 1990 ou CEB-MC90) com a fluência ajustada à teoria da solidificação de Bazant \& Prasannan (1989a,1989b). Esse ajuste é possível, pois, assim como na formulação de Bazant \& Prasannan, a formulação do CEB-MC90 separa o fator do coeficiente de fluência que depende do envelhecimento (idade do concreto) do fator de fluência que depende do tempo de aplicação da carga (idade da carga). Em vista dessa decomposição, a formulação e algoritmo apresentado por Bazant \& Prasannan permite modelar eficientemente os casos em que há um histórico de tensões variáveis, utilizando um modelo reológico de Kelvin-Generalizado para os parâmetros independnetes da idade do concreto.
+Para altas taxas de deformação (caso 1 e 2), a tensão aumenta rapidamente até atingir o valor limite de $2c$ e em seguida diminui abruptamente (ruptura frágil) ou gradualmente (ruptura dúctil) de encontro a uma tensão residual de $2c_0$. Pode-se notar, pela \autoref{resposta_epvp_deformacao_constante}a, que no caso 1, que possui a taxa de deformação muito alta os efeitos viscosos praticamente não ocorrem, ocorrendo apenas o comportamento elastoplástico, ao contrário do caso 2, no qual os efeitos viscosos ocorrem. Contudo, para taxas menores de deformação (caso 3) o limiar de ruptura não é atingido e a tensão evolui assintoticamente para um valor intermediário entre $2c$ e $2c_1$. Pode-se notar que no caso 4, quando a taxa de deformação é muito lenta, o modelo possui uma resposta elastoplástica perfeita com o limiar em $2c_1$. Quando se tem um maciço dúctil (\autoref{resposta_epvp_deformacao_constante}b) o mesmo fenômeno é observado.

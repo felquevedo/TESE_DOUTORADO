@@ -5217,9 +5217,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1.2855378"
-     inkscape:cx="314.48617"
-     inkscape:cy="322.13255"
+     inkscape:zoom="3.4133226"
+     inkscape:cx="102.89592"
+     inkscape:cy="410.02206"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      inkscape:document-rotation="0"
@@ -5237,7 +5237,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -5874,7 +5874,7 @@
            font-weight="400"
            font-size="13px"
            transform="translate(36,246)"
-           id="text9480">0.00</text>
+           id="text9480">0,00</text>
       </g>
       <g
          clip-path="url(#clip49-7)"
@@ -5884,7 +5884,7 @@
            font-weight="400"
            font-size="13px"
            transform="translate(36,221)"
-           id="text9484">0.10</text>
+           id="text9484">0,10</text>
       </g>
       <g
          clip-path="url(#clip50-5)"
@@ -5894,7 +5894,7 @@
            font-weight="400"
            font-size="13px"
            transform="translate(36,197)"
-           id="text9488">0.20</text>
+           id="text9488">0,20</text>
       </g>
       <g
          clip-path="url(#clip51-2)"
@@ -5904,7 +5904,7 @@
            font-weight="400"
            font-size="13px"
            transform="translate(36,172)"
-           id="text9492">0.30</text>
+           id="text9492">0,30</text>
       </g>
       <g
          clip-path="url(#clip52-1)"
@@ -5914,7 +5914,7 @@
            font-weight="400"
            font-size="13px"
            transform="translate(36,148)"
-           id="text9496">0.40</text>
+           id="text9496">0,40</text>
       </g>
       <g
          clip-path="url(#clip53-5)"
@@ -5924,7 +5924,7 @@
            font-weight="400"
            font-size="13px"
            transform="translate(36,123)"
-           id="text9500">0.50</text>
+           id="text9500">0,50</text>
       </g>
       <g
          clip-path="url(#clip54-7)"
@@ -5934,7 +5934,7 @@
            font-weight="400"
            font-size="13px"
            transform="translate(36,98)"
-           id="text9504">0.60</text>
+           id="text9504">0,60</text>
       </g>
       <g
          clip-path="url(#clip55-79)"
@@ -5944,7 +5944,7 @@
            font-weight="400"
            font-size="13px"
            transform="translate(36,74)"
-           id="text9508">0.70</text>
+           id="text9508">0,70</text>
       </g>
       <g
          clip-path="url(#clip56-99)"
@@ -5954,7 +5954,7 @@
            font-weight="400"
            font-size="13px"
            transform="translate(36,49)"
-           id="text9512">0.80</text>
+           id="text9512">0,80</text>
       </g>
       <g
          clip-path="url(#clip57-43)"
@@ -6792,7 +6792,7 @@
            font-weight="400"
            font-size="13px"
            transform="translate(640.348,381)"
-           id="text10347">0.00</text>
+           id="text10347">0,00</text>
       </g>
       <g
          clip-path="url(#clip44-2)"
@@ -6802,7 +6802,7 @@
            font-weight="400"
            font-size="13px"
            transform="translate(640.348,357)"
-           id="text10351">0.10</text>
+           id="text10351">0,10</text>
       </g>
       <g
          clip-path="url(#clip45-0)"
@@ -6812,7 +6812,7 @@
            font-weight="400"
            font-size="13px"
            transform="translate(640.348,332)"
-           id="text10355">0.20</text>
+           id="text10355">0,20</text>
       </g>
       <g
          clip-path="url(#clip46-38)"
@@ -6822,7 +6822,7 @@
            font-weight="400"
            font-size="13px"
            transform="translate(640.348,308)"
-           id="text10359">0.30</text>
+           id="text10359">0,30</text>
       </g>
       <g
          clip-path="url(#clip47-5)"
@@ -6832,7 +6832,7 @@
            font-weight="400"
            font-size="13px"
            transform="translate(640.348,283)"
-           id="text10363">0.40</text>
+           id="text10363">0,40</text>
       </g>
       <g
          clip-path="url(#clip48-1)"
@@ -6842,7 +6842,7 @@
            font-weight="400"
            font-size="13px"
            transform="translate(640.348,259)"
-           id="text10367">0.50</text>
+           id="text10367">0,50</text>
       </g>
       <g
          clip-path="url(#clip49-43)"
@@ -6852,7 +6852,7 @@
            font-weight="400"
            font-size="13px"
            transform="translate(640.348,234)"
-           id="text10371">0.60</text>
+           id="text10371">0,60</text>
       </g>
       <g
          clip-path="url(#clip50-9)"
@@ -6862,7 +6862,7 @@
            font-weight="400"
            font-size="13px"
            transform="translate(640.348,210)"
-           id="text10375">0.70</text>
+           id="text10375">0,70</text>
       </g>
       <g
          clip-path="url(#clip51-3)"
@@ -6872,7 +6872,7 @@
            font-weight="400"
            font-size="13px"
            transform="translate(640.348,185)"
-           id="text10379">0.80</text>
+           id="text10379">0,80</text>
       </g>
       <g
          clip-path="url(#clip52-23)"

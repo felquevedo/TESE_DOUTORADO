@@ -1,7 +1,7 @@
 % ----------------------------------------------------------
 \chapter{Solução do modelo mecânico}
 % ----------------------------------------------------------
-A solução do modelo mecânico será é através do \textit{software} ANSYS e a primeira parte desse capítulo descreverá a solução numérica pelo método dos elementos finitos (de forma mais genérica possível) comentando as funcionalidades do ANSYS, quando pertinente. Posteriormente, é dada ênfase na solução numérica do modelo constitutivo do material (que é o foco principal do trabalho). 
+A solução do modelo mecânico foi feita através do \textit{software} ANSYS, na sua versão 2021R1, e a primeira parte desse capítulo descreve a solução numérica pelo método dos elementos finitos (de forma mais genérica possível) comentando as funcionalidades do ANSYS, quando pertinente. Posteriormente, é dada ênfase na solução numérica do modelo constitutivo do material (que é o foco principal do trabalho) que foi implementado no recurso programável \textit{Usermat}. No final desse capítulo é apresentado o domínio, a discretização da malha e do tempo, as condições de contorno e os parâmetros utilizados nas análises.
 
 \section{Forma fraca das equações de campo}
 No contexto da evolução quase estática e da hipótese das pequenas perturbações podem-se escrever as equações de campo na sua forma fraca através do princípio dos trabalhos virtuais. Sendo assim, aplicando um campo de deslocamento virtual $\dul$, cinematicamente admissível, em (\ref{eq:equilibrio_estatico_local}), porém ao longo de todo o volume $\Omega$ tem-se que:
@@ -170,7 +170,7 @@ nos quais:
 	\Fl_{V_e} = \int_{\Omega_e} \rho \Nll^T \fl d\Omega_e,~~~ \Fl_{S_e} = \int_{\partial \Omega_e} \Nll^T \Tl^d dS_e,~~~
 	\Fl_{C_e} = \int_{\partial \Omega_{e}} \Nll^T \Tl^c dS_c,
 \end{equation}
-sendo que $\Fl_{int_e}$ e $\Fl_{ext_e}$ são as forças internas e externas no elemento, respectivamente, $\Kll_e$ a matriz de rigidez do elemento, $\Fl_{\varepsilon_{0_e}}$ e $\Fl_{\sigma_{0_e}}$  forças internas no elemento devido às deformações inciais e tensões iniciais, respectivamente, $\Fl_{V_e}$ forças de volume do elemento, $\Fl_{S_e}$ forças de superfície no contorno livre do elemento, $\Fl_{C_e}$ forças de contato entre elementos vizinhos e $Fl_{N_e}$  forças nodais. A Figura 6.2 ilustra as forças externas de um elemento genérico.
+sendo que $\Fl_{int_e}$ e $\Fl_{ext_e}$ são as forças internas e externas no elemento, respectivamente, $\Kll_e$ a matriz de rigidez do elemento, $\Fl_{\varepsilon_{0_e}}$ e $\Fl_{\sigma_{0_e}}$  forças internas no elemento devido às deformações inciais e tensões iniciais, respectivamente, $\Fl_{V_e}$ forças de volume do elemento, $\Fl_{S_e}$ forças de superfície no contorno livre do elemento, $\Fl_{C_e}$ forças de contato entre elementos vizinhos e $\Fl_{N_e}$  forças nodais. A Figura 6.2 ilustra as forças externas de um elemento genérico.
 \begin{figure}[H]
 	\begin{center}
 		\includegraphics[scale = 1.0]{0602-diagrama de corpo livro de um elemento finito.pdf}
@@ -204,7 +204,7 @@ Os elementos finitos que são utilizados nesse trabalho com suas funções de in
 	\begin{center}
 		\includegraphics[scale = 1.0]{0603b-quadrilatero linear.pdf}
 	\end{center}
-	\caption{\label{PLANE183}Funções de interpolação, pesos e coordenadas dos pontos de Gauss para o elemento quadrilátero quadrático \textit{serendipity} isoparamétrico PLANE182 (adaptado de: \citeonline[p. 334, 369-370]{ANSYS2018})}
+	\caption{\label{PLANE183}Funções de interpolação, pesos e coordenadas dos pontos de Gauss para o elemento quadrilátero linear isoparamétrico PLANE182 (adaptado de: \citeonline[p. 334, 369-370]{ANSYS2018})}
 \end{figure}
 \begin{figure}[H]
 	\begin{center}
@@ -213,7 +213,7 @@ Os elementos finitos que são utilizados nesse trabalho com suas funções de in
 	\caption{\label{SOLID185}Funções de interpolação, pesos e coordenadas dos pontos de Gauss para o elemento hexaedro trilinear isoparamétrico SOLID185 (adaptado de: \citeonline[p. 345, 369-370]{ANSYS2018})}
 \end{figure}
 
-No \textit{software} ANSYS, ambos elementos possuem a opção degenerada em que é possível trabalhar de forma colapsada, triangular, por exemplo, no caso do elemento PLANE182, e prisma, tetraédrica ou piramidal, no caso do elemento SOLID185. Nas análises apresentadas ao final dessa tese, não foram utilizadas essas formas. Além disso, apesar do \textit{script} APDL ter sido construído com a opção de se trabalhar com os elementos quadráticos (PLANE183 e SOLID186), visando uma melhor eficiência computacional, principalmente para os domínios tridimensionais, optou-se por fazer o estudo de convergência da malha com elementos lineares.
+No \textit{software} ANSYS, ambos elementos possuem a opção degenerada em que é possível trabalhar de forma colapsada, triangular, por exemplo no caso do elemento PLANE182, e prisma, tetraédrica ou piramidal, no caso do elemento SOLID185. Nas análises apresentadas ao final dessa tese, não foram utilizadas essas formas. Além disso, apesar do \textit{script} APDL ter sido construído com a opção de se trabalhar com os elementos quadráticos (PLANE183 e SOLID186), visando uma melhor eficiência computacional, principalmente para os domínios tridimensionais, optou-se por fazer o estudo de convergência da malha com elementos lineares.
 
 Os elementos PLANE182 e SOLID185 possuem também opções que lidam com problemas de travamento (\textit{Locking}) e modos espúrios (\textit{Hourglass}). O travamento é caracterizado por uma rigidez excessiva do elemento, e ocorre principalmente em elementos de primeira ordem com integração completa que estão sujeitos a flexão. Ou ainda, quando o material é quase incompressível. Também podem ocorrer em elementos de segunda ordem, quando as deformações plásticas são da ordem das deformações elásticas. Esse problema evita-se com refinamento da malha, técnicas de subintegração e funções de formas extras. O ANSYS possuí as duas últimas técnicas para o SOLID185 (\textit{Uniform Reduced Integration with Hourglass Control} e \textit{Enhanced Strain Formulation}). Já os modos espúrios ocorrem quando se utiliza as técnicas de subintegração e é caracterizado por uma distorção no elemento porém com zero deformação. Esse problema é evitado utilizando integração completa ou refinamento da malha. No presente trabalho utilizou-se a \textbf{integração completa} (\textit{Full integration}) e esses problemas foram evitados com o \textbf{refinamento da malha}. 
 
@@ -351,12 +351,12 @@ Ainda na \autoref{NR-fluxograma} está detalhada a parte de atualização das te
 
 \section{Algoritmo de atualização das tensões e variáveis internas}\label{algoritmo de atualização das tensões e variáveis internas}
 
-Como visto no capítulo anterior, durante as iterações de equilíbrio é necessário fazer a integração espacial das forças internas no contexto do método dos elementos finitos. Essa integração pode ser escrita da seguinte maneira:
+Como visto na seção anterior, durante as iterações de equilíbrio é necessário fazer a integração espacial das forças internas no contexto do método dos elementos finitos. Essa integração pode ser escrita da seguinte maneira:
 \begin{equation}
 	\label{eq:Fint}
 	\Fl_{int_{n,i}} = \int_{\Omega}\Bll^T\sigmal_{n}d\Omega = \sum_{i_e=1}^{n_e}\sum_{i_p=1}^{n_p}\left( \Bll^T\sigmal_{n}WJ\right)_{i_p,i_e}
 \end{equation}
-sendo $\sigmal_{n}$ dado pela relação constitutiva do material. Contudo, as relações constitutivas, por dependerem da trajetória das tensões e/ou do tempo, estão descritas em forma de taxas, conforme visto no \autoref{cap: modelo mecanico}. E, portanto, é necessária a solução desse sistema de equações diferenciais ordinárias por algum método de integração juntamente com as iterações de equilíbrio. Essa etapa de integração, no esquema de elementos finitos, é conhecida como \textbf{algoritmo de atualização das tensões e variáveis internas}. Tal como ilustrado na \autoref{NR-fluxograma}, esse algoritmo ocorre para cada ponto de Gauss de cada elemento e tem por finalidade obter o incremento de tensão $\Delta \sigmal$ e de forças associadas às variáveis internas $\Delta \ql$ através do incremento de deformação total $\Delta \varepsilonl$ do subpasso.
+sendo $\sigmal_{n}$ dado pela relação constitutiva do material. Contudo, as relações constitutivas, por dependerem da trajetória das tensões e/ou do tempo, estão descritas em forma de taxas, conforme visto no \autoref{cap: modelo mecanico}. E, portanto, é necessária a solução desse sistema de equações diferenciais ordinárias por algum método de integração ao longo dos subpassos. Essa etapa de integração, no esquema de elementos finitos, é conhecida como \textbf{algoritmo de atualização das tensões e variáveis internas}. Tal como ilustrado na \autoref{NR-fluxograma}, esse algoritmo ocorre para cada ponto de Gauss de cada elemento e tem por finalidade obter o incremento de tensão $\Delta \sigmal$ e de forças associadas às variáveis internas $\Delta \ql$ através do incremento de deformação total $\Delta \varepsilonl$ do subpasso.
 
 \subsection{Integração das equações constitutivas elastoplásticas}
 
@@ -374,7 +374,7 @@ Como visto no \autoref{cap: modelo mecanico}, considerando a hipótese das peque
 	\right..
 \end{equation}
 
-Em geral, a proposta dos algoritmos de integração consiste em integrar as equações constitutivas através de métodos numéricos, como os de Runge-Kutta, com técnicas explícitas, implícitas ou semi-implícitas. E dessa forma, conhecido o conjunto de $\left\{ \varepsilonl_n, \varepsilonl_n^p,\sigmal_n,\ql_n \right\}$ do último subpasso convergido $n$ e o incremento de deformação total acumulado $\Delta \varepsilonl$ obtido pela iteração de Newton-Raphson, busca-se os valores $\left\{ \varepsilonl_{n+1}, \varepsilonl_{n+1}^p,\sigmal_{n+1},\ql_{n+1} \right\}$, plasticamente admissíveis, do subpasso $n+1$. No presente trabalho \textbf{foi implementado um esquema semi-implícito de Euler de dois passos para a relação constitutiva elastoplástica}, inicialmente em elastoplasticidade perfeita, e posteriormente com a lei de endurecimento/amolecimento multilinear para fins de análise na problemática de túneis.
+Em geral, a proposta dos algoritmos de integração consiste em integrar as equações constitutivas através de métodos numéricos, como os de Runge-Kutta, com técnicas explícitas, implícitas ou semi-implícitas. E dessa forma, conhecido o conjunto de $\left\{ \varepsilonl_n, \varepsilonl_n^p,\sigmal_n,\ql_n \right\}$ do último subpasso convergido $n$ e o incremento de deformação total acumulado $\Delta \varepsilonl$ obtido pela iteração de Newton-Raphson, busca-se os valores $\left\{ \varepsilonl_{n+1}, \varepsilonl_{n+1}^p,\sigmal_{n+1},\ql_{n+1} \right\}$, plasticamente admissíveis, do subpasso $n+1$. No presente trabalho \textbf{foi implementado um esquema semi-implícito de Euler de dois passos para a relação constitutiva elastoplástica}, inicialmente em elastoplasticidade perfeita, e posteriormente com a lei de endurecimento/amolecimento definida por partes para fins de análise na problemática de túneis.
 
 Em geral, em elastoplasticidade, o método de Runge-Kutta de primeira ordem (também conhecido como o método de Euler) é comumente utilizado para fazer a integração das relações constitutivas (\ref{eq:constitutiva_ep}), tendo-se o seguinte esquema de integração:
 \begin{equation}
@@ -391,7 +391,7 @@ Em geral, em elastoplasticidade, o método de Runge-Kutta de primeira ordem (tam
 \end{equation}
 em que $\Delta \lambda = \dot\lambda\Delta t$ e $0 \leq \Theta \leq 1$ fornece a regra trapezoidal generalizada para o fluxo plástico e evolução das variáveis internas. Quando $\Theta = 0$ tem-se a forma completamente explicita (\textit{fully explicit forward Euler}) e $\Theta = 1$  completamente implicita (\textit{fully implicit backward Euler}). Os algoritmos semi-implícitos adotam $0 \leq \Theta < 1$  ou ainda uma combinação implícita e explícita de $\Delta \lambda$, $\dgdsl$ e $\hl$.
 
-Os esquemas explícitos, como os de \citeonline{Nayak1972}, \citeonline{Zienkiewicz1969} e \citeonline{Owen1980} foram largamente usados até que \citeonline{Simo1985} propuseram um método implícito de dois passos conhecido como projeção do ponto mais próximo (\textit{Closest Point Projetction Method} ou abreviadamente CPPM). Isso pois, os esquemas completamente explícitos não satisfaziam a condição de consistência $f_{n+1} = f(\sigmal_{n+1},\ql_{n+1}) = 0$ no final do passo, uma vez que o multiplicador plástico e os vetores de fluxo são calculados com as tensões do passo anterior $n$. Segundo \citeonline[p. 278]{Belytschko2000} isso faz com que a solução acumule uma certa imprecisão. Esse fato levou a comunidade a desenvolver e utilizar cada vez mais os algoritmos implícitos e semi-implícitos que buscam satisfazer $f_{n+1} = 0$. E, portanto, é o método adotado nesse trabalho. Alguns dos principais métodos implícitos e semi-implícitos para elastoplasticidade podem ser encontrados em \citeonline{Simo1998}, \citeonline{Belytschko2000}, \citeonline{Neto2008} e \citeonline{Huang2009}.
+Os esquemas explícitos, como os de \citeonline{Nayak1972}, \citeonline{Zienkiewicz1969} e \citeonline{Owen1980} foram largamente usados até que \citeonline{Simo1985} propuseram um método implícito de dois passos conhecido como projeção do ponto mais próximo (\textit{Closest Point Projetction Method} ou abreviadamente CPPM). Isso pois, os esquemas completamente explícitos não satisfaziam a condição de consistência $f_{n+1} = f(\sigmal_{n+1},\ql_{n+1}) = 0$ no final do subpasso, uma vez que o multiplicador plástico e os vetores de fluxo são calculados com as tensões do subpasso anterior $n$. Segundo \citeonline[p. 278]{Belytschko2000} isso faz com que a solução acumule uma certa imprecisão. Esse fato levou a comunidade a desenvolver e utilizar cada vez mais os algoritmos implícitos e semi-implícitos que buscam satisfazer $f_{n+1} = 0$. E, portanto, é o método adotado nesse trabalho. Alguns dos principais métodos implícitos e semi-implícitos para elastoplasticidade podem ser encontrados em \citeonline{Simo1998}, \citeonline{Belytschko2000}, \citeonline{Neto2008} e \citeonline{Huang2009}.
 
 Atualmente esses métodos empregados nos algoritmos de atualização das tensões consistem em um esquema preditor-corretor de dois passos. Primeiro aplica-se a etapa do preditor elástico e, se necessário, a do corretor plástico. Dessa forma, definindo $\Delta \varepsilonl_{n+1}^p \equiv \varepsilonl_{n+1}^p - \varepsilonl_{n}^p$, o preditor elástico pode ser explicitado de (\ref{eq:esquema_int_constitutiva_ep})$_4$, conforme:
 \begin{equation}
@@ -492,7 +492,7 @@ Para derivar a expressão de $\Dll^{alg}$  escreve-se (\ref{eq:constitutiva_ep})
 	\label{eq:D_alg_ep}
 	\Dll^{alg} = \Dll - \dfrac{\Dll~\dgdsl_i~\dfdsl^T \Dll}{\dfdsl^T\Dll~\dgdsl_i-\dfdql \hl_i}
 \end{equation}
-Adotar o módulo tangente consistente faz com que a convergência seja atingida com menos iterações de equilíbrio globais, contudo, o procedimento tem um custo para sistemas grandes, uma vez que a cada iteração é exigida a montagem e fatorização da matriz de rigidez global (caso seja utilizado a opção de Newton-Raphson completo).  Portanto, é comum para sistemas grandes utilizar o módulo elástico $\Dll \leftarrow \Dll^e$. No presente trabalho essa atualização foi implementada e é opcional controlada por um parâmetro.
+Adotar o módulo tangente consistente faz com que a convergência seja atingida com menos iterações de equilíbrio globais, contudo, o procedimento tem um custo para sistemas grandes, uma vez que a cada iteração é exigida a montagem e fatorização da matriz de rigidez global (caso seja utilizado a opção de Newton-Raphson Completo).  Portanto, é comum para sistemas grandes utilizar o módulo elástico $\Dll \leftarrow \Dll^e$. No presente trabalho essa atualização foi implementada, é opcional e controlada por um parâmetro.
 
 \subsection{Integração das equações constitutivas viscoplásticas}
 
@@ -549,7 +549,7 @@ Substituindo (\ref{eq:esquema_int_constitutiva_vp3}) em (\ref{eq:esquema_int_con
 	\Delta \lambda = \dfrac{\Phi_n + \Theta \dPhidsl_n^T\Dll\Delta\varepsilonl}{\dfrac{\eta}{\Delta t} + \Theta (\dPhidsl_n^T\Dll~\dgdsl_n - \dPhidql_n^T \hl_n)}.
 \end{equation}
 
-Quando $0 < \Theta < 1$  tem-se um algoritmo semi-implicito e quando $\Theta = 0$ tem-se um algoritmo totalmente explícito, com $\Delta \lambda = \Delta t \dfrac{\Phi_n}{\eta}$. Como pode-se ver nessa dedução, ao contrário da integração da relação constitutiva em elastoplasticidade, não há necessidade de resolver o sistema de forma iterativa. E, além disso, todas as variáveis são obtidas do subpasso anterior $n$. Esse fato, como será visto no próximo item, facilitará o acoplamento entre o algoritmo de viscoplasticidade e elastoplasticidade. Além disso, para viscoplasticidade não é utilizado leis de endurecimento/amolecimento, simplificando a expressão (\ref{eq:esquema_int_constitutiva_vp4}) para:
+Quando $0 < \Theta < 1$  tem-se um algoritmo semi-implicito e quando $\Theta = 0$ tem-se um algoritmo totalmente explícito, com $\Delta \lambda = \Delta t \dfrac{\Phi_n}{\eta}$. Como pode-se ver nessa dedução, ao contrário da integração da relação constitutiva em elastoplasticidade, não há necessidade de resolver o sistema de forma iterativa. E, além disso, todas as variáveis são obtidas do subpasso anterior $n$. Esse fato, como será visto na próxima seção, facilitará o acoplamento entre o algoritmo de viscoplasticidade e elastoplasticidade. Além disso, para viscoplasticidade não é utilizado leis de endurecimento/amolecimento, simplificando a expressão (\ref{eq:esquema_int_constitutiva_vp4}) para:
 \begin{equation}
 	\label{eq:esquema_int_constitutiva_vp5}
 	\Delta \lambda = \dfrac{\Phi_n + \Theta \dPhidsl_n^T\Dll\Delta\varepsilonl_n}{\dfrac{\eta}{\Delta t} + \Theta \dPhidsl_n^T\Dll\dgdsl_n}.
@@ -718,7 +718,7 @@ Tal como visto na \autoref{cap:Discretização espacial em elementos finitos} o 
 \end{figure}
 As leis constitutivas vistas no \autoref{cap: modelo mecanico} são implementadas nesse domínio e estudadas em três condições: em estado plano de deformações, tridimensional e em axissimetria.
 
-Com o intuito de obter uma malha de fácil alteração, conveniente aos estudos de convergência de malha ou análises paramétricas, o domínio foi discretizado utilizando o pré-processamento do \textit{software} ANSYS v.19.2 através da linguagem APDL (\textit{Ansys Parametric Design Language}). Com o auxílio dessa linguagem é possível controlar a discretização do domínio em função de parâmetros que podem ser alterados facilmente e, dessa forma, obtido rapidamente uma nova malha para os estudos. As discretizações apresentadas vêm da experiência obtidas em estudos anteriores \cite{Quevedo2017} considerando isoladamente a elasticidade, elastoplastcidade e viscoplasticidade do maciço.
+Com o intuito de obter uma malha de fácil alteração, conveniente aos estudos de convergência de malha ou análises paramétricas, o domínio foi discretizado utilizando o pré-processamento do \textit{software} ANSYS 2021R1 através da linguagem APDL (\textit{Ansys Parametric Design Language}). Com o auxílio dessa linguagem é possível controlar a discretização do domínio em função de parâmetros que podem ser alterados facilmente e, dessa forma, obtido rapidamente uma nova malha para os estudos. As discretizações apresentadas vêm da experiência obtidas em estudos anteriores \cite{Quevedo2017} considerando isoladamente a elasticidade, elastoplastcidade e viscoplasticidade do maciço. O \textit{script} APDL para a construção do modelo em axissimetria encontra-se no Apêndice A.
 
 A \autoref{malhaEPD_tunel} apresenta o domínio para análises em estado plano de deformações com seus parâmetros, condições de contorno e malha. Como visto na \autoref{cap:Influência da escavação e o conceito de convergência da seção}, esse modelo é útil no estudo de seções fora da zona de influência da frente de escavação na qual se pode admitir a ausência de deslocamento ao longo do eixo longitudinal do túnel. Quando implementado a lei do material, esse modelo também é ideal para obter as curvas de convergência do maciço, tais como as da \autoref{cap:Método convergência-confinamento}.
 
@@ -731,7 +731,7 @@ Como pode-se ver na \autoref{malhaEPD_tunel}, é considerada condição de simet
 	\caption{\label{malhaEPD_tunel}Domínio, parâmetros geométricos, condições de contorno e malha para o modelo em estado plano de deformações}
 \end{figure}
 
-Conforme a \autoref{malhaEPD_tunel}, essa malha possui quatro regiões de refinamento: a região $A1$ representando o interior da seção do túnel, cujos elementos são desativados já no início das análises; a região $A2$ referente ao revestimento (que estará presente sempre que o parâmetro  $e_{rev} > 0$); a região $A3$, circular, no entorno do túnel onde se dará maior esforço de refinamento, pela proximidade da região escavada e, por último, a região $A4$ relativa ao restante do domínio, onde os gradientes de tensão e deformação serão pequenos. Para a malha da \autoref{malhaEPD_tunel}, tem-se a definição dos parâmetros e seus valores na \autoref{parametros_EPD}.
+Conforme a \autoref{malhaEPD_tunel}, essa malha possui quatro regiões de refinamento: a região $A1$ representando o interior da seção do túnel, cujos elementos são desativados já no início das análises; a região $A2$ referente ao revestimento (que estará presente sempre que o parâmetro  $e_{rev} > 0$); a região $A3$, circular, no entorno do túnel onde se dará maior esforço de refinamento, pela proximidade da região escavada e, por último, a região $A4$ relativa ao restante do domínio, onde os gradientes de tensão e deformação serão pequenos. A \autoref{parametros_EPD} apresenta a definição dos parâmetros desse modelo e seus valores.
 
 \begin{table}[H]
 	\caption{Parâmetros para a construção da malha em estado plano de deformações da \autoref{malhaEPD_tunel}}
@@ -885,7 +885,7 @@ Conforme \autoref{malhaAXI_tunel}, no modelo axissimétrico o eixo longitudinal 
 	\normalsize
 \end{table}
 
-O \textit{script} APDL do modelo escolhido para constar no Apêndice A foi justamente o modelo axissimétrico. A entrada dos parâmetros pode ser vista nas linhas 24-153.
+O \textit{script} APDL do modelo escolhido para constar no Apêndice A foi justamente o modelo axissimétrico. A entrada dos parâmetros pode ser vista entre as linhas 24 e 153 do \textit{script}.
 
 Para simular o ciclo contrutivo de escavação e revestimento é utilizado o recurso de \textbf{ativação/desativação de elementos} em cada passo de solução. A desativação, à rigor, compreende três modificações:
 \begin{alineas}
@@ -898,7 +898,7 @@ Para simular o ciclo contrutivo de escavação e revestimento é utilizado o rec
 	
 \end{alineas}
 
-No ANSYS esse recurso é conhecido como \textit{Birth and Death} e seu uso se dá através da seleção dos elementos e um comando APDL (EKILL e EALIVE) que identifica se estarão ativados ou desativados no passo.
+No \textit{software} ANSYS esse recurso é conhecido como \textit{Birth and Death} e seu uso se dá através da seleção dos elementos e um comando APDL (EKILL e EALIVE) que identifica se estarão ativados ou desativados no passo.
 
 O custo computacional desses modelos é refletido diretamente no tempo de processamento de cada subpasso durante a solução do sistema global. Esse tempo é função de diversos fatores. Dentre os mais simples estão a quantidade de operações em ponto flutuante (precisão simples ou dupla) necessários para a fatoração e solução do sistema frente à tecnologia de processamento (velocidade do processador e recursos de paralelização). A ordem de grandeza da quantidade de operações em ponto flutuante pode ser estimada através do tamanho do sistema. Portanto, a \autoref{tamanho_sistemas}, resume o tamanho do sistema para as malhas desses três modelos. Porém, para o tempo global, é necessário considerar as estratégias de atualização da matriz de rigidez e a quantidade de passos, sendo que este último aumenta tempo computacional linearmente.
 

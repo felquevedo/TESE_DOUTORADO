@@ -478,7 +478,7 @@
 	%
 	% Tradução folha de rosto
 	\newcommand{\txtorientador}{\IfStrEq{\generoorientador}{F}{Orientadora}{Orientador}}
-	\newcommand{\txtcoorientador}{\IfStrEq{\generocoorientador}{F}{Coorientadora}{Coorientador}}
+	\newcommand{\txtcoorientador}{\IfStrEq{\generocoorientador}{F}{Orientadora}{Coorientador}}
 	\newcommand{\txtcoordenadordo}{\IfStrEq{\generocoordenador}{F}{Coordenadora do}{Coordenador do}}
 	\newcommand{\txtbancaexaminadora}{Banca Examinadora}	
 	\newcommand{\txttextofolhaderosto}{

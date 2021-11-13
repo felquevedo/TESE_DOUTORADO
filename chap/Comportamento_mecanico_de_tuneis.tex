@@ -111,7 +111,7 @@ A \autoref{evolucao_convergencia} ilustra a evolução da convergência devido a
 
 \section{Influência da reologia do maciço}
 
-\subsection{Comportamento instantâneo}
+\subsection{Comportamento instantâneo}\label{comportamento_instantaneo}
 
 Para caracterizar o comportamento de curto prazo do maciço, o ensaio triaxial associado à medição da variação do volume é comumente utilizado. Esse ensaio clássico na mecânica das rochas permite estudar as diferentes fases do comportamento: elástica, plástica, ruptura e pós-ruptura. As medidas da variação do volume permitem fazer estudos de outros aspectos do comportamento, como o coeficiente de Poisson e a dilatância. Esse ensaio, de forma resumida, consiste em submeter uma amostra cilíndrica do maciço a um estado de tensões triaxial hidrostático e, após atingido esse estado, leva-lá à ruptura através do aumento da carga axial (o desviador). \citeonline{Rousset1988}, por exemplo, caracterizou o comportamento de curto prazo de maciços argilosos profundos em frágil (argila rígida) e dúctil (argila plástica). Um maciço rígido pode ser visto na \autoref{ensaio_triaxial_rigido}.
 
@@ -279,6 +279,8 @@ Muitas análises consideram, por simplificação, a seção circular. Esse forma
 	\caption{\label{trajetorias_hoekbrown}Trajetória das tensões principais e linhas de isotensão, da maior e menor tensão principal, para seção circular (à esquerda) e ferradura (à direita) em condições geostáticas hidrostáticas (adaptado de: \citeonline[p. 469, 484]{Hoek1980})}
 \end{figure}
 
+Ao final dessa tese é feito um estudo paramétrico considerando o modelo elastoplástico-viscoplástico com seção elíptica.
+
 \section{Influência da profundidade do túnel}
 \label{cap:Influência da profundidade do túnel}
 A profundidade do túnel está diretamente relacionada com o estado de tensões iniciais. Dados empíricos (\autoref{coeficiente_empuxo}a) sugerem que a tensão vertical pode ser estimada através da seguinte expressão \cite[p. 96]{Hoek1980}:
@@ -334,7 +336,7 @@ Além disso, quando o maciço apresenta um comportamento elastoplástico, a anis
 	\begin{center}
 		\includegraphics[scale = 1.0]{0423-modos_falha.pdf}
 	\end{center}
-	\caption{\label{modos_falha}Relação entre o estado de tensões iniciais e os modos de falha, onde $q_0$ é a resistência à compressão uniaxial do maciço (adaptado de: \citeonline[p.  121]{Detournay1988})}
+	\caption{\label{modos_falha}Relação entre o estado de tensões iniciais e os modos de falha, onde $q_0$ é a resistência à compressão do maciço (adaptado de: \citeonline[p.  121]{Detournay1988})}
 \end{figure}
 
 Como se pode ver na \autoref{modos_falha}, esses autores identificaram quatro zonas:
@@ -347,6 +349,8 @@ Como se pode ver na \autoref{modos_falha}, esses autores identificaram quatro zo
 \end{alineas}
 
 Além disso, quando há revestimento a anisotropia das tensões poderá ocasionar tração ou falha por compressão e cisalhamento na coroa ou nas paredes laterais do revestimento \cite{Brady2006}. Contudo, para uma situação em que $0 \leq K \leq 1$, em túneis profundos, a consideração de um estado geostático hidrostático ($K=1$) pode ser conservadora, para o dimensionamento do revestimento, como pode ser visto no estudo de \citeonline{Shrestha2015}.
+
+Apesar da generalidade do modelo constitutivo desenvolvido nessa tese não será abordado a influência da anisotropia das tensões durante as análises.
 
 
 \section{Influência da proximidade da superfície}
@@ -471,3 +475,5 @@ Existem métodos simplificados que se diferenciam justamente nas propostas de $U
 \end{figure}
 
 Em vista disso, esses autores propuseram uma correção ao método Convergência-Confinamento criando o \textit{New Implicit Method} (NIM). Um método implícito, pois $U_0$ depende tanto da rigidez do revestimento quanto da convergência ao equilíbrio (que se quer determinar). Esse método foi desenvolvido para leis de comportamento do maciço em elasticidade, plasticidade e viscoplasticidade, conforme \citeonline{Bernaud1992} e \citeonline{Bernaud1994}.
+
+A presente tese não lidará com análises que consideram a curva CV-CF que é um método simplificado. As análises em axissimetria e tridimensionais, implementadas na tese, já resolvem esse problema da iteração entre revestimento e o maciço fornecendo os valores das convergências e pressões no equilíbrio. Contudo, para trabalhos futuros pode ser interessante construir curvas de convergências para o modelo elastoplástico-viscoplástico e propor ajustes no método CV-CF.
