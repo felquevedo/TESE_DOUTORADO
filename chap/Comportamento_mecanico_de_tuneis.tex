@@ -89,9 +89,9 @@ O \textit{Spalling} é preponderante em maciço muito resistente, inicialmente p
 	\caption{\label{foto_spalling}À esquerda uma seção remanescente após moderada fragmentação e quebra em um túnel escavado com TBM e à direita uma seção em que parte do contorno apresentou instabilidade (flambagem) em um túnel escavado de forma não mecanizada (fonte: \citeonline[p. 1084]{Diederichs2007})}
 \end{figure}
 
-Já o \textit{Squeezing} é um modo de falha relacionado ao cisalhamento e encontrado principalmente em túneis profundos em condições de grandes tensões \textit{in situ}. Inicia-se quando a fissuração está suficientemente avançada, causando uma diminuição nas propriedades mecânicas do maciço, sem gerar instabilidade no contorno da seção. Essa diminuição das características mecânicas associada ao desenvolvimento da fissuração é progressiva e controlada, em especial, devido ao confinamento que reina no maciço. Ao contrário do primeiro mecanismo, a energia armazenada pela redistribuição das tensões é dissipada de forma gradual por deformações. Esse comportamento está intimamente relacionado com o fenômeno de fluência descrito na próxima seção a qual compreende um dos comportamentos passíveis de modelar e estudar com a solução proposta nessa tese.
+Já o \textit{Squeezing} é um modo de falha relacionado ao cisalhamento e encontrado principalmente em túneis profundos em condições de grandes tensões \textit{in situ}. Inicia-se quando a fissuração está suficientemente avançada, causando uma diminuição nas propriedades mecânicas do maciço, sem gerar instabilidade no contorno da seção. Essa diminuição das características mecânicas associada ao desenvolvimento da fissuração é progressiva e controlada, em especial, devido ao confinamento que reina no maciço. Ao contrário do primeiro mecanismo, a energia armazenada pela redistribuição das tensões é dissipada de forma gradual por deformações. Esse comportamento está intimamente relacionado com o fenômeno de fluência descrito na próxima seção a qual compreende um dos comportamentos passíveis de modelar e estudar com a parte viscoplástica da solução proposta nessa tese.
 
-A \autoref{evolucao_convergencia} ilustra a evolução da convergência por esse fenômeno. Tal comportamento também é visto em galerias para estocagem de rejeitos radioativos em maciços argilosos profundos. Essas argilas possuem baixa condutividade hidráulica, portanto, pouca difusão molecular, sendo ideais para estocar esse material. Porém, apresentam esse comportamento diferido e que pode comprometer o projeto no longo tempo requerido para estabilização desse material radioativo. Estudos como os de \citeonline{Rousset1988} e \citeonline{Armand2013} são alguns exemplos de investigações nesse sentido. Laboratórios como o HADES na Bélgica e \textit{Meuse/Haute-Marne} (\autoref{evolucao_GED}) em Paris, são exemplos de túneis para estocagem radioativa que apresentam esse fenômeno.
+A \autoref{evolucao_convergencia} ilustra a evolução da convergência devido a esse fenômeno. Tal comportamento também é visto em galerias para estocagem de rejeitos radioativos em maciços argilosos profundos. Essas argilas possuem baixa condutividade hidráulica, portanto, pouca difusão molecular, sendo ideais para estocar esse material. Porém, apresentam esse comportamento diferido e que pode comprometer o projeto no longo tempo requerido para estabilização desse material radioativo. Estudos como os de \citeonline{Rousset1988} e \citeonline{Armand2013} são alguns exemplos de investigações nesse sentido. Laboratórios como o HADES na Bélgica e \textit{Meuse/Haute-Marne} (\autoref{evolucao_GED}) em Paris, são exemplos de túneis para estocagem radioativa que apresentam esse fenômeno.
 
 \begin{figure}[H]
 	\begin{center}
@@ -132,7 +132,7 @@ No comportamento da \autoref{ensaio_triaxial_rigido} pode-se destacar as seguint
 	
 	\item \textbf{fase de ruptura} ($1,3\%\le \varepsilon_a \le 1,6\%$): o desviador cai acentuadamente, o que reflete a fragilidade do comportamento dessa argila. Enquanto isso, o volume da amostra aumenta drasticamente;
 	
-	\item \textbf{fase pós-ruptura} ($1,6\%\le \varepsilon_a \le 5\%$): o desviador evoluiu pouco e mantém um valor residual de 40\% do desvio máximo. Esta resistência residual ocorre pelo atrito ao deslizamento na superfície de ruptura que apareceu durante o carregamento. Nessa fase, o volume da abertura aumenta muito, o que reflete o comportamento altamente dilatante do material (2\% superior ao volume original na deformação de 5\%).
+	\item \textbf{fase pós-ruptura} ($1,6\%\le \varepsilon_a \le 5\%$): o desviador evoluiu pouco e mantém um valor residual de 40\% do desvio máximo. Esta resistência residual ocorre pelo atrito ao deslizamento na superfície de ruptura que apareceu durante o carregamento. Nessa fase, o volume aumenta muito, o que reflete o comportamento altamente dilatante do material (2\% superior ao volume original na deformação de 5\%).
 	
 \end{alineas}
 
@@ -172,9 +172,9 @@ Contudo, como visto nas figuras acima, a massa rochosa não é um material perfe
 	\caption{\label{deslocamentos_tensoes_analitico}Deslocamentos e tensões no entorno de um maciço submetido à pressão geostática-hidrostática $p_{\infty}$ e pressão interna $p_i$ no interior da seção do túnel. À esquerda, maciço elástico e à direita, elastoplástico.}
 \end{figure}
 
-Algumas soluções analíticas considerando leis elastoplásticas específicas para túneis não revestidos podem ser encontradas, por exemplo, em \citeonline{Salencon1969}, \citeonline{Hoek1980}, \citeonline{Brown1983}, \citeonline{Detournay1987}, \citeonline{Carranza-Torres1999}, \citeonline{Carranza-Torres2004}, Sharan (\citeyear{Sharan2003,Sharan2005}) e \citeonline{Alejano2009}.
+Algumas soluções analíticas considerando leis elastoplásticas específicas para túneis não revestidos podem ser encontradas, por exemplo, em \citeonline{Salencon1969}, \citeonline{Hoek1980}, \citeonline{Brown1983}, \citeonline{Detournay1987}, \citeonline{Corbeta1990}, \citeonline{Carranza-Torres1999}, \citeonline{Carranza-Torres2004}, Sharan (\citeyear{Sharan2003,Sharan2005}) e \citeonline{Alejano2009}.
 
-Um dos objetivos nessa tese é justamente implementar um algoritmo geral para considerar esse comportamento instantâneo elastoplástico conjuntamente com o fenômeno diferido no tempo.
+Um dos objetivos nessa tese é justamente formular e implementar um modelo constitutivo capaz de considerar esse comportamento instantâneo elastoplástico conjuntamente com o fenômeno diferido no tempo.
 
 \subsection{Comportamento diferido no tempo}
 
@@ -246,11 +246,11 @@ Um exemplo da magnitude dos efeitos viscosos frente a leis elásticas e elastopl
 	\caption{\label{perfil_convergencias_sterpi}Perfil de convergências, em análises numéricas axissimétricas com maciço elástico (EL), elastoplástico (EP), viscoelástico (VE), viscoplástico com fluência no regime secundário (VP) e em regime terciário (VP3), todos na ausência de revestimento (adaptado de: \citeonline[p. 329]{Sterpi2009})}
 \end{figure}
 
-Outra abordagem é a combinação de diversos comportamentos, tanto instantâneos quanto diferidos. Esse é o principal enfoque dessa tese, que compreenderá a implementação de um comportamento elastoplástico-viscoplástico.
+Outra abordagem é a combinação de diversos comportamentos, tanto instantâneos quanto diferidos, e esse é o principal enfoque dessa tese, que compreende o desenvolvimento e implementação de um comportamento elastoplástico-viscoplástico.
 
 \subsection{Alguns estudos considerando leis elastoplásticas e viscoplásticas}
 
-Alguns estudos considerando leis elastoplásticas-viscoplásticas podem ser encontrados em Rousset (\citeyear{Rousset1988}, \citeyear{Rousset1990}), \citeonline{Piepi1995}, \citeonline{Purwodihardjo2005}, \citeonline{Kleine2007}, \citeonline{Shafiqu2008}, \citeonline{Debernardi2009}, \citeonline{Souley2011}, \citeonline{Manh2015} e \citeonline{Vrakas2015}. A seguir alguns comentários sobre cada um desses estudos.
+Alguns estudos considerando leis elastoplásticas-viscoplásticas podem ser encontrados em Rousset (\citeyear{Rousset1988}, \citeyear{Rousset1990}), \citeonline{Piepi1995}, \citeonline{Purwodihardjo2005}, \citeonline{Kleine2007}, \citeonline{Shafiqu2008}, \citeonline{Debernardi2009}, \citeonline{Souley2011} e \citeonline{Manh2015}. A seguir alguns comentários sobre cada um desses estudos.
 
 \textbf{\citeonline{Rousset1988}}, no intuito de estudar túneis em maciços argilosos profundos (usados para estocagem de rejeitos radioativos) fez um excelente trabalho de caracterização experimental do comportamento desses e classificou-os em rígidos e dúcteis. Propôs um modelo elastoplástico-viscoplástico com critério tanto de Tresca quanto Mohr-Coulomb, perfeito (para as argilas rígidas) e com amolecimento bi-linear (para as dúcteis). O modelo de \citeonline{Perzyna1966} foi adotado como sendo o mecanismo viscoso com as mesmas superfícies de escoamento da elastoplasticidade. O seu trabalho compreende principalmente soluções analíticas.
 

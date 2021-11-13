@@ -12,7 +12,7 @@ A metodologia consiste em uma \textbf{abordagem teórica} derivada da mecânica 
 
 \section{Objetivos}
 
-O \textbf{objetivo principal} desta pesquisa consiste em formular e programar um modelo constitutivo elastoplástico-viscoplástico para analisar as deformações instantâneas e diferidas induzidas pelo processo de escavação em túneis profundos, incorporando a interação tridimensional entre o maciço e o revestimento.
+O \textbf{objetivo principal} desta tese consiste em formular e programar um modelo constitutivo elastoplástico-viscoplástico para analisar as deformações instantâneas e diferidas induzidas pelo processo de escavação em túneis profundos, incorporando a interação tridimensional entre o maciço e o revestimento.
 
 Como \textbf{objetivos secundários} têm-se:
 
@@ -23,7 +23,7 @@ Como \textbf{objetivos secundários} têm-se:
 	
 	\item generalizar esse modelo constitutivo para análises em estado plano de deformações, axissimetria (uma vez que essas análises são rápidas do ponto de vista computacional e comuns em diversos estudos na literatura) e tridimensional;
 	
-	\item implementar o modelo constitutivo acoplado através da customização do \textit{software} ANSYS utilizando a subrotina \textit{Usermat};
+	\item implementar o modelo constitutivo acoplado através da customização do \textit{software} ANSYS (versão 2021R1) utilizando a subrotina \textit{Usermat};
 	
 	\item generalizar o modelo constitutivo para reproduzir tanto o comportamento elástico, elastoplástico, viscoplástico e elastoplástico-viscoplástico, com a possibilidade de implementação de diversas leis de comportamento.
 	
@@ -38,15 +38,15 @@ Os túneis podem sofrer influência da superfície como, por exemplo, deformaç�
 
 Embora o maciço em que um túnel está imerso possa apresentar descontinuidades, em muitos casos, seu comportamento global pode ser simulado efetivamente como um \textbf{meio contínuo}. Apesar do comportamento complexo do maciço, que é função também de diversas propriedades que variam espacialmente, nesse trabalho é considerado um \textbf{maciço homogêneo e isotrópico}. Em vista disso, o \textbf{maciço é considerado monofásico} com seu comportamento instantâneo e diferido \textbf{modelado fenomenologicamente através de uma lei reológica} elástica, elastoplástica, viscoplástica e elastoplástica-viscoplástica, \textbf{não considerando, portanto, outras abordagens como, por exemplo, as da poro mecânica, as que tratam da influência do fluxo de água ou da temperatura}.
 
-É também sabido que, em geral, o estado de tensões internas em um maciço é extremamente complexo, devido aos movimentos tectônicos, descontinuidades e heterogeneidades. Contudo, as análises e verificações que são feitas nessa tese considera um \textbf{estado geostático hidrostático de tensões}. De qualquer forma isso não limita a aplicação do algoritmo desenvolvido para os casos em que o estado de tensões é anisotrópico.
+É também sabido que, em geral, o estado de tensões internas em um maciço é extremamente complexo, devido aos movimentos tectônicos, descontinuidades e heterogeneidades. Contudo, as análises e verificações que são feitas nessa tese considera um \textbf{estado geostático hidrostático de tensões}. De qualquer forma isso não limita a aplicação do modelo constitutivo desenvolvido para os casos em que o estado de tensões é anisotrópico.
 
-Como é visto no Capítulo 4, a velocidade de escavação e colocação do revestimento é uma variável importante quando se tem fenômenos diferidos no tempo. Essa velocidade depende de diversos fatores relacionados à dificuldade de escavação do maciço e ao cronograma de execução da obra. Contudo, nesse trabalho, apesar da generalidade do modelo, diferentemente da prática usual de execução de túneis, \textbf{a velocidade de avanço da face de escavação é considerada constante}.
+A velocidade de escavação e colocação do revestimento é uma variável importante quando se tem fenômenos diferidos no tempo. Essa velocidade depende de diversos fatores relacionados à dificuldade de escavação do maciço e ao cronograma de execução da obra. Contudo, nesse trabalho, apesar da generalidade do modelo, diferentemente da prática usual de execução de túneis, \textbf{a velocidade de avanço da face de escavação é considerada constante}.
 
 Apesar de um túnel poder atravessar um perfil litológico heterogêneo, o que pode exigir um revestimento e técnicas de pré-suporte especializados para cada região, no presente estudo, o \textbf{revestimento consiste em um modelo único de espessura constante} (sem distinção entre revestimento primário e secundário) ao longo de todo o eixo longitudinal do túnel.
 
 Principalmente em escavações não mecanizadas, é comum a frente de escavação apresentar parcializações de modo a estabilizar ou diminuir as deformações dessa zona. Apesar disso, nesse trabalho a \textbf{escavação é feita à seção plena, plana e vertical sem considerar nenhuma técnica ou elemento de pré-suporte}.
 
-Os modelos incorporados no programa são: \textbf{elástico, elastoplástico, viscoplástico e elastoplástico-viscoplástico}. Estão implementados para o maciço o modelo clássico elastoplástico de Drucker-Prager e o modelo viscoplástico de Perzyna (1966) com as mesma superfície de escoamento do modelo elastoplástico, contudo, não necessariamente com os mesmos valores dos parâmetros. De qualquer forma o modelo permite a implementação de outras superfícies de escoamento. \textbf{Para o revestimento é utilizado o modelo elástico linear}.
+Os modelos incorporados no programa são: \textbf{elástico, elastoplástico, viscoplástico e elastoplástico-viscoplástico}. Para o maciço é considerado o modelo clássico elastoplástico de Drucker-Prager e o modelo viscoplástico de Perzyna (1966) com a mesma superfície de escoamento do modelo elastoplástico, contudo, não necessariamente com os mesmos valores dos parâmetros. De qualquer forma o modelo permite a implementação de outras superfícies de escoamento. \textbf{Para o revestimento é utilizado o modelo elástico linear}.
 
 A evolução das deformações se dá de forma \textbf{quase-estática}, portanto, não são considerados os termos inerciais (densidade e aceleração) ou excitações dinâmicas (como seria, por exemplo, em uma análise considerando terremotos e explosões). Além disso, é considerada a \textbf{hipótese das pequenas perturbações}.
 
