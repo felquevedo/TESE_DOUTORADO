@@ -240,7 +240,7 @@ Fazendo $\fl(\ul) = \underline{0}$, isolando $\ul_{i+1}$ e substituindo (\ref{eq
 \end{equation}
 em que $\Delta \ul_i$ é o incremento de deslocamentos nodais da iteração atual $i$, $\Fl_{int_i}$ são as forças internas (ou forças restauradoras) da iteração atual (calculadas com $\ul_i$), $\Rl_i$ é o vetor de carga desbalanceado (também chamado de resíduo) para a iteração atual, $\Kll_i$ a matriz de rigidez global tangente na iteração atual, $\ul_i$ os deslocamentos nodais na iteração atual e $\ul_{i+1}$ os deslocamentos nodais atualizados para a próxima iteração.
 
-Como $\Delta \ul_i = \Kll_i^{-1}\Rl_i$ é um sistema de equações esparso (contém muitos elementos nulos) e geralmente simétrico, há diversas técnicas de solução que buscam explorar essas características para obter eficiência computacional. O ANSYS possui uma técnica de \textbf{solução direta}, que busca resolver o sistema através de operações que compreendem a inversão da matriz de rigidez, e três técnicas de \textbf{soluções indiretas}, que se aproximam da solução do sistema de forma interativa com uma dada tolerância.
+Como $\Delta \ul_i = \Kll_i^{-1}\Rl_i$ é um sistema de equações esparso (contém muitos elementos nulos) e geralmente simétrico, há diversas técnicas de solução que buscam explorar essas características para obter eficiência computacional. O \textit{software} ANSYS possui uma técnica de \textbf{solução direta}, que busca resolver o sistema através de operações que compreendem a inversão da matriz de rigidez, e três técnicas de \textbf{soluções indiretas}, que se aproximam da solução do sistema de forma interativa com uma dada tolerância.
 
 A solução direta (\textit{SPARSE - Sparse Direct Solver}) consiste em aplicar a fatorização de Cholesky modificada $\Kll = \Lll~\Dll~ \Lll^T$ (em que $\Lll$ é uma matriz triangular inferior e $\Dll$ uma matriz diagonal) e, através de substituições progressivas e retroativas, resolver o sistema. Em geral, para problemas com poucos graus de liberdade, é uma solução bastante eficiente e não possui problemas de instabilidade numérica. Algoritmos de solução direta análogas podem ser encontrados em \citeonline{Felippa1975} e \citeonline{Smith2014}.
 
@@ -588,10 +588,10 @@ em que $\phi'= \dfrac{d \phi}{d(f/f0)} = n(f/f0)^{n-1}$. Quando $\phi = 0$ tem-s
 \subsection{Integração das equações constitutivas acopladas elastoplástica-viscoplásticas}
 Como visto no \autoref{cap: modelo mecanico}, considerando a hipótese das transformações infinitesimais, as equações constitutivas da elastoplasticidade e viscoplasticidade são acopladas em série de forma a obter a relação constitutiva elastoplástica-viscoplástica linearizada (\ref{eq:lei_epvp}). Além disso, como a viscoplasticidade é integrada através de uma regra semi-implícita na qual todas as incógnitas são calculadas com as variáveis conhecidas do subpasso anterior $n$, o incremento de deformação viscoplástica pode ser descontado diretamente do incremento de deformação total na etapa de predição elástica do algoritmo de elastoplasticidade.
 
-O algoritmo para integração das equações constitutivas elastoplástica-viscoplástica pode ser visto no fluxograma da \autoref{algoritmo_EPVP}. A sua programação em \textit{Fortran} pode ser vista no Apêndice B.
+O algoritmo para integração das equações constitutivas elastoplástica-viscoplástica pode ser visto no fluxograma da \autoref{algoritmo_EPVP}. A sua programação em \textit{Fortran} pode ser vista no Apêndice B. O procedimento para incluir essa subrotina no ANSYS pode ser vista em \citeonline{Quevedo2017}.
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[scale = 1.0]{0610_4-integração EPVP.pdf}
+		\includegraphics[scale = 1.0]{0610_5-integração EPVP.pdf}
 	\end{center}
 	\caption{\label{algoritmo_EPVP}Algoritmo de integração do modelo constitutivo elastoplástico-viscoplástico (omitindo o índice $n$+1).}
 \end{figure}

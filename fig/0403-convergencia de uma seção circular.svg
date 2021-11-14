@@ -321,7 +321,7 @@
          sodipodi:nodetypes="cc" />
       <text
          xml:space="preserve"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:3.98971px;line-height:1.25;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, ';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+         style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:3.98971px;line-height:1.25;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman,  Italic';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583;"
          x="194.46875"
          y="82.120537"
          id="text6571"><tspan
@@ -329,7 +329,7 @@
            id="tspan6569"
            x="194.46875"
            y="82.120537"
-           style="font-size:3.98971px;stroke-width:0.264583">x</tspan></text>
+           style="font-size:3.98971px;stroke-width:0.264583;-inkscape-font-specification:'Times New Roman,  Italic';font-family:'Times New Roman';font-weight:normal;font-style:italic;font-stretch:normal;font-variant:normal;">x</tspan></text>
       <path
          style="fill:none;stroke:#000000;stroke-width:0.26464;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:0.26464, 0.52928;stroke-dashoffset:0;stroke-opacity:1"
          d="M 134.03566,69.540957 H 54.462653"
@@ -441,12 +441,12 @@
     <text
        id="text5521-0-8"
        y="72.103218"
-       x="121.17464"
+       x="120.1163"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:3.52777px;line-height:1.25;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, ';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.23395"
        xml:space="preserve"><tspan
          style="font-size:3.52777px;stroke-width:0.23395"
          y="72.103218"
-         x="121.17464"
+         x="120.1163"
          id="tspan5519-7-3"
          sodipodi:role="line"><tspan
    style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman,  Italic'"
@@ -454,7 +454,9 @@
    style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman,  Italic'"
    id="tspan1797">r</tspan> = <tspan
    style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman,  Italic'"
-   id="tspan1799">R</tspan>)</tspan></text>
+   id="tspan1799">R<tspan
+   style="font-size:2.82222px"
+   id="tspan1001">i</tspan></tspan>)</tspan></text>
     <text
        id="text5521-0-8-3"
        y="57.902851"
@@ -471,7 +473,9 @@
    style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman,  Italic'"
    id="tspan1803">r</tspan> = <tspan
    style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman,  Italic'"
-   id="tspan1805">R</tspan>)</tspan></text>
+   id="tspan1805">R<tspan
+   style="font-size:2.82222px"
+   id="tspan991">i</tspan></tspan>)</tspan></text>
     <path
        style="fill:#000000;fill-opacity:0.988235;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;marker-end:url(#Arrow1Mend)"
        d="M 51.484596,61.389938 V 66.36075"
@@ -528,17 +532,21 @@
          y="60.991528"
          x="139.77963"
          id="tspan5519-7-3-3"
-         sodipodi:role="line">R</tspan></text>
+         sodipodi:role="line">R<tspan
+   style="font-size:2.82222px"
+   id="tspan999">i</tspan></tspan></text>
     <text
        id="text5521-0-8-4-1"
        y="60.608055"
-       x="47.301659"
+       x="46.243324"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:3.52777px;line-height:1.25;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, ';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.23395"
        xml:space="preserve"><tspan
          style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:3.52777px;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman,  Italic';stroke-width:0.23395"
          y="60.608055"
-         x="47.301659"
+         x="46.243324"
          id="tspan5519-7-3-3-6"
-         sodipodi:role="line">R</tspan></text>
+         sodipodi:role="line">R<tspan
+   style="font-size:2.82222px"
+   id="tspan997">i</tspan></tspan></text>
   </g>
 </svg>

@@ -813,11 +813,11 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1.5345049"
-     inkscape:cx="235.97457"
-     inkscape:cy="170.8835"
+     inkscape:zoom="1.3681257"
+     inkscape:cx="247.01477"
+     inkscape:cy="224.30718"
      inkscape:document-units="mm"
-     inkscape:current-layer="layer1"
+     inkscape:current-layer="g19141-7"
      inkscape:document-rotation="0"
      showgrid="false"
      inkscape:window-width="1512"
@@ -1061,8 +1061,12 @@
            font-style="italic"
            font-weight="400"
            font-size="13px"
-           transform="rotate(-90,91.94115,57.05885)"
-           id="text17466-2">U</text>
+           transform="rotate(-90)"
+           id="text17466-2"
+           x="-151"
+           y="34.882301">U<tspan
+   style="font-size:10.6667px"
+   id="tspan1332">i</tspan></text>
       </g>
       <g
          clip-path="url(#clip25-5-1)"
@@ -1105,7 +1109,9 @@
            font-weight="400"
            font-size="13px"
            transform="translate(270.163,260)"
-           id="text17482-0">R</text>
+           id="text17482-0">R<tspan
+   style="font-size:10.6667px"
+   id="tspan1334">i</tspan></text>
       </g>
       <g
          clip-path="url(#clip31-5-2)"
@@ -1384,26 +1390,19 @@
              d="M -0.00171875,5.625e-4 H 10.142813"
              transform="matrix(1,0,0,-1,173.115,132.274)"
              id="id-f9fe7ef6-9354-4188-a307-1030a9150a4a-7" />
-          <g
-             style="fill:#000000;fill-opacity:1"
-             id="id-84483c19-cfcb-4c34-9fcc-352277f456b3-7">
-            <g
-               transform="translate(174.298,138.202)"
-               id="g19134-3">
-              <path
-                 style="stroke:none;stroke-width:0"
-                 d="M 4.1875,-0.125 C 3.859375,-0.140625 3.703125,-0.265625 3.5625,-0.65625 L 2.890625,-2.453125 c 0.5625,-0.125 0.796875,-0.234375 1.0625,-0.46875 0.25,-0.21875 0.390625,-0.5 0.390625,-0.828125 0,-0.6875 -0.546875,-1.0625 -1.546875,-1.0625 H 0.96875 v 0.109375 c 0.3125,0.046875 0.34375,0.0625 0.421875,0.109375 C 1.453125,-4.5625 1.5,-4.46875 1.5,-4.390625 1.5,-4.296875 1.453125,-4.125 1.40625,-3.921875 L 0.5,-0.65625 C 0.375,-0.234375 0.3125,-0.1875 -0.09375,-0.125 V 0 h 1.796875 v -0.125 c -0.453125,-0.046875 -0.5,-0.09375 -0.5,-0.328125 0,-0.078125 0.015625,-0.171875 0.09375,-0.4375 L 1.703125,-2.421875 2.1875,-2.390625 3.09375,0 H 4.1875 Z M 2.265625,-4.390625 c 0.046875,-0.15625 0.140625,-0.203125 0.375,-0.203125 0.625,0 0.921875,0.28125 0.921875,0.828125 0,0.734375 -0.46875,1.109375 -1.390625,1.109375 -0.125,0 -0.203125,-0.015625 -0.375,-0.046875 z m 0,0"
-                 id="id-71b6e605-e385-42e4-a2d5-dac8eed1165f-3" />
-            </g>
-            <g
-               transform="translate(178.802,138.202)"
-               id="g19137-2">
-              <path
-                 style="stroke:none;stroke-width:0"
-                 d="m 2.578125,-0.78125 c -0.40625,0.4375 -0.6875,0.59375 -1.046875,0.59375 -0.421875,0 -0.671875,-0.3125 -0.671875,-0.84375 0,-0.625 0.25,-1.28125 0.671875,-1.71875 0.203125,-0.21875 0.5,-0.34375 0.796875,-0.34375 0.171875,0 0.28125,0.0625 0.28125,0.140625 C 2.609375,-2.90625 2.59375,-2.875 2.5625,-2.8125 2.5,-2.71875 2.5,-2.65625 2.5,-2.59375 c 0,0.171875 0.109375,0.28125 0.28125,0.28125 0.203125,0 0.359375,-0.15625 0.359375,-0.34375 C 3.140625,-3 2.796875,-3.25 2.359375,-3.25 1.25,-3.25 0.21875,-2.171875 0.21875,-1.03125 c 0,0.703125 0.40625,1.109375 1.09375,1.109375 0.53125,0 0.9375,-0.21875 1.390625,-0.78125 z m 0,0"
-                 id="id-d94dadce-53ea-488c-bc27-c1c5d212b225-3" />
-            </g>
-          </g>
+          <text
+             xml:space="preserve"
+             style="font-size:6.18699px;line-height:1.25;font-family:times;-inkscape-font-specification:times;letter-spacing:0px;stroke-width:0.464025"
+             x="173.60736"
+             y="137.07094"
+             id="text1338"><tspan
+               sodipodi:role="line"
+               id="tspan1336"
+               x="173.60736"
+               y="137.07094"
+               style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:times;-inkscape-font-specification:'times Italic';stroke-width:0.464025">R<tspan
+   style="font-size:4.9496px"
+   id="tspan1340">i</tspan> c</tspan></text>
         </g>
       </g>
       <g

@@ -2,6 +2,7 @@
 
 \item[\textbf{Latino minúsculo:}]
 \item[$c$]				Coesão;
+\item[$c_1, c_2, c_3$]	Constantes para determinar o vetor de fluxo;
 \item[$c_{TR}$]			Coesão considerando superfície de escoamento de Tresca;
 \item[$c_{VM}$]			Coesão considerando superfície de escoamento de von-Mises;
 \item[$c_0$]			Coesão residual no modelo elastoplástico;
@@ -31,7 +32,7 @@
 \item[$i_p$]			Ponto de integração;
 \item[$i_p$]			Contador do passo de escavação;
 \item[$k$] 				Parâmetro da superfície de Drucker-Prager;
-\item[$k_{cut}$] 		Indica que é necessário dividir o passo pela metade;
+\item[$k_{cut}$] 		Indica que é necessário dividir o subpasso pela metade;
 \item[$l_0$] 			Dimensão característica para hipótese das pequenas perturbações;
 \item[$l_a,~l_b,~l_c$] 			Dimensão do modelo de ensaio triaxial;
 \item[$mL_{1}$] 				Razão entre o primeiro e último elemento além da região de refinamento próximo ao túnel;
@@ -96,8 +97,6 @@
 \item[\textbf{Latino maiúsculo:}]
 \item[$\All$]	Matriz algorítmica do esquema de integração;
 \item[$\Bll$]	Matriz que relaciona os deslocamentos nodais com as deformações no interior do elemento;
-
-\item[$c_1, c_2, c_3$]	Constantes para determinar o vetor de fluxo;
 \item[$D$]				Diâmetro equivalente da seção do túnel;
 \item[$\Dllll$] Tensor constitutivo elástico de quarta ordem simétrico;
 \item[$\Dllll^{ep}$] Tensor constitutivo elastoplástico contínuo;
@@ -110,6 +109,7 @@
 \item[$E$]				Módulo de Young;
 \item[$E^*$]			Módulo de Young adimensional;
 \item[$E_h$]			Módulo de deformação médio horizontal na parte superior da crosta terrestre;
+\item[$E_{rev}$]			Módulo de Young do revestimento;
 \item[$\Fll$]			Gradiente da transformação geométrica;
 \item[$\Fl_{int}$]			Vetor de forças internas globais;
 \item[$\Fl_{int_e}$]			Vetor de forças internas do elemento;
@@ -137,8 +137,8 @@
 \item[$\Jll$] 		Jacobiano da transformação;
 \item[$J_{i_p}$ ] 				Determinante do Jacobiano da transformação no ponto de integração $i_p$;
 \item[$K$]				Coeficiente de empuxo do maciço;
-\item[$K_r$]			Rigidez equivalente do revestimento;
-\item[$K_r^*$]			Rigidez equivalente adimensional do revestimento;
+\item[$K_{rev}$]			Rigidez equivalente do revestimento;
+\item[$K_{rev}^*$]			Rigidez equivalente adimensional do revestimento;
 \item[$\Kll_e$]			Matriz de rigidez do elemento;
 \item[$\Kll$]			Matriz de rigidez global;
 \item[$L_p$]			Tamanho do passo de escavação;
@@ -172,6 +172,7 @@
 \item[$ \Tl^d $] 		Vetor tensão imposto na fronteira $S_T$;
 \item[$ TOL $] 			Tolerância de convergência do algoritmo de Newton-Raphson local;
 \item[$ U $] 			Convergência da seção do túnel;
+\item[$ U_i $] 			Convergência em $r = R_i$;
 \item[$ U_{0} $] 		Convergência da seção do túnel na cota não revestida a partir da face de escavação;
 \item[$ U_{eq} $] 		Convergência de equilíbrio de um túnel revestido;
 \item[$ U_{int} $] 		Energia potencial interna de deformação;
@@ -207,8 +208,8 @@
 \item[$\bar{\varepsilon}^{vp}$] Magnitude da deformação viscoplástica acumulada;
 \item[$ \varepsilon_0 $] Deformação a partir da qual tem-se a coesão residual $c_0$;
 \item[$ \varepsilon_a $] Deformação axial em um ensaio triaxial;
-\item[$ \varepsilon_R $] tolerância para o resíduo;
-\item[$ \varepsilon_u $] tolerância para o incremento de deslocamentos;
+\item[$ \varepsilon_R $] Tolerância para o resíduo;
+\item[$ \varepsilon_u $] Tolerância para o incremento de deslocamentos;
 
 \item[$ \eta $] 		Constante de viscosidade dinâmica;
 \item[$\eta_1,\eta_2,\eta_3$] 	Direções principais;
@@ -226,7 +227,7 @@
 \item[$ \rho $] 		Densidade do domínio;
 \item[$ \rho_{H} $] 		Coordenada do espaço de Haigh-Westergaard;
 
-\item[$ \sigmal^{INI} $] 	Tensor de tensões iniciais;
+\item[$ \sigmal^{INI} $] 	Tensor de tensões iniciais (notação de Voigt);
 \item[$ \sigma_{oct} $] 	Tensão normal octaédrica;
 \item[$ \sigma_{v} $] 	Tensão vertical no interior do maciço;
 \item[$ \sigma_{\theta \theta} $] Tensão no maciço na direção ortorradial;
@@ -256,13 +257,13 @@
 \item[$ \Umll $] 	Tensor de quarta ordem unitário (notação de Voigt);
 \item[$ \Uml $] 	Tensor de segunda ordem unitário (notação de Voigt);
 \item[$\Umllll$] Tensor unitário de quarta ordem;
-\item[det($*$)] 	Função determinante;
-\item[tr($*$)] 	Função traço;
-\item[$(*)^T$] 	Operador de transposição;
-\item[$ \divl $] 	Operador divergente;
+\item[det($*$)] 	Função Determinante;
+\item[tr($*$)] 	Função Traço;
+\item[$(*)^T$] 	Operador de Transposição;
+\item[$ \divl $] 	Operador Divergente;
 \item[$ \nabla $] 	Operador Gradiente;
-\item[$||*||$] 	Operador módulo;
-\item[$\sum *$] 	Operador somatório;
+\item[$||*||$] 	Operador Módulo;
+\item[$\sum *$] 	Operador Somatório;
 
 
 

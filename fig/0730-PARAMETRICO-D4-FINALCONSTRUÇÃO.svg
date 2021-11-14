@@ -1324,7 +1324,7 @@
      inkscape:cx="263.01262"
      inkscape:cy="2.3125501"
      inkscape:document-units="mm"
-     inkscape:current-layer="layer1"
+     inkscape:current-layer="g1619"
      inkscape:document-rotation="0"
      showgrid="false"
      inkscape:window-width="1618"
@@ -2016,16 +2016,6 @@
            id="text1549">(MPa)</text>
       </g>
       <g
-         clip-path="url(#clip62)"
-         id="g1555">
-        <text
-           font-family="'Times New Roman', 'Times New Roman_MSFontService', sans-serif"
-           font-weight="700"
-           font-size="16px"
-           transform="translate(753.044,901)"
-           id="text1553">CONVERGÊNCIA NO FINAL DA CONSTRUÇÃO</text>
-      </g>
-      <g
          clip-path="url(#clip63)"
          id="g1559">
         <text
@@ -2363,6 +2353,24 @@
            x="-975.63556"
            y="696.70642"
            style="stroke-width:0.999999">(%)</tspan></text>
+      <text
+         font-family="'Times New Roman', 'Times New Roman_MSFontService', sans-serif"
+         font-weight="700"
+         font-size="16px"
+         id="text2608"
+         x="763.07513"
+         y="900.07874">CONVERGÊNCIA NO</text>
+      <text
+         xml:space="preserve"
+         style="font-size:16px;line-height:1.25;font-family:times;-inkscape-font-specification:times;letter-spacing:0px"
+         x="928.18024"
+         y="899.80298"
+         id="text1576"><tspan
+           sodipodi:role="line"
+           id="tspan1574"
+           x="928.18024"
+           y="899.80298"
+           style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:16px;font-family:times;-inkscape-font-specification:'times Bold'">CURTO PRAZO</tspan></text>
     </g>
   </g>
 </svg>

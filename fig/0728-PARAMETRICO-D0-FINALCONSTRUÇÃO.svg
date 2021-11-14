@@ -2584,7 +2584,7 @@
      inkscape:cx="232.22927"
      inkscape:cy="82.825398"
      inkscape:document-units="mm"
-     inkscape:current-layer="layer1"
+     inkscape:current-layer="g2610"
      inkscape:document-rotation="0"
      showgrid="false"
      inkscape:window-width="1618"
@@ -3284,7 +3284,18 @@
            font-weight="700"
            font-size="16px"
            transform="translate(181.474,885)"
-           id="text2608">CONVERGÊNCIA NO FINAL DA CONSTRUÇÃO</text>
+           id="text2608">CONVERGÊNCIA NO</text>
+        <text
+           xml:space="preserve"
+           style="font-size:16px;line-height:1.25;font-family:times;-inkscape-font-specification:times;letter-spacing:0px"
+           x="346.5791"
+           y="884.72424"
+           id="text1576"><tspan
+             sodipodi:role="line"
+             id="tspan1574"
+             x="346.5791"
+             y="884.72424"
+             style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:16px;font-family:times;-inkscape-font-specification:'times Bold'">CURTO PRAZO</tspan></text>
       </g>
       <g
          clip-path="url(#clip65-1)"
