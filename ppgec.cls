@@ -478,36 +478,48 @@
 	%
 	% Tradução folha de rosto
 	\newcommand{\txtorientador}{\IfStrEq{\generoorientador}{F}{Orientadora}{Orientador}}
-	\newcommand{\txtcoorientador}{\IfStrEq{\generocoorientador}{F}{Orientadora}{Coorientador}}
+	%\newcommand{\txtcoorientador}{\IfStrEq{\generocoorientador}{F}{Corientadora}{Corientador}}
+	\newcommand{\txtcoorientador}{\IfStrEq{\generocoorientador}{F}{Orientadora}{Orientador}}		
+		
 	\newcommand{\txtcoordenadordo}{\IfStrEq{\generocoordenador}{F}{Coordenadora do}{Coordenador do}}
 	\newcommand{\txtbancaexaminadora}{Banca Examinadora}	
 	\newcommand{\txttextofolhaderosto}{
 		\OnehalfSpacing{Esta \MakeTextLowercase{\imprimirtipotrabalho} foi julgada adequada para a obtenção do título de \MakeUppercase{\tituloobtido}, na área de concentração \areaconcentracao, e aprovada em sua forma final pelo professor orientador e pelo \ppg~da \imprimirinstituicao.}}	
 	\newcommand{\txttextofolhaderostoquali}{
 			\OnehalfSpacing{Texto apresentado como requisito de \MakeTextLowercase{\imprimirtipotrabalho} na área de concentração de \areaconcentracao~do \ppg~da \imprimirinstituicao.}}
-	%
-	% Documento, curso e título
+	%	
+	% Definindo tipo de trabalho, curso, titulo obtido e elementos do abstract
 	\if \vardoctype 0 
 		\tipotrabalho{Tese de Doutorado}
 		\newcommand{\tipotrabalhocurto}{Tese}
 		\newcommand{\cursorealizado}{Doutorado em Engenharia}
-		\newcommand{\tituloobtido}{Doutor em Engenharia}	
+		\newcommand{\tituloobtido}{Doutor em Engenharia}
+		\newcommand{\tipotrabalhocurtoabstract}{Thesis}	
+		\newcommand{\cursorealizadoabstract}{Doctor in Engineering}	
 	\else \if \vardoctype 1
 		\tipotrabalho{Dissertação de Mestrado}
 		\newcommand{\tipotrabalhocurto}{Dissertação}
 		\newcommand{\cursorealizado}{Mestrado em Engenharia}
 		\newcommand{\tituloobtido}{Mestre em Engenharia}
+		\newcommand{\tipotrabalhocurtoabstract}{Dissertation}
+		\newcommand{\cursorealizadoabstract}{Master in Engineering}		
 	\else \if \vardoctype 2
 		\tipotrabalho{Qualificação de Doutorado}
 		\newcommand{\tipotrabalhocurto}{Qualificação}
 		\newcommand{\cursorealizado}{Doutorado em Engenharia}
 		\newcommand{\tituloobtido}{Doutor em Engenharia}
+		\newcommand{\tipotrabalhocurtoabstract}{Qualification}
+		\newcommand{\cursorealizadoabstract}{Doctor in Engineering}		
 	\else \if \vardoctype 3
 		\tipotrabalho{Qualificação de Mestrado}
 		\newcommand{\tipotrabalhocurto}{Qualificação}
 		\newcommand{\cursorealizado}{Mestrado em Engenharia}
 		\newcommand{\tituloobtido}{Mestre em Engenharia}
+		\newcommand{\tipotrabalhocurtoabstract}{Qualification}	
+		\newcommand{\cursorealizadoabstract}{Master in Engineering}	
 	\fi \fi \fi \fi
+	\newcommand{\instituicaoabstract}{Federal University of Rio Grande do Sul}
+	\newcommand{\ppgabstract}{Postgraduate Program in Civil Engineering}
 	%
 	% Definindo a área de concentração
 	\if \vararea 0 
@@ -971,7 +983,7 @@
 % Resumo em outra lingua
 \newcommand{\imprimirabstract}{%
 \begin{resumo}[Abstract]
-	\SingleSpacing{\noindent \MakeUppercase{\citarautor}~{\bfseries \rmfamily \fontsize{12}{12} \imprimirtitulo}. \imprimirdata. \thelastpage p. \tipotrabalhocurto~(\cursorealizado) -- \ppg, \imprimirinstituicao, \imprimirlocal.}
+	\SingleSpacing{\noindent \MakeUppercase{\citarautor}~{\bfseries \rmfamily \fontsize{12}{12} \imprimirtituloestrangeiro}. \imprimirdata. \thelastpage p. \tipotrabalhocurtoabstract~(\cursorealizadoabstract) -- \ppgabstract, \instituicaoabstract, \imprimirlocal.}
 	\begin{otherlanguage*}{english}
 		
 		\OnehalfSpacing{\input{\pathpre abstract}} \vskip 24pt
