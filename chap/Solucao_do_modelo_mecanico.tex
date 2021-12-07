@@ -215,7 +215,7 @@ Os elementos finitos que são utilizados nesse trabalho com suas funções de in
 
 No \textit{software} ANSYS, ambos elementos possuem a opção degenerada em que é possível trabalhar de forma colapsada, triangular, por exemplo no caso do elemento PLANE182, e prisma, tetraédrica ou piramidal, no caso do elemento SOLID185. Nas análises apresentadas ao final dessa tese, não foram utilizadas essas formas. Além disso, apesar do \textit{script} APDL ter sido construído com a opção de se trabalhar com os elementos quadráticos (PLANE183 e SOLID186), visando uma melhor eficiência computacional, principalmente para os domínios tridimensionais, optou-se por fazer o estudo de convergência da malha com elementos lineares.
 
-Os elementos PLANE182 e SOLID185 possuem também opções que lidam com problemas de travamento (\textit{Locking}) e modos espúrios (\textit{Hourglass}). O travamento é caracterizado por uma rigidez excessiva do elemento, e ocorre principalmente em elementos de primeira ordem com integração completa que estão sujeitos a flexão. Ou ainda, quando o material é quase incompressível. Também podem ocorrer em elementos de segunda ordem, quando as deformações plásticas são da ordem das deformações elásticas. Esse problema evita-se com refinamento da malha, técnicas de subintegração e funções de formas extras. O ANSYS possuí as duas últimas técnicas para o SOLID185 (\textit{Uniform Reduced Integration with Hourglass Control} e \textit{Enhanced Strain Formulation}). Já os modos espúrios ocorrem quando se utiliza as técnicas de subintegração e é caracterizado por uma distorção no elemento porém com zero deformação. Esse problema é evitado utilizando integração completa ou refinamento da malha. No presente trabalho utilizou-se a \textbf{integração completa} (\textit{Full integration}) e esses problemas foram evitados com o \textbf{refinamento da malha}. 
+Os elementos PLANE182 e SOLID185 possuem também opções que lidam com problemas de travamento (\textit{Locking}) e modos espúrios (\textit{Hourglass}). O travamento é caracterizado por uma rigidez excessiva do elemento, e ocorre principalmente em elementos de primeira ordem com integração completa que estão sujeitos a flexão. Ou ainda, quando o material é quase incompressível. Também podem ocorrer em elementos de segunda ordem, quando as deformações plásticas são da ordem das deformações elásticas. Esse problema evita-se com refinamento da malha, técnicas de subintegração e funções de formas extras. O ANSYS possuí as duas últimas técnicas para o PLANE182 e SOLID185 (\textit{Uniform Reduced Integration with Hourglass Control} e \textit{Enhanced Strain Formulation}). Já os modos espúrios ocorrem quando se utiliza as técnicas de subintegração e é caracterizado por uma distorção no elemento porém com zero deformação. Esse problema é evitado utilizando integração completa ou refinamento da malha. No presente trabalho utilizou-se a \textbf{integração completa} (\textit{Full integration}) e esses problemas foram evitados com o \textbf{refinamento da malha}. 
 
 \section{Solução do sistema não linear}
 \label{cap: solução do sistema}
@@ -294,7 +294,7 @@ A convergência é verificada sobre o vetor resíduo e o incremento de deslocame
 	\label{eq:convergencia}
 	||\Rl_i|| \leq \varepsilon_R R_{ref},~~~ ||\Delta \ul_i || \leq \varepsilon_u u_{ref}
 \end{equation}
-em que $\varepsilon_R$ e $\varepsilon_u$ são as tolerâncias para o resíduo (de 0,5\%) e deslocamentos (de 5\%), respectivamente. Os valores de referência $R_{ref}$ e $u_{ref}$ são $||\Fl_{ext_p}||$ e $||\ul_{n,i}||$, respectivamente. Ou seja, por padrão o critério para o resíduo é de 0,5\% do valor das forças externas e os deslocamentos não podem apresentar uma variação maior do que 5\%. No ANSYS, a norma pode ser calculada de três formas: a máxima componente em valor absoluto, a soma absoluta das componentes ou a norma euclidiana das componentes, conforme:
+em que $\varepsilon_R$ e $\varepsilon_u$ são as tolerâncias para o resíduo (de 0,5\%) e deslocamentos (de 5\%), respectivamente. Os valores de referência $R_{ref}$ e $u_{ref}$ são $||\Fl_{ext_p}||$ e $||\ul_{n,i}||$, respectivamente. Ou seja, por padrão o critério para o resíduo é de 0,5\% do valor das forças externas e o incremento de deslocamentos não podem apresentar um valor maior do que 5\% dos deslocamentos do subpasso. No ANSYS, a norma pode ser calculada de três formas: a máxima componente em valor absoluto, a soma absoluta das componentes ou a norma euclidiana das componentes, conforme:
 \begin{equation}
 	\label{eq:jacobiano_transformacao}
 	||\underline *|| = \left\{
@@ -391,7 +391,7 @@ Em geral, em elastoplasticidade, o método de Runge-Kutta de primeira ordem (tam
 \end{equation}
 em que $\Delta \lambda = \dot\lambda\Delta t$ e $0 \leq \Theta \leq 1$ fornece a regra trapezoidal generalizada para o fluxo plástico e evolução das variáveis internas. Quando $\Theta = 0$ tem-se a forma completamente explicita (\textit{fully explicit forward Euler}) e $\Theta = 1$  completamente implicita (\textit{fully implicit backward Euler}). Os algoritmos semi-implícitos adotam $0 \leq \Theta < 1$  ou ainda uma combinação implícita e explícita de $\Delta \lambda$, $\dgdsl$ e $\hl$.
 
-Os esquemas explícitos, como os de \citeonline{Nayak1972}, \citeonline{Zienkiewicz1969} e \citeonline{Owen1980} foram largamente usados até que \citeonline{Simo1985} propuseram um método implícito de dois passos conhecido como projeção do ponto mais próximo (\textit{Closest Point Projetction Method} ou abreviadamente CPPM). Isso pois, os esquemas completamente explícitos não satisfaziam a condição de consistência $f_{n+1} = f(\sigmal_{n+1},\ql_{n+1}) = 0$ no final do subpasso, uma vez que o multiplicador plástico e os vetores de fluxo são calculados com as tensões do subpasso anterior $n$. Segundo \citeonline[p. 278]{Belytschko2000} isso faz com que a solução acumule uma certa imprecisão. Esse fato levou a comunidade a desenvolver e utilizar cada vez mais os algoritmos implícitos e semi-implícitos que buscam satisfazer $f_{n+1} = 0$. E, portanto, é o método adotado nesse trabalho. Alguns dos principais métodos implícitos e semi-implícitos para elastoplasticidade podem ser encontrados em \citeonline{Simo1998}, \citeonline{Belytschko2000}, \citeonline{Neto2008} e \citeonline{Huang2009}.
+Os esquemas explícitos, como os de \citeonline{Nayak1972}, \citeonline{Zienkiewicz1969} e \citeonline{Owen1980} foram largamente usados até que \citeonline{Simo1985} propuseram um método implícito de dois passos conhecido como projeção do ponto mais próximo (\textit{Closest Point Projection Method} ou abreviadamente CPPM). Isso pois, os esquemas completamente explícitos não satisfaziam a condição de consistência $f_{n+1} = f(\sigmal_{n+1},\ql_{n+1}) = 0$ no final do subpasso, uma vez que o multiplicador plástico e os vetores de fluxo são calculados com as tensões do subpasso anterior $n$. Segundo \citeonline[p. 278]{Belytschko2000} isso faz com que a solução acumule uma certa imprecisão. Esse fato levou a comunidade a desenvolver e utilizar cada vez mais os algoritmos implícitos e semi-implícitos que buscam satisfazer $f_{n+1} = 0$. E, portanto, é o método adotado nesse trabalho. Alguns dos principais métodos implícitos e semi-implícitos para elastoplasticidade podem ser encontrados em \citeonline{Simo1998}, \citeonline{Belytschko2000}, \citeonline{Neto2008} e \citeonline{Huang2009}.
 
 Atualmente esses métodos empregados nos algoritmos de atualização das tensões consistem em um esquema preditor-corretor de dois passos. Primeiro aplica-se a etapa do preditor elástico e, se necessário, a do corretor plástico. Dessa forma, definindo $\Delta \varepsilonl_{n+1}^p \equiv \varepsilonl_{n+1}^p - \varepsilonl_{n}^p$, o preditor elástico pode ser explicitado de (\ref{eq:esquema_int_constitutiva_ep})$_4$, conforme:
 \begin{equation}
@@ -400,7 +400,7 @@ Atualmente esses métodos empregados nos algoritmos de atualização das tensõe
 \end{equation}
 em que $\sigmal_{n+1}^{trial} = \Dll(\varepsilonl_n+\Delta \varepsilonl-\varepsilonl_{n}^ p)$ é o \textbf{preditor elástico} (também conhecido como tensão tentativa). Desse modo, no primeiro passo calcula-se a tensão tentativa e testa-se a função de escoamento $f$. Caso $f<0$ o estado de tensões está no domínio elástico e não há necessidade de aplicar o corretor plástico. Contudo, se $f>0$, ou seja, o estado de tensões está fora do domínio plasticamente admissível, é necessário aplicar a etapa do corretor plástico.
 
-O \textbf{corretor plástico}, nada mais é do que o procedimento de solução do sistema (\ref{eq:esquema_int_constitutiva_ep})$_{2,3,5}$ que determinará o valor de $\Delta \sigmal_{n+1}$ e $\Delta \ql_{n+1}$. Quando não é possível obter uma solução analítica para esse sistema, o procedimento de solução comumente utilizado é o de Newton-Raphson que itera $k$ vezes no espaço das tensões e variáveis internas até que o estado de tensões retorne sobre a superfície de escoamento (plasticamente admissível). Por isso esses esquemas também são conhecidos como algoritmos de retorno mapeado (\textit{Return Mapping Algorithm}). A Figura 6.8 ilustra geometricamente esse procedimento.
+O \textbf{corretor plástico}, nada mais é do que o procedimento de solução do sistema (\ref{eq:esquema_int_constitutiva_ep})$_{2,3,5}$ que determinará o valor de $\Delta \sigmal_{n+1}$ e $\Delta \ql_{n+1}$. Quando não é possível obter uma solução analítica para esse sistema, o procedimento de solução comumente utilizado é o de Newton-Raphson que itera $k$ vezes no espaço das tensões e variáveis internas até que o estado de tensões retorne sobre a superfície de escoamento (plasticamente admissível). Por isso esses esquemas também são conhecidos como algoritmos de retorno mapeado (\textit{Return Mapping Algorithm}). A \autoref{algoritmo_retorno} ilustra geometricamente esse procedimento.
 
 \begin{figure}[H]
 	\begin{center}
@@ -487,10 +487,10 @@ Como visto no fluxograma da \autoref{NR-fluxograma}, após a atualização das t
 	\Dll^{alg} = \left(\dfrac{d\sigmal}{d\varepsilonl} \right)_{n+1}.
 \end{equation}
 
-Para derivar a expressão de $\Dll^{alg}$  escreve-se (\ref{eq:constitutiva_ep})$_{1,2,3,4}$ e (\ref{eq:constitutiva_vp})$_{1,2,3,4}$ na sua forma incremental e resolve-se para $d\sigmal/d\varepsilonl$  \cite[p. 285]{Belytschko2000}. Com isso, tem-se, para a elastoplasticidade, a seguinte relação (omitindo-se o índice $n+1$):
+Para derivar a expressão de $\Dll^{alg}$  escreve-se (\ref{eq:constitutiva_ep})$_{1,2,3,4}$ na sua forma incremental e resolve-se para $d\sigmal/d\varepsilonl$  \cite[p. 285]{Belytschko2000}. Com isso, tem-se, para a elastoplasticidade, a seguinte relação (omitindo-se o índice $n+1$):
 \begin{equation}
 	\label{eq:D_alg_ep}
-	\Dll^{alg} = \Dll - \dfrac{\Dll~\dgdsl_i~\dfdsl^T \Dll}{\dfdsl^T\Dll~\dgdsl_i-\dfdql \hl_i}
+	\Dll^{alg} = \Dll - \dfrac{\Dll~\dgdsl_n~\dfdsl^T \Dll}{\dfdsl^T\Dll~\dgdsl_n-\dfdql \hl_n}
 \end{equation}
 Adotar o módulo tangente consistente faz com que a convergência seja atingida com menos iterações de equilíbrio globais, contudo, o procedimento tem um custo para sistemas grandes, uma vez que a cada iteração é exigida a montagem e fatorização da matriz de rigidez global (caso seja utilizado a opção de Newton-Raphson Completo).  Portanto, é comum para sistemas grandes utilizar o módulo elástico $\Dll \leftarrow \Dll^e$. No presente trabalho essa atualização foi implementada, é opcional e controlada por um parâmetro.
 
@@ -520,7 +520,7 @@ Para o presente trabalho é utilizado um esquema introduzido por \citeonline{Pei
 	\left\{
 	\begin{array}{lcl}
 		\varepsilonl_{n+1} = \varepsilonl_n + \Delta \varepsilonl \\
-		\varepsilonl_{n+1}^{vp} = \varepsilonl_i^{vp} + \Delta \lambda \dgdsl_n \\
+		\varepsilonl_{n+1}^{vp} = \varepsilonl_n^{vp} + \Delta \lambda \dgdsl_n \\
 		\ql_{n+1} = \ql_n + \Delta \lambda \hl_n \\	
 		\sigmal_{n+1} = \Dll~\varepsilonl_{n+1}^e = \Dll(\varepsilonl_{n+1} - \varepsilonl_{n+1}^{vp}) \\
 		\Delta \lambda = \dfrac{\Delta t}{\eta}[(1-\Theta)\Phi_n + \Theta \Phi_{n+1}]
@@ -838,7 +838,7 @@ Como pode-se notar, o modelo tridimensional possui a vantagem de considerar tant
 Conforme \autoref{malhaAXI_tunel}, no modelo axissimétrico o eixo longitudinal do túnel (eixo de rotação) está ao longo do eixo $y$, enquanto que o eixo $x$ representa o eixo radial. Os parâmetros para esse modelo podem ser vistos na \autoref{parametros_AXI}.
 
 \begin{table}[H]
-	\caption{Parâmetros adicionais para a malha em estado tridimensional de deformações da \autoref{malha3D_tunel}}
+	\caption{Parâmetros adicionais para a malha em estado axissimétrico \autoref{malhaAXI_tunel}}
 	\label{parametros_AXI}
 	\centering
 	\small
@@ -850,7 +850,7 @@ Conforme \autoref{malhaAXI_tunel}, no modelo axissimétrico o eixo longitudinal 
 		\multicolumn{1}{c}{\textbf{UNIDADE}} &
 		\multicolumn{1}{c}{\textbf{VALORES}} \\
 		\hline
-		\multicolumn{4}{c}{ESCAVAÇÃO E COLOCAÇÃO DO REVESTIMENTO} \\
+		\multicolumn{4}{c}{GEOMETRIA} \\
 		\hline
 		Raio da interface entre o túnel e o maciço & $R_i$ & m & 1 \\		
 		Espessura do revestimento (se houver) & $e_{rev}$ & m & 0,1 \\
