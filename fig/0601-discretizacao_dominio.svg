@@ -159,11 +159,11 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1.8473052"
-     inkscape:cx="330.75406"
-     inkscape:cy="117.81367"
+     inkscape:zoom="2.3120831"
+     inkscape:cx="360.84053"
+     inkscape:cy="164.99128"
      inkscape:document-units="mm"
-     inkscape:current-layer="layer1"
+     inkscape:current-layer="g1514"
      inkscape:document-rotation="0"
      showgrid="false"
      inkscape:window-width="1920"
@@ -555,11 +555,11 @@
          d="m 155.83781,36.793637 14.86455,-4.954848 -3.21018,7.816099 z"
          id="path1212" />
       <path
-         style="opacity:0.529412;fill:#d6d6d6;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-miterlimit:4;stroke-dasharray:none"
+         style="opacity:0.65;fill:#d6d6d6;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-miterlimit:4;stroke-dasharray:none"
          d="m 167.49218,39.654888 -5.93186,-13.817747 -5.72251,10.956496 11.65437,2.861251"
          id="path1214" />
       <path
-         style="opacity:0.54902;fill:#d6d6d6;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-miterlimit:4;stroke-dasharray:none"
+         style="opacity:0.65;fill:#d6d6d6;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-miterlimit:4;stroke-dasharray:none"
          d="m 161.56032,25.837141 9.14204,6.001648 -3.21018,7.816099 z"
          id="path1216" />
       <ellipse
@@ -738,19 +738,26 @@
          d="m 176.91337,66.801874 -11.37522,-1.605092 1.67488,-8.653539 5.86208,1.605092 z"
          id="path1202" />
       <path
-         style="opacity:0.571895;fill:#d6d6d6;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-miterlimit:4;stroke-dasharray:none"
-         d="m 173.07511,58.148335 -4.39656,4.187198 -8.8629,-2.0936 7.39738,-3.69869 z"
-         id="path1204" />
-      <path
-         style="opacity:0.552288;fill:#d6d6d6;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-miterlimit:4;stroke-dasharray:none"
-         d="m 168.67855,62.335533 0.62808,10.677348 7.60674,-6.211007 -3.83826,-8.653539 -4.39656,4.187198"
-         id="path1206" />
-      <path
          style="opacity:0.614379;fill:#d6d6d6;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-miterlimit:4;stroke-dasharray:none"
          d="m 158.0012,69.732913 7.53695,-4.536131 1.67488,-8.653539 -7.39738,3.69869 z"
          id="path1208" />
       <path
-         style="opacity:0.676471;fill:#d6d6d6;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-miterlimit:4;stroke-dasharray:none"
+         style="opacity:0.65;fill:#d6d6d6;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-miterlimit:4;stroke-dasharray:none"
+         d="m 173.07511,58.148335 -4.39656,4.187198 -8.8629,-2.0936 7.39738,-3.69869 z"
+         id="path1204" />
+      <path
+         style="opacity:0.65;fill:#d6d6d6;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-miterlimit:4;stroke-dasharray:none"
+         d="m 168.67855,62.335533 0.62808,10.677348 7.60674,-6.211007 -3.83826,-8.653539 -4.39656,4.187198"
+         id="path1206" />
+      <ellipse
+         style="opacity:1;fill:#919191;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-miterlimit:4;stroke-dasharray:none"
+         id="path874-05-1-32"
+         cx="165.44595"
+         cy="65.12944"
+         rx="0.45102444"
+         ry="0.4510242" />
+      <path
+         style="opacity:0.65;fill:#d6d6d6;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-miterlimit:4;stroke-dasharray:none"
          d="m 158.0012,69.732913 11.30543,3.279968 -0.62808,-10.677348 -8.8629,-2.0936 z"
          id="path1210" />
       <ellipse
@@ -797,9 +804,9 @@
          ry="0.4510242" />
       <ellipse
          style="opacity:1;fill:#919191;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.2;stroke-miterlimit:4;stroke-dasharray:none"
-         id="path874-05-1-32"
-         cx="165.44595"
-         cy="65.12944"
+         id="path874-05-1-09-3"
+         cx="168.61337"
+         cy="62.318775"
          rx="0.45102444"
          ry="0.4510242" />
     </g>

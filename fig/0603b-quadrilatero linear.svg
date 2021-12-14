@@ -40,11 +40,11 @@
      inkscape:window-height="1040"
      id="namedview20584"
      showgrid="false"
-     inkscape:zoom="1.1092493"
-     inkscape:cx="323.20909"
-     inkscape:cy="173.27922"
-     inkscape:window-x="764"
-     inkscape:window-y="221"
+     inkscape:zoom="1.2241158"
+     inkscape:cx="299.6405"
+     inkscape:cy="178.47044"
+     inkscape:window-x="302"
+     inkscape:window-y="0"
      inkscape:window-maximized="0"
      inkscape:current-layer="g4686"
      inkscape:document-rotation="0" />
@@ -2853,18 +2853,18 @@
     <text
        xml:space="preserve"
        style="font-size:9.99997px;line-height:1.25;font-family:times;-inkscape-font-specification:times;letter-spacing:0px;stroke-width:0.75"
-       x="20.960117"
+       x="32.960117"
        y="12.846523"
        id="text5513"><tspan
          sodipodi:role="line"
          id="tspan5511"
-         x="20.960117"
+         x="32.960117"
          y="12.846523"
          style="stroke-width:0.75"><tspan
            style="font-size:12px"
            id="tspan5523">P</tspan><tspan
            style="font-size:12px"
-           id="tspan5521">LANE 182 - QUADRILÁTERO LINEAR (4 NÓS, 4 PONTOS DE GAUSS (Q4)</tspan></tspan></text>
+           id="tspan5521">LANE182 - QUADRILÁTERO LINEAR, 4 NÓS, 4 PONTOS DE GAUSS </tspan></tspan></text>
     <text
        xml:space="preserve"
        id="text5515"

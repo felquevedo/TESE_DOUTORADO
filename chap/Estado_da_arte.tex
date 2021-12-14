@@ -1,5 +1,5 @@
 % ----------------------------------------------------------
-\chapter{Estado da Arte}
+\chapter{Tecnologia de execução de túneis}
 % ----------------------------------------------------------
 
 \section{Métodos de Escavação}
@@ -167,40 +167,3 @@ A \autoref{ilustracao_elementos_suporte} ilustra alguns desses elementos.
 Como este trabalho está delimitado às leis constitutivas do maciço, não foi abordada a diferenciação entre o revestimento primário e secundário. Além do mais, nos modelos desenvolvidos, o revestimento consiste de um material homogêneo, isotrópico e de espessura constante. E a escavação é feita a seção plena, plana e vertical.
 
 
-\section{Principais aspectos considerados em estudos numéricos recentes de túneis}
-
-A rigor o estado e evolução do campo de tensões e deformações durante e após a escavação de um túnel irá depender dos seguintes fatores:
-
-\begin{alineas}
-	
-	\item \textbf{Comportamento dos materiais}: propriedades hidro-mecânicas e reológicas do maciço e do revestimento;
-	
-	\item \textbf{Condições geológicas}: estado de tensões \textit{in situ}, heterogeneidade e grau de anisotropia do maciço bem como orientação, forma e comportamento das descontinuidades no seu interior, presença e fluxo de água, poro-pressão e movimentos sísmicos;
-	
-	\item \textbf{Interações com estruturas próximas}: fundações de edifícios, assentamentos superficiais, encontro com galerias, proximidade de outros túneis e sistemas subterrâneos;
-	
-	\item \textbf{Aspectos construtivos}: forma da seção transversal, velocidade de escavação, técnicas de pré-suporte, instante da instalação do revestimento e a distância não revestida durante o avanço da escavação.
-	
-\end{alineas}
-
-Além desses fatores, como a trajetória das tensões próxima à face de escavação é tridimensional, envolvendo um bulbo de descompressão, túneis são estruturas rigorosamente tridimensionais.
-
-Dentre as abordagens mais gerais que buscam prever o comportamento dos túneis, frente a todos esses fatores, estão as \textbf{teóricas-experimentais derivadas da mecânica do contínuo}. Contudo, as \textbf{soluções analíticas} dos modelos derivados dessa abordagem, apesar de úteis no entendimento do fenômeno e verificação numérica, são também limitadas a uma série de hipóteses simplificativas, tais como, domínio infinito, maciço isotrópico e homogêneo, seção circular, estado plano de deformações, ausência da interação entre o maciço e o revestimento, bem como leis constitutivas mais simples. Em vista disso, para contornar essas limitações, desde a década de 60, cada vez mais vem se utilizando \textbf{soluções numéricas} que agregam mais generalidades. E nas últimas décadas, com a ampliação da capacidade de computação, tem-se aumentado os estudos considerando o aspecto tridimensional dessas estruturas. Pode-se dizer que as soluções numéricas ganharam espaço frente às analíticas justamente devido à capacidade de incorporar todos os fatores listados acima. E, dentre os métodos numéricos, o mais difundido e utilizado é o \textbf{método dos elementos finitos}. Os desenvolvimentos numéricos e aplicações recentes geralmente consideraram um ou mais dentre os seguintes aspectos:
-
-\begin{alineas}
-	
-	\item \textbf{simulação do processo construtivo}: através da ativação e desativação dos elementos finitos, onde a cada ciclo construtivo é feita uma análise desativando-se os elementos que correspondem a região escavada do maciço e ativando-se aqueles referentes ao revestimento. Exemplos recentes podem ser encontrados na grande maioria de estudos que consideram a interação entre o maciço e o revestimento, tais como: \citeonline{Zhong2016} e \citeonline{Quevedo2017};
-	
-	\item \textbf{domínio espacial complexo}: incorporam a influência da frente de escavação, da intersecção com galerias ou da presença de túneis próximos como, por exemplo, \citeonline{Chakeri2011}, \citeonline{Do2014}  e ainda, quando se trata de túneis superficiais, assentamentos na superfície e interação com estruturas da superfície como, por exemplo, \citeonline{Augarde2001}, \citeonline{Burd2000}, \citeonline{Mroueh2003}, \citeonline{Xin2009} e \citeonline{Ferrao2020};
-	
-	\item \textbf{comportamento dos materiais}, ou seja, implementam e estudam a influência de diversas leis constitutivas, tanto para o maciço quanto para o revestimento. Nesse item os mais variados aspectos do maciço e do revestimento são frequentemente abordados. Leis constitutivas elásticas, elastoplásticas perfeitas, com amolecimento, como em \citeonline{Purwodihardjo2003}; viscoelásticas, tais como encontradas em \citeonline{Quevedo2017}; viscoplásticas, conforme \citeonline{Bernaud1991}, \citeonline{Roatesi2014} e \citeonline{Quevedo2017}; ou ainda, viscoplásticas com fator de dano como em \citeonline{Pellet2007} são apenas alguns poucos exemplos. Pode-se ter ainda leis que consideram acoplamento hidro-mecânico como em \citeonline{Chan2008} e \citeonline{Leem1999} bem como leis empíricas ou parâmetros de danos diretamente sobre as propriedades dos materiais, como em \citeonline{Schweiger2014} para considerar o comportamento diferido;
-	
-	\item \textbf{influência do pré-suporte e do revestimento primário}: estudos que tentam incorporar os efeitos causados pelos elementos e técnicas que servem para estabilizar a cavidade antes e durante a escavação como, por exemplo, tirantes frontais, enfilagens, congelamento, escavação parcializada e iteração com o escudo da tuneladora. Nesses estudos, os elementos físicos de pré-suporte podem ser incorporados de forma discreta (o que exige malhas bastante refinadas), incorporada no interior do elemento finito ou introduzida na lei constitutiva do maciço de forma homogeneizada. Essa ultima abordagem é utilizada, por exemplo, por \citeonline{Bernaud2009} e \citeonline{Couto2011} para considerar tirantes radiais e frontais.
-	
-	\item \textbf{problemas dinâmicos}: estudos que tem por finalidade implementar e estudar os efeitos das vibrações induzidas por trem, explosões na proximidade ou sismos como, por exemplo, em \citeonline{Chan2008}.
-	
-	\item \textbf{métodos numéricos alternativos}: embora o método dos elementos finitos seja o mais difundido, existem outros métodos de solução numérica como o das diferenças finitas e o método dos elementos de contorno. Outras abordagens menos convencionais também são utilizadas como o método das redes neurais, como, por exemplo, \citeonline{Shi1998} e métodos discretos, como em \citeonline{Maynar2005}. Uma revisão mais completa de diversos modelos e métodos numéricos utilizados em mecânica das rochas pode ser encontrada em \citeonline{Jing2003}.
-
-\end{alineas}
-
- A presente tese estará focada apenas no primeiro e terceiro item acima, sendo o terceiro o de maior interesse, devido a modelagem da lei constitutiva elastoplástica-viscoplástica do maciço.

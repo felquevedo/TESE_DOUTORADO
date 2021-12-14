@@ -138,12 +138,12 @@ sendo $\varepsilonl$ o campo de deformações e $\Bll = \nabla^s \Nll$ a matriz 
 em que $n_c$  é o número de componentes de deformações. Introduzindo (\ref{eq:deformacoes}) na lei de comportamento do material, é possível determinar as tensões no interior do elemento também em função dos deslocamentos nodais:
 \begin{equation}
 	\label{eq:tensoes}
-	\sigmal(\xl) = \sigmal(x_1,x_2,x_3) = \Dll ~ \Bll ~\ul_e + \Dll ~\varepsilonl_0 + \sigmal_0
+	\sigmal(\xl) = \sigmal(x_1,x_2,x_3) = \Dll ~ \Bll ~\ul_e + \Dll ~\varepsilonl_I + \sigmal_I
 \end{equation}
-na qual $\varepsilonl_0$ e $\sigmal_0$ são deformações e tensões iniciais no interior do elemento, respectivamente. Nos problemas de túneis, é através de $\sigmal_0$ que é introduzido as tensões \textit{in situ}. Para o caso de tensão geostática hidrostática, em um túnel de profundidade $H$ em um maciço com peso específico $\gamma_m$ a seguinte expressão é utilizada:
+na qual $\varepsilonl_I$ e $\sigmal_I$ são deformações e tensões iniciais no interior do elemento, respectivamente. Nos problemas de túneis, é através de $\sigmal_I$ que é introduzido as tensões \textit{in situ}. Para o caso de tensão geostática hidrostática, em um túnel de profundidade $H$ em um maciço com peso específico $\gamma_m$ a seguinte expressão é utilizada:
 \begin{equation}
 	\label{eq:tensoes_iniciais}
-	\sigmal_0 = \gamma_m H \Uml.
+	\sigmal_I = \gamma_m H \Uml.
 \end{equation}
 
 Introduzindo as expressões (\ref{eq:campo_deslocamentos}), (\ref{eq:deformacoes}) e (\ref{eq:tensoes}) no princípio dos trabalhos virtuais (\ref{eq:deslocamento_virtual_3}), considerando o domínio de um elemento $\Omega_e$, obtém-se a seguinte equação de equilíbrio em forças:
@@ -151,26 +151,26 @@ Introduzindo as expressões (\ref{eq:campo_deslocamentos}), (\ref{eq:deformacoes
 	\label{eq:forcas_interna_externa}
 	\Fl_{int_e} - \Fl_{ext_e} = \underline 0
 \end{equation}
-em que:
+em que
 \begin{equation}
 	\label{eq:forca_interna}
-	\Fl_{int_e} = \int_{\Omega_e} \Bll^T \sigmal d\Omega_e = \Kll_e \ul_e + \Fl_{\varepsilon_{0_e}} + \Fl_{\sigma_{0_e}}
+	\Fl_{int_e} = \int_{\Omega_e} \Bll^T \sigmal d\Omega_e = \Kll_e \ul_e + \Fl_{\varepsilon_{I_e}} + \Fl_{\sigma_{I_e}},
 \end{equation}
 \begin{equation}
 	\label{eq:forca_externa}
 	\Fl_{ext_e} = \Fl_{V_e} + \Fl_{S_e} + \Fl_{C_e} + \Fl_{N_e}
 \end{equation}
-nos quais:
+nos quais
 \begin{equation}
 	\label{eq:elementos_forca_interna}
-	\Kll_e = \int_{\Omega_e} \Bll^T \sigmal d\Omega_e,~~~ \Fl_{\varepsilon_{0_e}} = \int_{\Omega_e} \Bll^T \Dll~ \varepsilonl_0 d\Omega_e,~~~ \Fl_{\sigma_{0_e}} = \int_{\Omega_e} \Bll^T \sigma_0 d\Omega_e,
+	\Kll_e = \int_{\Omega_e} \Bll^T \sigmal d\Omega_e,~~~ \Fl_{\varepsilon_{I_e}} = \int_{\Omega_e} \Bll^T \Dll~ \varepsilonl_I d\Omega_e,~~~ \Fl_{\sigma_{I_e}} = \int_{\Omega_e} \Bll^T \sigmal_I d\Omega_e,
 \end{equation}
 \begin{equation}
 	\label{eq:elementos_forca_externa}
 	\Fl_{V_e} = \int_{\Omega_e} \rho \Nll^T \fl d\Omega_e,~~~ \Fl_{S_e} = \int_{\partial \Omega_e} \Nll^T \Tl^d dS_e,~~~
 	\Fl_{C_e} = \int_{\partial \Omega_{e}} \Nll^T \Tl^c dS_c,
 \end{equation}
-sendo que $\Fl_{int_e}$ e $\Fl_{ext_e}$ são as forças internas e externas no elemento, respectivamente, $\Kll_e$ a matriz de rigidez do elemento, $\Fl_{\varepsilon_{0_e}}$ e $\Fl_{\sigma_{0_e}}$  forças internas no elemento devido às deformações inciais e tensões iniciais, respectivamente, $\Fl_{V_e}$ forças de volume do elemento, $\Fl_{S_e}$ forças de superfície no contorno livre do elemento, $\Fl_{C_e}$ forças de contato entre elementos vizinhos e $\Fl_{N_e}$  forças nodais. A Figura 6.2 ilustra as forças externas de um elemento genérico.
+sendo que $\Fl_{int_e}$ e $\Fl_{ext_e}$ são as forças internas e externas no elemento, respectivamente, $\Kll_e$ a matriz de rigidez do elemento, $\Fl_{\varepsilon_{I_e}}$ e $\Fl_{\sigma_{I_e}}$  forças internas no elemento devido às deformações inciais e tensões iniciais, respectivamente, $\Fl_{V_e}$ forças de volume do elemento, $\Fl_{S_e}$ forças de superfície no contorno livre do elemento, $\Fl_{C_e}$ forças de contato entre elementos vizinhos e $\Fl_{N_e}$  forças nodais. A Figura 6.2 ilustra as forças externas de um elemento genérico.
 \begin{figure}[H]
 	\begin{center}
 		\includegraphics[scale = 1.0]{0602-diagrama de corpo livro de um elemento finito.pdf}
@@ -223,9 +223,9 @@ Os elementos PLANE182 e SOLID185 possuem também opções que lidam com problema
 Após o processo de discretização do domínio $\Omega$ é necessário fazer a montagem e a solução do seguinte sistema global de equações:
 \begin{equation}
 	\label{eq:sistema_global}
-	\left(\Kll~\ul + \Fl_{\varepsilon_{0}} + \Fl_{\sigma_{0}}\right) - \left(\Fl_V+\Fl_S+\Fl_N \right) = \Fl_{int} - \Fl_{ext} = f(\ul) = \underline{0}  
+	\left(\Kll~\ul + \Fl_{\varepsilon_{I}} + \Fl_{\sigma_{I}}\right) - \left(\Fl_V+\Fl_S+\Fl_N \right) = \Fl_{int} - \Fl_{ext} = f(\ul) = \underline{0}  
 \end{equation}
-em que $\Kll$ é a matriz de rigidez global resultante da montagem das matrizes de rigidezes $\Kll_e$ de cada elemento, $\ul$ é o vetor incógnito de deslocamentos nodais global proveniente da montagem dos deslocamentos nodais $\ul_e$ de cada elemento, $\left\{\Fl_V,\Fl_S,\Fl_N,\Fl_{\varepsilon_0},\Fl_{\sigma_0} \right\}$ são as forças globais resultantes da montagem das forças em cada elemento, conforme (\ref{eq:elementos_forca_interna}) e (\ref{eq:elementos_forca_externa}). Evidentemente não há um vetor de forças de contato global $\Fl_C$, uma vez que as forças de contato entre elementos vizinhos possuem a mesma magnitude e sentidos contrários e, portanto, se anulam no somatório global.
+em que $\Kll$ é a matriz de rigidez global resultante da montagem das matrizes de rigidezes $\Kll_e$ de cada elemento, $\ul$ é o vetor incógnito de deslocamentos nodais global proveniente da montagem dos deslocamentos nodais $\ul_e$ de cada elemento, $\left\{\Fl_V,\Fl_S,\Fl_N,\Fl_{\varepsilon_I},\Fl_{\sigma_I} \right\}$ são as forças globais resultantes da montagem das forças em cada elemento, conforme (\ref{eq:elementos_forca_interna}) e (\ref{eq:elementos_forca_externa}). Evidentemente não há um vetor de forças de contato global $\Fl_C$, uma vez que as forças de contato entre elementos vizinhos possuem a mesma magnitude e sentidos contrários e, portanto, se anulam no somatório global.
 
 Quando há uma não linearidade envolvendo as leis constitutivas do material (tal como na plasticidade ou viscoplasticidade, em que o problema é dependente da trajetória das tensões), a matriz de coeficientes $\Kll$ passa a depender dos deslocamentos nodais incógnitos  $\ul$, tornando o sistema (\ref{eq:sistema_global}) não linear. O \textbf{método de Newton-Raphson} (NR) é o processo iterativo comumente utilizado para resolver esse sistema e é utilizado pelo \textit{software} ANSYS. Dessa forma, aproximando (\ref{eq:sistema_global}) por uma série de Taylor truncada na primeira ordem (linearização) tem-se:
 \begin{equation}
@@ -248,15 +248,15 @@ As soluções indiretas, implementadas no ANSYS, se baseiam na família de Méto
 
 \begin{alineas}
 	
-	\item JCG (\textit{Jacobi Conjugate Gradiente}): o pré-condicionador é tomado como sendo uma matriz diagonal cujos termos são as diagonais da matriz de rigidez;
+	\item JCG (\textit{Jacobi Conjugate Gradient}): o pré-condicionador é tomado como sendo uma matriz diagonal cujos termos são as diagonais da matriz de rigidez;
 	
-	\item ICCG (\textit{Incomplete Cholesky Conjugate Gradiente}), o pré-condicionador é tomado através de uma fatorização incompleta de Cholesky. O algoritmo é internamente desenvolvido pela ANSYS e não publicado, e é mais robusto que o primeiro para matrizes mal condicionadas;
+	\item ICCG (\textit{Incomplete Cholesky Conjugate Gradient}), o pré-condicionador é tomado através de uma fatorização incompleta de Cholesky. O algoritmo é internamente desenvolvido pela ANSYS e não publicado, e é mais robusto que o primeiro para matrizes mal condicionadas;
 	
-	\item PCG (\textit{Preconditioned Conjugate Gradiente}) é um solucionador da \textit{Computational Applications and System Integration, Inc} que não consta nos manuais do \textit{software}. Contudo, é dito eficiente e confiável para problemas mal condicionados.
+	\item PCG (\textit{Preconditioned Conjugate Gradient}) é um solucionador da \textit{Computational Applications and System Integration, Inc} que não consta nos manuais do \textit{software}. Contudo, é dito eficiente e confiável para problemas mal condicionados.
 	
 \end{alineas}
 
-Maiores explicações dessas soluções indiretas, podem ser encontrados em \citeonline[p. 316]{Mendonca2019}. Cabe salientar que, tanto os métodos diretos quanto indiretos, são implementados buscando a eficiência computacional, evitando-se trabalhar com os elementos nulos, diminuindo o armazenamento e o número de operações. Alguns métodos que compreendem reordenamento e armazenamento eficiente do sistema, utilizados pelo ANSYS, podem ser encontrados em \citeonline{George1981}. Além disso, uma vantagem do ANSYS é a possibilidade de trabalhar com computação de alto desempenho (\textit{High Performance Computing}) com opções de aceleração usando placas de vídeo da Nvidia, memória compartilhada (SMP - \textit{Shared-Memory Parallel}) ou computação distribuída (MPI - \textit{Message Passing Interface}). Para o presente trabalho, foi utilizado a opção de SMP com 12 processadores.
+Maiores explicações dessas soluções indiretas, podem ser encontrados em \citeonline[p. 316]{Mendonca2019}. Cabe salientar que, tanto os métodos diretos quanto indiretos, são implementados buscando a eficiência computacional, evitando-se trabalhar com os elementos nulos, diminuindo o armazenamento e o número de operações. Alguns métodos que compreendem reordenamento e armazenamento eficiente do sistema, utilizados pelo ANSYS, podem ser encontrados em \citeonline{George1981}. Além disso, uma vantagem do ANSYS é a possibilidade de trabalhar com computação de alto desempenho (HPC - \textit{High Performance Computing}) com opções de aceleração usando placas de vídeo da Nvidia, memória compartilhada (SMP - \textit{Shared-Memory Parallel}) ou computação distribuída (MPI - \textit{Message Passing Interface}). Para o presente trabalho, foi utilizado a opção de SMP com 12 processadores.
 
 A rigor para um problema não linear a escolha do melhor método de solução vai depender de testagem. Por padrão o ANSYS utiliza o SPARSE. Contudo, o manual do \textit{software} recomenda utilizar o método PCG para estruturas sólidas 3D que possuem mais de 200.000 graus de liberdade. Para problemas mal condicionados, seja pela forma dos elementos, grandes diferenças entre as propriedades dos materiais ou ainda por insuficiente condições de contorno, recomenda-se o SPARSE \cite[p. 242]{ANSYS2018b}. Esse foi o método de solução escolhido para o presente trabalho.
 
@@ -479,7 +479,7 @@ O fluxograma desse algoritmo pode ser visto na \autoref{algoritmo_EP_semiimplici
 	\end{center}
 	\caption{\label{algoritmo_EP_semiimplicito}Algoritmo de integração para elastoplasticidade utilizando um esquema de Euler semi-implícito (omitindo o índice $n$+1).}
 \end{figure}
-No fluxograma da \autoref{algoritmo_EP_semiimplicito} aparecem três parâmetros que exigem uma explicação: $TOL$, $nr_{max}$ e $k_{cut}$. O primeiro diz respeito a tolerância exigida para o $f$ que indicará que houve a convergência do Newton-Raphson local. Como se trata de um processo iterativo o $f_k=0$ não é necessariamente atingido. Dessa forma, foi utilizado uma tolerância $TOL = 10^{-14}$. O segundo parâmetro diz respeito ao limite máximo de iterações locais que indicará a não convergência. O valor escolhido foi $nr_{max} = 10000$. Por fim, o último parâmetro $k_{cut}$ é de suma importância, pois seu valor igual a unidade indicará para o ANSYS que é necessário dividir o passo pela metade e repetir o processo de modo a buscar a convergência. Também nesse fluxograma aparece as tensões iniciais $\sigma_{INI}$ que são adicionadas ao preditor elástico.
+No fluxograma da \autoref{algoritmo_EP_semiimplicito} aparecem três parâmetros que exigem uma explicação: $TOL$, $nr_{max}$ e $k_{cut}$. O primeiro diz respeito a tolerância exigida para o $f$ que indicará que houve a convergência do Newton-Raphson local. Como se trata de um processo iterativo o $f_k=0$ não é necessariamente atingido. Dessa forma, foi utilizado uma tolerância $TOL = 10^{-14}$. O segundo parâmetro diz respeito ao limite máximo de iterações locais que indicará a não convergência. O valor escolhido foi $nr_{max} = 10000$. Por fim, o último parâmetro $k_{cut}$ é de suma importância, pois seu valor igual a unidade indicará para o ANSYS que é necessário dividir o passo pela metade e repetir o processo de modo a buscar a convergência. Também nesse fluxograma aparece as tensões iniciais $\underline \sigma_{I}$ que são adicionadas ao preditor elástico.
 
 Como visto no fluxograma da \autoref{NR-fluxograma}, após a atualização das tensões e variáveis internas tem-se a possibilidade de atualizar o módulo constitutivo. É possível utilizar o módulo tangente consistente com a linearização feita durante o algoritmo de integração das leis constitutivas (por isso também esse módulo é conhecido como módulo algorítmico). Como comentado no \autoref{cap: solução do sistema} sua utilização aumenta a taxa de convergência das iterações de equilíbrio. Sua expressão geral é definida por:
 \begin{equation}
@@ -716,9 +716,9 @@ Tal como visto na \autoref{cap:Discretização espacial em elementos finitos} o 
 	\end{center}
 	\caption{\label{dominio_tunel}Representação do domínio $\Omega$ a ser discretizado}
 \end{figure}
-As leis constitutivas vistas no \autoref{cap: modelo mecanico} são implementadas nesse domínio e estudadas em três condições: em estado plano de deformações, tridimensional e em axissimetria.
+As leis constitutivas vistas no \autoref{cap: modelo mecanico} são implementadas nesse domínio e estudadas em três condições: em estado plano de deformações (EPD), tridimensional (3D) e em axissimetria (AXI).
 
-Com o intuito de obter uma malha de fácil alteração, conveniente aos estudos de convergência de malha ou análises paramétricas, o domínio foi discretizado utilizando o pré-processamento do \textit{software} ANSYS 2021R1 através da linguagem APDL (\textit{Ansys Parametric Design Language}). Com o auxílio dessa linguagem é possível controlar a discretização do domínio em função de parâmetros que podem ser alterados facilmente e, dessa forma, obtido rapidamente uma nova malha para os estudos. As discretizações apresentadas vêm da experiência obtidas em estudos anteriores \cite{Quevedo2017} considerando isoladamente a elasticidade, elastoplastcidade e viscoplasticidade do maciço. O \textit{script} APDL para a construção do modelo em axissimetria encontra-se no Apêndice A.
+Com o intuito de obter uma malha de fácil alteração, conveniente aos estudos de convergência de malha e análises paramétricas, o domínio foi discretizado utilizando o pré-processamento do \textit{software} ANSYS 2021R1 através da linguagem APDL (\textit{Ansys Parametric Design Language}). Com o auxílio dessa linguagem é possível controlar a discretização do domínio em função de parâmetros que podem ser alterados facilmente e, dessa forma, obtido rapidamente uma nova malha para os estudos. As discretizações apresentadas vêm da experiência obtidas em estudos anteriores \cite{Quevedo2017} considerando isoladamente a elasticidade, elastoplastcidade e viscoplasticidade do maciço. O \textit{script} APDL para a construção do modelo em axissimetria encontra-se no Apêndice A.
 
 A \autoref{malhaEPD_tunel} apresenta o domínio para análises em estado plano de deformações com seus parâmetros, condições de contorno e malha. Como visto na \autoref{cap:Influência da escavação e o conceito de convergência da seção}, esse modelo é útil no estudo de seções fora da zona de influência da frente de escavação na qual se pode admitir a ausência de deslocamento ao longo do eixo longitudinal do túnel. Quando implementado a lei do material, esse modelo também é ideal para obter as curvas de convergência do maciço, tais como as da \autoref{cap:Método convergência-confinamento}.
 
@@ -838,7 +838,7 @@ Como pode-se notar, o modelo tridimensional possui a vantagem de considerar tant
 Conforme \autoref{malhaAXI_tunel}, no modelo axissimétrico o eixo longitudinal do túnel (eixo de rotação) está ao longo do eixo $y$, enquanto que o eixo $x$ representa o eixo radial. Os parâmetros para esse modelo podem ser vistos na \autoref{parametros_AXI}.
 
 \begin{table}[H]
-	\caption{Parâmetros adicionais para a malha em estado axissimétrico \autoref{malhaAXI_tunel}}
+	\caption{Parâmetros para a malha em estado axissimétrico \autoref{malhaAXI_tunel}}
 	\label{parametros_AXI}
 	\centering
 	\small
@@ -854,7 +854,8 @@ Conforme \autoref{malhaAXI_tunel}, no modelo axissimétrico o eixo longitudinal 
 		\hline
 		Raio da interface entre o túnel e o maciço & $R_i$ & m & 1 \\		
 		Espessura do revestimento (se houver) & $e_{rev}$ & m & 0,1 \\
-		Raio total do domínio & $L_{x}$ & m & $20R_i$ \\		
+		Raio total do domínio & $L_{x}$ & m & $20R_i$ \\
+		Raio da região de refinamento próxima ao túnel & $R_{1}$ & m & $10R_i$ \\				
 		Trecho do raio além da região próxima ao túnel & $L_{x_1}$ & m & $L_x - R_1$ \\	
 		Comprimento longitudinal do domínio & $L_y$ & m & $L_{y_1}+L_{y_2}$ \\
 		Comprimento do trecho escavado & $Ly_{1}$ & m & $n_pL_p$ \\
@@ -900,7 +901,7 @@ Para simular o ciclo contrutivo de escavação e revestimento é utilizado o rec
 
 No \textit{software} ANSYS esse recurso é conhecido como \textit{Birth and Death} e seu uso se dá através da seleção dos elementos e um comando APDL (EKILL e EALIVE) que identifica se estarão ativados ou desativados no passo.
 
-O custo computacional desses modelos é refletido diretamente no tempo de processamento de cada subpasso durante a solução do sistema global. Esse tempo é função de diversos fatores. Dentre os mais simples estão a quantidade de operações em ponto flutuante (precisão simples ou dupla) necessários para a fatoração e solução do sistema frente à tecnologia de processamento (velocidade do processador e recursos de paralelização). A ordem de grandeza da quantidade de operações em ponto flutuante pode ser estimada através do tamanho do sistema. Portanto, a \autoref{tamanho_sistemas}, resume o tamanho do sistema para as malhas desses três modelos. Porém, para o tempo global, é necessário considerar as estratégias de atualização da matriz de rigidez e a quantidade de passos, sendo que este último aumenta tempo computacional linearmente.
+O custo computacional desses modelos é refletido diretamente no tempo de processamento de cada subpasso durante a solução do sistema global. Esse tempo é função de diversos fatores. Dentre os mais simples estão a quantidade de operações em ponto flutuante (precisão simples ou dupla) necessários para a fatoração e solução do sistema frente à tecnologia de processamento (velocidade do processador e recursos de paralelização). A ordem de grandeza da quantidade de operações em ponto flutuante pode ser estimada através do tamanho do sistema. Portanto, a \autoref{tamanho_sistemas}, resume o tamanho do sistema para as malhas desses três modelos. Porém, para o tempo global, é necessário considerar as estratégias de atualização da matriz de rigidez e a quantidade de passos, sendo que este último aumenta o tempo computacional linearmente.
 
 \begin{table}[H]
 	\caption{Tamanho do sistema para cada modelo}
