@@ -468,7 +468,7 @@ Devido a esse tratamento explícito do vetor de fluxo plástico e do módulo de 
 	\begin{array}{lcl}
 			\dgdsl_n \\ 
 			\hl_n
-	\end{array}\right\}}
+	\end{array}\right\}}.
 \end{equation}
 
 O fluxograma desse algoritmo pode ser visto na \autoref{algoritmo_EP_semiimplicito}.
@@ -490,7 +490,7 @@ Como visto no fluxograma da \autoref{NR-fluxograma}, após a atualização das t
 Para derivar a expressão de $\Dll^{alg}$  escreve-se (\ref{eq:constitutiva_ep})$_{1,2,3,4}$ na sua forma incremental e resolve-se para $d\sigmal/d\varepsilonl$  \cite[p. 285]{Belytschko2000}. Com isso, tem-se, para a elastoplasticidade, a seguinte relação (omitindo-se o índice $n+1$):
 \begin{equation}
 	\label{eq:D_alg_ep}
-	\Dll^{alg} = \Dll - \dfrac{\Dll~\dgdsl_n~\dfdsl^T \Dll}{\dfdsl^T\Dll~\dgdsl_n-\dfdql \hl_n}
+	\Dll^{alg} = \Dll - \dfrac{\Dll~\dgdsl_n~\dfdsl^T \Dll}{\dfdsl^T\Dll~\dgdsl_n-\dfdql \hl_n}.
 \end{equation}
 Adotar o módulo tangente consistente faz com que a convergência seja atingida com menos iterações de equilíbrio globais, contudo, o procedimento tem um custo para sistemas grandes, uma vez que a cada iteração é exigida a montagem e fatorização da matriz de rigidez global (caso seja utilizado a opção de Newton-Raphson Completo).  Portanto, é comum para sistemas grandes utilizar o módulo elástico $\Dll \leftarrow \Dll^e$. No presente trabalho essa atualização foi implementada, é opcional e controlada por um parâmetro.
 
@@ -525,7 +525,7 @@ Para o presente trabalho é utilizado um esquema introduzido por \citeonline{Pei
 		\sigmal_{n+1} = \Dll~\varepsilonl_{n+1}^e = \Dll(\varepsilonl_{n+1} - \varepsilonl_{n+1}^{vp}) \\
 		\Delta \lambda = \dfrac{\Delta t}{\eta}[(1-\Theta)\Phi_n + \Theta \Phi_{n+1}]
 	\end{array}
-	\right..
+	\right.
 \end{equation}
 em que a função de sobretensão $\Phi_{n+1}$ é obtida através da seguinte linearização:
 \begin{equation}
