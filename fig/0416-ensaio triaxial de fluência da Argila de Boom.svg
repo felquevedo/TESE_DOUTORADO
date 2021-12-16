@@ -505,7 +505,7 @@
      inkscape:cx="284.61939"
      inkscape:cy="239.3855"
      inkscape:document-units="mm"
-     inkscape:current-layer="layer1"
+     inkscape:current-layer="g1206"
      inkscape:document-rotation="0"
      showgrid="false"
      inkscape:window-width="1512"
@@ -793,7 +793,7 @@
            font-weight="400"
            font-size="16px"
            transform="translate(456.842,168)"
-           id="text1086">5MPa</text>
+           id="text1086">5 MPa</text>
       </g>
       <g
          clip-path="url(#clip24)"
@@ -826,36 +826,6 @@
            id="text1098">𝑃</text>
       </g>
       <g
-         clip-path="url(#clip27)"
-         id="g1104">
-        <text
-           font-family="'Cambria Math', 'Cambria Math_MSFontService', sans-serif"
-           font-weight="400"
-           font-size="15px"
-           transform="translate(184.526,224)"
-           id="text1102">2</text>
-      </g>
-      <g
-         clip-path="url(#clip28)"
-         id="g1108">
-        <text
-           font-family="'Cambria Math', 'Cambria Math_MSFontService', sans-serif"
-           font-weight="400"
-           font-size="15px"
-           transform="translate(192.646,224)"
-           id="text1106">,</text>
-      </g>
-      <g
-         clip-path="url(#clip29)"
-         id="g1112">
-        <text
-           font-family="'Cambria Math', 'Cambria Math_MSFontService', sans-serif"
-           font-weight="400"
-           font-size="15px"
-           transform="translate(195.653,224)"
-           id="text1110">5𝑀𝑃𝑎</text>
-      </g>
-      <g
          clip-path="url(#clip30)"
          id="g1116">
         <text
@@ -886,36 +856,6 @@
            id="text1122">𝑃</text>
       </g>
       <g
-         clip-path="url(#clip33)"
-         id="g1128">
-        <text
-           font-family="'Cambria Math', 'Cambria Math_MSFontService', sans-serif"
-           font-weight="400"
-           font-size="15px"
-           transform="translate(111.543,201)"
-           id="text1126">2</text>
-      </g>
-      <g
-         clip-path="url(#clip34)"
-         id="g1132">
-        <text
-           font-family="'Cambria Math', 'Cambria Math_MSFontService', sans-serif"
-           font-weight="400"
-           font-size="15px"
-           transform="translate(119.663,201)"
-           id="text1130">,</text>
-      </g>
-      <g
-         clip-path="url(#clip35)"
-         id="g1136">
-        <text
-           font-family="'Cambria Math', 'Cambria Math_MSFontService', sans-serif"
-           font-weight="400"
-           font-size="15px"
-           transform="translate(122.67,201)"
-           id="text1134">25𝑀𝑃𝑎</text>
-      </g>
-      <g
          clip-path="url(#clip36)"
          id="g1140">
         <text
@@ -944,36 +884,6 @@
            font-size="15px"
            transform="translate(79.4466,208)"
            id="text1146">𝑃</text>
-      </g>
-      <g
-         clip-path="url(#clip39)"
-         id="g1152">
-        <text
-           font-family="'Cambria Math', 'Cambria Math_MSFontService', sans-serif"
-           font-weight="400"
-           font-size="15px"
-           transform="translate(41.5199,225)"
-           id="text1150">1</text>
-      </g>
-      <g
-         clip-path="url(#clip40)"
-         id="g1156">
-        <text
-           font-family="'Cambria Math', 'Cambria Math_MSFontService', sans-serif"
-           font-weight="400"
-           font-size="15px"
-           transform="translate(49.6399,225)"
-           id="text1154">,</text>
-      </g>
-      <g
-         clip-path="url(#clip41)"
-         id="g1160">
-        <text
-           font-family="'Cambria Math', 'Cambria Math_MSFontService', sans-serif"
-           font-weight="400"
-           font-size="15px"
-           transform="translate(52.6466,225)"
-           id="text1158">75𝑀𝑃𝑎</text>
       </g>
       <g
          clip-path="url(#clip42)"
@@ -1040,42 +950,52 @@
            id="text1186">𝑃</text>
       </g>
       <g
-         clip-path="url(#clip49)"
-         id="g1192">
-        <text
-           font-family="'Cambria Math', 'Cambria Math_MSFontService', sans-serif"
-           font-weight="400"
-           font-size="15px"
-           transform="translate(266.468,204)"
-           id="text1190">2</text>
-      </g>
-      <g
-         clip-path="url(#clip50)"
-         id="g1196">
-        <text
-           font-family="'Cambria Math', 'Cambria Math_MSFontService', sans-serif"
-           font-weight="400"
-           font-size="15px"
-           transform="translate(274.588,204)"
-           id="text1194">,</text>
-      </g>
-      <g
-         clip-path="url(#clip51)"
-         id="g1200">
-        <text
-           font-family="'Cambria Math', 'Cambria Math_MSFontService', sans-serif"
-           font-weight="400"
-           font-size="15px"
-           transform="translate(277.595,204)"
-           id="text1198">75𝑀𝑃𝑎</text>
-      </g>
-      <g
          clip-path="url(#clip52)"
          id="g1204">
         <path
            d="m 295.831,216.457 6.816,51.875 -0.661,0.087 -6.816,-51.876 z m 10.277,50.075 -2.923,8.453 -5.009,-7.41 z"
            id="path1202" />
       </g>
+      <text
+         xml:space="preserve"
+         style="font-size:16px;line-height:1.25;font-family:times;-inkscape-font-specification:times;letter-spacing:0px"
+         x="40.389698"
+         y="224.56665"
+         id="text1047"><tspan
+           sodipodi:role="line"
+           id="tspan1045"
+           x="40.389698"
+           y="224.56665">1,75 MPa</tspan></text>
+      <text
+         xml:space="preserve"
+         style="font-size:16px;line-height:1.25;font-family:times;-inkscape-font-specification:times;letter-spacing:0px"
+         x="104.94434"
+         y="199.98367"
+         id="text1047-5"><tspan
+           sodipodi:role="line"
+           id="tspan1045-3"
+           x="104.94434"
+           y="199.98367">2,25 MPa</tspan></text>
+      <text
+         xml:space="preserve"
+         style="font-size:16px;line-height:1.25;font-family:times;-inkscape-font-specification:times;letter-spacing:0px"
+         x="183.60358"
+         y="223.7941"
+         id="text1047-5-2"><tspan
+           sodipodi:role="line"
+           id="tspan1045-3-8"
+           x="183.60358"
+           y="223.7941">2,50 MPa</tspan></text>
+      <text
+         xml:space="preserve"
+         style="font-size:16px;line-height:1.25;font-family:times;-inkscape-font-specification:times;letter-spacing:0px"
+         x="262.76736"
+         y="203.59926"
+         id="text1047-5-2-7"><tspan
+           sodipodi:role="line"
+           id="tspan1045-3-8-2"
+           x="262.76736"
+           y="203.59926">2,75 MPa</tspan></text>
     </g>
   </g>
 </svg>

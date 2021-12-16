@@ -2852,11 +2852,11 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="3.1502251"
-     inkscape:cx="299.03188"
-     inkscape:cy="125.45189"
+     inkscape:zoom="1.9247523"
+     inkscape:cx="330.37239"
+     inkscape:cy="179.50564"
      inkscape:document-units="mm"
-     inkscape:current-layer="g3608-3"
+     inkscape:current-layer="id-187dda58-949f-4de2-a201-4bd816ee169f-1"
      inkscape:document-rotation="0"
      showgrid="false"
      inkscape:window-width="1920"
@@ -3280,11 +3280,12 @@
            font-weight="400"
            font-size="12px"
            transform="translate(456.555,111)"
-           id="text3470-3">Cota = 243,40m</text>
+           id="text3470-3">Cota = 243,40 m</text>
       </g>
       <g
          clip-path="url(#clip47-0)"
-         id="g3476-8">
+         id="g3476-8"
+         transform="translate(-2)">
         <text
            font-family="'Times New Roman', 'Times New Roman_MSFontService', sans-serif"
            font-style="italic"
@@ -3301,11 +3302,12 @@
            font-weight="400"
            font-size="12px"
            transform="translate(453.502,124)"
-           id="text3478-1">=71mm</text>
+           id="text3478-1">= 71 mm</text>
       </g>
       <g
          clip-path="url(#clip49-1)"
-         id="g3484-2">
+         id="g3484-2"
+         transform="translate(8)">
         <text
            font-family="'Times New Roman', 'Times New Roman_MSFontService', sans-serif"
            font-style="italic"
@@ -3316,13 +3318,14 @@
       </g>
       <g
          clip-path="url(#clip50-9)"
-         id="g3488-4">
+         id="g3488-4"
+         transform="translate(8)">
         <text
            font-family="'Times New Roman', 'Times New Roman_MSFontService', sans-serif"
            font-weight="400"
            font-size="12px"
            transform="translate(505.602,124)"
-           id="text3486-9">= 36mm</text>
+           id="text3486-9">= 36 mm</text>
       </g>
       <g
          clip-path="url(#clip51-3)"
@@ -3431,7 +3434,7 @@
            font-weight="400"
            font-size="12px"
            transform="translate(472.102,221)"
-           id="text3530-9">1mm/min</text>
+           id="text3530-9">1 mm/min</text>
       </g>
       <g
          clip-path="url(#clip62-1)"
@@ -3470,11 +3473,12 @@
            font-weight="400"
            font-size="12px"
            transform="translate(454.288,262)"
-           id="text3546-7">= 403MPa</text>
+           id="text3546-7">= 403 MPa</text>
       </g>
       <g
          clip-path="url(#clip66-9)"
-         id="g3552-1">
+         id="g3552-1"
+         transform="translate(6)">
         <text
            font-family="'Times New Roman', 'Times New Roman_MSFontService', sans-serif"
            font-weight="400"
@@ -3484,7 +3488,8 @@
       </g>
       <g
          clip-path="url(#clip67-7)"
-         id="g3556-0">
+         id="g3556-0"
+         transform="translate(6)">
         <text
            font-family="'Times New Roman', 'Times New Roman_MSFontService', sans-serif"
            font-weight="400"
@@ -3518,7 +3523,7 @@
            font-weight="400"
            font-size="12px"
            transform="translate(445.562,304)"
-           id="text3566-9">Desviador = 2,7MPa</text>
+           id="text3566-9">Desviador = 2,7 MPa</text>
       </g>
       <g
          clip-path="url(#clip71-7)"
@@ -3538,7 +3543,7 @@
            font-weight="400"
            font-size="12px"
            transform="translate(425.075,331)"
-           id="text3574-5">Desviador residual = 1,7MPa</text>
+           id="text3574-5">Desviador residual = 1,7 MPa</text>
       </g>
       <g
          transform="matrix(1.8471761,0,0,1.8471761,149.30827,232.26839)"
@@ -3633,22 +3638,9 @@
                  id="id-f2a94e82-d0da-43cb-9f7c-0e07864517ae-5" />
             </g>
           </g>
-          <g
-             style="fill:#000000;fill-opacity:1"
-             id="id-f0de4d48-5c4e-4e67-ac46-bae855569e63-3">
-            <g
-               transform="translate(158.187,131.611)"
-               id="g3568-9-5">
-              <path
-                 style="stroke:none"
-                 d="M 2.78125,-0.65625 C 2.6875,-0.5625 2.65625,-0.53125 2.609375,-0.484375 2.421875,-0.3125 2.359375,-0.25 2.296875,-0.25 2.25,-0.25 2.21875,-0.28125 2.21875,-0.328125 2.21875,-0.4375 2.46875,-1.46875 2.75,-2.5 2.765625,-2.5625 2.765625,-2.5625 2.78125,-2.625 L 2.734375,-2.640625 2.375,-2.59375 l -0.015625,0.015625 -0.0625,0.28125 C 2.25,-2.515625 2.078125,-2.640625 1.8125,-2.640625 c -0.796875,0 -1.703125,1.09375 -1.703125,2.046875 0,0.421875 0.21875,0.65625 0.609375,0.65625 0.40625,0 0.671875,-0.1875 1.203125,-0.9375 -0.125,0.46875 -0.140625,0.546875 -0.140625,0.6875 0,0.171875 0.0625,0.25 0.234375,0.25 0.234375,0 0.390625,-0.109375 0.828125,-0.65625 z M 1.84375,-2.5 c 0.203125,0 0.34375,0.140625 0.34375,0.359375 0,0.5 -0.296875,1.203125 -0.71875,1.65625 -0.140625,0.15625 -0.34375,0.25 -0.515625,0.25 -0.21875,0 -0.34375,-0.171875 -0.34375,-0.4375 0,-0.328125 0.21875,-0.9375 0.484375,-1.3125 0.234375,-0.34375 0.515625,-0.546875 0.75,-0.515625 z m 0,0"
-                 id="id-6f1698a9-cb3e-4e50-a8e0-98acfca936d7-7" />
-            </g>
-          </g>
           <path
              style="fill:none;stroke:#000000;stroke-width:0.398;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10;stroke-opacity:1"
-             d="M -0.00175,5.625e-4 H 11.767781"
-             transform="matrix(1,0,0,-1,149.908,132.274)"
+             d="m 147.74079,132.27344 h 11.76953"
              id="id-344baf16-a912-4a82-9bd2-21875bf60abe-0" />
           <g
              style="fill:#000000;fill-opacity:1"
@@ -3660,18 +3652,6 @@
                  style="stroke:none"
                  d="m 5.078125,-4.8125 h -1.375 v 0.109375 c 0.328125,0.046875 0.46875,0.109375 0.46875,0.25 0,0.140625 -0.140625,0.46875 -0.390625,0.890625 L 2.265625,-0.9375 1.78125,-4.21875 C 1.765625,-4.25 1.765625,-4.28125 1.765625,-4.328125 c 0,-0.25 0.109375,-0.3125 0.578125,-0.375 V -4.8125 H 0.5625 v 0.109375 c 0.40625,0.0625 0.421875,0.078125 0.578125,1 L 1.765625,0.125 H 1.90625 l 2.75,-4.53125 c 0.125,-0.203125 0.25,-0.28125 0.421875,-0.296875 z m 0,0"
                  id="id-f743ce14-5226-4868-8703-d39313b863ba-7" />
-            </g>
-          </g>
-          <g
-             style="fill:#000000;fill-opacity:1"
-             id="id-a0a6d906-4082-4a00-9087-2352f6a11154-7">
-            <g
-               transform="translate(155.931,139.308)"
-               id="g3577-3">
-              <path
-                 style="stroke:none"
-                 d="M 2.78125,-0.65625 C 2.6875,-0.5625 2.65625,-0.53125 2.609375,-0.484375 2.421875,-0.3125 2.359375,-0.25 2.296875,-0.25 2.25,-0.25 2.21875,-0.28125 2.21875,-0.328125 2.21875,-0.4375 2.46875,-1.46875 2.75,-2.5 2.765625,-2.5625 2.765625,-2.5625 2.78125,-2.625 L 2.734375,-2.640625 2.375,-2.59375 l -0.015625,0.015625 -0.0625,0.28125 C 2.25,-2.515625 2.078125,-2.640625 1.8125,-2.640625 c -0.796875,0 -1.703125,1.09375 -1.703125,2.046875 0,0.421875 0.21875,0.65625 0.609375,0.65625 0.40625,0 0.671875,-0.1875 1.203125,-0.9375 -0.125,0.46875 -0.140625,0.546875 -0.140625,0.6875 0,0.171875 0.0625,0.25 0.234375,0.25 0.234375,0 0.390625,-0.109375 0.828125,-0.65625 z M 1.84375,-2.5 c 0.203125,0 0.34375,0.140625 0.34375,0.359375 0,0.5 -0.296875,1.203125 -0.71875,1.65625 -0.140625,0.15625 -0.34375,0.25 -0.515625,0.25 -0.21875,0 -0.34375,-0.171875 -0.34375,-0.4375 0,-0.328125 0.21875,-0.9375 0.484375,-1.3125 0.234375,-0.34375 0.515625,-0.546875 0.75,-0.515625 z m 0,0"
-                 id="id-da55a1ec-1a0e-45fb-b04b-d68f7429d251-4" />
             </g>
           </g>
         </g>

@@ -2,7 +2,7 @@
 
 \section{Validação referente ao endurecimento e amolecimento da parte elastoplástica através de um ensaio}
 
-Uma vez que se tem um ensaio triaxial, como por exemplo, o da \autoref{ensaio_triaxial_ductil} uma validação do endurecimento e amolecimento da parte elastoplástica é possível. Os modelos estão apresentados na \autoref{malha_ensaio_triaxial} e compreendem a simulação numérica de um ensaio considerando um modelo 3D, estado plano de deformação e axissimétrico. Sendo $l_a = l_b = l_c = 1$ o próprio deslocamento em y do nó A será a deformação específica e a força reativa a tensão. Para representar o ensaio da \autoref{ensaio_triaxial_ductil} foi aplicado um deslocamento imposto $\delta = 0,1$ em toda a face superior e medido a força reativa.
+Uma vez que se tem um ensaio triaxial, como por exemplo, o da \autoref{ensaio_triaxial_ductil} uma validação do endurecimento e amolecimento da parte elastoplástica é possível. Os modelos estão apresentados na \autoref{malha_ensaio_triaxial} e compreendem a simulação numérica de um ensaio considerando um modelo 3D, estado plano de deformação e axissimétrico. Sendo $l_a = l_b = l_c = 1$ o próprio deslocamento em $y$ do nó A será a deformação específica e a força reativa a tensão. Para representar o ensaio da \autoref{ensaio_triaxial_ductil} foi aplicado um deslocamento imposto $\delta = 0,1$ em toda a face superior e medido a força reativa.
 
 \begin{figure}[H]
 	\begin{center}
@@ -11,7 +11,7 @@ Uma vez que se tem um ensaio triaxial, como por exemplo, o da \autoref{ensaio_tr
 	\caption{\label{malha_ensaio_triaxial}Domínio e discretização de um ensaio triaxial com modelo 3D, EPD e AXI}
 \end{figure}
 
-Os valores dos parâmetros do modelo constitutivo adotado na análise foram $E = 403$MPa, $\nu = 0,39$,  superficief = 2, superficieg = 2, $\phi = 0,~\psi = 0,~c_i = 0,7MPa,~c_p = 1,3MPa,~c_r = 0,9MPa,~\bar \varepsilon^p_{I} = 0,010,~\bar \varepsilon^p_{II} = 0,050,~\bar \varepsilon^p_{r} = 0,07$. Os parâmetros de coesão e de deformação plástica equivalente das zonas de endurecimento e amolecimento são coletados do gráfico do ensaio, tal como apresentado na \autoref{ensaio_triaxial_parametros}. O valor de duas vezes a coesão no eixo das ordenadas está no fato de que não está sendo considerado o ângulo de atrito, fazendo com que a superfície de plasticidade se reduza a de von-Mises. Também está sendo desconsiderado a dilatância, portanto, a variação do volume não considera a dilatância durante a deformação plástica. A parte viscosa do modelo constitutivo é eliminada utilizando uma coesão alta. O resultado da análise pode ser visto na \autoref{ensaio_triaxial_solucao}.
+Os valores dos parâmetros do modelo constitutivo adotado na análise foram $E = 403$ MPa, $\nu = 0,39$,  superficief $=$ 2, superficieg $=$ 2, $\phi = 0,~\psi = 0,~c_i = 0,7$ MPa, $c_p = 1,3$ MPa, $c_r = 0,9$ MPa, $\bar \varepsilon^p_{I} = 0,010,~\bar \varepsilon^p_{II} = 0,050,~\bar \varepsilon^p_{r} = 0,07$. Os parâmetros de coesão e de deformação plástica equivalente das zonas de endurecimento e amolecimento são coletados do gráfico do ensaio, tal como apresentado na \autoref{ensaio_triaxial_parametros}. O valor de duas vezes a coesão no eixo das ordenadas está no fato de que não está sendo considerado o ângulo de atrito, fazendo com que a superfície de plasticidade se reduza a de von-Mises. Também está sendo desconsiderado a dilatância, portanto, a variação do volume não considera a dilatância durante à deformação plástica. A parte viscosa do modelo constitutivo é eliminada utilizando uma coesão alta. O resultado da análise pode ser visto na \autoref{ensaio_triaxial_solucao}.
  
 \begin{figure}[H]
  	\begin{center}
@@ -52,7 +52,7 @@ em que $E'=E/(1+\nu),~\nu,~C' = (C_1-C_0)/\varepsilon_0^p$ são parâmetros do m
 	{{\omega }_{0}}=\frac{2{{C}_{0}}}{E'\varepsilon _{0}^{p}+2{{C}_{1}}}, ~~~ 	{{\omega }_{1}}={{\sigma }_{i}}-{{\sigma }_{\infty }}-{{C}_{0}} , ~~~ {{\omega }_{2}}=\frac{{{C}_{0}}}{1+2\frac{C'}{E'}}\ln ({{\omega }_{0}}), ~~~ 	{{\omega }_{3}}=\frac{\frac{C'}{E'}\left[ 2({{C}_{0}}-{{C}_{1}})-\varepsilon _{0}^{p} \right]}{1+2\frac{C'}{E'}}
 \end{equation}
 
-Utilizando $R_i=1$m, $E=1430$MPa, $\nu = 0,4$, $C_0=0,21$MPa, $C_1=0,56$MPa, $\varepsilon _{0}^{p}=0,024$, $P_i = -\sigma_i = 2,5$MPa, $ P_\infty = -\sigma_\infty = 4,5$MPa tem-se, pela expressão analítica, $U_i = - u(r=R_i)/R_i = 5,91$\%. A \autoref{solucao_numérica_LAJSS} apresenta a concordância do resultado numérico com um erro menor que 1\%.
+Utilizando $R_i=1$ m, $E=1430$ MPa, $\nu = 0,4$, $C_0=0,21$ MPa, $C_1=0,56$ MPa, $\varepsilon _{0}^{p}=0,024$, $P_i = -\sigma_i = 2,5$ MPa, $ P_\infty = -\sigma_\infty = 4,5$ MPa tem-se, pela expressão analítica, $U_i = - u(r=R_i)/R_i = 5,91$\%. A \autoref{solucao_numérica_LAJSS} apresenta a concordância do resultado numérico com um erro menor que 1\%.
 
 \begin{figure}[H]
 	\begin{center}
@@ -60,47 +60,47 @@ Utilizando $R_i=1$m, $E=1430$MPa, $\nu = 0,4$, $C_0=0,21$MPa, $C_1=0,56$MPa, $\v
 	\end{center}
 	\caption{\label{solucao_numérica_LAJSS}Solução numérica considerando elastoplasticidade com endurecimento}
 \end{figure}
-Para essa solução numérica foi utilizado domínio em EPD (\autoref{malhaEPD_tunel}) e a relação (\ref{eq:ctr_cvm})$_1$ que considera a superfície de von-Mises inscrita em Tresca e as mesmas considerações para particularizar o modelo elastoplástico-viscoplástico para elastoplástico, ou seja, a parte viscosa do modelo constitutivo é novamente eliminada utilizando uma coesão viscosa alta. Para representar a mesma lei de endurecimento tem-se $c_i = 0,21\sqrt{3}/2$, $c_p = 0,56\sqrt{3}/2$, $c_r = 0,56\sqrt{3}/2,~\bar \varepsilon^p_{I} = 0,024,~\bar \varepsilon^p_{II} = 0,024,~\bar \varepsilon^p_{r} = 0,024$. 
+Para essa solução numérica foi utilizado domínio em EPD (\autoref{malhaEPD_tunel}) e a relação (\ref{eq:ctr_cvm})$_1$ que considera a superfície de von-Mises inscrita em Tresca e as mesmas considerações para particularizar o modelo elastoplástico-viscoplástico para elastoplástico, ou seja, a parte viscosa do modelo constitutivo é novamente eliminada utilizando uma coesão viscosa alta. Para representar a mesma lei de endurecimento tem-se $c_i = 0,21\sqrt{3}/2$ MPa, $c_p = 0,56\sqrt{3}/2$ MPa, $c_r = 0,56\sqrt{3}/2$ MPa, $\bar \varepsilon^p_{I} = 0,024,~\bar \varepsilon^p_{II} = 0,024,~\bar \varepsilon^p_{r} = 0,024$. 
 
 \section{Verificação do modelo acoplado com cada comportamento em separado}
-O modelo constitutivo elastoplástico-viscoplástico é bastante geral e capaz de reproduzir cada comportamento em separado. Portanto, é apresentado algumas verificações da solução numérica considerando cada lei constitutiva separada: I - elasticidade, II - elastoplasticidade e III - viscoplasticidade. Para o caso I e II sem revestimento é utilizado soluções analíticas como comparação. A expressão dessas podem ser encontradas em \citeonline{Corbeta1990} e \citeonline[p. 50-54]{Quevedo2017} e portanto não serão apresentadas. A solução elastoplástica considera uma plasticidade perfeita com regra de fluxo associada com superfície de escoamento de Tresca. Portanto é utilizado a relação (\ref{eq:ctr_cvm})$_1$. Para outros casos e quando se tem revestimento a verificação foi feita com outro \textit{software}, o GEOMEC91. O GEOMEC91 é um programa de elementos finitos para geomecânica para análises bidimensionais em axissimetria. Ele foi desenvolvido por \citeonline{Bernaud1991} e detalhes de sua malha e condições de contorno podem ser vistas em \citeonline[p. 190]{Bernaud1991}.
+O modelo constitutivo elastoplástico-viscoplástico é bastante geral e capaz de reproduzir cada comportamento em separado. Portanto, são apresentadas algumas verificações da solução numérica considerando cada lei constitutiva separada: I - elasticidade, II - elastoplasticidade e III - viscoplasticidade. Para o caso I e II sem revestimento é utilizado soluções analíticas como comparação. A expressão dessas podem ser encontradas em \citeonline{Corbeta1990} e \citeonline[p. 50-54]{Quevedo2017} e portanto não serão apresentadas. A solução elastoplástica considera uma plasticidade perfeita com regra de fluxo associada com superfície de escoamento de Tresca. Portanto é utilizado a relação (\ref{eq:ctr_cvm})$_1$. Para outros casos e quando se tem revestimento a verificação foi feita com outro \textit{software}, o GEOMEC91. O GEOMEC91 é um programa de elementos finitos para geomecânica para análises bidimensionais em axissimetria. Ele foi desenvolvido por \citeonline{Bernaud1991} e detalhes de sua malha e condições de contorno podem ser vistas em \citeonline[p. 190]{Bernaud1991}.
 
 Os resultados apresentados nessa seção são os do modelo axissimétrico da \autoref{malhaAXI_tunel} com os parâmetros da \autoref{parametros_AXI}. Apesar de estar limitado às condições de axissimetria, é um dos modelos mais importantes, pois considera o processo de escavação e colocação do revestimento de forma realista e permite fazer estudos paramétricos de forma mais eficiente que os modelos tridimensionais. Contudo, as mesmas verificações foram feitas no modelo tridimensional considerando seção circular e os mesmos resultados foram obtidos, com pequenas diferenças menores que 1\%.
 
 \subsection{Verificações em elasticidade}
 
-O modelo constitutivo acoplado, por ser geral, tem que ser capaz de reproduzir o resultado em elasticidade colocando coesões elevadas na parte plástica e viscosa. Dessa forma, considerando $E =$1000MPa e 5000MPa, $\nu =$ 0,498MPa, $p_v = p_h = 5$MPa tem-se os resultados da \autoref{ELAST-D0-E1000-ER0-P5} e \autoref{ELAST-D0-E5000-ER0-P5}. As curvas cinzas são os perfis de convergência a cada passo de escavação e a vermelha no último passo. A curva verde pontilhada é a solução analítica.
+O modelo constitutivo acoplado, por ser geral, tem que ser capaz de reproduzir o resultado em elasticidade colocando coesões elevadas na parte plástica e viscosa. Dessa forma, considerando $E =1000$ MPa e 5000 MPa, $\nu =0,498$, $p_v = p_h = 5$ MPa tem-se os resultados da \autoref{ELAST-D0-E1000-ER0-P5} e \autoref{ELAST-D0-E5000-ER0-P5}. As curvas cinzas são os perfis de convergência a cada passo de escavação e a vermelha no último passo. A curva verde pontilhada é a solução analítica.
 
 \begin{figure}[H]
 	\begin{center}
 		\includegraphics[scale = 1.0]{0706-AXI-SREVESTIMENTO-E1000.pdf}
 	\end{center}
-	\caption{\label{ELAST-D0-E1000-ER0-P5}Verificação solução numérica em elasticidade sem revestimento - E = 1000MPa}
+	\caption{\label{ELAST-D0-E1000-ER0-P5}Verificação solução numérica em elasticidade sem revestimento - $E= 1000$ MPa}
 \end{figure}
 
 \begin{figure}[H]
 	\begin{center}
 		\includegraphics[scale = 1.0]{0707-AXI-SREVESTIMENTO-E5000.pdf}
 	\end{center}
-	\caption{\label{ELAST-D0-E5000-ER0-P5}Verificação solução numérica em elasticidade sem revestimento - E = 5000MPa}
+	\caption{\label{ELAST-D0-E5000-ER0-P5}Verificação solução numérica em elasticidade sem revestimento - $E = 5000$ MPa}
 \end{figure}
 
-Cabe salientar que quando se utiliza o modelo constitutivo elástico linear a mesma solução é obtida escavando todos os passos de uma única vez. Contudo, quando se tem revestimento não há solução analítica, pois ocorre a iteração entre o revestimento e o maciço. Para essa verificação é comparado o resultado do ANSYS com o GEOMEC91. A \autoref{ELAST-D0-E1000-ER30000-P5} mostra essa comparação considerando $E$ = 1000MPa com um revestimento de $E_{rev}$=30000MPa e $\nu_{rev}$ = 0,3. Nesse caso, foi considerado um $d0$ = 0.
+Cabe salientar que quando se utiliza o modelo constitutivo elástico linear a mesma solução é obtida escavando todos os passos de uma única vez. Contudo, quando se tem revestimento não há solução analítica, pois ocorre a iteração entre o revestimento e o maciço. Para essa verificação é comparado o resultado do ANSYS com o GEOMEC91. A \autoref{ELAST-D0-E1000-ER30000-P5} mostra essa comparação considerando $E=1000$ MPa com um revestimento de $E_{rev}= 30000$ MPa e $\nu_{rev}$ = 0,3. Nesse caso, foi considerado um $d_0$ = 0.
 
 \begin{figure}[H]
 	\begin{center}
 		\includegraphics[scale = 1.0]{0708-AXI-SREVESTIMENTO-E1000-ER30000-D0.pdf}
 	\end{center}
-	\caption{\label{ELAST-D0-E1000-ER30000-P5}Verificação solução numérica em elasticidade com revestimento - $E$ = 1000MPa, $E_{rev}$ = 30000MPa, $d0$ = 0}
+	\caption{\label{ELAST-D0-E1000-ER30000-P5}Verificação solução numérica em elasticidade com revestimento - $E = 1000$ MPa, $E_{rev} = 30000$ MPa, $d_0= 0$}
 \end{figure}
 
-O perfil de convergência apresenta um pico nas primeiras escavações, uma vez que na primeira escavação é escavado 3$L_p$. De qualquer forma, em comparação com a \autoref{ELAST-D0-E1000-ER0-P5} consegue-se ver que o revestimento tem um grande efeito sobre as deformações. Nesse caso, a rigidez do revestimento foi muito elevada em relação ao maciço. Contudo, não é só o módulo de elasticidade do revestimento que conta, mas tão importante quanto, o d0. Considerando um $d_0=4L_p$ tem-se os resultados da \autoref{ELAST-D4-E1000-ER30000-P5}.
+O perfil de convergência apresenta um pico nas primeiras escavações, uma vez que na primeira escavação é escavado 3$L_p$. De qualquer forma, em comparação com a \autoref{ELAST-D0-E1000-ER0-P5} consegue-se ver que o revestimento tem um grande efeito sobre as deformações. Nesse caso, a rigidez do revestimento foi muito elevada em relação ao maciço. Contudo, não é só o módulo de elasticidade do revestimento que conta, mas tão importante quanto, o $d_0$. Considerando um $d_0=4L_p$ tem-se os resultados da \autoref{ELAST-D4-E1000-ER30000-P5}.
 
 \begin{figure}[H]
 	\begin{center}
 		\includegraphics[scale = 1.0]{0709-AXI-SREVESTIMENTO-E1000-ER30000-D4.pdf}
 	\end{center}
-	\caption{\label{ELAST-D4-E1000-ER30000-P5}Verificação solução numérica em elasticidade com revestimento - $E$ = 1000MPa, $E_{rev}$ = 30000MPa, $d0$ = 4$L_p$}
+	\caption{\label{ELAST-D4-E1000-ER30000-P5}Verificação solução numérica em elasticidade com revestimento - $E = 1000$ MPa, $E_{rev} = 30000$ MPa, $d_0 = 4L_p$}
 \end{figure}
 
 Na \autoref{ELAST-D4-E1000-ER30000-P5} pode-se ver pequenas ondulações no perfil de convergências do GEOMEC91 que não estão presentes no resultado do ANSYS. Essa diferença ocorre devido ao elemento finito utilizado. No GEOMEC91 é utilizado um elemento quadrático \textit{serendipity}, que possuí um nó intermediário em suas bordas.
@@ -109,15 +109,15 @@ Como pode-se notar o modelo constitutivo acoplado conseguiu em elasticidade repr
 
 \subsection{Verificações em elastoplasticidade}
 
-De forma análoga à elasticidade, o modelo constitutivo acoplado, por ser um modelo de aplicação geral, tem que ser capaz de reproduzir o resultado em elastoplasticidade utilizando uma coesão viscoplástica elevada. Considerando $E =$1000MPa, $\nu =$ 0,498MPa, $p_v = p_h = 4$MPa, $c_i=c_p=c_r = \sqrt{3}/2$MPa e $3\sqrt{3}/2$MPa  tem-se os resultados da \autoref{PLAST-D0-E1000-ER0-P4-C1} e \autoref{PLAST-D0-E1000-ER0-P4-C3}. As curvas cinzas são os perfis de convergência a cada passo de escavação e a vermelha no último passo. A curva verde pontilhada é a solução analítica.
+De forma análoga à elasticidade, o modelo constitutivo acoplado, por ser um modelo de aplicação geral, tem que ser capaz de reproduzir o resultado em elastoplasticidade utilizando uma coesão viscoplástica elevada. Considerando $E =1000$ MPa, $\nu =0,498$, $p_v = p_h = 4$ MPa, $c_i=c_p=c_r = \sqrt{3}/2$ MPa e $3\sqrt{3}/2$ MPa  tem-se os resultados da \autoref{PLAST-D0-E1000-ER0-P4-C1} e \autoref{PLAST-D0-E1000-ER0-P4-C3}. As curvas cinzas são os perfis de convergência a cada passo de escavação e a vermelha no último passo. A curva verde pontilhada é a solução analítica.
 
 \begin{figure}[H]
 	\begin{center}
 		\includegraphics[scale = 1.0]{0710-AXI-PLAST-SREVESTIMENTO-D0-E1000-ER0-P4-C1.pdf}
 	\end{center}
-	\caption{\label{PLAST-D0-E1000-ER0-P4-C1}Verificação solução numérica em elastoplasticidade sem revestimento - $E$ = 1000MPa,  $c_i=c_p=c_r = \sqrt{3}/2$MPa}
+	\caption{\label{PLAST-D0-E1000-ER0-P4-C1}Verificação solução numérica em elastoplasticidade sem revestimento - $E = 1000$ MPa,  $c_i=c_p=c_r = \sqrt{3}/2$ MPa}
 \end{figure}
-No caso em que $c_i=c_p=c_r = \sqrt{3}/2$MPa, foi necessário aumentar o número de passos de escavação $n_p = 128$ para que o patamar no perfil de convergência se desenvolvesse plenamente. A solução analítica é dada para esse patamar sem a influência da face de escavação ou das bordas do modelo. Isso demonstra que dependendo dos valores dos parâmetros constitutivos pode ser necessário aumentar o número de passos $n_p$. Se o valor almejado é a convergência no equilíbrio fora das zonas de influência deve-se buscar uma malha suficiente para aparecer o patamar no perfil de convergências. Um outro aspecto em que o domínio deve ser ajustado é quando as deformações plásticas alcançam as fronteiras do domínio, sendo nesse caso necessário aumentar seus limites ($L_x,~L_y$ e $L_z$). Para o tamanho do domínio escolhido resultados são obtidos de forma satisfatória sempre que a relação da pressão geostática-hidrostática pela coesão for menor ou igual a 5. Caso contrário, pode ser necessário fazer esse ajuste nas fronteiras do domínio.
+No caso em que $c_i=c_p=c_r = \sqrt{3}/2$ MPa, foi necessário aumentar o número de passos de escavação $n_p = 128$ para que o patamar no perfil de convergência se desenvolvesse plenamente. A solução analítica é dada para esse patamar sem a influência da face de escavação ou das bordas do modelo. Isso demonstra que dependendo dos valores dos parâmetros constitutivos pode ser necessário aumentar o número de passos $n_p$. Se o valor almejado é a convergência no equilíbrio fora das zonas de influência deve-se buscar uma malha suficiente para aparecer o patamar no perfil de convergências. Um outro aspecto em que o domínio deve ser ajustado é quando as deformações plásticas alcançam as fronteiras do domínio, sendo nesse caso necessário aumentar seus limites ($L_x,~L_y$ e $L_z$). Para o tamanho do domínio escolhido resultados são obtidos de forma satisfatória sempre que a relação da pressão geostática-hidrostática pela coesão for menor ou igual a 5. Caso contrário, pode ser necessário fazer esse ajuste nas fronteiras do domínio.
 \begin{figure}[H]
 	\begin{center}
 		\includegraphics[scale = 1]{0711-AXI-PLAST-SREVESTIMENTO-D0-E1000-ER0-P4-C3.pdf}
@@ -129,16 +129,16 @@ No caso em que $c_i=c_p=c_r = \sqrt{3}/2$MPa, foi necessário aumentar o número
 	\begin{center}
 		\includegraphics[scale = 1]{0712-AXI-PLAST--D0-E1000-ER0-P4-C1-KP15-KB1.pdf}
 	\end{center}
-	\caption{\label{PLAST-D0-E1000-ER0-P4-C1-KP15-KB1}Verificação solução numérica elastoplasticidade sem revestimento $E$ = 1000MPa, $c_i=c_p=c_r = \sqrt{3}/2$MPa, $\phi$=15$^\circ$ e $\psi$=0$^\circ$}
+	\caption{\label{PLAST-D0-E1000-ER0-P4-C1-KP15-KB1}Verificação solução numérica elastoplasticidade sem revestimento $E = 1000$ MPa, $c_i=c_p=c_r = \sqrt{3}/2$ MPa, $\phi$=15$^\circ$ e $\psi$=0$^\circ$}
 \end{figure}
 
-A verificação da solução considerando a colocação de um revestimento com $E_{rev} = 30000$MPa, $\nu_{rev} = 0,3$ e $d_0=0$ pode ser vista na \ref{PLAST-D0-E1000-ER30000-P4-C1}.
+A verificação da solução considerando a colocação de um revestimento com $E_{rev} = 30000$ MPa, $\nu_{rev} = 0,3$ e $d_0=0$ pode ser vista na \ref{PLAST-D0-E1000-ER30000-P4-C1}.
 
 \begin{figure}[H]
 	\begin{center}
 		\includegraphics[scale = 1.0]{0713-PLAST-D0-E1000-ER30000-P4-C1.pdf}
 	\end{center}
-	\caption{\label{PLAST-D0-E1000-ER30000-P4-C1}Verificação solução numérica em elastoplasticidade com revestimento - $E$ = 1000MPa, $E_{rev}$ = 30000MPa, $d0=0$, $c_i=c_p=c_r=\sqrt{3}/2$}
+	\caption{\label{PLAST-D0-E1000-ER30000-P4-C1}Verificação solução numérica em elastoplasticidade com revestimento - $E = 1000$ MPa, $E_{rev} = 30000$ MPa, $d_0=0$, $c_i=c_p=c_r=\sqrt{3}/2$ MPa}
 \end{figure}
 
 \subsection{Verificações em viscoplasticidade}
@@ -148,33 +148,33 @@ De forma análoga à elasticidade e à elastoplasticidade, o modelo constitutivo
 	\begin{center}
 		\includegraphics[scale = 1.0]{0714-AXI-D0-E1000-ER0-P4-C1-V5.pdf}
 	\end{center}
-	\caption{\label{VISCO-D0-E1000-ER0-P4-C1-V5}Verificação solução numérica em elastoplasticidade com revestimento - $E$ = 1000MPa, $c_i=c_p=c_r=\sqrt{3}/2$, $V_p=5$m/dia}
+	\caption{\label{VISCO-D0-E1000-ER0-P4-C1-V5}Verificação solução numérica em elastoplasticidade com revestimento - $E = 1000$ MPa, $c_i=c_p=c_r=\sqrt{3}/2$ MPa, $V_p=5$ m/dia}
 \end{figure}
-Como pode-se ver o resultado do GEOMEC91 não apresenta a evolução do perfil de convergências entre o final da construção do túnel e o final dos efeitos viscosos (longo prazo). Contudo, o longo prazo é quando o perfil de convergências cessa sua evolução. Isso pode ser visto no modelo do ANSYS pela aproximação das curvas cinzas entre a curva vermelha e azul conforme o tempo passa. Outro aspecto é que, para esses parâmetros, a quantidade de escavação $n_p$ não foi suficiente para aparecer o patamar no perfil de convergências, portanto os valores escolhidos para comparação estão na cota $y/R_i=4$. Um aspecto importante a ser notado é que quando se tem apenas viscoplasticidade, sem revestimento, o perfil de convergências no longo prazo tende a se aproximar da solução elastoplástica com os parâmetros do modelo viscoso, como pode ser visto comparando a \autoref{VISCO-D0-E1000-ER0-P4-C1-V5} e \autoref{PLAST-D0-E1000-ER0-P4-C1}. Além disso, o perfil de convergências no final da construção do túnel (curto prazo), tende a se aproximar da solução em elasticidade (menores convergências) quando a velocidade de escavação $V_p$ aumenta. A \autoref{VISCO-D0-E1000-ER0-P4-C1-V10} mostra esse aspecto com uma velocidade de 10m/dia.
+Como pode-se ver o resultado do GEOMEC91 não apresenta a evolução do perfil de convergências entre o final da construção do túnel e o final dos efeitos viscosos (longo prazo). Contudo, o longo prazo é quando o perfil de convergências cessa sua evolução. Isso pode ser visto no modelo do ANSYS pela aproximação das curvas cinzas entre a curva vermelha e azul conforme o tempo passa. Outro aspecto é que, para esses parâmetros, a quantidade de escavação $n_p$ não foi suficiente para aparecer o patamar no perfil de convergências, portanto os valores escolhidos para comparação estão na cota $y/R_i=4$. Um aspecto importante a ser notado é que quando se tem apenas viscoplasticidade, sem revestimento, o perfil de convergências no longo prazo tende a se aproximar da solução elastoplástica com os parâmetros do modelo viscoso, como pode ser visto comparando a \autoref{VISCO-D0-E1000-ER0-P4-C1-V5} e \autoref{PLAST-D0-E1000-ER0-P4-C1}. Além disso, o perfil de convergências no final da construção do túnel (curto prazo), tende a se aproximar da solução em elasticidade (menores convergências) quando a velocidade de escavação $V_p$ aumenta. A \autoref{VISCO-D0-E1000-ER0-P4-C1-V10} mostra esse aspecto com uma velocidade de 10 m/dia.
 
 \begin{figure}[H]
 	\begin{center}
 		\includegraphics[scale = 1.0]{0715-AXI-D0-E1000-ER0-P4-C1-V10.pdf}
 	\end{center}
-	\caption{\label{VISCO-D0-E1000-ER0-P4-C1-V10}Verificação solução numérica em viscoplasticidade com revestimento - $E$ = 1000MPa, $c_i=c_p=c_r=\sqrt{3}/2$, $V_p=10$m/dia}
+	\caption{\label{VISCO-D0-E1000-ER0-P4-C1-V10}Verificação solução numérica em viscoplasticidade com revestimento - $E = 1000$ MPa, $c_i=c_p=c_r=\sqrt{3}/2$ MPa, $V_p=10$ m/dia}
 \end{figure}
 Como pode-se ver o perfil de convergências no longo prazo não sofreu alteração e o perfil de curto prazo diminuiu suas convergências. \textbf{O modelo constitutivo acoplado traz diferença justamente nesse aspecto}: a convergência no curto prazo pode ser influenciada por eventuais plastificações e a convergência de longo prazo pode não mais se aproximar da solução elastoplástica com os mesmos valores dos parâmetros viscosos.
 
-Por fim, para verificar a parte do modelo viscoplástico com revestimento a \autoref{VISCO-D2-E1000-ER3000-P4-C1-V5} apresenta uma comparação considerando um revestimento de $E_{rev}=3000$MPa, $\nu_{rev}=0,3$ colocado com $d_0=2L_p$ afastado da face de escavação.
+Por fim, para verificar a parte do modelo viscoplástico com revestimento a \autoref{VISCO-D2-E1000-ER3000-P4-C1-V5} apresenta uma comparação considerando um revestimento de $E_{rev}=3000$ MPa, $\nu_{rev}=0,3$ colocado com $d_0=2L_p$ afastado da face de escavação.
 
 \begin{figure}[H]
 	\begin{center}
 		\includegraphics[scale = 1.0]{0716-AXI-D2-E1000-ER3000-P4-C1-V5.pdf}
 	\end{center}
-	\caption{\label{VISCO-D2-E1000-ER3000-P4-C1-V5}Verificação solução numérica em viscoplasticidade com revestimento - $E$ = 1000MPa, $c_i=c_p=c_r=\sqrt{3}/2$, $E_{rev} = 3000$MPa, $d0=2L_p$, $V_p=5$m/dia}
+	\caption{\label{VISCO-D2-E1000-ER3000-P4-C1-V5}Verificação solução numérica em viscoplasticidade com revestimento - $E = 1000$ MPa, $c_i=c_p=c_r=\sqrt{3}/2$ MPa, $E_{rev} = 3000$ MPa, $d0=2L_p$, $V_p=5$ m/dia}
 \end{figure}
 O revestimento, de uma forma geral, diminui as convergências tanto de curto quanto de longo prazo resistindo às deformações. Contudo, quando se tem um revestimento viscoso, como o concreto que sofre fluência e retração, esse bloqueio não é tão eficiente como pode ser visto em \citeonline{Quevedo2017}. Além disso, a baixa rigidez do revestimento faz com que o perfil de convergências no final da construção do túnel (curto prazo) se aproxime do de longo prazo.
 
 \section{Verificação do modelo elastoplástico-viscoplástico com uma solução analítica}
 
-De modo a verificar o algoritmo acoplado implementado é feita a comparação com a solução analítica deduzida por \citeonline[p. 61]{Piepi1995} para um túnel profundo em condições geostáticas-hidrostáticas no interior de um maciço com comportamento elastoplástico-viscoplástico perfeito obedecendo ao critério de Tresca. Essa solução analítica foi escolhida por utilizar o mesmo princípio de associação da \autoref{lei_endurecimento_rousset}, como pode ser visto em \citeonline[p. 35]{Piepi1995}. Contudo, não apresenta a mesma generalidade da solução numérica implementada e possui algumas hipóteses simplificativas, dentre elas, a consideração da mesma superfície de escoamento para plasticidade e viscoplasticidade e vetores de fluxo totalmente associados, ou seja, $\fl^p = \gl^{p} = \fl^{vp} = \gl^{vp}$. Para essa verificação é utilizado o modelo axissimétrico com os seguintes parâmetros: $E=1500$MPa e $2000$MPa, $\nu=0,498$, $c^i=c^p=c^r =4\sqrt{3}/2$MPa, $c^{vp}=3\sqrt{3}/2$MPa, $\eta = 4 \cdot 10^4$dia, $n=1$, $f_0=1$MPa e $p_v=p_h=9$MPa. Esses parâmetros são os mesmos utilizado por \citeonline[p. 131]{Piepi1995} que chegou nas convergências de $U_i=2,16$\% para $E=1500$MPa e $U_i=1,6$\% para $E=2000$MPa.
+De modo a verificar o algoritmo acoplado implementado é feita a comparação com a solução analítica deduzida por \citeonline[p. 61]{Piepi1995} para um túnel profundo em condições geostáticas-hidrostáticas no interior de um maciço com comportamento elastoplástico-viscoplástico perfeito obedecendo ao critério de Tresca. Essa solução analítica foi escolhida por utilizar o mesmo princípio de associação da \autoref{lei_endurecimento_rousset}, como pode ser visto em \citeonline[p. 35]{Piepi1995}. Contudo, não apresenta a mesma generalidade da solução numérica implementada e possui algumas hipóteses simplificativas, dentre elas, a consideração da mesma superfície de escoamento para plasticidade e viscoplasticidade e vetores de fluxo totalmente associados, ou seja, $\fl^p = \gl^{p} = \fl^{vp} = \gl^{vp}$. Para essa verificação é utilizado o modelo axissimétrico com os seguintes parâmetros: $E=1500$ MPa e $2000$ MPa, $\nu=0,498$, $c^i=c^p=c^r =4\sqrt{3}/2$ MPa, $c^{vp}=3\sqrt{3}/2$ MPa, $\eta = 4 \cdot 10^4$ dia, $n=1$, $f_0=1$ MPa e $p_v=p_h=9$ MPa. Esses parâmetros são os mesmos utilizado por \citeonline[p. 131]{Piepi1995} que chegou nas convergências de $U_i=2,16$\% para $E=1500$MPa e $U_i=1,6$\% para $E=2000$ MPa.
 
-Como a solução analítica está deduzida para superfície de Tresca e aqui é utilizada a de Drucker-Prager (que se particulariza para von-Mises devido a ausência de ângulo de atrito) foi adotado a relação (\ref{eq:ctr_cvm})$_1$ considerando von-Mises inscrito em Tresca nos valores das coesões. A solução analítica obtém o perfil de convergência apenas no longo prazo. Contudo, para mostrar as diferenças entre os modelos, além da solução numérica elastoplástica-viscoplástica (EPVP), foi feita também a solução considerando cada comportamento separado, ou seja, elástico (E), elastoplástico (EP) e viscoplástico (VP) tanto no final da escavação quanto no longo prazo. O modelo viscoplástico (VP) é utilizada a mesma coesão de $4\sqrt{3}/2$ do modelo (EP). Para averiguar a influência da velocidade de escavação será considerado três velocidades $V_p=0,1; 0,2$ e 10m/dia.
+Como a solução analítica está deduzida para superfície de Tresca e aqui é utilizada a de Drucker-Prager (que se particulariza para von-Mises devido à ausência de ângulo de atrito) foi adotado a relação (\ref{eq:ctr_cvm})$_1$ considerando von-Mises inscrito em Tresca nos valores das coesões. A solução analítica obtém o perfil de convergência apenas no longo prazo. Contudo, para mostrar as diferenças entre os modelos, além da solução numérica elastoplástica-viscoplástica (EPVP), foi feita também a solução considerando cada comportamento separado, ou seja, elástico (E), elastoplástico (EP) e viscoplástico (VP) tanto no final da escavação quanto no longo prazo. O modelo viscoplástico (VP) é utilizada a mesma coesão de $4\sqrt{3}/2$ MPa do modelo (EP). Para averiguar a influência da velocidade de escavação será considerado três velocidades $V_p=0,1; 0,2$ e 10 m/dia.
 
 A \autoref{PIEPI-E1500-FINALESCAVACAO} apresenta os resultados no final da escavação. Pode-se notar que os perfis de convergência para o modelo viscoplástico (VP) são intermediários entre o modelo elástico (E) e elastoplástico (EP), sendo que quanto mais rápida a escavação, mais a resposta desse modelo se  aproxima da convergência do maciço em elasticidade. Isso é um resultado esperado, pois quanto maior a velocidade de escavação menos tempo transcorreu para a evolução das deformações viscosas. O modelo elastoplástico-viscoplástico (EPVP) apresentou a mesma relação com a velocidade (quanto mais rápido menos tempo para as deformações viscosas evoluírem), porém, \textbf{iniciou suas deformações próximas do perfil de convergências do modelo elastoplástico (EP)}. Isso ocorre, pois, o maciço atingiu a plastificação durante a escavação. \textbf{Esse é um dos principais objetivos e vantagem desse modelo acoplado}, pois geralmente a escavação induz um comportamento elastoplástico no maciço próximo à abertura e esse efeito não é captado pelos modelos que consideram apenas a viscoplasticidade.
 
@@ -182,42 +182,42 @@ A \autoref{PIEPI-E1500-FINALESCAVACAO} apresenta os resultados no final da escav
 	\begin{center}
 		\includegraphics[scale = 1.0]{0717-PIEPI-E1500-FINALESCAVACAO.pdf}
 	\end{center}
-	\caption{\label{PIEPI-E1500-FINALESCAVACAO}Perfis de convergências no final da escavação para os diversos comportamentos implementados, considerando os parâmetros físicos do maciço de acordo com \citeonline{Piepi1995} com $E=1500$MPa}
+	\caption{\label{PIEPI-E1500-FINALESCAVACAO}Perfis de convergências no final da escavação para os diversos comportamentos implementados, considerando os parâmetros físicos do maciço de acordo com \citeonline{Piepi1995} com $E=1500$ MPa}
 \end{figure}
 
-Após o final da escavação, os perfis de convergências dos modelos (VP) e (EPVP) continuam evoluindo com uma taxa cada vez menor devido a redistribuição de tensões no interior do maciço, até estabilizarem (no longo prazo). A \autoref{PIEPI-E1500-LONGOPRAZO} mostra os perfis de convergências no longo prazo (cerca de 500 dias). Pode-se ver que independente da velocidade de escavação, os perfis de convergêncais viscoplásticos (VP) se estabilizam sobre o perfil da elastoplasticidade (EP). Isso ocorre pois é utilizado a mesma superfície de escoamento com os mesmos parâmetros em ambos os modelos. Contudo, os perfis do modelo elastoplástico-viscoplástico (EPVP) encontram a estabilização bem acima do perfil do modelo elastoplástico (EP), o que mostra, mais uma vez a importância da magnitude desse comportamento acoplado. Pode-se ver também que a solução numérica no longo prazo ficou satisfatória com a solução analítica.
+Após o final da escavação, os perfis de convergências dos modelos (VP) e (EPVP) continuam evoluindo com uma taxa cada vez menor devido à redistribuição de tensões no interior do maciço, até estabilizarem (no longo prazo). A \autoref{PIEPI-E1500-LONGOPRAZO} mostra os perfis de convergências no longo prazo (cerca de 500 dias). Pode-se ver que independente da velocidade de escavação, os perfis de convergêncais viscoplásticos (VP) se estabilizam sobre o perfil da elastoplasticidade (EP). Isso ocorre pois é utilizado a mesma superfície de escoamento com os mesmos parâmetros em ambos os modelos. Contudo, os perfis do modelo elastoplástico-viscoplástico (EPVP) encontram a estabilização bem acima do perfil do modelo elastoplástico (EP), o que mostra, mais uma vez a importância da magnitude desse comportamento acoplado. Pode-se ver também que a solução numérica no longo prazo ficou satisfatória com a solução analítica.
 
 \begin{figure}[H]
 	\begin{center}
 		\includegraphics[scale = 1.0]{0718-PIEPI-E1500-LONGOPRAZO.pdf}
 	\end{center}
-	\caption{\label{PIEPI-E1500-LONGOPRAZO}Perfis de convergências no longo prazo para os diversos comportamentos implementados, considerando os parâmetros físicos do maciço de acordo com \citeonline{Piepi1995} com $E=1500$MPa}
+	\caption{\label{PIEPI-E1500-LONGOPRAZO}Perfis de convergências no longo prazo para os diversos comportamentos implementados, considerando os parâmetros físicos do maciço de acordo com \citeonline{Piepi1995} com $E=1500$ MPa}
 \end{figure}
 
-A \autoref{PIEPI-E2000-FINALESCAVACAO} e \autoref{PIEPI-E2000-LONGOPRAZO} mostram os resultados para $E=2000$MPa. O mesmo raciocínio se aplica nesse caso, porém, como o maciço tem maior módulo de elasticidade, os perfis possuem menores convergências.
+A \autoref{PIEPI-E2000-FINALESCAVACAO} e \autoref{PIEPI-E2000-LONGOPRAZO} mostram os resultados para $E=2000$ MPa. O mesmo raciocínio se aplica nesse caso, porém, como o maciço tem maior módulo de elasticidade, os perfis possuem menores convergências.
 
 \begin{figure}[H]
 	\begin{center}
 		\includegraphics[scale = 1.0]{0719-PIEPI-E2000-FINALESCAVACAO.pdf}
 	\end{center}
-	\caption{\label{PIEPI-E2000-FINALESCAVACAO}Perfis de convergências no final da escavação para os diversos comportamentos implementados, considerando os parâmetros físicos do maciço de acordo com \citeonline{Piepi1995} com $E=2000$MPa}
+	\caption{\label{PIEPI-E2000-FINALESCAVACAO}Perfis de convergências no final da escavação para os diversos comportamentos implementados, considerando os parâmetros físicos do maciço de acordo com \citeonline{Piepi1995} com $E=2000$ MPa}
 \end{figure}
 
 \begin{figure}[H]
 	\begin{center}
 		\includegraphics[scale = 1.0]{0720-PIEPI-E2000-LONGOPRAZO.pdf}
 	\end{center}
-	\caption{\label{PIEPI-E2000-LONGOPRAZO}Perfil de convergências no longo prazo para os diversos comportamentos implementados, considerando os parâmetros físicos do maciço de acordo com \citeonline{Piepi1995} com $E=2000$MPa}
+	\caption{\label{PIEPI-E2000-LONGOPRAZO}Perfil de convergências no longo prazo para os diversos comportamentos implementados, considerando os parâmetros físicos do maciço de acordo com \citeonline{Piepi1995} com $E=2000$ MPa}
 \end{figure}
 
-Os mesmos resultados foram obtidos utilizando o modelo 3D. A \autoref{PIEPI-E1500-CAMPO_DESLOCAMENTO} mostra o campo de deslocamentos no longo prazo para o caso (EPVP) com velocidade de escavação $V_p=0,1$m/dia e $E=1500$MPa.
+Os mesmos resultados foram obtidos utilizando o modelo 3D. A \autoref{PIEPI-E1500-CAMPO_DESLOCAMENTO} mostra o campo de deslocamentos no longo prazo para o caso (EPVP) com velocidade de escavação $V_p=0,1$ m/dia e $E=1500$ MPa.
 
 \begin{figure}[H]
 	\begin{center}
 		\includegraphics[scale = 1.0]{0721-PIEPI-E1500-CAMPO_DESLOCAMENTO.pdf
 		}
 	\end{center}
-	\caption{\label{PIEPI-E1500-CAMPO_DESLOCAMENTO}Campo de deslocamentos no longo prazo para o caso elastoplástico-viscoplástico com $E=1500$MPa e $V_p=0,1$m/dia}
+	\caption{\label{PIEPI-E1500-CAMPO_DESLOCAMENTO}Campo de deslocamentos no longo prazo para o caso elastoplástico-viscoplástico com $E=1500$ MPa e $V_p=0,1$ m/dia}
 \end{figure}
 
 A \autoref{PIEPI-E1500-CAMPO_DEFORMACOES} mostra o campo de deformações plásticas e viscosas equivalentes para o mesmo caso.
@@ -227,12 +227,12 @@ A \autoref{PIEPI-E1500-CAMPO_DEFORMACOES} mostra o campo de deformações plást
 		\includegraphics[scale = 1.0]{0722-PIEPI-E1500-CAMPO_DEFORMACOES.pdf
 		}
 	\end{center}
-	\caption{\label{PIEPI-E1500-CAMPO_DEFORMACOES}Campo de deformações plásticas e viscosas no longo prazo para o caso elastoplástico-viscoplástico com $E=1500$MPa e $V_p=0,1$m/dia}
+	\caption{\label{PIEPI-E1500-CAMPO_DEFORMACOES}Campo de deformações plásticas e viscosas no longo prazo para o caso elastoplástico-viscoplástico com $E=1500$ MPa e $V_p=0,1$ m/dia}
 \end{figure}
 
 \section{Verificação do modelo elastoplástico-viscoplástico com uma solução numérica}
 
-\citeonline{Piepi1995} também desenvolveu sua solução numérica em axissimetria para verificar seus resultados analíticos e fazer estudos considerando a colocação do revestimento. Portanto, nesse aspecto, é possível também verificar o modelo desenvolvido com um de seus cálculos numéricos. Dessa forma tendo as propriedades $E=1500$MPa, $\nu=0,498$, $c^i=c^p=c^r =4\sqrt{3}/2$MPa, $c^{vp}=2\sqrt{3}/2$MPa, $\eta = 4 \cdot 10^4$dia, $n=1$, $f_0=1$MPa e $p_v=p_h=9$MPa, considerando um $E_{rev} = 2968$MPa, $d_0 = 2L_p$ e $V_p=12,5$m/dia \cite[p. 128, 132]{Piepi1995}, tem-se na \autoref{VP_COMPARAÇÃO_SOLUÇÃO_NUMÉRICA_CONVERGENCIA} e \autoref{EPVP_COMPARAÇÃO_SOLUÇÃO_NUMÉRICA_CONVERGENCIA} a comparação para o modelo viscoplástico (VP) e elastoplástico-viscoplástico (EPVP), respectivamente.
+\citeonline{Piepi1995} também desenvolveu sua solução numérica em axissimetria para verificar seus resultados analíticos e fazer estudos considerando a colocação do revestimento. Portanto, nesse aspecto, é possível também verificar o modelo desenvolvido com um de seus cálculos numéricos. Dessa forma tendo as propriedades $E=1500$ MPa, $\nu=0,498$, $c^i=c^p=c^r =4\sqrt{3}/2$ MPa, $c^{vp}=2\sqrt{3}/2$ MPa, $\eta = 4 \cdot 10^4$ dia, $n=1$, $f_0=1$ MPa e $p_v=p_h=9$ MPa, considerando um $E_{rev} = 2968$ MPa, $d_0 = 2L_p$ e $V_p=12,5$ m/dia \cite[p. 128, 132]{Piepi1995}, tem-se na \autoref{VP_COMPARAÇÃO_SOLUÇÃO_NUMÉRICA_CONVERGENCIA} e \autoref{EPVP_COMPARAÇÃO_SOLUÇÃO_NUMÉRICA_CONVERGENCIA} a comparação para o modelo viscoplástico (VP) e elastoplástico-viscoplástico (EPVP), respectivamente.
 
 \begin{figure}[H]
 	\begin{center}
@@ -248,11 +248,11 @@ A \autoref{PIEPI-E1500-CAMPO_DEFORMACOES} mostra o campo de deformações plást
 	\caption{\label{EPVP_COMPARAÇÃO_SOLUÇÃO_NUMÉRICA_CONVERGENCIA}Verificação com a solução de \citeonline{Piepi1995} do modelo elastoplástico-viscoplástico com revestimento}
 \end{figure}
 
-Pode-se notar que, para essas propriedades, o modelo elastoplástico-viscoplástico possuí uma convergência 34\% maior, no final da construção do túnel, e 11\% maior no longo prazo) em comparação com o modelo viscoplástico.
+Pode-se notar que, para essas propriedades, o modelo elastoplástico-viscoplástico possui uma convergência 34\% maior, no final da construção do túnel, e 11\% maior no longo prazo) em comparação com o modelo viscoplástico.
 
 \section{Análise considerando amolecimento}
 
-Como o modelo constitutivo elastoplástico-viscoplástico comporta a característica de endurecimento/amolecimento, nessa seção é apresentada uma pequena análise da influência que se pode ter em considerar esse fenômeno. Para tanto, é utilizado o exemplo anterior em axissimetria com as seguintes propriedades para o maciço: $E=1500$MPa, $\nu=0,498$, $c^{vp}=3\sqrt{3}/2$MPa, $\eta = 4 \cdot 10^4$dia, $n=1$, $f_0=1$MPa e $p_v=p_h=9$MPa. Vendo o campo de deformações plásticas equivalentes da \autoref{PIEPI-E1500-CAMPO_DEFORMACOES}, vamos adotar uma coesão inicial $c_i=4\sqrt{3}/2$MPa, contudo, um amolecimento linear até $\bar \varepsilon^p_{I} = 0,02$, para metade da coesão $c_p=2\sqrt{3}/2$MPa (\autoref{AMOLECIMENTO}).
+Como o modelo constitutivo elastoplástico-viscoplástico comporta a característica de endurecimento/amolecimento, nessa seção é apresentada uma pequena análise da influência que se pode ter em considerar esse fenômeno. Para tanto, é utilizado o exemplo anterior em axissimetria com as seguintes propriedades para o maciço: $E=1500$ MPa, $\nu=0,498$, $c^{vp}=3\sqrt{3}/2$ MPa, $\eta = 4 \cdot 10^4$ dia, $n=1$, $f_0=1$ MPa e $p_v=p_h=9$ MPa. Vendo o campo de deformações plásticas equivalentes da \autoref{PIEPI-E1500-CAMPO_DEFORMACOES}, vamos adotar uma coesão inicial $c_i=4\sqrt{3}/2$ MPa, contudo, um amolecimento linear até $\bar \varepsilon^p_{I} = 0,02$, para metade da coesão $c_p=2\sqrt{3}/2$ MPa (\autoref{AMOLECIMENTO}).
 
 \begin{figure}[H]
 	\begin{center}
@@ -272,7 +272,7 @@ A \autoref{EP-EFEITO-AMOLECIMENTO} mostra a diferença entre os perfis de conver
 	\caption{\label{EP-EFEITO-AMOLECIMENTO}Efeito do amolecimento no perfil de convergências para o caso elastoplástico}
 \end{figure}
 
-A \autoref{EPVP-EFEITO-AMOLECIMENTO} mostra a diferença entre os perfis de convergências com e sem amolecimento para o modelo elastoplástico-viscoplástico no final da construção do túnel, ou seja, no curto prazo (CP) e no longo prazo (LP). É adotado uma velocidade $V_p=0,1$m/dia.
+A \autoref{EPVP-EFEITO-AMOLECIMENTO} mostra a diferença entre os perfis de convergências com e sem amolecimento para o modelo elastoplástico-viscoplástico no final da construção do túnel, ou seja, no curto prazo (CP) e no longo prazo (LP). É adotado uma velocidade $V_p=0,1$ m/dia.
 
 \begin{figure}[H]
 	\begin{center}
@@ -286,18 +286,18 @@ Para o modelo elastoplástico, a redução na coesão pela metade devido ao amol
 
 \section{Análise paramétrica da influência do revestimento}
 
-Nessa seção é apresentada uma análise paramétrica para averiguar a influência do revestimento sobre o perfil de convergência do modelo elastoplástico-viscoplástico. As propriedades do maciço são as mesmas da análise anterior com $E=1500$MPa. É utilizado o modelo em axissimetria, primeiramente sem revestimento e então com revestimento variando o seu módulo de elasticidade de $E_{rev} = 3000$MPa para $E_{rev} = 30000$MPa e a distância não suportada de $d0 = 0$ e de $d0 = 4L_p$. A \autoref{PARAMETRICO-D0-FINALCONSTRUÇÃO} e \autoref{PARAMETRICO-D0-LONGOPRAZO} mostram os resultados considerando $d_0 = 0$ e a \autoref{PARAMETRICO-D4-FINALCONSTRUÇÃO} e \autoref{PARAMETRICO-D4-LONGOPRAZO} considerando $d_0=4L_p$. A convergência ao equilíbrio é medida em $y/R_i = 6$. 
+Nessa seção é apresentada uma análise paramétrica para averiguar a influência do revestimento sobre o perfil de convergência do modelo elastoplástico-viscoplástico. As propriedades do maciço são as mesmas da análise anterior com $E= 1500$ MPa. É utilizado o modelo em axissimetria, primeiramente sem revestimento e então com revestimento variando o seu módulo de elasticidade de $E_{rev} = 3000$ MPa para $E_{rev} = 30000$ MPa e a distância não suportada de $d_0 = 0$ e de $d_0 = 4L_p$. A \autoref{PARAMETRICO-D0-FINALCONSTRUÇÃO} e \autoref{PARAMETRICO-D0-LONGOPRAZO} mostram os resultados considerando $d_0 = 0$ e a \autoref{PARAMETRICO-D4-FINALCONSTRUÇÃO} e \autoref{PARAMETRICO-D4-LONGOPRAZO} considerando $d_0=4L_p$. A convergência ao equilíbrio é medida em $y/R_i = 6$. 
 
 Quando a rigidez do revestimento é alta o modelo (VP) se aproxima do (EL). Isso ocorre, pois as deformações viscosas do modelo viscoplástico são resistidas pelo revestimento e impedidas de ocorrer. Já o modelo (EPVP) se aproxima do (EP). Isso, pois durante a escavação e colocação do revestimento, alguma plastificação ocorre, mas as deformações viscosas do modelo (EPVP) são resistidas pelo revestimento.
 
-Comparando o modelo elastoplástico-viscoplástico com o modelo viscoplástico, no final da construção, sem revestimento, o primeiro teve uma convergência 33\% maior. Com revestimento aplicado a $d0=0$ uma convergência entre 17\% e 20\% e para $d0=4L_p$ entre 25\% a 28\% maior. No longo prazo, sem revestimento, o primeiro teve, uma convergência 54\% maior. Com revestimento aplicado a $d0=0$ uma convergência entre 17\% e 23\% e para $d0=4L_p$ entre 26\% a 30\% maior. Isso é uma grande diferença com relação a modelos que procuram estimar a convergência no longo prazo, mas não consideram a plastificação do maciço no comportamento instantâneo.
+Comparando o modelo elastoplástico-viscoplástico com o modelo viscoplástico, no final da construção, sem revestimento, o primeiro teve uma convergência 33\% maior. Com revestimento aplicado a $d_0=0$ uma convergência entre 17\% e 20\% e para $d_0=4L_p$ entre 25\% a 28\% maior. No longo prazo, sem revestimento, o primeiro teve, uma convergência 54\% maior. Com revestimento aplicado a $d_0=0$ uma convergência entre 17\% e 23\% e para $d_0=4L_p$ entre 26\% a 30\% maior. Isso é uma grande diferença com relação a modelos que procuram estimar a convergência no longo prazo, mas não consideram a plastificação do maciço no comportamento instantâneo.
 
 \begin{figure}[H]
 	\begin{center}
 		\includegraphics[scale = 1.0]{0728-PARAMETRICO-D0-FINALCONSTRUÇÃO.pdf
 		}
 	\end{center}
-	\caption{\label{PARAMETRICO-D0-FINALCONSTRUÇÃO}Convergência no final da construção \textit{versus} módulo de elasticidade do revestimento para uma distância não revestida $d0=0$}
+	\caption{\label{PARAMETRICO-D0-FINALCONSTRUÇÃO}Convergência no final da construção \textit{versus} módulo de elasticidade do revestimento para uma distância não revestida $d_0=0$}
 \end{figure}
 
 \begin{figure}[H]
@@ -305,7 +305,7 @@ Comparando o modelo elastoplástico-viscoplástico com o modelo viscoplástico, 
 		\includegraphics[scale = 1.0]{0729-PARAMETRICO-D0-LONGOPRAZO.pdf
 		}
 	\end{center}
-	\caption{\label{PARAMETRICO-D0-LONGOPRAZO}Convergência no longo prazo \textit{versus} módulo de elasticidade do revestimento para uma distância não revestida $d0=0$}
+	\caption{\label{PARAMETRICO-D0-LONGOPRAZO}Convergência no longo prazo \textit{versus} módulo de elasticidade do revestimento para uma distância não revestida $d_0=0$}
 \end{figure}
 
 \begin{figure}[H]
@@ -313,7 +313,7 @@ Comparando o modelo elastoplástico-viscoplástico com o modelo viscoplástico, 
 		\includegraphics[scale = 1.0]{0730-PARAMETRICO-D4-FINALCONSTRUÇÃO.pdf
 		}
 	\end{center}
-	\caption{\label{PARAMETRICO-D4-FINALCONSTRUÇÃO}Convergência no final da construção \textit{versus} módulo de elasticidade do revestimento para uma distância não revestida $d0=4L_p$}
+	\caption{\label{PARAMETRICO-D4-FINALCONSTRUÇÃO}Convergência no final da construção \textit{versus} módulo de elasticidade do revestimento para uma distância não revestida $d_0=4L_p$}
 \end{figure}
 
 \begin{figure}[H]
@@ -321,14 +321,14 @@ Comparando o modelo elastoplástico-viscoplástico com o modelo viscoplástico, 
 		\includegraphics[scale = 1.0]{0731-PARAMETRICO-D4-LONGOPRAZO.pdf
 		}
 	\end{center}
-	\caption{\label{PARAMETRICO-D4-LONGOPRAZO}Convergência no longo prazo \textit{versus} módulo de elasticidade do revestimento para uma distância não revestida $d0=4L_p$}
+	\caption{\label{PARAMETRICO-D4-LONGOPRAZO}Convergência no longo prazo \textit{versus} módulo de elasticidade do revestimento para uma distância não revestida $d_0=4L_p$}
 \end{figure}
 
 \section{Análise paramétrica considerando uma seção elíptica}
 
-Uma vez que o modelo constitutivo acoplado (EPVP) está generalizado para o caso tridimensional é interessante fazer uma análise paramétrica considerando algum aspecto que não pode ser analisado com o modelo axissimétrico. O aspecto escolhido nessa análise foi a razão entre o raio horizontal e vertical. Dessa forma, foram consideradas duas razões de aspecto $R_{h_i}/R_{vi}$: 1, ou seja, circular e 2. Além disso, os cálculos foram executados sem revestimento (S/REV) e com revestimento (C/REV) afastado de $d0=2L_p$ da face de escavação. As propriedades do maciço são: $E=1500$MPa, $\nu=0,498$, $c^i=c^p=c^r =4\sqrt{3}/2$MPa, $c^{vp}=2\sqrt{3}/2$MPa, $\eta = 4 \cdot 10^4$dia, $n=1$, $f_0=1$MPa e $p_v=p_h=9$MPa. E do revestimento: $E_{rev}=2968$MPa, $\nu_{rev}$=0,3 com uma velocidade de escavação e colocação de $V_p=1$m/dia. Para evidenciar a diferença que o modelo acoplado pode representar os resultados foram comparados com modelo viscoplástico (VP) com uma coesão de $2\sqrt{3}/2$MPa.
+Uma vez que o modelo constitutivo acoplado (EPVP) está generalizado para o caso tridimensional é interessante fazer uma análise paramétrica considerando algum aspecto que não pode ser analisado com o modelo axissimétrico. O aspecto escolhido nessa análise foi a razão entre o raio horizontal e vertical. Dessa forma, foram consideradas duas razões de aspecto $R_{h_i}/R_{vi}$: 1, ou seja, circular e 2. Além disso, os cálculos foram executados sem revestimento (S/REV) e com revestimento (C/REV) afastado de $d_0=2L_p$ da face de escavação. As propriedades do maciço são: $E=1500$ MPa, $\nu=0,498$, $c^i=c^p=c^r =4\sqrt{3}/2$ MPa, $c^{vp}=2\sqrt{3}/2$ MPa, $\eta = 4 \cdot 10^4$ dia, $n=1$, $f_0=1$ MPa e $p_v=p_h=9$ MPa. E do revestimento: $E_{rev}=2968$ MPa, $\nu_{rev}=0,3$ com uma velocidade de escavação e colocação de $V_p=1$ m/dia. Para evidenciar a diferença que o modelo acoplado pode representar os resultados foram comparados com modelo viscoplástico (VP) com uma coesão de $2\sqrt{3}/2$ MPa.
 
-Como a seção transversal é eliptica as convergências são medidas ao longo do maior e menor raio da seção, portanto,  tem-se $U_{yi} = -u_y(r=R_{vi})/R_{vi}$ e $U_{xi} = -u_x(r=R_{hi})/R_{hi}$.  A \autoref{ELIPTICO-CONVERGENCIAS-UX-SREV} e \autoref{ELIPTICO-CONVERGENCIAS-UX-CREV} mostram as convergências no equilíbrio na direção $x$ para ambos os modelos (VP) e (EPVP), no curto prazo (CP), ou seja, no final da construção do túnel e no longo prazo (LP) sem revestimento e com revestimento, respectivamente.
+Como a seção transversal é elíptica as convergências são medidas ao longo do maior e menor raio da seção, portanto,  tem-se $U_{yi} = -u_y(r=R_{vi})/R_{vi}$ e $U_{xi} = -u_x(r=R_{hi})/R_{hi}$.  A \autoref{ELIPTICO-CONVERGENCIAS-UX-SREV} e \autoref{ELIPTICO-CONVERGENCIAS-UX-CREV} mostram as convergências no equilíbrio na direção $x$ para ambos os modelos (VP) e (EPVP), no curto prazo (CP), ou seja, no final da construção do túnel e no longo prazo (LP) sem revestimento e com revestimento, respectivamente.
 
 
 \begin{figure}[H]
@@ -377,7 +377,7 @@ A \autoref{ELIPTICO-CONVERGENCIAS-UY-SREV} e \autoref{ELIPTICO-CONVERGENCIAS-UY-
 
 Como pode-se ver a magnitude das deformações inelásticas na direção $y$ para ambos os modelos são muito próximas. Portanto, a diferença entre esses modelos vai depender muito do nível de plastificação. Quanto maior, maior as diferenças.
 
-A \autoref{convergencias_analise_secao_eliptica} resume a razão entre as convergências elastoplásticas-viscplástica e viscoplástica.
+A \autoref{convergencias_analise_secao_eliptica} resume a razão entre as convergências elastoplásticas-viscoplástica e viscoplástica.
 
 \begin{table}[H]
 	\caption{Razão entre as convergências ao equilíbrio do modelo (EPVP) com (VP)}

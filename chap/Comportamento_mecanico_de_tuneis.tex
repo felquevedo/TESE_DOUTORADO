@@ -23,7 +23,7 @@ Dentre as abordagens mais gerais que buscam prever o comportamento dos túneis, 
 
 \begin{alineas}
 	
-	\item \textbf{simulação do processo construtivo}: através da ativação e desativação dos elementos finitos, onde a cada ciclo construtivo é feita uma análise desativando-se os elementos que correspondem a região escavada do maciço e ativando-se aqueles referentes ao revestimento. Exemplos recentes podem ser encontrados na grande maioria de estudos que consideram a interação entre o maciço e o revestimento, tais como: \citeonline{Zhong2016} e \citeonline{Quevedo2017};
+	\item \textbf{simulação do processo construtivo}: através da ativação e desativação dos elementos finitos, onde a cada ciclo construtivo é feita uma análise desativando-se os elementos que correspondem à região escavada do maciço e ativando-se aqueles referentes ao revestimento. Exemplos recentes podem ser encontrados na grande maioria de estudos que consideram a interação entre o maciço e o revestimento, tais como: \citeonline{Zhong2016} e \citeonline{Quevedo2017};
 	
 	\item \textbf{domínio espacial complexo}: incorporam a influência da frente de escavação, da intersecção com galerias ou da presença de túneis próximos como, por exemplo, \citeonline{Chakeri2011}, \citeonline{Do2014}  e ainda, quando se trata de túneis superficiais, assentamentos na superfície e interação com estruturas da superfície como, por exemplo, \citeonline{Augarde2001}, \citeonline{Burd2000}, \citeonline{Mroueh2003}, \citeonline{Xin2009} e \citeonline{Ferrao2020};
 	
@@ -37,7 +37,7 @@ Dentre as abordagens mais gerais que buscam prever o comportamento dos túneis, 
 	
 \end{alineas}
 
-A presente tese estará focada apenas no primeiro e terceiro item acima, sendo o terceiro o de maior interesse, devido a modelagem da lei constitutiva elastoplástica-viscoplástica do maciço.
+A presente tese estará focada apenas no primeiro e terceiro item acima, sendo o terceiro o de maior interesse, devido à modelagem da lei constitutiva elastoplástica-viscoplástica do maciço.
 
 \section{Influência da escavação e o conceito de convergência da seção}
 \label{cap:Influência da escavação e o conceito de convergência da seção}
@@ -68,7 +68,7 @@ O parâmetro geométrico mais simples e representativo do comportamento de um t�
 	\caption{\label{definicao_convergencia}Ilustração das medidas geométricas que compõe a convergência de uma seção circular: a) corte transversal, b) corte longitudinal}
 \end{figure}
 
-Dependendo da anisotropia das tensões \textit{in situ} ou do formato da seção, sua deformada pode não ser radial e, na prática, podem-se usar varias medidas para compor o cálculo da convergência da seção, como exemplificado na \autoref{convergenca_secao_qualquer}.
+Dependendo da anisotropia das tensões \textit{in situ} ou do formato da seção, sua deformada pode não ser radial e, na prática, podem-se usar várias medidas para compor o cálculo da convergência da seção, como exemplificado na \autoref{convergenca_secao_qualquer}.
 
 \begin{figure}[H]
 	\begin{center}
@@ -198,9 +198,7 @@ No comportamento da \autoref{ensaio_triaxial_ductil} podem-se destacar as seguin
 	
 \end{alineas}
 
-Para um maciço homogêneo, isotrópico e elástico linear a solução analítica para o campo de deslocamentos e tensões no entorno de uma seção circular afastada da zona de influência da face de escavação é conhecida desde \citeonline{Lame1852} e \citeonline{Kirsch1898}, sendo que este último generalizou a solução para um estado de tensões \textit{in situ} anisotrópico. 
-
-Contudo, como visto nas figuras acima, a massa rochosa não é um material perfeitamente elástico e dependendo da magnitude das tensões \textit{in situ} e do desvio das tensões causado pela escavação, o túnel pode apresentar uma zona plastificada ao redor da cavidade. Quando a seção do túnel é circular, o maciço homogêneo, isotrópico, elastoplástico, com tensões iniciais geostáticas-hidrostáticas, essa zona plástica é circular e caracterizada por um raio plástico $R^p$. \autoref{deslocamentos_tensoes_analitico} ilustra a solução analítica de um maciço elástico e um elastoplástico. Apesar de a solução depender da forma da lei constitutiva elastoplástica, em geral, para túneis não revestidos, há uma diminuição nas tensões ao redor da cavidade e um aumento na convergência.
+Para um maciço homogêneo, isotrópico e elástico linear a solução analítica para o campo de deslocamentos e tensões no entorno de uma seção circular afastada da zona de influência da face de escavação é conhecida desde \citeonline{Lame1852} e \citeonline{Kirsch1898}, sendo que este último generalizou a solução para um estado de tensões \textit{in situ} anisotrópico.  Contudo, como visto na \autoref{ensaio_triaxial_rigido} e \autoref{ensaio_triaxial_ductil}, a massa rochosa não é um material perfeitamente elástico e dependendo da magnitude das tensões \textit{in situ} e do desvio das tensões causado pela escavação, o túnel pode apresentar uma zona plastificada ao redor da cavidade. Quando a seção do túnel é circular, o maciço homogêneo, isotrópico, elastoplástico, com tensões iniciais geostáticas-hidrostáticas, essa zona plástica é circular e caracterizada por um raio plástico $R^p$. \autoref{deslocamentos_tensoes_analitico} ilustra a solução analítica de um maciço elástico e um elastoplástico. Apesar de a solução depender da forma da lei constitutiva elastoplástica, em geral, para túneis não revestidos, há uma diminuição nas tensões ao redor da cavidade e um aumento na convergência.
 
 \begin{figure}[H]
 	\begin{center}
@@ -224,7 +222,7 @@ O comportamento viscoso do maciço, caracterizado pela deformação contínua no
 	\caption{\label{curva_caracteristica_fluencia}Curva característica em um ensaio de fluência com os três estágios de comportamento (adaptado de: \citeonline[p. 107]{Costa1984})}
 \end{figure}
 
-Conforme pode-se ver na figura acima, no instante de aplicação da carga axial o corpo de prova sofre uma deformação instantânea inicial $\varepsilon_{a_{0}}$ elástica ou, dependendo do nível das tensões, elastoplástica. Conforme o tempo avança as deformações continuam aumentando, porém, a uma taxa decrescente. Esse estágio é chamado de \textbf{fluência primária} (ou transiente), pois em seguida a taxa de deformação diminui até ficar constante iniciando dessa forma o segundo estágio chamado de \textbf{fluência secundária} (permanente ou estacionária). Após essa fase, que pode consumir a maior parte do tempo, as deformações podem evoluir para o terceiro estágio chamado de \textbf{fluência terciária} (instável), onde a taxa de deformação passa a aumentar até que o material atinge a ruptura \cite{Costa1984}. Contudo, dependendo do nível das tensões, nem sempre a amostra apresenta os três estágios, podendo, inclusive, haver uma estabilização das deformações no tempo.
+Conforme pode-se ver na \autoref{curva_caracteristica_fluencia}, no instante de aplicação da carga axial o corpo de prova sofre uma deformação instantânea inicial $\varepsilon_{a_{0}}$ elástica ou, dependendo do nível das tensões, elastoplástica. Conforme o tempo avança as deformações continuam aumentando, porém, a uma taxa decrescente. Esse estágio é chamado de \textbf{fluência primária} (ou transiente), pois em seguida a taxa de deformação diminui até ficar constante iniciando dessa forma o segundo estágio chamado de \textbf{fluência secundária} (permanente ou estacionária). Após essa fase, que pode consumir a maior parte do tempo, as deformações podem evoluir para o terceiro estágio chamado de \textbf{fluência terciária} (instável), onde a taxa de deformação passa a aumentar até que o material atinge a ruptura \cite{Costa1984}. Contudo, dependendo do nível das tensões, nem sempre a amostra apresenta os três estágios, podendo, inclusive, haver uma estabilização das deformações no tempo.
 
 Além desses estágios de comportamento citados, a recuperação das deformações é outro fenômeno característico de materiais em regime de fluência. Se durante a fluência primária for retirada a carga desviadora o corpo recuperará a sua configuração original seguindo a trajetória $\overline{\textrm{PQR}}$, sendo o trecho $\overline{\textrm{PQ}}$ uma recuperação rápida e instantânea e o trecho $\overline{\textrm{QR}}$ uma recuperação lenta, assintótica e completa (salvo se houverem deformações plásticas durante o carregamento). Nesse caso, em que a recuperação é completa, o maciço está em regime viscoelástico. Contudo, se a descarga for feita no segundo estágio, haverá o mesmo comportamento instantâneo (trecho $\overline{\textrm{TU}}$) e assintótico (trecho $\overline{\textrm{UV}}$), mas a recuperação pode não ser mais completa. Nesse caso, evidencia-se o material comportando-se em seu regime viscoplástico \cite{Costa1984}. Um exemplo típico desse ensaio pode ser visto na \autoref{curva_caracteristica_fluencia_ensaio}.
 
@@ -235,15 +233,15 @@ Além desses estágios de comportamento citados, a recuperação das deformaçõ
 	\caption{\label{curva_caracteristica_fluencia_ensaio}Ensaio triaxial de fluência da Argila de Boom (adaptado de: \citeonline[p. 42]{Rousset1988})}
 \end{figure}
 
-Na figura acima, pode-se destacar as seguintes fases \cite[p. 42]{Rousset1988}:
+Na \autoref{curva_caracteristica_fluencia_ensaio}, pode-se destacar as seguintes fases \cite[p. 42]{Rousset1988}:
 
 \begin{alineas}
 	
-	\item para um pequeno desviador (1,75MPa) a deformação aumenta rapidamente no início. Sua evolução, em seguida, diminui e se estabiliza depois de alguns dias. Nessa etapa foi observado apenas a fase primária, transiente;
+	\item para um pequeno desviador (1,75 MPa) a deformação aumenta rapidamente no início. Sua evolução, em seguida, diminui e se estabiliza depois de alguns dias. Nessa etapa foi observado apenas a fase primária, transiente;
 	
-	\item para um desviador moderado (2,25MPa), após uma fase rápida, mas desacelerada (fase primária), observa-se o desenvolvimento de uma fase com taxa de deformação constante ($\dot{\varepsilon_a}\simeq 7\cdot {{10}^{-6}}{{h}^{-1}}$). Essa é uma fase de fluência secundária, que leva a deformações relativamente importantes, da ordem de 3,5\% após três meses;
+	\item para um desviador moderado (2,25 MPa), após uma fase rápida, mas desacelerada (fase primária), observa-se o desenvolvimento de uma fase com taxa de deformação constante ($\dot{\varepsilon_a}\simeq 7\cdot {{10}^{-6}}$ h$^{-1}$). Essa é uma fase de fluência secundária, que leva a deformações relativamente importantes, da ordem de 3,5\% após três meses;
 	
-	\item para um desviador forte (2,75MPa), próximo do limite máximo de resistência do comportamento instantâneo (\autoref{ensaio_triaxial_ductil}), a taxa de deformação da fase secundária é cinco vezes maior do que a anterior. Após duas semanas, leva a um aumento na taxa de deformação (fase terciária) e, finalmente, a ruptura da amostra, logo que a deformação ultrapassa 6\%.
+	\item para um desviador forte (2,75 MPa), próximo do limite máximo de resistência do comportamento instantâneo (\autoref{ensaio_triaxial_ductil}), a taxa de deformação da fase secundária é cinco vezes maior do que a anterior. Após duas semanas, leva a um aumento na taxa de deformação (fase terciária) e, finalmente, a ruptura da amostra, logo que a deformação ultrapassa 6\%.
 	
 \end{alineas}
 
@@ -274,7 +272,7 @@ Do ponto de vista da modelagem há diversas formas de introduzir esse comportame
 	
 \end{alineas}
 
-Um exemplo da magnitude dos efeitos viscosos frente a leis elásticas e elastoplásticas em túneis profundos, pode ser vista no perfil de convergências da \autoref{perfil_convergencias_sterpi} obtidas de análises em axissimetria. Quando se considera no modelo apenas a lei elastoviscoplástica em regime secundário, tal possui um comportamento intermediário entre as leis elásticas e elastoplásticas. Além disso, quanto mais rápido a escavação, mais a resposta se aproxima da solução em elasticidade e quanto mais lenta mais se aproxima da elastoplasticidade. Isso é uma característica própria dos modelos viscoplásticos, por exemplo.
+Um exemplo da magnitude dos efeitos viscosos frente às leis elásticas e elastoplásticas em túneis profundos, pode ser vista no perfil de convergências da \autoref{perfil_convergencias_sterpi} obtidas de análises em axissimetria. Quando se considera no modelo apenas a lei elastoviscoplástica em regime secundário, tal possui um comportamento intermediário entre as leis elásticas e elastoplásticas. Além disso, quanto mais rápido a escavação, mais a resposta se aproxima da solução em elasticidade e quanto mais lenta mais se aproxima da elastoplasticidade. Isso é uma característica própria dos modelos viscoplásticos, por exemplo.
 
 \begin{figure}[H]
 	\begin{center}
@@ -291,7 +289,7 @@ Alguns estudos considerando leis elastoplásticas-viscoplásticas podem ser enco
 
 \textbf{\citeonline{Rousset1988}}, no intuito de estudar túneis em maciços argilosos profundos (usados para estocagem de rejeitos radioativos) fez um excelente trabalho de caracterização experimental do comportamento desses e classificou-os em rígidos e dúcteis. Propôs um modelo elastoplástico-viscoplástico com critério tanto de Tresca quanto Mohr-Coulomb, perfeito (para as argilas rígidas) e com amolecimento bi-linear (para as dúcteis). O modelo de \citeonline{Perzyna1966} foi adotado como sendo o mecanismo viscoso com as mesmas superfícies de escoamento da elastoplasticidade. O seu trabalho compreende principalmente soluções analíticas.
 
-Seguindo os mesmos passos de Rousset, \textbf{\citeonline{Piepi1995}} estudando argilas rígidas, desenvolveu um cálculo semi-analítico para um túnel circular em um maciço elastoplástico-viscoplástico com critério de Tresca sem endurecimento ou amolecimento. Também, no mesmo trabalho implementou essa lei constitutiva (entre outras como von-Mises, Drucker-Prager e Mohr-Coulomb) em elementos finitos, para abordar túneis em axissimetria, calibrou os parâmetros através de ensaios e verificou os resultados com sua solução analítica.
+Seguindo os mesmos passos de \citeonline{Rousset1988}, \textbf{\citeonline{Piepi1995}} estudando argilas rígidas, desenvolveu um cálculo semi-analítico para um túnel circular em um maciço elastoplástico-viscoplástico com critério de Tresca sem endurecimento ou amolecimento. Também, no mesmo trabalho implementou essa lei constitutiva (entre outras como von-Mises, Drucker-Prager e Mohr-Coulomb) em elementos finitos, para abordar túneis em axissimetria, calibrou os parâmetros através de ensaios e verificou os resultados com sua solução analítica.
 
 \textbf{\citeonline{Purwodihardjo2005}}, apresentam o modelo elastoplástico-viscoplástico composto pelo modelo elastoplástico CJS desenvolvido por \citeonline{Cambou1987}, que, além de dividir o mecanismo em uma parcela volumétrica e desviatória, leva em conta a dependência da densidade do maciço através da teoria do estado crítico, como pode-se ver em \citeonline{Maleki2000}. A parcela diferida é dada pelo modelo viscoplástico de \citeonline{Perzyna1966} com o parâmetro de viscosidade em função da distância entre o estado de tensões e a superfície de ruptura, para representar a fase terciária. O critério viscoplástico é inspirado na teoria da superfície delimitadora de \citeonline{Kaliakin1990}. O modelo foi calibrado com os ensaios triaxiais feitos por \citeonline{Piepi1995}. Por fim, seu modelo foi utilizado para analisar um estudo de caso referente ao túnel de \textit{Tartaiguille}, localizado entre \textit{Valence} e \textit{Montélimar} (França), utilizando análises axissimétricas e em estado plano de deformações.
 
@@ -326,7 +324,7 @@ A profundidade do túnel está diretamente relacionada com o estado de tensões 
 	\sigma_v(z=H)= \gamma_m H ,
 \end{equation}
 
-em que $\gamma_m$ é o peso específico do maciço e $H$ a profundidade do túnel. \citeonline{Hoek1980} reunem diversos dados que indicam que $\gamma_m$ (para maciços rochosos) situa-se na faixa de 20kN/m³ à 30kN/m³. Contudo, esses limites podem variar dependendo do banco de dados utilizado como, por exemplo, em \citeonline[p. 1030]{Martin2003}.
+em que $\gamma_m$ é o peso específico do maciço e $H$ a profundidade do túnel. \citeonline{Hoek1980} reunem diversos dados que indicam que $\gamma_m$ (para maciços rochosos) situa-se na faixa de 20 kN/m³ à 30 kN/m³. Contudo, esses limites podem variar dependendo do banco de dados utilizado como, por exemplo, em \citeonline[p. 1030]{Martin2003}.
 
 \begin{figure}[H]
 	\begin{center}
@@ -335,7 +333,7 @@ em que $\gamma_m$ é o peso específico do maciço e $H$ a profundidade do túne
 	\caption{\label{coeficiente_empuxo}a) tensões verticais e b) razão entre a tensão horizontal e vertical (coeficiente de empuxo $K$)  (adaptado de: \citeonline[p. 99-100]{Hoek1980})}
 \end{figure}
 
-Como pode ser visto na \autoref{coeficiente_empuxo}b, há certa dispersão da tensão horizontal. Esse aspecto ainda hoje é objeto de estudo e uma boa revisão desses trabalhos pode ser obtido em \citeonline{Zhu2013}. Muitos desses trabalhos propõem equações simplificadas para obter o valor do coeficiente de empuxo $K$. Por exemplo, \citeonline[p. 32]{Sheorey1994} desenvolveu um modelo elasto-estático termal para as tensões na crosta da terra e obteve a seguinte equação simplificada que pode ser utilizada para estimar o coeficiente de empuxo $K$ em maciços rochosos:
+Como pode ser visto na \autoref{coeficiente_empuxo}b, há certa dispersão da tensão horizontal. Esse aspecto ainda hoje é objeto de estudo e uma boa revisão desses trabalhos pode ser obtido em \citeonline{Zhu2013}. Muitos desses trabalhos propõem equações simplificadas para obter o valor do coeficiente de empuxo $K$. Por exemplo, \citeonline[p. 32]{Sheorey1994} desenvolveu um modelo térmico elasto-estático para as tensões na crosta da terra e obteve a seguinte equação simplificada que pode ser utilizada para estimar o coeficiente de empuxo $K$ em maciços rochosos:
 
 \begin{equation}
 	K = 0,25 + 7E_h(0,001+1/H).
@@ -343,7 +341,7 @@ Como pode ser visto na \autoref{coeficiente_empuxo}b, há certa dispersão da te
 
 Sendo $H$ (m) a profundidade e $E_h$ (GPa) o módulo de deformação médio horizontal na parte superior da crosta terrestre. Contudo, como apontado por Sheorey, seu trabalho não explica a ocorrência de tensões verticais mais altas do que a profundidade indicaria ou o porquê de duas tensões horizontais raramente serem iguais. Segundo \citeonline[p. 67]{Hoek1998}, essas diferenças provavelmente se devem às características topográficas e geológicas locais, que não podem ser consideradas em um modelo de grande escala. Consequentemente, em maciços onde as tensões \textit{in situ} tendem a ter uma influência significativa no comportamento de aberturas subterrâneas é melhor medi-las \textit{in loco}.
 
-Para túneis profundos, quando $H/D > 10$ , sendo $D$ o diâmetro equivalente da seção, é comum durante as análises, desprezar-se a variação da tensão vertical com a profundidade. Uma vez que, em túneis profundos, a variação de tensão ao longo do diâmetro da seção é irrelevante frente a magnitude da tensão na cota da profundidade, ou seja,
+Para túneis profundos, quando $H/D > 10$ , sendo $D$ o diâmetro equivalente da seção, é comum durante as análises, desprezar-se a variação da tensão vertical com a profundidade. Uma vez que, em túneis profundos, a variação de tensão ao longo do diâmetro da seção é irrelevante frente à magnitude da tensão na cota da profundidade, ou seja,
 
 \begin{equation}
 	\left|\Delta\sigma_v\right| = \left| \sigma_v(H+D/2)-\sigma_v(H-D/2)\right| = \left| \sigma_v(D) \right| <<  \left| \sigma_v(H)\right|.
