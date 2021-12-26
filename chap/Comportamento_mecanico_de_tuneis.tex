@@ -37,11 +37,11 @@ Dentre as abordagens mais gerais que buscam prever o comportamento dos túneis, 
 	
 \end{alineas}
 
-A presente tese estará focada apenas no primeiro e terceiro item acima, sendo o terceiro o de maior interesse, devido à modelagem da lei constitutiva elastoplástica-viscoplástica do maciço.
+A presente tese estará focada apenas no primeiro e terceiro item acima, sendo o terceiro o de maior interesse, devido à modelagem da lei constitutiva elastoplástica-viscoplástica do maciço. Uma revisão sobre outros estudos que consideraram leis desse tipo será vista adiante, na \autoref{revisao_estudos_leis_epvp}.
 
 \section{Influência da escavação e o conceito de convergência da seção}
 \label{cap:Influência da escavação e o conceito de convergência da seção}
-De uma forma geral, do ponto de vista do maciço, a escavação de um túnel nada mais é do que uma perturbação no seu estado natural de equilíbrio devido à remoção de parte do maciço. Essa perturbação induzirá o maciço a uma nova configuração de equilíbrio que mobilizará tensões tangenciais desviando, dessa forma, a direção das tensões principais no entorno da escavação. Através desse \textbf{arqueamento das tensões}, o próprio maciço participa da sustentação da cavidade. Esse arqueamento pode ser decomposto em dois arcos longitudinais (contidos nos planos horizontal e vertical) e um arco transversal (no plano perpendicular ao eixo do túnel), tal como mostrado na \autoref{arqueamento}.
+De uma forma geral, do ponto de vista do maciço, a escavação de um túnel nada mais é do que uma perturbação no seu estado natural de equilíbrio devido à remoção de parte do maciço. Essa perturbação induzirá o maciço a uma nova configuração de equilíbrio que mobilizará tensões tangenciais desviando, dessa forma, a direção das tensões principais no entorno da escavação, conforme \citeonline[p. 341]{Langer1985} \textit{apud} \citeonline[p. 9]{Franca2006}. Através desse \textbf{arqueamento das tensões}, o próprio maciço participa da sustentação da cavidade. Esse arqueamento pode ser decomposto em dois arcos longitudinais (contidos nos planos horizontal e vertical) e um arco transversal (no plano perpendicular ao eixo do túnel), tal como mostrado na \autoref{arqueamento}.
 
 \begin{figure}[H]
 	\begin{center}
@@ -65,7 +65,7 @@ O parâmetro geométrico mais simples e representativo do comportamento de um t�
 	\begin{center}
 		\includegraphics[scale = 1]{0403-convergencia de uma seção circular.pdf}
 	\end{center}
-	\caption{\label{definicao_convergencia}Ilustração das medidas geométricas que compõe a convergência de uma seção circular: a) corte transversal, b) corte longitudinal}
+	\caption{\label{definicao_convergencia}Ilustração das medidas geométricas que compõe a convergência de uma seção circular: a) corte transversal, b) corte longitudinal (elaborado pelo autor)}
 \end{figure}
 
 Dependendo da anisotropia das tensões \textit{in situ} ou do formato da seção, sua deformada pode não ser radial e, na prática, podem-se usar várias medidas para compor o cálculo da convergência da seção, como exemplificado na \autoref{convergenca_secao_qualquer}.
@@ -126,13 +126,13 @@ O \textit{Spalling} é preponderante em maciço muito resistente, inicialmente p
 	\caption{\label{foto_spalling}À esquerda uma seção remanescente após moderada fragmentação e quebra em um túnel escavado com TBM e à direita uma seção em que parte do contorno apresentou instabilidade (flambagem) em um túnel escavado de forma não mecanizada (fonte: \citeonline[p. 1084]{Diederichs2007})}
 \end{figure}
 
-Já o \textit{Squeezing} é um modo de falha relacionado ao cisalhamento e encontrado principalmente em túneis profundos em condições de grandes tensões \textit{in situ}. Inicia-se quando a fissuração está suficientemente avançada, causando uma diminuição nas propriedades mecânicas do maciço, sem gerar instabilidade no contorno da seção. Essa diminuição das características mecânicas associada ao desenvolvimento da fissuração é progressiva e controlada, em especial, devido ao confinamento que reina no maciço. Ao contrário do primeiro mecanismo, a energia armazenada pela redistribuição das tensões é dissipada de forma gradual por deformações. Esse comportamento está intimamente relacionado com o fenômeno de fluência descrito na próxima seção a qual compreende um dos comportamentos passíveis de modelar e estudar com a parte viscoplástica da solução proposta nessa tese.
+Já o \textit{Squeezing} é um modo de falha relacionado ao cisalhamento e encontrado principalmente em túneis profundos em condições de grandes tensões \textit{in situ}. Inicia-se quando a fissuração está suficientemente avançada, causando uma diminuição nas propriedades mecânicas do maciço, sem gerar instabilidade no contorno da seção. Essa diminuição das características mecânicas associada ao desenvolvimento da fissuração é progressiva e controlada, em especial, devido ao confinamento que reina no maciço. Ao contrário do primeiro mecanismo, a energia armazenada pela redistribuição das tensões é dissipada de forma gradual por deformações. Esse comportamento está intimamente relacionado com o fenômeno de fluência descrito na próxima seção a qual compreende um dos comportamentos passíveis de modelar e estudar com a parte viscoplástica da solução proposta nessa tese. Mais detalhes sobre esse mecanismo podem ser vistos em \citeonline[p. 3]{Barla2012}.
 
 A \autoref{evolucao_convergencia} ilustra a evolução da convergência devido a esse fenômeno. Tal comportamento também é visto em galerias para estocagem de rejeitos radioativos em maciços argilosos profundos. Essas argilas possuem baixa condutividade hidráulica, portanto, pouca difusão molecular, sendo ideais para estocar esse material. Porém, apresentam esse comportamento diferido e que pode comprometer o projeto no longo tempo requerido para estabilização desse material radioativo. Estudos como os de \citeonline{Rousset1988} e \citeonline{Armand2013} são alguns exemplos de investigações nesse sentido. Laboratórios como o HADES (\textit{High Activity Disposal Experimental Site}) na Bélgica e \textit{Meuse/Haute-Marne} (\autoref{evolucao_GED}) em Paris, são exemplos de túneis para estocagem radioativa que apresentam esse fenômeno.
 
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[scale = 1]{0410-evolução da convergencia do túnel fréjus.pdf}
+		\includegraphics[scale = 0.9]{0410-evolução da convergencia do túnel fréjus.pdf}
 	\end{center}
 	\caption{\label{evolucao_convergencia}Evolução da convergência do túnel Fréjus (adaptado de: \citeonline[p. 17]{Lunardi1980})}
 \end{figure}
@@ -204,7 +204,7 @@ Para um maciço homogêneo, isotrópico e elástico linear a solução analític
 	\begin{center}
 		\includegraphics[scale = 1]{0414-campo de deslocamento e tensões no entorno de uma seção circular.pdf}
 	\end{center}
-	\caption{\label{deslocamentos_tensoes_analitico}Deslocamentos e tensões no entorno de um maciço submetido à pressão geostática-hidrostática $p_{\infty}$ e pressão interna $p_i$ no interior da seção do túnel. À esquerda, maciço elástico e à direita, elastoplástico.}
+	\caption{\label{deslocamentos_tensoes_analitico}Deslocamentos e tensões no entorno de um maciço submetido à pressão geostática-hidrostática $p_{\infty}$ e pressão interna $p_i$ no interior da seção do túnel. À esquerda, maciço elástico e à direita, elastoplástico (elaborado pelo autor)}
 \end{figure}
 
 Algumas soluções analíticas considerando leis elastoplásticas específicas para túneis não revestidos podem ser encontradas, por exemplo, em \citeonline{Salencon1969}, \citeonline{Hoek1980}, \citeonline{Brown1983}, \citeonline{Detournay1987}, \citeonline{Corbeta1990}, \citeonline{Carranza-Torres1999}, \citeonline{Carranza-Torres2004}, Sharan (\citeyear{Sharan2003,Sharan2005}) e \citeonline{Alejano2009}.
@@ -256,7 +256,7 @@ Portanto, no comportamento do túnel, além da deformação instantânea (result
 	\caption{\label{evolucao_U_t_x}Evolução da convergência $U$ no tempo $t$ em função do avanço da escavação $x$ (adaptado de: \citeonline[p. 12]{Panet1995})}
 \end{figure}
 
-Como pode-se ver na figura acima, mesmo sem escavar nos intervalos $[t_2,t_3]$ e $[t_5,t_6]$ a convergência não é constante, tal como seria em um maciço apenas elástico ou elastoplástico. Além disso, nesse caso ilustrativo, a convergência não só evoluiu como também se estabiliza em uma assintótica com o tempo, indicando que a fluência está em um regime primário ou secundário. 
+Como pode-se ver na \autoref{evolucao_U_t_x}, mesmo sem escavar nos intervalos $[t_2,t_3]$ e $[t_5,t_6]$ a convergência não é constante, tal como seria em um maciço apenas elástico ou elastoplástico. Além disso, nesse caso ilustrativo, a convergência não só evoluiu como também se estabiliza em uma assintótica com o tempo, indicando que a fluência está em um regime primário ou secundário. 
 
 Do ponto de vista da modelagem há diversas formas de introduzir esse comportamento nas análises de túneis, sejam em soluções analíticas ou numéricas, diversas leis constitutivas são empregadas. Podem-se classificar essas leis como: 
 
@@ -276,14 +276,14 @@ Um exemplo da magnitude dos efeitos viscosos frente às leis elásticas e elasto
 
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[scale = 1]{0418-perfil de convergências.pdf}
+		\includegraphics[scale = 0.9]{0418-perfil de convergências.pdf}
 	\end{center}
 	\caption{\label{perfil_convergencias_sterpi}Perfil de convergências, em análises numéricas axissimétricas com maciço elástico (EL), elastoplástico (EP), viscoelástico (VE), viscoplástico com fluência no regime secundário (VP) e em regime terciário (VP3), todos na ausência de revestimento (adaptado de: \citeonline[p. 329]{Sterpi2009})}
 \end{figure}
 
-Outra abordagem é a combinação de diversos comportamentos, tanto instantâneos quanto diferidos, e esse é o principal enfoque dessa tese, que compreende o desenvolvimento e implementação de um comportamento elastoplástico-viscoplástico.
+Outra abordagem é a combinação de diversos comportamentos, tanto instantâneos quanto diferidos, e esse é o principal enfoque dessa tese, que compreende o desenvolvimento e implementação de um comportamento acoplado elastoplástico-viscoplástico.
 
-\subsection{Alguns estudos considerando leis elastoplásticas e viscoplásticas}
+\subsection{Alguns estudos considerando leis elastoplásticas-viscoplásticas}\label{revisao_estudos_leis_epvp}
 
 Alguns estudos considerando leis elastoplásticas-viscoplásticas podem ser encontrados em Rousset (\citeyear{Rousset1988}, \citeyear{Rousset1990}), \citeonline{Piepi1995}, \citeonline{Purwodihardjo2005}, \citeonline{Kleine2007}, \citeonline{Shafiqu2008}, \citeonline{Debernardi2009}, \citeonline{Souley2011} e \citeonline{Manh2015}. A seguir alguns comentários sobre cada um desses estudos.
 
@@ -419,7 +419,7 @@ Seguindo o trabalho de \citeonline{Martos1958} sobre assentamentos causados por 
 
 Após \citeonline{Peck1969} propor sua forma empírica para descrever a bacia de assentamentos, adaptações dela e outros métodos semi-empíricos foram desenvolvidos com base em mais observações. Devido ao comportamento bastante específico relacionado a proximidade da superfície, os estudos sobre túneis se dividem em \textbf{túneis superficiais} e \textbf{túneis profundos}. Apesar da generalidade do modelo proposto na tese, a influência da superfície não é estudada no presente trabalho, que envolve apenas túneis profundos, contudo, um bom resumo bibliográfico de soluções semi-empíricas pode ser encontrado em \citeonline{Zhou2018} e soluções numéricas na introdução de \citeonline{Panji2016}.
 
-\section{Influência do revestimento e parâmetros adimensionais}
+\section{Influência do revestimento}
 
 Dependendo da qualidade da rocha e das dimensões da abertura, muitos maciços conseguem desenvolver o arqueamento das tensões com pouca deformação ou ausência de plastificação. Isso caracteriza um maciço \textbf{autoportante} e, nesse caso, é necessário apenas um revestimento estético ou primário para evitar quedas localizadas. Contudo, se a redistribuição das tensões puder levar o maciço à plastificação ou deformações excessivas, nesse caso, é necessária a utilização de um \textbf{revestimento com função estrutural}. Dessa forma, a redistribuição das tensões para as zonas vizinhas no interior do maciço vai depender também dos deslocamentos permitidos por esse revestimento. Portanto, o estado de equilíbrio após a escavação não dependerá apenas das características do maciço, tensões iniciais, da geometria da seção e escavação, mas também do comportamento conjunto do maciço com esse revestimento. Consequentemente, o campo de tensões e deformações dependerão da rigidez relativa entre o maciço e o revestimento, da deformação do maciço no instante de colocação do revestimento, da distância não suportada em relação à frente de escavação e, quando há comportamentos diferidos no tempo, da velocidade de avanço da construção do túnel.
 
@@ -449,35 +449,6 @@ Contudo, os efeitos viscosos continuam mesmo após a construção do túnel. Com
 	\end{center}
 	\caption{\label{perfil_convergencias_apos_efeitos_viscosos}Perfil de convergência em função da velocidade de construção admensionalizada no final da construção do túnel (adaptado de: \citeonline[p. 214]{Bernaud1991})}
 \end{figure}
-
-Um aspecto importante derivado das soluções analíticas é a identificação de parâmetros adimensionais que governam a problemática de túneis e permitem extrapolar os valores de uma análise para outra adimensionalmente equivalente. Dada essa generalidade são parâmetros muito utilizados para apresentação de resultados, como os que constam na \autoref{perfil_convergencias_final_construção} e \autoref{perfil_convergencias_apos_efeitos_viscosos}.
-
-Segundo \citeonline[p. 5]{Bernaud1994}, nas soluções analíticas em estado plano de deformações, considerando tanto o maciço quanto o revestimento com leis constitutivas elásticas, obtêm-se os seguintes parâmetros adimensionais:
-
-\begin{equation}
-	p_\infty^* = \frac{p_\infty}{E},~~~ K_{rev}^* = \frac{K_{rev}}{E},~~~ d_0^* = \frac{d_0}{R_i} 
-\end{equation}
-
-em que $E$ é o módulo de elasticidade do maciço, $p_\infty$ a pressão geostática hidrostástica, $K_{rev}$ a rigidez equivalente do revestimento, $d_0$ a distância não revestida logo atrás da frente de escavação e $R_i$ o raio externo da abertura circular do túnel. A rigidez equivalente do maciço pode ser calculada através da seguinte expressão:
-
-\begin{equation}
-	K_{rev} = \dfrac{E_{rev}}{(1+\nu_{rev})}\dfrac{R_i^2-(R_i-e)^2}{\left[(1-2\nu_{rev})R_i^2+(R_i-e)^2)\right]} 
-\end{equation}
-
-em que $E_{rev}$ é o módulo de elasticidade do revestimento, $\nu_{rev}$ o seu coeficiente de Poisson, $R_i$ o raio do túnel e $e$ a espessura do revestimento. Quando o maciço possuí lei constitutiva elastoplástica de Tresca ou von-Mises, acrescenta-se mais um parâmetro adimensional:
-
-\begin{equation}
-	c^* = \frac{c}{E} 
-\end{equation}
-
-sendo $c$ a coesão do maciço. Além disso, quando o túnel se encontra imerso em um meio elastoviscoplástico perfeito com modelo de Perzyna, tem-se cinco parâmetros adimensionais, que são \cite[p. 198]{Bernaud1991}:
-
-\begin{equation}
-	\label{eq:parametros_admensionais_vp}
-	E^* = \frac{E}{c},~~~ p_\infty^* = \frac{p_\infty}{c},~~~ K_{rev}^* = \frac{K_{rev}}{c},~~~ d_0^* = \frac{d_0}{R_i},~~~ V^*=\frac{\eta V_p}{R_i~c}
-\end{equation}
-
-em que $\eta$ é a constante de viscosidade dinâmica (em unidade de tensão vezes tempo) e $V_p$ a velocidade do passo de escavação do túnel.
 
 Contudo, a principal dificuldade na determinação do estado de equilíbrio de um túnel revestido está no fato de que o maciço já possui uma convergência $U_0$ no instante de instalação do revestimento. E essa convergência é dependente da interação entre o maciço e o revestimento que já foi aplicado. Uma forma de lidar com essa complexidade é através do método Convergência-Confinamento (também conhecido como o método das Curvas Características).
 
@@ -512,3 +483,39 @@ Existem métodos simplificados que se diferenciam justamente nas propostas de $U
 Em vista disso, esses autores propuseram uma correção ao método Convergência-Confinamento criando o \textit{New Implicit Method} (NIM). Um método implícito, pois $U_0$ depende tanto da rigidez do revestimento quanto da convergência ao equilíbrio (que se quer determinar). Esse método foi desenvolvido para leis de comportamento do maciço em elasticidade, plasticidade e viscoplasticidade, conforme \citeonline{Bernaud1992} e \citeonline{Bernaud1994}.
 
 A presente tese não lidará com análises que consideram a curva CV-CF que é um método simplificado. As análises em axissimetria e tridimensionais, implementadas na tese, já resolvem esse problema da iteração entre revestimento e o maciço fornecendo os valores das convergências e pressões no equilíbrio. Contudo, para trabalhos futuros pode ser interessante construir curvas de convergências para o modelo elastoplástico-viscoplástico e propor ajustes no método CV-CF.
+
+\section{Parâmetros adimensionais}
+
+Um aspecto importante derivado das soluções analíticas é a identificação de parâmetros adimensionais que governam a problemática de túneis e permitem extrapolar os valores de uma análise para outra adimensionalmente equivalente. Dada essa generalidade são parâmetros muito utilizados para apresentação de resultados, como os que constam na \autoref{perfil_convergencias_final_construção} e \autoref{perfil_convergencias_apos_efeitos_viscosos}.
+
+Segundo \citeonline[p. 5]{Bernaud1994}, nas soluções analíticas em estado plano de deformações, considerando tanto o maciço quanto o revestimento com leis constitutivas elásticas, obtêm-se os seguintes parâmetros adimensionais:
+
+\begin{equation}
+	p_\infty^* = \frac{p_\infty}{E},~~~ K_{rev}^* = \frac{K_{rev}}{E},~~~ d_0^* = \frac{d_0}{R_i} 
+\end{equation}
+
+em que $E$ é o módulo de elasticidade do maciço, $p_\infty$ a pressão geostática hidrostástica, $K_{rev}$ a rigidez equivalente do revestimento, $d_0$ a distância não revestida logo atrás da frente de escavação e $R_i$ o raio externo da abertura circular do túnel. A rigidez equivalente do revestimento pode ser calculada, para $R_i/e \leq 10$, através da seguinte expressão de tubos espessos \cite[p. 31]{Panet1995}:
+
+\begin{equation}
+	K_{rev} = \dfrac{E_{rev}}{(1+\nu_{rev})}\dfrac{R_i^2-(R_i-e)^2}{\left[(1-2\nu_{rev})R_i^2+(R_i-e)^2)\right]} 
+\end{equation}
+
+em que $E_{rev}$ é o módulo de elasticidade do revestimento, $\nu_{rev}$ o seu coeficiente de Poisson, $R_i$ o raio do túnel e $e$ a espessura do revestimento. Quando o maciço possuí lei constitutiva elastoplástica de Tresca ou von-Mises, acrescenta-se mais um parâmetro adimensional \cite[p. 5]{Bernaud1994}:
+
+\begin{equation}
+	c^* = \frac{c}{E} 
+\end{equation}
+
+sendo $c$ a coesão do maciço. Além disso, quando o túnel se encontra imerso em um meio elastoviscoplástico perfeito com modelo de Perzyna, com uma coesão viscoplástica de longo prazo $c^{vp}$ tem-se cinco parâmetros adimensionais, que são \cite[p. 198]{Bernaud1991}:
+
+\begin{equation}
+	\label{eq:parametros_admensionais_vp}
+	E^* = \frac{E}{c^{vp}},~~~ p_\infty^* = \frac{p_\infty}{c^{vp}},~~~ K_{rev}^* = \frac{K_{rev}}{c^{vp}},~~~ d_0^* = \frac{d_0}{R_i},~~~ V^*=\frac{\eta V_p}{R_i~c^{vp}}
+\end{equation}
+
+em que $\eta$ é a constante de viscosidade dinâmica (em unidade de tensão vezes tempo) e $V_p$ a velocidade do passo de escavação do túnel. Para o caso do modelo elastoplástico-viscoplástico com critério de Tresca perfeito e associado tem-se mais um parâmetro \cite[p. 129]{Piepi1995}:
+
+\begin{equation}
+	\label{eq:parametros_admensionais_epvp}
+	S^* = \frac{c}{c^{vp}}.
+\end{equation}
