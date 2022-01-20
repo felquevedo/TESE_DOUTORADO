@@ -577,7 +577,7 @@ O esquema de integração representado por (\ref{eq:esquema_int_constitutiva_vp}
 			\dfrac{\eta f_0}{\Phi'}\dfrac{(1+\nu)(1-2\nu)}{E}\dfrac{(3-\sin{\phi})^2}{\frac{3}{4}(1-2\nu)(3-\sin{\phi})^2 + 6(1+\nu)\sin{\phi}^2}
 		\end{array} \right.
 \end{equation}
-em que $\phi'= \dfrac{d \phi}{d(f/f0)} = n(f/f0)^{n-1}$. Quando $\phi = 0$ tem-se o caso específico para a superfície de von-Mises. Esse limite é deduzido considerando viscoplasticidade associada e com esquema de integração totalmente explícito. O fluxograma para o algoritmo de integração das equações viscoplásticas pode ser visto na \autoref{algoritmo_VP_semiimplicito}.
+em que $\phi'= \dfrac{d \phi}{d(f/f_0)} = n(f/f_0)^{n-1}$. Quando $\phi = 0$ tem-se o caso específico para a superfície de von-Mises. Esse limite é deduzido considerando viscoplasticidade associada e com esquema de integração totalmente explícito. O fluxograma para o algoritmo de integração das equações viscoplásticas pode ser visto na \autoref{algoritmo_VP_semiimplicito}.
 \begin{figure}[H]
 	\begin{center}
 		\includegraphics[scale = 1.0]{0609_4-integração VP semi-implicito sem endurecimento.pdf}
@@ -718,7 +718,14 @@ Tal como visto na \autoref{cap:Discretização espacial em elementos finitos} o 
 \end{figure}
 As leis constitutivas vistas no \autoref{cap: modelo mecanico} são implementadas nesse domínio e estudadas em três condições: em estado plano de deformações (EPD), tridimensional (3D) e em axissimetria (AXI).
 
-Com o intuito de obter uma malha de fácil alteração, conveniente aos estudos de convergência de malha e análises paramétricas, o domínio foi discretizado utilizando o pré-processamento do \textit{software} ANSYS 2021R1 através da linguagem APDL (\textit{Ansys Parametric Design Language}). Com o auxílio dessa linguagem é possível controlar a discretização do domínio em função de parâmetros que podem ser alterados facilmente e, dessa forma, obtido rapidamente uma nova malha para os estudos. As discretizações apresentadas vêm da experiência obtidas em estudos anteriores \cite{Quevedo2017} considerando isoladamente a elasticidade, elastoplastcidade e viscoplasticidade do maciço. O \textit{script} APDL para a construção do modelo em axissimetria encontra-se no Apêndice A.
+Com o intuito de obter uma malha de fácil alteração, conveniente aos estudos de convergência de malha e análises paramétricas, o domínio foi discretizado utilizando o pré-processamento do \textit{software} ANSYS 2021R1 através da linguagem APDL (\textit{Ansys Parametric Design Language}). Com o auxílio dessa linguagem é possível controlar a discretização do domínio em função de parâmetros que podem ser alterados facilmente e, dessa forma, obtido rapidamente uma nova malha para os estudos. As discretizações apresentadas são resultados de um estudo de convergência de malha que teve os seguintes aspectos considerados:
+
+\begin{alineas}
+	\item uma vez que o método dos elementos finitos garantem apenas a compatibilidade de deslocamentos nodais e apresenta descontinuidade nas derivadas mais altas do campo de deslocamentos, buscou-se uma discretização da malha em que não houvesse grande variação nas tensões entre elementos vizinhos considerando os comportamentos separados (elasticidade, elastoplasticidade e viscoplasticidade);
+	\item foi também dado como satisfatório o refinamento a partir do qual o campo de deslocamentos não apresentasse mais variação entre uma discretização e outra mais refinada;
+\end{alineas}
+
+A rigor, convergência e qualidade da solução vão depender, para uma dada discretização, da magnitude dos deslocamentos que é função das propriedades dos materiais e das condições de contorno no domínio discretizado. Os elementos não podem ter grandes distorções, os gradientes devem ser suaves e o campo de plastificação não deve alcançar as bordas do domínio. Nesse aspecto, as malhas apresentadas estão fornecendo resultados satisfatórios em elastoplasticidade perfeita independente da pressão para $p_\infty^* = \dfrac{p_\infty}{c} \leq 5$.
 
 A \autoref{malhaEPD_tunel} apresenta o domínio para análises em estado plano de deformações com seus parâmetros, condições de contorno e malha. Como visto na \autoref{cap:Influência da escavação e o conceito de convergência da seção}, esse modelo é útil no estudo de seções fora da zona de influência da frente de escavação na qual se pode admitir a ausência de deslocamento ao longo do eixo longitudinal do túnel. Quando implementado a lei do material, esse modelo também é ideal para obter as curvas de convergência do maciço, tais como as da \autoref{cap:Método convergência-confinamento}.
 
@@ -838,7 +845,7 @@ Como pode-se notar, o modelo tridimensional possui a vantagem de considerar tant
 Conforme \autoref{malhaAXI_tunel}, no modelo axissimétrico o eixo longitudinal do túnel (eixo de rotação) está ao longo do eixo $y$, enquanto que o eixo $x$ representa o eixo radial. Os parâmetros para esse modelo podem ser vistos na \autoref{parametros_AXI}.
 
 \begin{table}[H]
-	\caption{Parâmetros para a malha em estado axissimétrico \autoref{malhaAXI_tunel}}
+	\caption{Parâmetros para a malha em estado axissimétrico da \autoref{malhaAXI_tunel}}
 	\label{parametros_AXI}
 	\centering
 	\small
@@ -925,7 +932,7 @@ O custo computacional desses modelos é refletido diretamente no tempo de proces
 \end{table}
 
 \section{Propriedades e parâmetros do modelo constitutivo}
-Além dos parâmetros referente ao domínio para a construção da malha, condições de contorno e discretização do tempo tem-se os parâmetros para o modelo constitutivo do maciço e do revestimento. Como o revestimento possuí apenas comportamento elástico, ele apresenta apenas dois parâmetros $E_{rev}$ (módulo de Young) e $\nu_{rev}$ (Coeficiente de Poisson). A \autoref{parametros_EPVP} apresenta a definição dos parâmetros referente ao modelo constitutivo elastoplástico-viscoplástico.
+Além dos parâmetros referente ao domínio para a construção da malha, condições de contorno e discretização do tempo tem-se os parâmetros para o modelo constitutivo do maciço e do revestimento. Como o revestimento possuí apenas comportamento elástico, ele apresenta apenas dois parâmetros $E_{rev}$ (módulo de Young) e $\nu_{rev}$ (Coeficiente de Poisson). A \autoref{parametros_EPVP} apresenta a definição dos parâmetros referente ao modelo constitutivo elastoplástico-viscoplástico do maciço.
 \begin{table}[H]
 	\caption{Parâmetros para o modelo constitutivo elastoplástico-viscoplástico}
 	\label{parametros_EPVP}
