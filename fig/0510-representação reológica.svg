@@ -44,9 +44,9 @@
      inkscape:cx="283.3843"
      inkscape:cy="158.099"
      inkscape:window-x="111"
-     inkscape:window-y="69"
+     inkscape:window-y="0"
      inkscape:window-maximized="0"
-     inkscape:current-layer="surface12376"
+     inkscape:current-layer="g5057"
      inkscape:document-rotation="0" />
   <defs
      id="defs4647">
@@ -795,7 +795,8 @@
         </g>
         <g
            id="g4681"
-           style="fill:#000000;fill-opacity:1">
+           style="fill:#000000;fill-opacity:1"
+           transform="translate(-8.634412)">
           <use
              height="100%"
              width="100%"
@@ -805,26 +806,9 @@
              xlink:href="#glyph3-3" />
         </g>
         <g
-           id="g4687"
-           style="fill:#000000;fill-opacity:1">
-          <use
-             height="100%"
-             width="100%"
-             id="use4683"
-             y="154.72272"
-             x="428.97217"
-             xlink:href="#glyph4-1" />
-          <use
-             height="100%"
-             width="100%"
-             id="use4685"
-             y="154.72273"
-             x="475.52881"
-             xlink:href="#glyph4-1" />
-        </g>
-        <g
            id="g4691"
-           style="fill:#000000;fill-opacity:1">
+           style="fill:#000000;fill-opacity:1"
+           transform="translate(8.634412)">
           <use
              height="100%"
              width="100%"
