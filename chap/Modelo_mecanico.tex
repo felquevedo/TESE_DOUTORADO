@@ -170,8 +170,8 @@ em que $\alphal$ é o conjunto de variáveis internas cuja evolução está rela
 	\label{eq:leielastoplasticidade}
 		\left\{
 		\begin{array}{rcl}
-			\sigmall = \dfrac{\partial \psi^e}{\partial \varepsilonll^e} \\ 
-			\ql = \dfrac{\partial \psi^p}{\partial \alphal}
+			\sigmall = \rho \dfrac{\partial \psi^e}{\partial \varepsilonll^e} \\ 
+			\ql = \rho \dfrac{\partial \psi^p}{\partial \alphal}
 			
 		\end{array}
 		\right.
@@ -318,7 +318,7 @@ Tal como a função de escoamento, o potencial plástico geralmente é descrito 
 	\label{eq:invariantes_tensores}
 	\begin{array}{lcl}
 		\dgdsll = C_1\gllum + C_2\glldois + C_3\glltres, \\ 
-		\gllum = \dfrac{\partial I_1}{\partial \sigmall} = \Umll,~~~ \glldois = \dfrac{\partial \sqrt{J_2}}{\partial \sigmall} = \dfrac{1}{2\sqrt{J_2}}\sll,~~~ \glltres = \dfrac{\partial J_3}{\partial \sigmall}, \\
+		\gllum = \dfrac{\partial I_1}{\partial \sigmall} = \Umll,~~~ \glldois = \dfrac{\partial \sqrt{J_2}}{\partial \sigmall} = \dfrac{1}{2\sqrt{J_2}}\sll,~~~ \glltres = \dfrac{\partial J_3}{\partial \sigmall} = \sll^2-\dfrac{2}{3}J_2\Umll, \\
 		C_1 = \dfrac{\partial g}{\partial I_1},~~~C_2=\dfrac{\partial g}{\partial \sqrt{J_2}}-\dfrac{\tan{(3\theta)}}{\sqrt{J_2}}\dfrac{\partial g}{\partial \theta},~~~C_3 = -\dfrac{\sqrt{3}}{2\cos{(3\theta})}\dfrac{1}{J_2^{3/2}}\dfrac{\partial g}{\partial \theta},
 	\end{array}
 \end{equation}
@@ -342,7 +342,7 @@ em que $\hl = - \partial h / \partial \ql$ é um vetor que contém os gradientes
 	\end{center}
 	\caption{\label{tipos_endurecimento}Representação dos tipos de endurecimento no plano desviador e na curva tensão-deformação: a) elastoplasticidade perfeita, b) endurecimento isotrópico e c) endurecimento cinemático (adaptado de: \citeauthor{Neto2008}, \citeyear{Neto2008}, p. 178, 179, 186)}
 \end{figure}
-Em um primeiro momento, no presente trabalho, não é considerado a influência da lei de endurecimento e as forças termodinâmicas não variam com o histórico de deformações, ou seja, $\dot \ql = \underline 0$. Nesse caso, tem-se a elastoplasticidade perfeita. Em um segundo momento é considerado a lei de endurecimento/amolecimento associada ($h = f$) e isotrópica. Dessa forma, a força termodinâmica associada é dada exclusivamente pela parcela que não depende da parte hidrostática ($I_1$) e nem desviadora ($J_2$) nas superfícies de escoamento. Essa força foi controlada pelo parâmetro coesivo, de modo que $q = \chi c(\bar \varepsilon^p)$ em que:
+Em um primeiro momento, no presente trabalho, não é considerado a influência da lei de endurecimento e as forças termodinâmicas não variam com o histórico de deformações, ou seja, $\dot \ql = \underline 0$. Nesse caso, tem-se a elastoplasticidade perfeita. Em um segundo momento é considerado a lei de endurecimento/amolecimento associada ($h = f$) e isotrópica. Dessa forma, a força termodinâmica associada é dada exclusivamente pela parcela que não depende da parte hidrostática ($I_1$) e nem desviadora ($J_2$) nas superfícies de escoamento. Essa força foi controlada pelo parâmetro coesivo, de modo que $q = \beta_3 = \chi c(\bar \varepsilon^p)$ em que:
 \begin{equation}
 	\label{eq:dfdc}
 	\chi = \left\{ \begin{array}{ll} 
