@@ -143,7 +143,7 @@ em que $n_c$  é o número de componentes de deformações. Introduzindo (\ref{e
 na qual $\varepsilonl_I$ e $\sigmal_I$ são deformações e tensões iniciais no interior do elemento, respectivamente. Nos problemas de túneis, é através de $\sigmal_I$ que é introduzido as tensões \textit{in situ}. Para o caso de tensão geostática hidrostática, em um túnel de profundidade $H$ em um maciço com peso específico $\gamma_m$ a seguinte expressão é utilizada:
 \begin{equation}
 	\label{eq:tensoes_iniciais}
-	\sigmal_I = \gamma_m H \Uml.
+	\sigmal_I = -\gamma_m H \Uml.
 \end{equation}
 
 Introduzindo as expressões (\ref{eq:campo_deslocamentos}), (\ref{eq:deformacoes}) e (\ref{eq:tensoes}) no princípio dos trabalhos virtuais (\ref{eq:deslocamento_virtual_3}), considerando o domínio de um elemento $\Omega_e$, obtém-se a seguinte equação de equilíbrio em forças:
@@ -813,8 +813,8 @@ A discretização do domínio tridimensional faz uso dos mesmos parâmetros do e
 		\hline
 		\multicolumn{4}{c}{DISCRETIZAÇÃO} \\
 		\hline
-		Tamanho do elemento no trecho escavado & $L_{p_e}$ & m & $L_{p}$ \\		
-		Número de elementos no trecho não escavado & $nL_{z_2}$ & un & 8 \\			
+		Elementos no passo escavado & $nL_{p}$ & un & 1 \\		
+		Número de elementos no trecho não escavado & $nL_{z_2}$ & un & 15 \\			
 		Razão entre o primeiro e último elemento em $L_{z_2}$ & $mL_{z_2}$ & adm & 5 \\				
 		\hline
 	\end{tabular}
@@ -879,9 +879,9 @@ Conforme \autoref{malhaAXI_tunel}, no modelo axissimétrico o eixo longitudinal 
 		Elementos ao longo de $R_1$ & $nR_{1}$ & un & 15 \\	
 		Razão primeiro e último elemento de $R_1$ & $mR_{1}$ & adm & 15 \\	
 		Elementos ao longo de $L_{x_1}$ & $nL_{x_1}$ & un & 5 \\
-		Razão primeiro e último elemento de $L_{x_1}$ & $mL_{x_1}$ & adm & 5 \\				
-		Tamanho do elemento no trecho escavado & $L_{p_e}$ & m & $L_{p}$ \\	
-		Número de elementos ao longo de $L_{y_2}$ & $nL_{y_2}$ & un & 8 \\			
+		Razão primeiro e último elemento de $L_{x_1}$ & $mL_{x_1}$ & adm & 1,2 \\				
+		Elementos no passo escavado & $nL_{p}$ & un & 1 \\	
+		Número de elementos ao longo de $L_{y_2}$ & $nL_{y_2}$ & un & 15 \\			
 		Razão entre o primeiro e último elemento em $L_{y_2}$ & $mL_{y_2}$ & adm & 5 \\				
 		\hline
 	\end{tabular}
@@ -918,9 +918,9 @@ O custo computacional desses modelos é refletido diretamente no tempo de proces
 		\multicolumn{1}{c}{\textbf{No. NÓS}} &
 		\multicolumn{1}{c}{\textbf{SISTEMA nxn}} \\
 		\hline
-		EPD & 235 & 768 & 1536 \\
-		3D & 13395 & 15456 & 46368 \\
-		AXI & 1222 & 3813 & 7626 \\
+		EPD & 237 & 774 & 1548 \\
+		3D & 15635 & 17982 & 53946 \\
+		AXI & 1431 & 1512 & 3024 \\
 		\hline
 	\end{tabular}
 	\normalsize
