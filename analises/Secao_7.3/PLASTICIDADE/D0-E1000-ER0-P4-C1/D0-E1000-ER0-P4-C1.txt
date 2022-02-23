@@ -1,0 +1,896 @@
+!***********************************************************!
+!** SCRIPT TUNEL AXISSIMÉTRICO                            **!
+!** Versão: 2021.3                                        **!
+!**                                                       **!
+!** Objetivo: faz análise da convergência de tuneis  	  **!
+!**	      profundos com seção circular considerando   **!
+!**	      modelo axissimétrico.                       **!
+!**                                                       **!
+!** Programador: Felipe Quevedo 		          **!
+!** Inicio     : (05/06/2021)                             **!
+!** Situação   : OK			                  **!
+!** Unidades   : MPa,m,dia                                **!
+!**                                                       **!
+!***********************************************************!
+!
+!***********************************************************!
+! 1. CONFIGURAÇÕES INICIAIS                                 !
+!***********************************************************!
+! Inicializando o ANSYS
+FINISH 
+/CLEAR,NOSTART
+!
+!***********************************************************!
+! 2. DADOS DE ENTRADA PARA O PROBLEMA                       !
+!***********************************************************!
+!
+! Nessa seção define-se todos os dados de entrada necessarios
+!
+!***********************************************************!
+! 2.1 Parâmetros geométricos                          	    !
+!***********************************************************! 
+Ri		= 1			! [m] raio externo do túnel (entre a interface e o maciço)
+esp		= 0.1			! [m] espessura do revestimento
+R1		= 10			! [Ri] raio da região de refinamento da malha próxima do túnel
+Lx		= 20			! [Ri] dimensão da base do domínio
+Ly2		= 10			! [Ri] dimensão do trecho não escavado
+Lp		= 1/3*Ri		! [m] tamanho do passo de escavação
+np		= 128			! [un] numero de passos de escavação
+npi 		= 3			! [un] numero de passos escavados na primeira escavação
+d0		= 0			! [lp] dimensão não suportada (multiplo do passo)
+revested0 	= 1			! 0 - não reveste ultimo d0+Lp, 1 - reveste ultimo d0+Lp
+revesteface	= 1			! 0 - não reveste a ultima face, 1 - reveste a ultima face
+!
+!***********************************************************!
+! 2.2 Modelos e parâmetros para o material do maciço        !
+!***********************************************************! 
+!
+! Modelo do material do maciço
+! matmacico = 1				! elastico do ANSYS
+! matmacico = 2				! elastoplastico VM do ANSYS (BISO)
+! matmacico = 22			! elastoplastico VM do ANSYS (MISO)
+! matmacico = 23			! viscoplastico Perzyna VM do ANSYS
+! matmacico = 4				! usermat3D_VM do ANSYS (BISO)
+! matmacico = 5				! usermat3D_elastico
+! matmacico = 6				! usermat3D_EP
+! matmacico = 7				! usermat3D_VP
+! matmacico = 8				! usermat3D_EPVP
+!
+matmacico	= 8			! Tipo de modelo escolhido
+!
+! Parâmetros de todos os modelos
+E1 		= 1000			! [MPa] modulo elasticidade (1,2,22,23,4,5,6,7,8)
+nu1 		= 0.498			! [adm] coeficiente de poisson (1,2,22,23,4,5,6,7,8)
+!
+! Parametros para o modelo 6 e 8
+superficief	= 2			! função de escoamento: 1-DPI, 2-DPII, 3-DPIII (6,8)
+superficieg 	= 2			! função potencial: 1-DPI, 2-DPII, 3-DPIII (6,8)
+fi	    	= 0			! [graus] angulo de atrito (0 - VM ou TR) (6,8)
+psi	    	= 0			! [graus] angulo de dilatância (6,8)
+c1	    	= 1*SQRT(3)/2 !0.866025		! [MPa]	coesão inicial (6,8)
+c2	    	= 1*SQRT(3)/2 !1.0			! [MPa] coesão de pico (6,8)
+c3	    	= 1*SQRT(3)/2 !0.866025		! [MPa] coesão residual (6,8)
+eps1	    	= 0.010			! [adm] deformação equivalente limite da zona 1 (6,8)
+eps2	    	= 0.020			! [adm] deformação equivalente limite da zona 2 (6,8)
+eps3	    	= 0.025			! [adm] deformação equivalente limite da zona 3 (6,8)
+Dalg		= 0			! 0 - módulo elastico, 1 - módulo algoritmíco
+!
+! Parametros para o modelo 7 e 8
+superficiefvp 	= 2			! função de escoamento: 1-DPI, 2-DPII, 3-DPIII (7,8)
+superficiegvp 	= 2			! função potencial: 1-DPI, 2-DPII, 3-DPIII (7,8)
+fivp          	= 0			! [graus] angulo de atrito (0 - VM ou TR)(7,8)
+psivp         	= 0			! [graus] angulo de dilatância (7,8)
+cvp 	      	= 1000 !3*SQRT(3)/2			! [MPa]	coesão inicial (7,8)
+n1	      	= 1			! [adm] expoente do modelo de Perzyna (7,8)
+eta           	= 4*10000	!1E7/(60*60*24)	! [dia] constante de viscosidade dinâmica (7,8)
+f0     	      	= 1			! [MPa] valor de referência (7,8)
+thetavp       	= 0			! forma de integração: 0 - totalmente explícito, 1 - semi-implicito (7,8)
+!
+! Parametros para o modelo 2, 22, 23, 4
+yield	    	= 2*c1			! [MPa]	tensão de escoamento (2,22,23,4)
+Ep 		= 2*(c2-c1)/(eps1)	! [MPa] módulo plástico tangente (2,22,23,4)
+youngt      	= Ep*E1/(E1+Ep)		! [MPa] módulo de elastoplástico tangente (2,22,23,4)
+epst0		= 2*c1/E1		! [adm] deformação total no escoamento (22)
+epst1		= 2*c2/E1 + eps1 	! [adm] deformação total na zona 1 (22)	
+epst2		= 2*c2/E1 + eps2	! [adm] deformação total na zona 2 (22)	
+epst3		= 2*c3/E1 + eps3	! [adm] deformação total na zona 3 (22)	
+gamma	      	= ((2*cvp/f0)**n1)/eta 	! [dias^-1] coeficiente Gamma do modelo de Perzyna Ansys (23)
+m  	      	= 1/n1			! [adm] coeficiente m do modelo de Perzyna do ANSYS (23)
+!
+!***********************************************************!
+! 2.3 Modelos e parâmetros para o material do revestimento  !
+!***********************************************************! 
+!
+! Modelo do material do revestimento
+! matrev = 0				! sem revestimento
+! matrev = 1				! elastico do ANSYS
+!
+matrev		= 0			! Tipo de modelo escolhido
+E2 		= 30000			! [MPa] modulo elasticidade (1)
+nu2 		= 0.3			! [adm] coeficiente de poisson (1)
+!
+!***********************************************************!
+! 2.4 Condições de contorno				    !
+!***********************************************************! 
+!
+! Pressão geostática
+ph		= 4			! [MPa] Pressão geostática normal ao eixo do túnel
+pv		= 4			! [MPa] Pressão geostática radial
+!
+!***********************************************************!
+! 2.5 Discretização do tempo nos passos			    !
+!***********************************************************! 
+!
+! Discretização do tempo durante os passos de escavação
+v		= 10		! [m/d] velocidade da escavação
+tp		= Lp/v		! [d] tempo do passo de escavação
+dt		= 0.5*tp	! [d] incremento de tempo inicial dentro de cada passo
+dtmax		= dt		! [d] incremento máximo de tempo dentro de cada passo
+!
+! Discretização do tempo nos passos após a escavação
+tp2		= 200 !50 !200		! 1[d] tempo de cada passo após a escavação do túnel
+np2		= 5 !20 !5		! 10[un] número de passos após a escavação do túnel
+dtp2		= 0.5*tp2	! 0.5[d] incremento de tempo inicial dentro de cada passo
+dtp2max		= dtp2		! [d] incremento máximo de tempo dentro de cada passo
+!
+!***********************************************************!
+! 2.6 Discretização da malha 			    	    !
+!***********************************************************! 
+!
+! Parametros para discretização da malha
+tipoelem	= 0		! 0 - PLANE182, 1 - PLANE183
+nrev		= 2 		! [un] divisões na espessura do revestimento
+nLp		= 1		! [un] numero de elementos no passo escavado
+nRi		= 10		! [un] divisões na interface entre o túnel e o maciço
+nR1		= 15		! [un] divisões ao longo do raio da região de refinamento
+mR1		= 15		! [%] taxa de crescimento de nr1
+nLx1		= 5		! [un] divisões na base fora da região de refinamento
+mLx1		= 1.2		! [%] taxa de crescimento de mLx1
+nLy2		= 15		! [un] numero de elementos no trecho não escavado
+mLy2		= 5		! [%] taxa de crescimento de nLy2
+!
+!***********************************************************!
+! 2.7 Configurações da solução			    	    !
+!***********************************************************! 
+!
+nr		= 2		! Newton-Raphson
+!				! 	1 - INIT matriz de rigidez não é atualizada
+!				! 	2 - FULL matriz de rigidez atualizada a cada iteração
+!				! 	3 - UNSYM matriz de rigidez atualizada a cada iteração
+!
+psc		= 1		! 1 - Ativa, 0 - desativa a opção de paralelização SMP
+nlg		= 0		! 1 - Ativa, 0 - desativa a não lineariedade geométrica
+soleq		= 1		! 1 - calcula o equilibrio do maciço antes de iniciar
+!
+!
+!
+!------------------FIM ENTRADA DE DADOS---------------------!
+!
+!
+!
+!
+!***********************************************************!
+! 3. Pré-Processamento                                      !
+!***********************************************************!
+/PREP7			! inicia módulo de pré-processamento
+!
+!***********************************************************!
+! 3.1 Parâmetros calculados                                 !
+!***********************************************************!	
+R1		= R1*Ri		! [m] raio da região de refinamento da malha próxima do túnel
+Lx		= Lx*Ri		! [m] dimensão da base do domínio
+ly1		= np*lp		! [m] dimensão do trecho escavado
+nLy1		= np*nlp	! [un] numero de elementos no trecho escavado
+nRv		= nri/2		! [un] divisões da parte interna da seção do túnel
+d0		= d0*lp		! [m] comprimento não revestido
+ly2		= ly2*Ri	! [m] comprimento do trecho não escavado
+Lx1		= Lx-R1		! [m] altura acima da região de refinamento
+Ly 		= Ly1+Ly2	! [m] comprimento total do modelo
+nesc		= np-npi+1	! [un] total de escavações
+!
+!***********************************************************!
+! 3.2 Configurando elemento finito                          !
+!***********************************************************!
+*IF,tipoelem,eq,0,then
+	ET,1,PLANE182 
+	KEYOPT,1,1,0
+	KEYOPT,1,3,1
+	KEYOPT,1,6,0
+	!
+*ELSEIF,tipoelem,eq,1,then
+	ET,1,PLANE183   
+	KEYOPT,1,1,0
+	KEYOPT,1,3,1
+	KEYOPT,1,6,0
+*ENDIF
+!
+!***********************************************************!
+! 3.3 Material do maciço                                    !
+!***********************************************************!
+*IF,matmacico,eq,1,then
+	! Definindo o material elastico do Ansys
+	MPTEMP,1,0  		
+	MPDATA,EX,1,,E1	
+	MPDATA,PRXY,1,,nu1 	
+*ELSEIF,matmacico,eq,2,then
+	! Definindo o material elastoplástico VM do Ansys
+	MPTEMP,1,0  		
+	MPDATA,EX,1,,E1	
+	MPDATA,PRXY,1,,nu1 	
+	TB,BISO,1,1,2,  
+	TBTEMP,0
+	TBDATA,,yield,youngt,,,,
+*ELSEIF,matmacico,eq,22,then
+	! Definindo o material elastoplástico VM do Ansys multilinear
+	MPTEMP,1,0  		
+	MPDATA,EX,1,,E1	
+	MPDATA,PRXY,1,,nu1 	
+	!TB,PLASTIC,,,,MISO
+	TB,MISO,1,1,5,0 
+	TBTEMP,0
+	TBPT,,epst0,2*c1
+	TBPT,,epst1,2*c2
+	TBPT,,epst2,2*c2 
+	TBPT,,epst3,2*c3
+	TBPT,,0.1,2*c3    
+*ELSEIF,matmacico,eq,23,then
+	! Definindo o material viscoplastico perzyna VM do Ansys
+	MPTEMP,1,0  		
+	MPDATA,EX,1,,E1	
+	MPDATA,PRXY,1,,nu1	
+	TB,BISO,1,1,2,  
+	TBTEMP,0
+	TBDATA,,2*cvp,0,,,,
+	TB,RATE,1,1,2,1
+	TBTEMP,0
+	TBDATA,,m,gamma,,,,	
+*ELSEIF,matmacico,eq,4,then
+	! Definindo material usermat3D VM do Ansys
+	TB,USER,1,2,5
+	TBTEMP,1.0 		
+	TBDATA,1,matmacico,E1,nu1,yield,youngt ! modelo, E, posn, sigy, H
+	TB,STATE,1,,8
+*ELSEIF,matmacico,eq,5,then
+	! Definindo material usermat3D_elastico
+	TB,USER,1,2,3
+	TBTEMP,1.0 		
+	TBDATA,1,matmacico,E1,nu1
+	TB,STATE,1,,8	
+*ELSEIF,matmacico,eq,6,then
+	! Definindo material usermat3D_EP
+	TB,USER,1,2,14
+	TBTEMP,1.0 		
+	TBDATA,1,matmacico,E1,nu1
+	TBDATA,4,superficief,superficieg
+	TBDATA,6,fi,psi,
+	TBDATA,8,c1,c2,c3,eps1,eps2,eps3
+	TBDATA,14,Dalg
+	TB,STATE,1,,20	
+*ELSEIF,matmacico,eq,7,then
+	! Definindo material usermat3D_VP
+	TB,USER,1,2,13
+	TBTEMP,1.0 		
+	TBDATA,1,matmacico,E1,nu1
+	TBDATA,4,superficiefvp,superficiegvp
+	TBDATA,6,fivp,psivp,
+	TBDATA,8,cvp,n1,eta,f0,thetavp	
+	TB,STATE,1,,20		
+*ELSEIF,matmacico,eq,8,then
+	! Definindo material usermat3D_EPVP
+	TB,USER,1,2,23
+	TBTEMP,1.0 		
+	TBDATA,1,matmacico,E1,nu1
+	TBDATA,4,superficief,superficieg
+	TBDATA,6,fi,psi,
+	TBDATA,8,c1,c2,c3,eps1,eps2,eps3
+	TBDATA,14,Dalg
+	TBDATA,15,superficiefvp,superficiegvp
+	TBDATA,17,fivp,psivp
+	TBDATA,19,cvp
+	TBDATA,20,n1,eta,f0
+	TBDATA,23,thetavp	
+	TB,STATE,1,,20	
+*ENDIF
+!
+!***********************************************************!
+! 3.4 Material do revestimento                              !
+!***********************************************************!
+*IF,matrev,EQ,1,THEN
+	*DO,i,2,nesc,1
+		MPTEMP,1,0  				
+		MPDATA,EX,i,,E2			
+		MPDATA,PRXY,i,,nu2
+	*ENDDO 
+*ENDIF
+!
+!***********************************************************!
+! 3.5 Modelo sólido                                         !
+!***********************************************************!
+! Criando pontos chaves
+K,1,0,0,0
+K,10,Ri-esp,0,0
+K,9,Ri,0,0
+K,8,R1,0,0
+K,7,Lx,0,0
+K,101,0,Ly1,0
+K,110,Ri-esp,Ly1,0
+K,109,Ri,Ly1,0
+K,108,R1,Ly1,0
+K,107,Lx,Ly1,0
+K,201,0,Ly,0
+K,210,Ri-esp,Ly,0
+K,209,Ri,Ly,0
+K,208,R1,Ly,0
+K,207,Lx,Ly,0
+!
+! Criação das linhas e discretização da malha
+L,1,10,nRv
+L,10,9,nrev
+L,9,8,nR1,mR1
+L,8,7,nLx1,mLx1
+L,101,110,nRv
+L,110,109,nrev
+L,109,108,nR1,mR1
+L,108,107,nLx1,mLx1
+L,201,210,nRv
+L,210,209,nrev
+L,209,208,nR1,mR1
+L,208,207,nLx1,mLx1
+L,1,101,nLy1
+L,10,110,nLy1
+L,9,109,nLy1
+L,8,108,nLy1
+L,7,107,nLy1
+L,101,201,nLy2,mLy2
+L,110,210,nLy2,mLy2
+L,109,209,nLy2,mLy2
+L,108,208,nLy2,mLy2
+L,107,207,nLy2,mLy2
+!
+! Criação das áreas
+LSEL,S,LINE,,1
+LSEL,A,LINE,,14
+LSEL,A,LINE,,5
+LSEL,A,LINE,,13
+AL,ALL
+CM,A1,AREA
+!
+LSEL,S,LINE,,2
+LSEL,A,LINE,,15
+LSEL,A,LINE,,6
+LSEL,A,LINE,,14
+AL,ALL
+CMSEL,U,A1,AREA
+CM,A2,AREA
+!
+LSEL,S,LINE,,3
+LSEL,A,LINE,,16
+LSEL,A,LINE,,7
+LSEL,A,LINE,,15
+AL,ALL
+CMSEL,U,A2,AREA
+CM,A3,AREA
+!
+LSEL,S,LINE,,4
+LSEL,A,LINE,,17
+LSEL,A,LINE,,8
+LSEL,A,LINE,,16
+AL,ALL
+CMSEL,U,A3,AREA
+CM,A4,AREA
+!
+LSEL,S,LINE,,5
+LSEL,A,LINE,,19
+LSEL,A,LINE,,9
+LSEL,A,LINE,,18
+AL,ALL
+CMSEL,U,A4,AREA
+CM,A5,AREA
+!
+LSEL,S,LINE,,6
+LSEL,A,LINE,,20
+LSEL,A,LINE,,10
+LSEL,A,LINE,,19
+AL,ALL
+CMSEL,U,A5,AREA
+CM,A6,AREA
+!
+LSEL,S,LINE,,7
+LSEL,A,LINE,,21
+LSEL,A,LINE,,11
+LSEL,A,LINE,,20
+AL,ALL
+CMSEL,U,A6,AREA
+CM,A7,AREA
+!
+LSEL,S,LINE,,8
+LSEL,A,LINE,,22
+LSEL,A,LINE,,12
+LSEL,A,LINE,,21
+AL,ALL
+CMSEL,U,A7,AREA
+CM,A8,AREA
+!
+!***********************************************************!
+! 3.6 Atribuindo malha                                      !
+!***********************************************************!
+ALLSEL,ALL
+MSHKEY,1
+MSHAPE,0,2D
+AMESH,ALL
+!
+!***********************************************************!
+! 3.7 Condições de contorno                                 !
+!***********************************************************!
+! Aplicação das tensões iniciais
+ALLSEL,ALL
+INISTATE, DEFINE,,,,,-pv,-ph,-ph,0,0,0		
+!
+! Simetria em x
+LSEL,ALL
+LSEL,S,LINE,,1
+LSEL,A,LINE,,2
+LSEL,A,LINE,,3
+LSEL,A,LINE,,4
+DL,ALL, ,SYMM 
+!
+! Simetria em y
+LSEL,ALL
+LSEL,S,LINE,,13
+LSEL,A,LINE,,18
+DL,ALL, ,SYMM 
+!
+! Pressão no topo do modelo
+LSEL,ALL
+LSEL,S,LINE,,9
+LSEL,A,LINE,,10
+LSEL,A,LINE,,11
+LSEL,A,LINE,,12
+SFL,ALL,PRESS,ph
+!
+! Pressão na lateral direita do modelo
+LSEL,ALL
+LSEL,S,LINE,,22
+LSEL,A,LINE,,17
+SFL,ALL,PRESS,pv
+!
+!
+!***********************************************************!
+! 3.8 Criando elementos do revestimento                     !
+!***********************************************************!
+! Obs: esses elementos ficam sobrepostos ao do solo. Durante
+!      a análise, conforme vai desligando os elementos do 
+!      solo vai-se ligando os do resvestimento, se houver.
+!
+*IF,matrev,NE,0,THEN
+	! Gerando elementos sobrepostos do revestimento
+	ESEL,ALL
+	ESEL,S,CENT,Y,0,ly1			
+	ESEL,R,CENT,X,ri-esp,ri
+	EGEN,2,0,all,all,1,1,,,,0,0,0
+	ESEL,ALL
+	NUMMRG,node, , , ,LOW				
+*ENDIF
+!
+!***********************************************************!
+! 3.9 Criando grupos de escavação-revestimento              !
+!***********************************************************!
+!
+! Primeira escavação
+i = 1
+ESEL,ALL				
+yi=0					
+yf=npi*lp				
+ESEL,S,CENT,Y,yi,yf			
+ESEL,R,CENT,X,0,Ri
+ESEL,R,MAT,,1			
+CM,esc %i%,ELEM				
+CMSEL,S,esc %i%,ELEM			
+!
+! Proximas escavações e resvestimentos
+*DO,i,2,nesc,1					
+	! criando grupos com os elementos escavados do passo i			
+	yi=yf		
+	yf=(i-1)*lp+npi*lp		
+	ESEL,S,CENT,Y,yi,yf			
+	ESEL,R,CENT,X,0,ri			
+	CM,esc %i%,ELEM
+	CMSEL,S,esc %i%,ELEM
+	!
+	*IF,matrev,NE,0,THEN
+		! criando grupos com os elementos revestidos do passo i
+		*IF,i,EQ,2,THEN		
+			yi=0
+		*ELSE
+			yi=npi*lp+(i-2)*lp-(lp+d0)		
+		*ENDIF
+		yf=(i-1)*lp+npi*lp-(lp+d0)
+		ESEL,S,CENT,Y,yi,yf			
+		ESEL,R,CENT,X,ri-esp,ri
+		ESEL,R,MAT,,2
+		MPCHG,i,ALL
+		CM,rev %i-1%,ELEM			
+		CMSEL,S,rev %i-1%,ELEM						
+	*ENDIF
+	!
+	! revestindo o ultimo trecho
+	*IF,i,EQ,nesc,THEN
+		*IF,matrev,NE,0,THEN
+			*IF,revested0,EQ,1,THEN
+				yi=Ly1-lp-d0
+				yf=Ly1
+				ESEL,S,CENT,Y,yi,yf	
+				ESEL,R,CENT,X,ri-esp,ri	
+				ESEL,R,MAT,,2
+				MPCHG,i,ALL	
+				CM,rev %i%,ELEM			
+				CMSEL,S,rev %i%,ELEM
+			*ENDIF
+			*IF,revesteface,EQ,1,THEN
+				yi=Ly1
+				yf=Ly1+(lp)
+				ESEL,ALL
+				ESEL,S,CENT,Y,yi,yf
+				ESEL,R,CENT,X,0,ri
+				CM,soloface,ELEM
+				CMSEL,S,soloface,ELEM
+				!
+				fi=Ly1
+				ff=Ly1+(lp)
+				ESEL,ALL
+				ESEL,S,CENT,Y,yi,yf
+				ESEL,R,CENT,X,0,ri
+				EGEN,2,0,all,all,1,1,,,,0,0,0
+				NUMMRG,node, , , ,LOW
+				ESEL,R,MAT,,2
+				MPCHG,i,ALL
+				CM,revface,ELEM
+				CMSEL,S,revface,ELEM	
+			*ENDIF
+		*ENDIF
+	*ENDIF		
+*ENDDO
+!
+! criando grupo de elementos escavados
+ESEL,S,CENT,Y,0,ly1
+ESEL,R,CENT,X,0,Ri
+CM,esctotal,ELEM
+!
+!***********************************************************!
+! 4. Solução                                                !
+!***********************************************************!
+/SOL			
+!
+! Configurações iniciais
+*IF,nlg,eq,0,then		
+	NLGEOM,OFF
+*ELSEIF,nlg,eq,1,then		
+	NLGEOM,ON
+*ENDIF
+*IF,nr,eq,1,then		
+	NROPT,INIT
+*ELSEIF,nr,eq,2,then		
+	NROPT,FULL
+*ELSEIF,nr,eq,3,then		
+	NROPT,UNSYM
+*ENDIF	
+*IF,psc,eq,0,then		
+	PSCONTROL,ALL,OFF
+*ELSEIF,nlg,eq,1,then		
+	PSCONTROL,ALL,ON
+*ENDIF
+OUTRES,SVAR,ALL	
+OUTRES,ALL,ALL		
+ALLSEL,ALL
+!
+! Apaga os elementos do revestimento
+*IF,matrev,NE,0,THEN	
+	ESEL,S,CENT,Y,0,Ly1		
+	ESEL,R,CENT,X,ri-esp,ri
+	ESEL,R,MAT,,2,nesc
+	EKILL,ALL				
+	ESEL,ALL
+	*IF,revesteface,EQ,1,THEN
+		CMSEL,S,revface,ELEM
+		EKILL,ALL				
+		ESEL,ALL	
+	*ENDIF			
+*ENDIF
+!
+! Verifica o equilibrio do maciço
+*IF,soleq,EQ,1,THEN
+	ANTYPE,0,NEW
+	ESEL,ALL
+	TIME,1
+	DELTIM,0.5,,0.5			
+	SOLVE								
+	FINISH
+	/POST1 
+	RSYS,1    
+	PLNSOL, U,SUM, 0,1.0  
+	ESEL,ALL
+*ENDIF
+!
+!
+! Solução com as escavações
+/SOL
+*IF,matmacico,LT,0,AND,matrev,EQ,0,THEN
+	!
+	! Maciço elástico sem revestimento (não precisa escavar)
+	ANTYPE,0,NEW	
+	CMSEL,S,esctotal,ELEM
+	EKILL,ALL
+	SAVE
+	TIME,tp*nesc
+	DELTIM,dt,,dtmax
+	ESEL,ALL
+	SOLVE
+	FINISH
+*ELSE
+	!
+	! Necessário fazer vários passos de escavação
+	ANTYPE,0,NEW	
+	!
+	! Primeiro passo de escavação
+	i=1
+	CMSEL,S,esc %i%,ELEM
+	EKILL,ALL
+	ESEL,S,LIVE
+	EPLOT
+	TIME,tp*i
+	DELTIM,dt,,dtmax
+	ESEL,ALL
+	SOLVE
+	SAVE
+	FINISH
+	/POST1   
+	RSYS,1
+	ESEL,S,LIVE 
+	PLNSOL, U,SUM, 0,1.0    
+	!
+	! Próximos passos de escavação
+	/SOL
+	ANTYPE,0,RESTART	
+	*DO,i,2,nesc,1
+		CMSEL,S,esc %i%,ELEM
+		EKILL,ALL
+		ESEL,S,LIVE
+		EPLOT
+		!
+		! Ativa o revestimento
+		*IF,matrev,NE,0,THEN
+			CMSEL,S,rev %i-1%,ELEM
+			EALIVE,ALL
+			*IF,revested0,EQ,1,THEN
+				*IF,i,EQ,nesc,THEN
+					CMSEL,S,rev %i%,ELEM
+					EALIVE,ALL
+				*ENDIF
+			*ENDIF
+			*IF,revesteface,EQ,1,THEN
+				*IF,i,EQ,nesc,THEN
+					CMSEL,S,revface,ELEM
+					EALIVE,ALL
+					CMSEL,S,soloface,ELEM
+					EKILL,ALL
+				*ENDIF
+			*ENDIF
+		*ENDIF
+		!
+		ESEL,S,LIVE
+		EPLOT
+		TIME,tp*i 
+		DELTIM,dt,,dtmax
+		OUTRES,ESOL,LAST
+		ESEL,ALL
+		SAVE
+		SOLVE		
+	*ENDDO
+	!
+	! Análise após a escavação (modelos viscosos)
+	*IF,matmacico,GT,6,OR,matrev,GT,1,THEN	                    
+		*DO,i,1,np2
+			TIME,tp*(nesc)+i*tp2		
+			DELTIM,dtp2,,dtp2max							
+			ESEL,ALL
+			SOLVE						
+			SAVE
+		*ENDDO
+	*ENDIF					
+	FINISH
+*ENDIF
+!
+!***********************************************************!
+! 5 Pós-processamento                                       !
+!***********************************************************!
+!
+!***********************************************************!
+! 5.1 Alterando a cor dos elementos para pós processamento  !
+!***********************************************************!
+ALLSEL,ALL
+ASEL,S,AREA,,1
+ASEL,A,AREA,,5
+ASEL,A,AREA,,3
+ASEL,A,AREA,,7
+ESLA,S
+/COLOR,ELEM,13,ALL
+!
+ALLSEL,ALL
+ASEL,S,AREA,,2
+ASEL,A,AREA,,6
+ASEL,A,AREA,,4
+ASEL,A,AREA,,8
+ESLA,S
+/COLOR,ELEM,14,ALL
+!
+ALLSEL,ALL
+EPLOT
+! 
+/RGB,INDEX,100,100,100, 0   
+/RGB,INDEX, 80, 80, 80,13   
+/RGB,INDEX, 60, 60, 60,14   
+/RGB,INDEX, 0, 0, 0,15   
+!
+!***********************************************************!
+! 5.2 Gráfico de convergências                              !
+!***********************************************************!
+/POST1 
+RSYS,5		! sistema cilindrico para os resultados
+ESEL,S,LIVE	! só elementos ativos
+!
+! numero de analises
+*IF,matmacico,EQ,23,OR,matmacico,EQ,7,THEN
+	nanalises=nesc+np2
+*ELSE	
+	*IF,matmacico,EQ,8,THEN
+		nanalises=nesc+np2	
+	*ELSE
+		nanalises=nesc
+	*ENDIF
+*ENDIF
+!
+! selecionando nós
+ALLSEL,ALL 
+NSEL,S,LOC,Y,0,Ly
+NSEL,R,LOC,X,0.999*Ri,1.001*Ri	
+ESEL,S,LIVE	! só elementos ativos
+!
+! dimensionando arrays
+*GET,ncount,NODE,,COUNT			! numero de nós selecionado
+*GET,ntotal,NODE,,NUM,MAX		! número total de nós
+*DIM,convergence,TABLE,ncount,2+nanalises	! dimensiona tabela de convergencias
+*DIM,pressure,TABLE,ncount,2+nanalises	! dimensiona tabela de pressões radiais
+*DIM,coordy,ARRAY,ntotal		! dimensiona um array de 1 até ntotal 
+*DIM,u_x,ARRAY,ntotal			! dimensiona um array ux de 1 até ntotal
+*DIM,s_x,ARRAY,ntotal			! dimensiona um array sx de 1 até ntotal
+*DIM,n_sel,ARRAY,ntotal			! dimensiona um array dos nós selecionados
+!
+! Coloca lista de nós em ordem na primeira coluna do convergence e do pressure
+*VGET,convergence(1,1),NODE,,NLIST
+*VGET,pressure(1,1),NODE,,NLIST
+!
+! criando o vetor de coordenadas
+*VGET,n_sel(1),NODE,1,NSEL		! marca com 1 os nós selecionados nas linhas de nsel
+*VGET,coordy(1),NODE,1,LOC,y		! coloca as coordenadas y dos nós em ny
+*VOPER,coordy(1),coordy(1),MULT,1/Ri	! multiplica as coordenadas por 1
+!
+! Preenchendo o convergence e pressure com as coordenadas
+*VMASK,n_sel(1)				! define nsel como sendo a máscara
+*VFUN,convergence(1,2),COMP,coordy(1)	! coloca em convergence apenas os que tem máscara "true"
+*VMASK,n_sel(1)				! define nsel como sendo a máscara
+*VFUN,pressure(1,2),COMP,coordy(1)	! coloca em pressure apenas os que tem máscara "true"
+!
+! preenchendo o convergence com a convergência
+*DO,i,1,nanalises,1
+	! identifica o passo
+	*IF,i,EQ,nanalises,THEN
+		SUBSET,LAST
+	*ELSE
+		*IF,matmacico,LT,1,AND,matrev,EQ,0,THEN
+			SUBSET,LAST
+		*ELSE
+			SUBSET,i,,,,,,
+			!SUBSET,LAST
+		*ENDIF					
+	*ENDIF
+	!
+	
+	!
+	! Preenchendo o array com os deslocamentos radiais e tensões radiais
+	*VMASK,n_sel(1)				! define nsel como máscara
+	*VGET,u_x(1),NODE,1,U,X			! coloca em ux os resultados nodais	
+	*VOPER,u_x(1),u_x(1),MULT,-1/Ri*100	! Calcula a convergência
+	!
+	*VMASK,n_sel(1)				! define nsel como máscara
+	*VGET,s_x(1),NODE,1,S,X			! coloca em ux os resultados nodais	
+	*VOPER,s_x(1),s_x(1),MULT,1		! Calcula a tensão
+	!
+	! Preenchendo o convergence e pressure
+	*VMASK,n_sel(1)				! define nsel como sendo a máscara		
+	*VFUN,convergence(1,2+i),COMP,u_x(1)	! coloca o ux nos resultados
+	*VMASK,n_sel(1)				! define nsel como sendo a máscara		
+	*VFUN,pressure(1,2+i),COMP,s_x(1)	! coloca o ux nos resultados
+*ENDDO
+!
+! ordena a tabela de acordo com a segunda coluna (das coordenadas)
+*MOPER,ORDER,convergence,SORT,convergence(1,2)
+*MOPER,ORDER,pressure,SORT,pressure(1,2)
+!
+! Coleta o maior valor das convergências
+*VSCFUN,umaximofinal,max,convergence(1,2+nanalises)
+*VSCFUN,smaximofinal,max,pressure(1,2+nanalises)
+*VSCFUN,sminimofinal,min,pressure(1,2+nanalises)	
+!
+! formatando grafico de convergencia
+/RGB,INDEX,100,100,100,0	
+/RGB,INDEX,0,0,0,15 
+/AXLAB,X,Y/Ri 			
+/AXLAB,Y,U=-u(r=Ri)/Ri (%) 	
+/XRANGE,0,ly/Ri			
+/YRANGE,umaximofinal*1.2,0	
+/GROPT,DIVY,20			
+/GROPT,DIVX,10			
+/GROPT,DIG1,3			
+/GTHK,CURVE,1 			
+/PLOPTS,INFO,on
+!
+! graficando na tela do Ansys
+/ERASE
+*DO,i,1,nanalises,1
+	*IF,i,EQ,nanalises,THEN
+		/COLOR,CURVE,MAGE,1
+	*ELSEIF,i,EQ,nesc,THEN
+		/COLOR,CURVE,YELL,1
+	*ELSE
+		/COLOR,CURVE,LGRA,1
+	*ENDIF
+	*VPLOT,convergence(1,2),convergence(1,2+i)
+	/NOERASE
+*ENDDO
+/ERASE
+!
+!
+! formatando grafico do pressure
+/RGB,INDEX,100,100,100,0	
+/RGB,INDEX,0,0,0,15 
+/AXLAB,X,Y/Ri 			
+/AXLAB,Y,Sx (MPa) 	
+/XRANGE,0,ly/Ri			
+/YRANGE,smaximofinal*1.2,sminimofinal*1.2	
+/GROPT,DIVY,20			
+/GROPT,DIVX,10			
+/GROPT,DIG1,3			
+/GTHK,CURVE,1 			
+/PLOPTS,INFO,on
+!
+! graficando na tela do Ansys
+/ERASE
+*DO,i,1,nanalises,1
+	*IF,i,EQ,nanalises,THEN
+		/COLOR,CURVE,MAGE,1
+	*ELSEIF,i,EQ,nesc,THEN
+		/COLOR,CURVE,YELL,1
+	*ELSE
+		/COLOR,CURVE,LGRA,1
+	*ENDIF
+	*VPLOT,pressure(1,2),pressure(1,2+i)
+	/NOERASE
+*ENDDO
+/ERASE
+!
+! Escrevendo em arquivo as convergências
+*CREATE,ansuitmp
+*MWRITE,convergence,convergencias,txt
+(1000(E10.4,3X)) 
+*END
+/INPUT,ansuitmp
+!
+! Escrevendo em arquivo as pressões
+*CREATE,ansuitmp
+*MWRITE,pressure,pressure,txt
+(1000(E10.4,3X)) 
+*END
+/INPUT,ansuitmp
+!
+! Cria arquivo com os parâmetros
+PARSAV,SCALAR,parametros,txt	
