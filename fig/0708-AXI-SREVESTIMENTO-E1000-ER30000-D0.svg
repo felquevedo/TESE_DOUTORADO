@@ -3806,7 +3806,7 @@
      inkscape:pageshadow="2"
      inkscape:zoom="1.5570663"
      inkscape:cx="219.35644"
-     inkscape:cy="348.64102"
+     inkscape:cy="226.61667"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      inkscape:document-rotation="0"
@@ -5734,7 +5734,17 @@
          y="197.74239"
          style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:4.23333px;font-family:times;-inkscape-font-specification:'times Bold';text-align:center;text-anchor:middle;stroke-width:0.264583"
          sodipodi:role="line"
-         id="tspan8974"> E = 1000MPa, Erev = 30000, D0 = 0</tspan></text>
+         id="tspan8974"> <tspan
+   style="font-style:italic;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:times;-inkscape-font-specification:'times Bold Italic'"
+   id="tspan1998">E</tspan> = 1000 MPa, <tspan
+   style="font-style:italic;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:times;-inkscape-font-specification:'times Bold Italic'"
+   id="tspan2000">E<tspan
+   style="font-size:65%;baseline-shift:sub"
+   id="tspan2002">rev</tspan></tspan> = 30000 MPa, <tspan
+   style="font-style:italic;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:times;-inkscape-font-specification:'times Bold Italic'"
+   id="tspan2008">d</tspan><tspan
+   style="font-size:65%;baseline-shift:sub"
+   id="tspan2006">0</tspan> = 0</tspan></text>
     <text
        xml:space="preserve"
        style="font-size:4.23333px;line-height:1.25;font-family:times;-inkscape-font-specification:times;text-align:center;letter-spacing:0px;text-anchor:middle;stroke-width:0.264583"
@@ -5750,7 +5760,15 @@
          y="277.33795"
          style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:4.23333px;font-family:times;-inkscape-font-specification:'times Bold';text-align:center;text-anchor:middle;stroke-width:0.264583"
          sodipodi:role="line"
-         id="tspan8974-5"> E = 1000MPa, Erev = 30000, D0 = 0</tspan></text>
+         id="tspan8974-5"> <tspan
+   style="font-style:italic;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:times;-inkscape-font-specification:'times Bold Italic'"
+   id="tspan2010">E</tspan> = 1000 MPa, <tspan
+   style="font-style:italic;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:times;-inkscape-font-specification:'times Bold Italic'"
+   id="tspan2012">E<tspan
+   style="font-size:65%;baseline-shift:sub"
+   id="tspan2014">rev</tspan></tspan> = 30000 MPa, d<tspan
+   style="font-size:65%;baseline-shift:sub"
+   id="tspan2018">0</tspan> = 0</tspan></text>
     <g
        id="g1814-7-5-0"
        transform="translate(-71.659793,193.4023)">

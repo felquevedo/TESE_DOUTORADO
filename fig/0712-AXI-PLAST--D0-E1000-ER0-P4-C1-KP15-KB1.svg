@@ -10266,11 +10266,11 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1.1824491"
-     inkscape:cx="324.07761"
-     inkscape:cy="311.19844"
+     inkscape:zoom="1.515743"
+     inkscape:cx="259.93042"
+     inkscape:cy="212.70901"
      inkscape:document-units="mm"
-     inkscape:current-layer="g16785"
+     inkscape:current-layer="layer1"
      inkscape:document-rotation="0"
      showgrid="false"
      inkscape:window-width="1920"
@@ -11134,7 +11134,13 @@
            y="39.11657"
            style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:16px;font-family:times;-inkscape-font-specification:'times Bold';text-align:center;text-anchor:middle;stroke-width:0.999999"
            sodipodi:role="line"
-           id="tspan8974-53-2-8-5"> E = 1000MPa, Ctr = 1MPa, phi = 15º, psi = 0º</tspan></text>
+           id="tspan8974-53-2-8-5"> <tspan
+   style="font-style:italic;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:times;-inkscape-font-specification:'times Bold Italic'"
+   id="tspan3434">E</tspan> = 1000 MPa, <tspan
+   style="font-style:italic;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:times;-inkscape-font-specification:'times Bold Italic'"
+   id="tspan3438">c</tspan><tspan
+   style="font-size:65%;baseline-shift:sub"
+   id="tspan3436">TR</tspan> = 1 MPa, φ = 15º, ψ = 0º</tspan></text>
       <g
          clip-path="url(#clip66-4-1)"
          id="g2531"
@@ -12048,7 +12054,13 @@
            y="161.22781"
            style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:16.0757px;font-family:times;-inkscape-font-specification:'times Bold';text-align:center;text-anchor:middle;stroke-width:1.00473"
            sodipodi:role="line"
-           id="tspan8974-53-2-8-5-5"> E = 1000MPa, Ctr = 1MPa, phi = 15º, psi = 0º</tspan></text>
+           id="tspan8974-53-2-8-5-5"> <tspan
+   style="font-style:italic;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:times;-inkscape-font-specification:'times Bold Italic'"
+   id="tspan3440">E</tspan> = 1000 MPa, <tspan
+   style="font-style:italic;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:times;-inkscape-font-specification:'times Bold Italic'"
+   id="tspan3444">c</tspan><tspan
+   style="font-size:65%;baseline-shift:sub"
+   id="tspan3442">TR</tspan> = 1 MPa, φ = 15º, ψ = 0º</tspan></text>
       <g
          clip-path="url(#clip66-4-9)"
          id="g2531-2"

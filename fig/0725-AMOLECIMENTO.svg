@@ -13,7 +13,7 @@
    version="1.1"
    id="svg8"
    inkscape:version="1.0.1 (3bc2e813f5, 2020-09-07)"
-   sodipodi:docname="0723-AMOLECIMENTO.svg">
+   sodipodi:docname="0725-AMOLECIMENTO.svg">
   <defs
      id="defs2">
     <clipPath
@@ -339,9 +339,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1.6934081"
-     inkscape:cx="247.71386"
-     inkscape:cy="214.98774"
+     inkscape:zoom="1.5345049"
+     inkscape:cx="272.97659"
+     inkscape:cy="179.62987"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      inkscape:document-rotation="0"
@@ -349,7 +349,7 @@
      inkscape:window-width="1618"
      inkscape:window-height="1040"
      inkscape:window-x="168"
-     inkscape:window-y="161"
+     inkscape:window-y="0"
      inkscape:window-maximized="0" />
   <metadata
      id="metadata5">
@@ -728,12 +728,14 @@
          transform="rotate(-90)"
          id="text2018"
          x="-1410.9905"
-         y="1123.7318">2C (MPa)</text>
+         y="1123.7318">2<tspan
+   style="font-style:italic;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:'Times New Roman', 'Times New Roman_MSFontService', sans-serif;-inkscape-font-specification:'Times New Roman, Times New Roman_MSFontService, sans-serif Bold Italic'"
+   id="tspan968">C</tspan> (MPa)</text>
     </g>
     <g
        clip-path="url(#clip30-1)"
        id="g2024"
-       transform="matrix(0.26458333,0,0,0.26458333,-306.09643,-282.58291)">
+       transform="matrix(0.26458333,0,0,0.26458333,-297.6593,-283.83285)">
       <text
          fill="#595959"
          font-family="'Times New Roman', 'Times New Roman_MSFontService', sans-serif"
@@ -741,7 +743,10 @@
          font-size="13px"
          id="text2022"
          x="1323.8661"
-         y="1298.2261">DEFORMAÇÃO</text>
+         y="1298.2261"
+         style="font-size:21.3333px">ε<tspan
+   style="font-size:65%;baseline-shift:sub"
+   id="tspan978">a</tspan></text>
     </g>
     <g
        clip-path="url(#clip31-8)"

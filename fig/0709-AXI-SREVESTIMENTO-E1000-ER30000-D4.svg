@@ -5217,11 +5217,11 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="3.4133226"
-     inkscape:cx="102.89592"
-     inkscape:cy="410.02206"
+     inkscape:zoom="1.3516515"
+     inkscape:cx="264.69635"
+     inkscape:cy="305.33806"
      inkscape:document-units="mm"
-     inkscape:current-layer="layer1"
+     inkscape:current-layer="g10481"
      inkscape:document-rotation="0"
      showgrid="false"
      inkscape:window-width="1920"
@@ -7014,7 +7014,21 @@
            y="173.63806"
            style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:15.9793px;font-family:times;-inkscape-font-specification:'times Bold';text-align:center;text-anchor:middle;stroke-width:0.998703"
            sodipodi:role="line"
-           id="tspan8974-5-9"> E = 1000MPa, Erev = 30000, D0 = 4Lp</tspan></text>
+           id="tspan8974-5-9"> <tspan
+   style="font-style:italic;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:times;-inkscape-font-specification:'times Bold Italic'"
+   id="tspan2332">E</tspan> = 1000 MPa, <tspan
+   style="font-style:italic;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:times;-inkscape-font-specification:'times Bold Italic'"
+   id="tspan2334">E<tspan
+   style="font-size:65%;baseline-shift:sub"
+   id="tspan2336">rev</tspan></tspan> = 30000 Mpa, <tspan
+   style="font-style:italic;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:times;-inkscape-font-specification:'times Bold Italic'"
+   id="tspan2340">d</tspan><tspan
+   style="font-size:65%;baseline-shift:sub"
+   id="tspan2342">0</tspan> = 4<tspan
+   style="font-style:italic;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:times;-inkscape-font-specification:'times Bold Italic'"
+   id="tspan2344">L<tspan
+   style="font-size:65%;baseline-shift:sub"
+   id="tspan2346">p</tspan></tspan></tspan></text>
       <g
          clip-path="url(#clip66-4-1)"
          id="g2531-6"
@@ -7184,7 +7198,21 @@
          y="198.54729"
          style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:4.23333px;font-family:times;-inkscape-font-specification:'times Bold';text-align:center;text-anchor:middle;stroke-width:0.264583"
          sodipodi:role="line"
-         id="tspan8974-53"> E = 1000MPa, Erev = 30000, D0 = 4Lp</tspan></text>
+         id="tspan8974-53"> <tspan
+   style="font-style:italic;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:times;-inkscape-font-specification:'times Bold Italic'"
+   id="tspan2316">E</tspan> = 1000 MPa, <tspan
+   style="font-style:italic;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:times;-inkscape-font-specification:'times Bold Italic'"
+   id="tspan2318">E<tspan
+   style="font-size:65%;baseline-shift:sub"
+   id="tspan2320">rev</tspan></tspan> = 30000 MPa, <tspan
+   style="font-style:italic;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:times;-inkscape-font-specification:'times Bold Italic'"
+   id="tspan2324">d</tspan><tspan
+   style="font-size:65%;baseline-shift:sub"
+   id="tspan2326">0</tspan> = 4<tspan
+   style="font-style:italic;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:times;-inkscape-font-specification:'times Bold Italic'"
+   id="tspan2328">L<tspan
+   style="font-size:65%;baseline-shift:sub"
+   id="tspan2330">p</tspan></tspan></tspan></text>
     <g
        id="g1814-7-5-0-9-2"
        transform="translate(81.958282,256.94891)">

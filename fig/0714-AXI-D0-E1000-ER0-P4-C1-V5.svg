@@ -7576,9 +7576,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1.2644196"
-     inkscape:cx="126.90437"
-     inkscape:cy="276.75152"
+     inkscape:zoom="1.2271985"
+     inkscape:cx="349.13123"
+     inkscape:cy="281.20583"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      inkscape:document-rotation="0"
@@ -9831,7 +9831,17 @@
          y="198.54936"
          style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:4.23333px;font-family:times;-inkscape-font-specification:'times Bold';text-align:center;text-anchor:middle;stroke-width:0.264583"
          sodipodi:role="line"
-         id="tspan8974-53-7"> E = 1000MPa, Ctr = 1MPa, Vp = 5m/dia</tspan></text>
+         id="tspan8974-53-7"> <tspan
+   style="font-style:italic;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:times;-inkscape-font-specification:'times Bold Italic'"
+   id="tspan3089">E</tspan> = 1000 MPa, <tspan
+   style="font-style:italic;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:times;-inkscape-font-specification:'times Bold Italic'"
+   id="tspan3093">c</tspan><tspan
+   style="font-size:65%;baseline-shift:sub"
+   id="tspan3091">TR</tspan> = 1 MPa, <tspan
+   style="font-style:italic;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:times;-inkscape-font-specification:'times Bold Italic'"
+   id="tspan3095">V<tspan
+   style="font-size:65%;baseline-shift:sub"
+   id="tspan3097">p</tspan></tspan> = 5 m/dia</tspan></text>
     <g
        clip-path="url(#clip0-5)"
        transform="matrix(0.26308569,0,0,0.26458333,144.88124,244.78456)"
@@ -10766,7 +10776,17 @@
          y="278.65997"
          style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:4.23333px;font-family:times;-inkscape-font-specification:'times Bold';text-align:center;text-anchor:middle;stroke-width:0.264583"
          sodipodi:role="line"
-         id="tspan8974-53-7-6"> E = 1000MPa, Ctr = 1MPa, Vp = 5m/dia</tspan></text>
+         id="tspan8974-53-7-6"> <tspan
+   style="font-style:italic;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:times;-inkscape-font-specification:'times Bold Italic'"
+   id="tspan3101">E</tspan> = 1000 MPa, <tspan
+   style="font-style:italic;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:times;-inkscape-font-specification:'times Bold Italic'"
+   id="tspan3105">c</tspan><tspan
+   style="font-size:65%;baseline-shift:sub"
+   id="tspan3103">TR</tspan> = 1 MPa, <tspan
+   style="font-style:italic;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:times;-inkscape-font-specification:'times Bold Italic'"
+   id="tspan3107">V<tspan
+   style="font-size:65%;baseline-shift:sub"
+   id="tspan3109">p</tspan></tspan> = 5 m/dia</tspan></text>
     <path
        style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.397;stroke-miterlimit:10;stroke-dasharray:2.382, 2.382;stroke-dashoffset:0;stroke-opacity:1"
        d="M 354.95516,332.49393 V 291.14012"
@@ -11058,5 +11078,27 @@
         </g>
       </g>
     </g>
+    <text
+       xml:space="preserve"
+       style="font-size:3.52777px;line-height:1.25;font-family:times;-inkscape-font-specification:times;letter-spacing:0px;stroke-width:0.264583"
+       x="370.89487"
+       y="197.91644"
+       id="text3101"><tspan
+         sodipodi:role="line"
+         id="tspan3099"
+         x="370.89487"
+         y="197.91644"
+         style="font-style:italic;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:65%;font-family:times;-inkscape-font-specification:'times Bold Italic';baseline-shift:super;stroke-width:0.264583">vp</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:3.52777px;line-height:1.25;font-family:times;-inkscape-font-specification:times;letter-spacing:0px;stroke-width:0.264583"
+       x="373.95911"
+       y="278.00409"
+       id="text3101-1"><tspan
+         sodipodi:role="line"
+         id="tspan3099-1"
+         x="373.95911"
+         y="278.00409"
+         style="font-style:italic;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:2.29305px;font-family:times;-inkscape-font-specification:'times Bold Italic';baseline-shift:super;stroke-width:0.264583">vp</tspan></text>
   </g>
 </svg>

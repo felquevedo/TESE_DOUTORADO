@@ -1505,11 +1505,11 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.9458942"
-     inkscape:cx="316.5912"
-     inkscape:cy="314.50117"
+     inkscape:zoom="1.5481367"
+     inkscape:cx="293.49969"
+     inkscape:cy="186.53801"
      inkscape:document-units="mm"
-     inkscape:current-layer="g1627"
+     inkscape:current-layer="layer1"
      inkscape:document-rotation="0"
      showgrid="false"
      inkscape:window-width="1618"
@@ -1525,7 +1525,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -2674,7 +2674,15 @@
          font-weight="700"
          font-size="16px"
          transform="translate(444.794,903)"
-         id="text2620">D0 = 4Lp</text>
+         id="text2620"><tspan
+   style="font-style:italic;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:'Times New Roman', 'Times New Roman_MSFontService', sans-serif;-inkscape-font-specification:'Times New Roman, Times New Roman_MSFontService, sans-serif Bold Italic'"
+   id="tspan1368">d</tspan><tspan
+   style="font-size:65%;baseline-shift:sub"
+   id="tspan1366">0</tspan> = 4<tspan
+   style="font-style:italic;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:'Times New Roman', 'Times New Roman_MSFontService', sans-serif;-inkscape-font-specification:'Times New Roman, Times New Roman_MSFontService, sans-serif Bold Italic'"
+   id="tspan1370">L<tspan
+   style="font-size:65%;baseline-shift:sub"
+   id="tspan1372">p</tspan></tspan></text>
     </g>
   </g>
 </svg>

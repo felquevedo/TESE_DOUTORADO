@@ -14039,9 +14039,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.88650132"
-     inkscape:cx="584.67541"
-     inkscape:cy="274.6756"
+     inkscape:zoom="1.3147791"
+     inkscape:cx="455.41986"
+     inkscape:cy="189.92809"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      inkscape:document-rotation="0"
@@ -14858,7 +14858,9 @@
          id="tspan18804-8-9"
          x="26.870905"
          y="80.358932"
-         style="font-size:4.23333px;stroke-width:0.264583">E = 1500MPa</tspan></text>
+         style="font-size:4.23333px;stroke-width:0.264583"><tspan
+   style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:times;-inkscape-font-specification:'times Italic'"
+   id="tspan4102">E </tspan>= 1500 MPa</tspan></text>
     <path
        style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.4;stroke-miterlimit:4;stroke-dasharray:1.6, 0.799999;stroke-dashoffset:0;stroke-opacity:1"
        d="M -9.0292724,86.918988 H 77.618283"

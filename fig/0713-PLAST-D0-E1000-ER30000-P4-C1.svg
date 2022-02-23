@@ -5217,9 +5217,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1.0969683"
-     inkscape:cx="392.51792"
-     inkscape:cy="309.59295"
+     inkscape:zoom="1.9465795"
+     inkscape:cx="302.69686"
+     inkscape:cy="165.91772"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      inkscape:document-rotation="0"
@@ -7193,7 +7193,19 @@
          y="202.4859"
          style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:4.23333px;font-family:times;-inkscape-font-specification:'times Bold';text-align:center;text-anchor:middle;stroke-width:0.264583"
          sodipodi:role="line"
-         id="tspan8974-3"> E = 1000MPa, Erev = 30000MPa, Ctr = 1MPa, D0 = 0</tspan></text>
+         id="tspan8974-3"> <tspan
+   style="font-style:italic;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:times;-inkscape-font-specification:'times Bold Italic'"
+   id="tspan2316">E</tspan> = 1000 MPa, <tspan
+   style="font-style:italic;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:times;-inkscape-font-specification:'times Bold Italic'"
+   id="tspan2318">E<tspan
+   style="font-size:65%;baseline-shift:sub"
+   id="tspan2320">rev</tspan></tspan> = 30000 MPa, <tspan
+   style="font-style:italic;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:times;-inkscape-font-specification:'times Bold Italic'"
+   id="tspan2326">c</tspan><tspan
+   style="font-size:65%;baseline-shift:sub"
+   id="tspan2324">TR</tspan> = 1 MPa, d<tspan
+   style="font-size:65%;baseline-shift:sub"
+   id="tspan2328">0</tspan> = 0</tspan></text>
     <text
        xml:space="preserve"
        style="font-size:4.23333px;line-height:1.25;font-family:times;-inkscape-font-specification:times;text-align:center;letter-spacing:0px;text-anchor:middle;stroke-width:0.264583"
@@ -7209,7 +7221,21 @@
          y="282.75864"
          style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:4.23333px;font-family:times;-inkscape-font-specification:'times Bold';text-align:center;text-anchor:middle;stroke-width:0.264583"
          sodipodi:role="line"
-         id="tspan8974-3-7"> E = 1000MPa, Erev = 30000MPa, Ctr = 1MPa, D0 = 0</tspan></text>
+         id="tspan8974-3-7"> <tspan
+   style="font-style:italic;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:times;-inkscape-font-specification:'times Bold Italic'"
+   id="tspan2330">E</tspan> = 1000 MPa, <tspan
+   style="font-style:italic;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:times;-inkscape-font-specification:'times Bold Italic'"
+   id="tspan2332">E<tspan
+   style="font-size:65%;baseline-shift:sub"
+   id="tspan2334">rev</tspan></tspan> = 30000 MPa, <tspan
+   style="font-style:italic;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:times;-inkscape-font-specification:'times Bold Italic'"
+   id="tspan2340">c</tspan><tspan
+   style="font-size:65%;baseline-shift:sub"
+   id="tspan2338">TR</tspan> = 1 MPa, <tspan
+   style="font-style:italic;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:times;-inkscape-font-specification:'times Bold Italic'"
+   id="tspan2344">d</tspan><tspan
+   style="font-size:65%;baseline-shift:sub"
+   id="tspan2342">0</tspan> = 0</tspan></text>
     <g
        id="g1814-7-5-0-5"
        transform="translate(82.87846,206.38361)">

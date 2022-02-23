@@ -871,10 +871,10 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="1.630043"
-     inkscape:cx="222.19408"
+     inkscape:cx="263.13118"
      inkscape:cy="107.62654"
      inkscape:document-units="mm"
-     inkscape:current-layer="g586"
+     inkscape:current-layer="g2014"
      inkscape:document-rotation="0"
      showgrid="false"
      inkscape:window-width="1618"
@@ -1913,7 +1913,9 @@
            id="tspan929"
            x="45.551891"
            y="14.269811"
-           style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:4.23333px;font-family:times;-inkscape-font-specification:'times Bold';stroke-width:0.264583">ELASTICIDADE - S/ REVESTIMENTO - E = 1000MPa</tspan></text>
+           style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:4.23333px;font-family:times;-inkscape-font-specification:'times Bold';stroke-width:0.264583">ELASTICIDADE - S/ REVESTIMENTO - <tspan
+   style="font-style:italic;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:times;-inkscape-font-specification:'times Bold Italic'"
+   id="tspan1196">E</tspan> = 1000 MPa</tspan></text>
       <g
          id="g1814"
          transform="translate(-19.326119,-2.7348281)">

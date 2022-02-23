@@ -2904,18 +2904,18 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.86474928"
-     inkscape:cx="344.73264"
-     inkscape:cy="313.19971"
+     inkscape:zoom="1.902116"
+     inkscape:cx="280.41675"
+     inkscape:cy="160.4653"
      inkscape:document-units="mm"
-     inkscape:current-layer="layer1"
+     inkscape:current-layer="g3919"
      inkscape:document-rotation="0"
      showgrid="false"
-     inkscape:window-width="958"
-     inkscape:window-height="1008"
-     inkscape:window-x="-7"
-     inkscape:window-y="0"
-     inkscape:window-maximized="0" />
+     inkscape:window-width="1920"
+     inkscape:window-height="1017"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1" />
   <metadata
      id="metadata5">
     <rdf:RDF>
@@ -3539,7 +3539,11 @@
            font-weight="700"
            font-size="16px"
            transform="translate(1913.7,385)"
-           id="text3857">CONVERGÊNCIAS Uy</text>
+           id="text3857">CONVERGÊNCIAS <tspan
+   style="font-style:italic;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:'Times New Roman', 'Times New Roman_MSFontService', sans-serif;-inkscape-font-specification:'Times New Roman, Times New Roman_MSFontService, sans-serif Bold Italic'"
+   id="tspan1627">U<tspan
+   style="font-size:65%;baseline-shift:sub"
+   id="tspan1629">y</tspan></tspan></text>
       </g>
       <g
          clip-path="url(#clip62-4)"

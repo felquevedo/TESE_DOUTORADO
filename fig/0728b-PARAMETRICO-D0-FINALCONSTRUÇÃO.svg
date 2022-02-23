@@ -2639,7 +2639,7 @@
      inkscape:cx="355.19946"
      inkscape:cy="165.83061"
      inkscape:document-units="mm"
-     inkscape:current-layer="g2674"
+     inkscape:current-layer="layer1"
      inkscape:document-rotation="0"
      showgrid="false"
      inkscape:window-width="1920"
@@ -3318,7 +3318,13 @@
            font-weight="700"
            font-size="16px"
            transform="translate(444.794,903)"
-           id="text2620">D0 = 0Lp</text>
+           id="text2620">d<tspan
+   style="font-size:65%;baseline-shift:sub"
+   id="tspan1626">0</tspan> = 0<tspan
+   style="font-style:italic;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:'Times New Roman', 'Times New Roman_MSFontService', sans-serif;-inkscape-font-specification:'Times New Roman, Times New Roman_MSFontService, sans-serif Bold Italic'"
+   id="tspan1622">L<tspan
+   style="font-size:65%;baseline-shift:sub"
+   id="tspan1624">p</tspan></tspan></text>
       </g>
       <g
          clip-path="url(#clip68-6)"

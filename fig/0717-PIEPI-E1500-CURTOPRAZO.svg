@@ -13677,6 +13677,8 @@
          id="tspan18804-8"
          x="23.497576"
          y="-8.8532429"
-         style="font-size:4.23333px;stroke-width:0.264583">E = 1500MPa</tspan></text>
+         style="font-size:4.23333px;stroke-width:0.264583"><tspan
+   style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:times;-inkscape-font-specification:'times Italic'"
+   id="tspan3840">E</tspan> = 1500 MPa</tspan></text>
   </g>
 </svg>

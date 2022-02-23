@@ -1320,11 +1320,11 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1.1519384"
-     inkscape:cx="263.01262"
-     inkscape:cy="2.3125501"
+     inkscape:zoom="1.534505"
+     inkscape:cx="254.03069"
+     inkscape:cy="132.25595"
      inkscape:document-units="mm"
-     inkscape:current-layer="g1619"
+     inkscape:current-layer="g1567"
      inkscape:document-rotation="0"
      showgrid="false"
      inkscape:window-width="1618"
@@ -2043,7 +2043,15 @@
            font-weight="700"
            font-size="16px"
            transform="translate(1016.36,919)"
-           id="text1565">D0 = 4Lp</text>
+           id="text1565"><tspan
+   style="font-style:italic;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:'Times New Roman', 'Times New Roman_MSFontService', sans-serif;-inkscape-font-specification:'Times New Roman, Times New Roman_MSFontService, sans-serif Bold Italic'"
+   id="tspan1295">d</tspan><tspan
+   style="font-size:65%;baseline-shift:sub"
+   id="tspan1297">0</tspan> = 4<tspan
+   style="font-style:italic;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:'Times New Roman', 'Times New Roman_MSFontService', sans-serif;-inkscape-font-specification:'Times New Roman, Times New Roman_MSFontService, sans-serif Bold Italic'"
+   id="tspan1299">L<tspan
+   style="font-size:65%;baseline-shift:sub"
+   id="tspan1301">p</tspan></tspan></text>
       </g>
       <g
          clip-path="url(#clip66)"

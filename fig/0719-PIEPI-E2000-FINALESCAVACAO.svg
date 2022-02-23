@@ -14219,7 +14219,9 @@
          id="tspan18804-8-0"
          x="28.001524"
          y="79.509621"
-         style="font-size:4.23333px;stroke-width:0.264583">E = 2000MPa</tspan></text>
+         style="font-size:4.23333px;stroke-width:0.264583"><tspan
+   style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:times;-inkscape-font-specification:'times Italic'"
+   id="tspan3970">E</tspan> = 2000 MPa</tspan></text>
     <g
        clip-path="url(#clip42-60-2)"
        id="g17863-8"

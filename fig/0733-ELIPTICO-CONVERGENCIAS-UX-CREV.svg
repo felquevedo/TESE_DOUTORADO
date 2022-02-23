@@ -2049,11 +2049,11 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1.1621716"
-     inkscape:cx="418.64927"
-     inkscape:cy="168.05925"
+     inkscape:zoom="1.5618895"
+     inkscape:cx="368.65177"
+     inkscape:cy="149.7779"
      inkscape:document-units="mm"
-     inkscape:current-layer="layer1"
+     inkscape:current-layer="g997"
      inkscape:document-rotation="0"
      showgrid="false"
      inkscape:window-width="1920"
@@ -2785,7 +2785,11 @@
            font-weight="700"
            font-size="16px"
            transform="translate(2480.2,66)"
-           id="text935">CONVERGÊNCIAS Ux</text>
+           id="text935">CONVERGÊNCIAS <tspan
+   style="font-style:italic;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:'Times New Roman', 'Times New Roman_MSFontService', sans-serif;-inkscape-font-specification:'Times New Roman, Times New Roman_MSFontService, sans-serif Bold Italic'"
+   id="tspan1435">U<tspan
+   style="font-size:65%;baseline-shift:sub"
+   id="tspan1437">x</tspan></tspan></text>
       </g>
       <g
          clip-path="url(#clip61-8)"

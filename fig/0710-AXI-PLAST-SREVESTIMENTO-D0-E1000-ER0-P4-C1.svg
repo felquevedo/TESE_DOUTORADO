@@ -9560,7 +9560,13 @@
          y="199.16756"
          style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:4.23333px;font-family:times;-inkscape-font-specification:'times Bold';text-align:center;text-anchor:middle;stroke-width:0.264583"
          sodipodi:role="line"
-         id="tspan8974-53-2"> E = 1000MPa, Ctr = 1MPa</tspan></text>
+         id="tspan8974-53-2"> <tspan
+   style="font-style:italic;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:times;-inkscape-font-specification:'times Bold Italic'"
+   id="tspan2816">E</tspan> = 1000 MPa, <tspan
+   style="font-style:italic;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:times;-inkscape-font-specification:'times Bold Italic'"
+   id="tspan2820">c<tspan
+   style="font-size:65%;baseline-shift:sub"
+   id="tspan2822">TR</tspan></tspan> = 1 MPa</tspan></text>
     <path
        style="fill:none;fill-rule:evenodd;stroke:#30f600;stroke-width:0.396999;stroke-miterlimit:10;stroke-dasharray:2.382, 2.382;stroke-opacity:1"
        d="M 319.36123,217.89899 H 435.27394"
