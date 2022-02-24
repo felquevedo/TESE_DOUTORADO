@@ -11,7 +11,7 @@ Foram também feitas algumas análises paramétricas para mostrar as diferenças
 
 Uma vez que o modelo constitutivo foi generalizado para o caso tridimensional, foi feita uma análise paramétrica considerando a variação da razão de aspecto de uma seção transversal elíptica. Como a seção é elíptica as convergências são medidas ao longo do maior e menor raio da seção. De uma forma geral, quando se aumenta a razão de aspecto os deslocamentos aumentam. Sem revestimento, uma razão de aspecto de 2, levou a maiores convergências no modelo elastoplástico-viscoplástico na direção $x$ (direção que se tem as maiores plastificações) em relação ao modelo viscoplástico. Foi encontrada uma convergência 2,05 vezes maior no curto prazo. Na direção $y$ (onde a plastificação não é tão intensa) encontrou-se uma convergência 1,22 vezes maior do que o modelo viscoplástico no curto prazo. No longo prazo, para ambas as direções, os valores ficaram equivalentes dado o nível de plastificação próximo em ambos os modelos nessa direção. Contudo, foi também constatado que o revestimento pode bloquear as deformações plásticas instantâneas, fazendo com que os modelos não apresentem diferenças tão significativas.
 
-Frente a essas análises, foi constatada a relevância do modelo constitutivo acoplado frente ao modelo viscoplástico e é importante que esse modelo seja estudado com mais profundidade e ampliado. Portanto, como sugestões para serem adicionadas em trabalhos futuros, pode-se citar:
+Frente a essas análises, foi constatada a relevância do modelo constitutivo acoplado frente ao modelo viscoplástico e é importante que esse modelo seja estudado com mais profundidade e ampliado. Portanto, como sugestões para serem adicionadas em trabalhos futuros:
 
 \begin{alineas}
 	
@@ -19,15 +19,19 @@ Frente a essas análises, foi constatada a relevância do modelo constitutivo ac
 	
 	\item fazer mais estudos paramétricos para compreender melhor o comportamento desse modelo constitutivo acoplado, como, por exemplo, considerando a anisotropia das tensões inicias;
 	
-	\item adicionar outras superfícies de plasticidade e viscoplasticidade além da superfície de Drucker-Prager. Apesar dessa superfície ser bastante geral e incluir a dependência da pressão hidrostática, há superfícies especializadas em captar aspectos próprios da geomecânica de túneis;
+	\item uma vez que se tem a lei de endurecimento/amolecimento implementada, seria interessante realizar estudos paramétricos para compreender as principais diferenças ocasionadas nos túneis considerando maciços rígidos e dúcteis;
 	
-	\item adicionar uma lei de amolecimento e endurecimento que considere a variação do ângulo de atrito durante a deformação plástica;
+	\item adicionar outras superfícies de plasticidade e viscoplasticidade além da superfície de Drucker-Prager. Apesar dessa superfície ser bastante geral e incluir a dependência da pressão hidrostática, há superfícies específicas em captar aspectos próprios da geomecânica de túneis;
+	
+	\item adicionar uma lei de amolecimento e endurecimento que considere também a variação do ângulo de atrito durante a deformação plástica;
 	
 	\item aplicar esse modelo constitutivo em domínios mais complexos como o caso de túneis gêmeos e encontro de galerias;
 	
 	\item fazer um estudo considerando revestimentos que possuem comportamento diferido, como o caso do concreto que sofre fluência e retração;
 	
 	\item construir curvas de convergências para o modelo elastoplástico-viscoplástico e propor ajustes no método NIM;
+	
+	\item durante as análises as propriedades do maciço, do revestimento e os parâmetros da geometria do túnel foram adotadas de forma determinística. Contudo, seria interessante fazer análises probabilísticas de modo a determinar a resposta da estrutura à variabilidade desses parâmetros;
 	
 	\item generalizar a solução para considerar grandes deformações.	
 	
