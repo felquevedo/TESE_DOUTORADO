@@ -202,7 +202,7 @@ sendo $\xi_{r_{i_p}}$ a coordenada radial natural do ponto de Gauss. A equação
 Os elementos finitos que são utilizados nesse trabalho com suas funções de interpolação, pesos e coordenadas dos pontos de integração podem ser vistos na \autoref{PLANE183}, para análises em estado plano de deformações e axissimetria e, para análises tridimensionais, que consomem maior tempo de processamento, é utilizado o elemento da \autoref{SOLID185}.
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[scale = 1.0]{0603b-quadrilatero linear.pdf}
+		\includegraphics[scale = 1.0]{0603-quadrilatero linear.pdf}
 	\end{center}
 	\caption{\label{PLANE183}Funções de interpolação, pesos e coordenadas dos pontos de Gauss para o elemento quadrilátero linear isoparamétrico PLANE182 (adaptado de: \citeonline[p. 334, 369-370]{ANSYS2018})}
 \end{figure}
@@ -308,7 +308,7 @@ em que $\varepsilon_R$ e $\varepsilon_u$ são as tolerâncias para o resíduo (d
 em que $j$ é o índice da componente do vetor $\underline * = \Rl$ ou $\underline * = \Delta \ul$. Para o presente trabalho foi escolhida a norma euclidiana para o resíduo e a norma infinita para o incremento de deslocamento. A \autoref{NR} ilustra o andamento da solução ao longo dos subpassos. Pode-se ver, caso haja a convergência entre os subpassos, que o resíduo e o incremento de deformações vão ficando cada vez menores ao longo das iterações de equilíbrio.
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[scale = 1.0]{0605_2-ilustracao das iteracoes do método de NR.pdf}
+		\includegraphics[scale = 1.0]{0605-ilustracao das iteracoes do método de NR.pdf}
 	\end{center}
 	\caption{\label{NR}Ilustração das iterações do método de Newton-Raphson (adaptado de: \citeonline[p. 301]{Chen1988})}
 \end{figure}
@@ -343,7 +343,7 @@ Apesar de não terem sido utilizadas nessa tese, o ANSYS possui ainda quatro té
 Na \autoref{NR-fluxograma} tem-se o fluxograma do método de Newton-Raphson, mostrando as três opções de atualização da matriz de rigidez, o método da bisseção e os laços das iterações de equilíbrio e de subpassos.
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[scale = 1.0]{0606_2-fluxograma do metodo NR.pdf}
+		\includegraphics[scale = 1.0]{0606-fluxograma do metodo NR.pdf}
 	\end{center}
 	\caption{\label{NR-fluxograma}Fluxograma do método de Newton-Raphson para solução do sistema de equações globais não lineares}
 \end{figure}
@@ -404,7 +404,7 @@ O \textbf{corretor plástico}, nada mais é do que o procedimento de solução d
 
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[scale = 1.0]{0607_2-ilustração do algoritmo de retorno.pdf}
+		\includegraphics[scale = 1.0]{0607-ilustração do algoritmo de retorno.pdf}
 	\end{center}
 	\caption{\label{algoritmo_retorno}Ilustração do algoritmo de retorno mapeado genérico com $k$ iterações locais de Newton-Raphson: a) totalmente implícito e b) semi-implícito.}
 \end{figure}
@@ -475,7 +475,7 @@ O fluxograma desse algoritmo pode ser visto na \autoref{algoritmo_EP_semiimplici
 
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[scale = 1.0]{0608_4-integração EP semi-implicito.pdf}
+		\includegraphics[scale = 1.0]{0608-integração EP semi-implicito.pdf}
 	\end{center}
 	\caption{\label{algoritmo_EP_semiimplicito}Algoritmo de integração para elastoplasticidade utilizando um esquema de Euler semi-implícito (omitindo o índice $n$+1).}
 \end{figure}
@@ -580,7 +580,7 @@ O esquema de integração representado por (\ref{eq:esquema_int_constitutiva_vp}
 sendo $\Phi'= \dfrac{d \Phi}{d(f/f_0)} = n(f/f_0)^{n-1}$. Quando $\phi = 0$ tem-se o caso específico para a superfície de von-Mises. Esse limite é deduzido considerando viscoplasticidade associada e com esquema de integração totalmente explícito. O fluxograma para o algoritmo de integração das equações viscoplásticas pode ser visto na \autoref{algoritmo_VP_semiimplicito}.
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[scale = 1.0]{0609_4-integração VP semi-implicito sem endurecimento.pdf}
+		\includegraphics[scale = 1.0]{0609-integração VP semi-implicito sem endurecimento.pdf}
 	\end{center}
 	\caption{\label{algoritmo_VP_semiimplicito}Algoritmo de integração para viscoplasticidade utilizando um esquema de Euler semi-implícito ou totalmente explícito (quando $\Theta = 0$) sem endurecimento/amolecimento (omitindo o índice $n+1$).}
 \end{figure}
@@ -591,7 +591,7 @@ Como visto no \autoref{cap: modelo mecanico}, considerando a hipótese das trans
 O algoritmo para integração das equações constitutivas elastoplástica-viscoplástica pode ser visto no fluxograma da \autoref{algoritmo_EPVP}. A sua programação em \textit{Fortran} pode ser vista no Apêndice B. O procedimento para incluir essa subrotina no ANSYS pode ser vista em \citeonline{Quevedo2017}.
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[scale = 1.0]{0610_5-integração EPVP.pdf}
+		\includegraphics[scale = 1.0]{0610-integração EPVP.pdf}
 	\end{center}
 	\caption{\label{algoritmo_EPVP}Algoritmo de integração do modelo constitutivo elastoplástico-viscoplástico (omitindo o índice $n$+1).}
 \end{figure}

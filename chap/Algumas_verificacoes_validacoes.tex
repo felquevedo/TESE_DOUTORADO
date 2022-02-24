@@ -30,7 +30,7 @@ Essa verificação considerará uma das soluções analíticas deduzidas por \ci
 
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[scale = 1.2]{0704-lei de endurecimento ou amolecimento_coesao_solucao_analitca.pdf}
+		\includegraphics[scale = 1.2]{0703-lei de endurecimento ou amolecimento_coesao_solucao_analitca.pdf}
 	\end{center}
 	\caption{\label{coesao_solucao_analitca_LAJSS}Variação da coesão: I - trecho de endurecimento linear e II - comportamento perfeitamente plástico (\citeonline[p.  4]{Bernaud2020})}
 \end{figure}
@@ -51,7 +51,7 @@ Utilizando $R_i=1$ m, $E=1430$ MPa, $\nu = 0,4$, $C_0=0,21$ MPa, $C_1=0,56$ MPa,
 
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[scale = 1.0]{0705-lei de endurecimento ou amolecimento_coesao_solucao_numerica.pdf}
+		\includegraphics[scale = 1.0]{0704-lei de endurecimento ou amolecimento_coesao_solucao_numerica.pdf}
 	\end{center}
 	\caption{\label{solucao_numérica_LAJSS}Solução numérica considerando elastoplasticidade com endurecimento}
 \end{figure}
@@ -68,14 +68,14 @@ O modelo constitutivo acoplado, por ser geral, tem que ser capaz de reproduzir o
 
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[scale = 1.0]{0706-AXI-SREVESTIMENTO-E1000.pdf}
+		\includegraphics[scale = 1.0]{0705-AXI-SREVESTIMENTO-E1000.pdf}
 	\end{center}
 	\caption{\label{ELAST-D0-E1000-ER0-P5}Verificação solução numérica em elasticidade sem revestimento - $E= 1000$ MPa}
 \end{figure}
 
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[scale = 1.0]{0707-AXI-SREVESTIMENTO-E5000.pdf}
+		\includegraphics[scale = 1.0]{0706-AXI-SREVESTIMENTO-E5000.pdf}
 	\end{center}
 	\caption{\label{ELAST-D0-E5000-ER0-P5}Verificação solução numérica em elasticidade sem revestimento - $E = 5000$ MPa}
 \end{figure}
@@ -84,7 +84,7 @@ Cabe salientar que quando se utiliza o modelo constitutivo elástico linear a me
 
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[scale = 1.0]{0708-AXI-SREVESTIMENTO-E1000-ER30000-D0.pdf}
+		\includegraphics[scale = 1.0]{0707-AXI-SREVESTIMENTO-E1000-ER30000-D0.pdf}
 	\end{center}
 	\caption{\label{ELAST-D0-E1000-ER30000-P5}Verificação solução numérica em elasticidade com revestimento - $E = 1000$ MPa, $E_{rev} = 30000$ MPa, $d_0= 0$}
 \end{figure}
@@ -93,7 +93,7 @@ O perfil de convergência apresenta um pico nas primeiras escavações, uma vez 
 
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[scale = 1.0]{0709-AXI-SREVESTIMENTO-E1000-ER30000-D4.pdf}
+		\includegraphics[scale = 1.0]{0708-AXI-SREVESTIMENTO-E1000-ER30000-D4.pdf}
 	\end{center}
 	\caption{\label{ELAST-D4-E1000-ER30000-P5}Verificação solução numérica em elasticidade com revestimento - $E = 1000$ MPa, $E_{rev} = 30000$ MPa, $d_0 = 4L_p$}
 \end{figure}
@@ -108,21 +108,21 @@ De forma análoga à elasticidade, o modelo constitutivo acoplado, por ser um mo
 
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[scale = 1.0]{0710-AXI-PLAST-SREVESTIMENTO-D0-E1000-ER0-P4-C1.pdf}
+		\includegraphics[scale = 1.0]{0709-AXI-PLAST-SREVESTIMENTO-D0-E1000-ER0-P4-C1.pdf}
 	\end{center}
 	\caption{\label{PLAST-D0-E1000-ER0-P4-C1}Verificação solução numérica em elastoplasticidade sem revestimento - $E = 1000$ MPa,  $c_i=c_p=c_r = \sqrt{3}/2$ MPa}
 \end{figure}
 No caso em que $c_i=c_p=c_r = \sqrt{3}/2$ MPa, foi necessário aumentar o número de passos de escavação $n_p = 128$ para que o patamar no perfil de convergência se desenvolvesse plenamente. A solução analítica é dada para esse patamar sem a influência da face de escavação ou das bordas do modelo. Isso demonstra que dependendo dos valores dos parâmetros constitutivos pode ser necessário aumentar o número de passos $n_p$. Se o valor almejado é a convergência no equilíbrio fora das zonas de influência deve-se buscar uma malha suficiente para aparecer o patamar no perfil de convergências. Um outro aspecto em que o domínio deve ser ajustado é quando as deformações plásticas alcançam as fronteiras do domínio, sendo nesse caso necessário aumentar seus limites ($L_x,~L_y$ e $L_z$). Para o tamanho do domínio escolhido resultados são obtidos de forma satisfatória sempre que a relação da pressão geostática-hidrostática pela coesão for menor ou igual a 5. Caso contrário, pode ser necessário fazer esse ajuste nas fronteiras do domínio.
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[scale = 1]{0711-AXI-PLAST-SREVESTIMENTO-D0-E1000-ER0-P4-C3.pdf}
+		\includegraphics[scale = 1]{0710-AXI-PLAST-SREVESTIMENTO-D0-E1000-ER0-P4-C3.pdf}
 	\end{center}
 	\caption{\label{PLAST-D0-E1000-ER0-P4-C3}Verificação solução numérica em elastoplasticidade sem revestimento - $E$ = 1000MPa, $c_i=c_p=c_r = 3\sqrt{3}/2$MPa}
 \end{figure}
  A próxima verificação, compreende a plasticidade dependente da pressão e não associada. Para tanto é utilizado um ângulo de atrito $\phi$=15$^\circ$ e um ângulo de dilatância $\psi$=0$^\circ$. O resultado pode ser visto na \autoref{PLAST-D0-E1000-ER0-P4-C1-KP15-KB1}. Essa solução apenas não converge quando se utiliza Newton-Raphson Completo com o módulo constitutivo consistente. Se for utilizar o módulo constitutivo consistente é necessário utilizar o Newton-Raphson Completo Assimétrico. A opção em que é utilizado Newton-Raphson Completo mas sem atualizar o módulo constitutivo converge para a solução. Outro aspecto importante, comparando o resultado da \autoref{PLAST-D0-E1000-ER0-P4-C1-KP15-KB1} com a \autoref{PLAST-D0-E1000-ER0-P4-C1} é a sensibilidade com que a convergência é afetada pelo ângulo de atrito. Esse resultado é esperado uma vez que quanto maior o ângulo de atrito, para uma dada pressão hidrostática, mais afastada fica a superfície de plastificação do eixo hidrostático.
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[scale = 1]{0712-AXI-PLAST--D0-E1000-ER0-P4-C1-KP15-KB1.pdf}
+		\includegraphics[scale = 1]{0711-AXI-PLAST--D0-E1000-ER0-P4-C1-KP15-KB1.pdf}
 	\end{center}
 	\caption{\label{PLAST-D0-E1000-ER0-P4-C1-KP15-KB1}Verificação solução numérica elastoplasticidade sem revestimento $E = 1000$ MPa, $c_i=c_p=c_r = \sqrt{3}/2$ MPa, $\phi$=15$^\circ$ e $\psi$=0$^\circ$}
 \end{figure}
@@ -131,7 +131,7 @@ A verificação da solução considerando a colocação de um revestimento com $
 
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[scale = 1.0]{0713-PLAST-D0-E1000-ER30000-P4-C1.pdf}
+		\includegraphics[scale = 1.0]{0712-PLAST-D0-E1000-ER30000-P4-C1.pdf}
 	\end{center}
 	\caption{\label{PLAST-D0-E1000-ER30000-P4-C1}Verificação solução numérica em elastoplasticidade com revestimento - $E = 1000$ MPa, $E_{rev} = 30000$ MPa, $d_0=0$, $c_i=c_p=c_r=\sqrt{3}/2$ MPa}
 \end{figure}
@@ -141,7 +141,7 @@ A verificação da solução considerando a colocação de um revestimento com $
 De forma análoga à elasticidade e à elastoplasticidade, o modelo constitutivo acoplado, por ser geral, tem que ser capaz de reproduzir o resultado viscoplástico colocando coesões elevadas na parte elastoplástica.  Considerando $E =$1000  MPa, $\nu =$ 0,498 MPa, $p_v = p_h = 4$ MPa, $c^{vp} = \sqrt{3}/2$ MPa, $\eta = 115,74$ dia, $f_0=1$ MPa, $n=1$, $V_p = 5$ m/dia tem-se os resultados da \autoref{VISCO-D0-E1000-ER0-P4-C1-V5}. As curvas cinzas abaixo da curva vermelha são os perfis de convergência a cada passo de escavação. A curva vermelha o perfil de convergência da última escavação e colocação do revestimento. A curva azul é o perfil de convergência após os efeitos viscosos cessarem. As curvas cinzas entre a curva vermelha e azul mostram a evolução do perfil de convergências a cada intervalo de tempo, que está indicado no gráfico.
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[scale = 1.0]{0714-AXI-D0-E1000-ER0-P4-C1-V5.pdf}
+		\includegraphics[scale = 1.0]{0713-AXI-D0-E1000-ER0-P4-C1-V5.pdf}
 	\end{center}
 	\caption{\label{VISCO-D0-E1000-ER0-P4-C1-V5}Verificação solução numérica em elastoplasticidade com revestimento - $E = 1000$ MPa, $c^{vp}=\sqrt{3}/2$ MPa, $V_p=5$ m/dia}
 \end{figure}
@@ -149,7 +149,7 @@ Como pode-se ver o resultado do GEOMEC91 não apresenta a evolução do perfil d
 
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[scale = 1.0]{0715-AXI-D0-E1000-ER0-P4-C1-V10.pdf}
+		\includegraphics[scale = 1.0]{0714-AXI-D0-E1000-ER0-P4-C1-V10.pdf}
 	\end{center}
 	\caption{\label{VISCO-D0-E1000-ER0-P4-C1-V10}Verificação solução numérica em viscoplasticidade com revestimento - $E = 1000$ MPa, $c^{vp}=\sqrt{3}/2$ MPa, $V_p=10$ m/dia}
 \end{figure}
@@ -159,7 +159,7 @@ Por fim, para verificar a parte do modelo viscoplástico com revestimento a \aut
 
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[scale = 1.0]{0716-AXI-D2-E1000-ER3000-P4-C1-V5.pdf}
+		\includegraphics[scale = 1.0]{0715-AXI-D2-E1000-ER3000-P4-C1-V5.pdf}
 	\end{center}
 	\caption{\label{VISCO-D2-E1000-ER3000-P4-C1-V5}Verificação solução numérica em viscoplasticidade com revestimento - $E = 1000$ MPa, $c^{vp}=\sqrt{3}/2$ MPa, $E_{rev} = 3000$ MPa, $d_0=2L_p$, $V_p=5$ m/dia}
 \end{figure}
@@ -175,7 +175,7 @@ A \autoref{PIEPI-E1500-FINALESCAVACAO} apresenta os resultados no final da escav
 
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[scale = 1.0]{0717-PIEPI-E1500-FINALESCAVACAO.pdf}
+		\includegraphics[scale = 1.0]{0716-PIEPI-E1500-FINALESCAVACAO.pdf}
 	\end{center}
 	\caption{\label{PIEPI-E1500-FINALESCAVACAO}Perfis de convergências no final da escavação para os diversos comportamentos implementados, considerando os parâmetros físicos do maciço de acordo com \citeonline{Piepi1995} com $E=1500$ MPa}
 \end{figure}
@@ -184,7 +184,7 @@ Após o final da escavação, os perfis de convergências dos modelos (VP) e (EP
 
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[scale = 1.0]{0718-PIEPI-E1500-LONGOPRAZO.pdf}
+		\includegraphics[scale = 1.0]{0717-PIEPI-E1500-LONGOPRAZO.pdf}
 	\end{center}
 	\caption{\label{PIEPI-E1500-LONGOPRAZO}Perfis de convergências no longo prazo para os diversos comportamentos implementados, considerando os parâmetros físicos do maciço de acordo com \citeonline{Piepi1995} com $E=1500$ MPa}
 \end{figure}
@@ -193,14 +193,14 @@ A \autoref{PIEPI-E2000-FINALESCAVACAO} e \autoref{PIEPI-E2000-LONGOPRAZO} mostra
 
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[scale = 1.0]{0719-PIEPI-E2000-FINALESCAVACAO.pdf}
+		\includegraphics[scale = 1.0]{0718-PIEPI-E2000-FINALESCAVACAO.pdf}
 	\end{center}
 	\caption{\label{PIEPI-E2000-FINALESCAVACAO}Perfis de convergências no final da escavação para os diversos comportamentos implementados, considerando os parâmetros físicos do maciço de acordo com \citeonline{Piepi1995} com $E=2000$ MPa}
 \end{figure}
 
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[scale = 1.0]{0720-PIEPI-E2000-LONGOPRAZO.pdf}
+		\includegraphics[scale = 1.0]{0719-PIEPI-E2000-LONGOPRAZO.pdf}
 	\end{center}
 	\caption{\label{PIEPI-E2000-LONGOPRAZO}Perfil de convergências no longo prazo para os diversos comportamentos implementados, considerando os parâmetros físicos do maciço de acordo com \citeonline{Piepi1995} com $E=2000$ MPa}
 \end{figure}
@@ -209,7 +209,7 @@ Os mesmos resultados foram obtidos utilizando o modelo 3D. A \autoref{PIEPI-E150
 
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[scale = 1.0]{0721-PIEPI-E1500-CAMPO_DESLOCAMENTO.pdf
+		\includegraphics[scale = 1.0]{0720-PIEPI-E1500-CAMPO_DESLOCAMENTO.pdf
 		}
 	\end{center}
 	\caption{\label{PIEPI-E1500-CAMPO_DESLOCAMENTO}Campo de deslocamentos no longo prazo para o caso elastoplástico-viscoplástico com $E=1500$ MPa e $V_p=0,1$ m/dia}
@@ -219,7 +219,7 @@ A \autoref{PIEPI-E1500-CAMPO_DEFORMACOES} mostra o campo de deformações plást
 
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[scale = 1.0]{0722-PIEPI-E1500-CAMPO_DEFORMACOES.pdf
+		\includegraphics[scale = 1.0]{0721-PIEPI-E1500-CAMPO_DEFORMACOES.pdf
 		}
 	\end{center}
 	\caption{\label{PIEPI-E1500-CAMPO_DEFORMACOES}Campo de deformações plásticas e viscosas no longo prazo para o caso elastoplástico-viscoplástico com $E=1500$ MPa e $V_p=0,1$ m/dia}
@@ -231,14 +231,14 @@ A \autoref{PIEPI-E1500-CAMPO_DEFORMACOES} mostra o campo de deformações plást
 
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[scale = 1]{0723-VP_COMPARAÇÃO_SOLUÇÃO_NUMÉRICA_CONVERGENCIA.pdf}
+		\includegraphics[scale = 1]{0722-VP_COMPARAÇÃO_SOLUÇÃO_NUMÉRICA_CONVERGENCIA.pdf}
 	\end{center}
 	\caption{\label{VP_COMPARAÇÃO_SOLUÇÃO_NUMÉRICA_CONVERGENCIA}Verificação com a solução de \citeonline{Piepi1995} do modelo viscoplástico com revestimento}
 \end{figure}
 
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[scale = 1]{0724-EPVP_COMPARAÇÃO_SOLUÇÃO_NUMÉRICA_CONVERGENCIA.pdf}
+		\includegraphics[scale = 1]{0723-EPVP_COMPARAÇÃO_SOLUÇÃO_NUMÉRICA_CONVERGENCIA.pdf}
 	\end{center}
 	\caption{\label{EPVP_COMPARAÇÃO_SOLUÇÃO_NUMÉRICA_CONVERGENCIA}Verificação com a solução de \citeonline{Piepi1995} do modelo elastoplástico-viscoplástico com revestimento}
 \end{figure}
@@ -251,7 +251,7 @@ Como o modelo constitutivo elastoplástico-viscoplástico comporta a caracterís
 
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[scale = 1]{0725-AMOLECIMENTO.pdf
+		\includegraphics[scale = 1]{0724-AMOLECIMENTO.pdf
 		}
 	\end{center}
 	\caption{\label{AMOLECIMENTO}Curva tensão \textit{versus} deformação obtido pelo modelo com amolecimento}
@@ -261,7 +261,7 @@ A \autoref{EP-EFEITO-AMOLECIMENTO} mostra a diferença entre os perfis de conver
 
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[scale = 1.0]{0726-EP-EFEITO-AMOLECIMENTO.pdf
+		\includegraphics[scale = 1.0]{0725-EP-EFEITO-AMOLECIMENTO.pdf
 		}
 	\end{center}
 	\caption{\label{EP-EFEITO-AMOLECIMENTO}Efeito do amolecimento no perfil de convergências para o caso elastoplástico}
@@ -271,7 +271,7 @@ A \autoref{EPVP-EFEITO-AMOLECIMENTO} mostra a diferença entre os perfis de conv
 
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[scale = 1.0]{0725-EPVP-EFEITO-AMOLECIMENTO.pdf}
+		\includegraphics[scale = 1.0]{0726-EPVP-EFEITO-AMOLECIMENTO.pdf}
 	\end{center}
 	\caption{\label{EPVP-EFEITO-AMOLECIMENTO}Efeito do amolecimento no perfil de convergências para o caso elastoplástico-viscoplástico}
 \end{figure}
@@ -285,7 +285,7 @@ Nessa seção é apresentada uma análise paramétrica para averiguar a influên
 
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[scale = 1.0]{0728-PARAMETRICO-D0-FINALCONSTRUÇÃO.pdf
+		\includegraphics[scale = 1.0]{0727-PARAMETRICO-D0-FINALCONSTRUÇÃO.pdf
 		}
 	\end{center}
 	\caption{\label{PARAMETRICO-D0-FINALCONSTRUÇÃO}Convergência no final da construção \textit{versus} módulo de elasticidade do revestimento para uma distância não revestida $d_0=0$}
@@ -293,7 +293,7 @@ Nessa seção é apresentada uma análise paramétrica para averiguar a influên
 
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[scale = 1.0]{0729-PARAMETRICO-D0-LONGOPRAZO.pdf
+		\includegraphics[scale = 1.0]{0728-PARAMETRICO-D0-LONGOPRAZO.pdf
 		}
 	\end{center}
 	\caption{\label{PARAMETRICO-D0-LONGOPRAZO}Convergência no longo prazo \textit{versus} módulo de elasticidade do revestimento para uma distância não revestida $d_0=0$}
@@ -301,7 +301,7 @@ Nessa seção é apresentada uma análise paramétrica para averiguar a influên
 
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[scale = 1.0]{0730-PARAMETRICO-D4-FINALCONSTRUÇÃO.pdf
+		\includegraphics[scale = 1.0]{0729-PARAMETRICO-D4-FINALCONSTRUÇÃO.pdf
 		}
 	\end{center}
 	\caption{\label{PARAMETRICO-D4-FINALCONSTRUÇÃO}Convergência no final da construção \textit{versus} módulo de elasticidade do revestimento para uma distância não revestida $d_0=4L_p$}
@@ -309,7 +309,7 @@ Nessa seção é apresentada uma análise paramétrica para averiguar a influên
 
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[scale = 1.0]{0731-PARAMETRICO-D4-LONGOPRAZO.pdf
+		\includegraphics[scale = 1.0]{0730-PARAMETRICO-D4-LONGOPRAZO.pdf
 		}
 	\end{center}
 	\caption{\label{PARAMETRICO-D4-LONGOPRAZO}Convergência no longo prazo \textit{versus} módulo de elasticidade do revestimento para uma distância não revestida $d_0=4L_p$}
@@ -330,7 +330,7 @@ Como a seção transversal é elíptica as convergências são medidas ao longo 
 
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[scale = 1.0]{0732-ELIPTICO-CONVERGENCIAS-UX-SREV.pdf
+		\includegraphics[scale = 1.0]{0731-ELIPTICO-CONVERGENCIAS-UX-SREV.pdf
 		}
 	\end{center}
 	\caption{\label{ELIPTICO-CONVERGENCIAS-UX-SREV}Convergências na direção $x$ \textit{versus} razão de aspecto da seção sem revestimento}
@@ -338,7 +338,7 @@ Como a seção transversal é elíptica as convergências são medidas ao longo 
 
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[scale = 1.0]{0733-ELIPTICO-CONVERGENCIAS-UX-CREV.pdf
+		\includegraphics[scale = 1.0]{0732-ELIPTICO-CONVERGENCIAS-UX-CREV.pdf
 		}
 	\end{center}
 	\caption{\label{ELIPTICO-CONVERGENCIAS-UX-CREV}Convergências na direção $x$ \textit{versus} razão de aspecto da seção com revestimento}
@@ -350,7 +350,7 @@ A \autoref{ELIPTICO-CONVERGENCIAS-UY-SREV} e \autoref{ELIPTICO-CONVERGENCIAS-UY-
 
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[scale = 1.0]{0734-ELIPTICO-CONVERGENCIAS-UY-SREV.pdf
+		\includegraphics[scale = 1.0]{0733-ELIPTICO-CONVERGENCIAS-UY-SREV.pdf
 		}
 	\end{center}
 	\caption{\label{ELIPTICO-CONVERGENCIAS-UY-SREV}Convergências na direção $y$ \textit{versus} razão de aspecto da seção sem revestimento}
@@ -358,7 +358,7 @@ A \autoref{ELIPTICO-CONVERGENCIAS-UY-SREV} e \autoref{ELIPTICO-CONVERGENCIAS-UY-
 
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[scale = 1.0]{0735-ELIPTICO-CONVERGENCIAS-UY-CREV.pdf
+		\includegraphics[scale = 1.0]{0734-ELIPTICO-CONVERGENCIAS-UY-CREV.pdf
 		}
 	\end{center}
 	\caption{\label{ELIPTICO-CONVERGENCIAS-UY-CREV}Convergências na direção $y$ \textit{versus} razão de aspecto da seção com revestimento}
@@ -366,7 +366,7 @@ A \autoref{ELIPTICO-CONVERGENCIAS-UY-SREV} e \autoref{ELIPTICO-CONVERGENCIAS-UY-
 
 \begin{figure}[H]
 	\begin{center}
-		\includegraphics[scale = 1.0]{0736-campo_deformacoes_eliptico.pdf
+		\includegraphics[scale = 1.0]{0735-campo_deformacoes_eliptico.pdf
 		}
 	\end{center}
 	\caption{\label{campo_deformacoes_eliptico}Campo de deformações equivalentes para o modelo (VP) e (EPVP), sem revestimento, com razão de aspecto 2 e no longo prazo}
