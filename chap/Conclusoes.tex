@@ -7,7 +7,7 @@ Em vista disso, o objetivo principal desse trabalho foi justamente o desenvolvim
 
 O modelo também foi capaz de simular o fenômeno de amolecimento/endurecimento característico dos maciços frágeis e dúcteis. Em elastoplasticidade, adotando as mesmas propriedades de \citeonline{Piepi1995}, uma redução na coesão pela metade devido ao amolecimento conduziu a uma convergência 37\% maior. E para o modelo elastoplástico-viscoplástico, o mesmo amolecimento representou uma convergência 28\% maior, no final da construção do túnel, e 24\% maior no longo prazo.
 
-Foram também feitas algumas análises paramétricas para mostrar as diferenças do modelo acoplado em relação ao modelo viscoplástico comumente usado para análises de longo prazo. Utilizando novamente as propriedades de \citeonline{Piepi1995}, sem a presença do revestimento, foram encontradas diferenças significativas de 30\%, no final da construção do túnel, e 50\%, no longo prazo. Com a presença do revestimento a diferença foi de 17\% a 23\% para uma distância não suportada de $d0=0$ e de 26\% a 30\% para uma distância não suportada $d0=4L_p$. Essa diferença ocorre pois o modelo constitutivo acoplado considera a plastificação do maciço nas deformações instantâneas, enquanto que o modelo viscoplástico considera essas deformações como elásticas.
+Foram também feitas algumas análises paramétricas para mostrar as diferenças do modelo acoplado em relação ao modelo viscoplástico comumente usado para análises de longo prazo. Utilizando novamente as propriedades de \citeonline{Piepi1995}, sem a presença do revestimento, foram encontradas diferenças de 8\%, no final da construção do túnel, e 1\%, no longo prazo. Com a presença do revestimento a diferença foi de 5\% a 15\% para uma distância não suportada de $d0=0$ e de 9\% a 20\% para uma distância não suportada $d0=4L_p$. Essa diferença ocorre pois o modelo constitutivo acoplado considera a plastificação do maciço nas deformações instantâneas, enquanto que o modelo viscoplástico considera essas deformações como elásticas. Porém, as maiores diferenças ocorrem justamente com a interação do revestimento (que bloqueia as deformações viscosas).
 
 Uma vez que o modelo constitutivo foi generalizado para o caso tridimensional, foi feita uma análise paramétrica considerando a variação da razão de aspecto de uma seção transversal elíptica. Como a seção é elíptica as convergências são medidas ao longo do maior e menor raio da seção. De uma forma geral, quando se aumenta a razão de aspecto os deslocamentos aumentam. Sem revestimento, uma razão de aspecto de 2, levou a maiores convergências no modelo elastoplástico-viscoplástico na direção $x$ (direção que se tem as maiores plastificações) em relação ao modelo viscoplástico. Foi encontrada uma convergência 2,05 vezes maior no curto prazo. Na direção $y$ (onde a plastificação não é tão intensa) encontrou-se uma convergência 1,22 vezes maior do que o modelo viscoplástico no curto prazo. No longo prazo, para ambas as direções, os valores ficaram equivalentes dado o nível de plastificação próximo em ambos os modelos nessa direção. Contudo, foi também constatado que o revestimento pode bloquear as deformações plásticas instantâneas, fazendo com que os modelos não apresentem diferenças tão significativas.
 
@@ -15,13 +15,13 @@ Frente a essas análises, foi constatada a relevância do modelo constitutivo ac
 
 \begin{alineas}
 	
-	\item fazer mais validações com estudos experimentais;
+	\item fazer mais validações com ensaios experimentais e com túneis reais;
 	
-	\item fazer mais estudos paramétricos para compreender melhor o comportamento desse modelo constitutivo acoplado, como, por exemplo, considerando a anisotropia das tensões inicias;
+	\item fazer mais estudos paramétricos para compreender melhor o comportamento desse modelo constitutivo acoplado, considerando também a anisotropia das tensões inicias;
 	
 	\item uma vez que se tem a lei de endurecimento/amolecimento implementada, seria interessante realizar estudos paramétricos para compreender as principais diferenças ocasionadas nos túneis considerando maciços rígidos e dúcteis;
 	
-	\item adicionar outras superfícies de plasticidade e viscoplasticidade além da superfície de Drucker-Prager. Apesar dessa superfície ser bastante geral e incluir a dependência da pressão hidrostática, há superfícies específicas em captar aspectos próprios da geomecânica de túneis;
+	\item adicionar outras superfícies de plasticidade e viscoplasticidade além da superfície de Drucker-Prager. Apesar de ser bastante geral e incluir a dependência da pressão hidrostática, há superfícies específicas em captar aspectos próprios de certas rochas;
 	
 	\item adicionar uma lei de amolecimento e endurecimento que considere também a variação do ângulo de atrito durante a deformação plástica;
 	
@@ -31,7 +31,7 @@ Frente a essas análises, foi constatada a relevância do modelo constitutivo ac
 	
 	\item construir curvas de convergências para o modelo elastoplástico-viscoplástico e propor ajustes no método NIM;
 	
-	\item durante as análises as propriedades do maciço, do revestimento e os parâmetros da geometria do túnel foram adotadas de forma determinística. Contudo, seria interessante fazer análises probabilísticas de modo a determinar a resposta da estrutura à variabilidade desses parâmetros;
+	\item as propriedades do maciço, do revestimento e os parâmetros da geometria do túnel foram adotadas de forma determinística. Contudo, seria interessante fazer análises probabilísticas de modo a determinar a resposta da estrutura à variabilidade desses parâmetros;
 	
 	\item generalizar a solução para considerar grandes deformações.	
 	
