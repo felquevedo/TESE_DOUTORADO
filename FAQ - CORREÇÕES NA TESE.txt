@@ -1,0 +1,2 @@
+- Título do gráfico da Figura 7.4. Deveria ser: CONVERGÊNCIA - SOLUÇÃO ANALÍTICA vs NUMÉRICA
+- Adicionar nas referências o guia do ANSYS de Programação da Usermat
