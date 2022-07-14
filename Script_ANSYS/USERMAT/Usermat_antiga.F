@@ -408,7 +408,6 @@ c     ! c             (dp,sc,l)                coesão
 c     ! c1,c2,c3      (dp,sc,l)                magnitudes das componentes do vetor de fluxo
 c     ! cp,ci,cr      (dp,sc,l)                coesão inicial, pico e residual
 c     ! czao          (dp,sc,l)                constante para o calculo da deformação plástica equivalente
-c     ! dalg          (int,sc,l)               1 - calcula módulo consistente, 0 - não calcula
 c     ! ddlam         (dp,sc,l)                incremento de dlam pelo NR do corretor plástico
 c     ! dfds          (dp,ar(ncomp),l)         derivada da função de escoamento em relação às tensões
 c     ! dfds_m        (dp,ar(1,ncomp),l)       df/ds^T em forma de matriz para aplicar MATMUL
@@ -425,7 +424,8 @@ c     ! eps1,eps2,eps3(dp,sc,l)                deformações plásticas equivalente
 c     ! epsEP         (dp,ar(ncomp),l)         deformações plásticas
 c     ! epsEPeq       (dp,sc,l)                deformação plástica equivalente
 c     ! f             (dp,sc,l)                função de escoamento
-c     ! fi            (dp,sc,l)                ângulo de atrito 
+c     ! fi            (dp,sc,l)                ângulo de atrito
+c     ! flag          (int,sc,l)               1- DP coincide com as bordas externas MC ou VM circunscreve TR 
 c     ! ftDg          (dp,sc,l)                produto df/ds^T*D*dg/ds
 c     ! g1,g2,g3      (dp,ar(ncomp),l)         componentes diretoras do vetor de fluxo
 c     ! i,j,k         (int,sc,l)               contadores
@@ -447,23 +447,6 @@ c     ! superficief   (int,sc,l)               identifica a função de escoamento
 c     ! superficieg   (int,sc,l)               identifica a função potencial: 1-VM, 2-DP, 3-TR, 4-MC
 c     ! vPi           (dp,sc,l)                Pi
 c     ! 
-c     ! 
-c     !**************************************************************************! 
-c     ! INFORMAÇÕES DAS VARIÁVEIS DE ESTADO                                      !
-c     !**************************************************************************!
-c     !
-c     !   nstatev    = 20 
-c     !   ustatev(1) = epsEPeq
-c     !   ustatev(2) = dlam
-c     !   ustatev(3) = c
-c     !   ustatev(3) = q
-c     !   ustatev(3) = f
-c     !   ustatev(6:ncomp) = epsEP(1:ncomp)
-c     !   ustatev(12:ncomp) = stress(1:ncomp)
-c     !
-c     ! OBS: as variáveis de estados podem ser plotadas na GUI do ANSYS
-c     ! utilizando o comando PLESOL,SVAR,[componente] ou PLNESOL,SVAR,[componente]
-c     !  
 c     !**************************************************************************! 
 c     ! Declaração das variáveis locais                                          !
 c     !**************************************************************************! 
@@ -652,6 +635,7 @@ c             !*****************************************************************
 c             ! Incremento das tensões e do dlam                                         !
 c             !**************************************************************************!
               stress  = stress + dstress
+              !c       = c + dq/2.0d0
               c       = c + dq/Xi
               dlam    = dlam + ddlam
               q       = q + dq
@@ -786,7 +770,6 @@ c     ! dgPHItD       (dp,ar(ncomp,ncomp),l)   produto dg/ds*PHI^T*D
 c     ! dlambdaVP     (dp,sc,l)                incremento da magnitude da deformação viscoplástica
 c     ! depsVP        (dp,ar(ncomp),l)         incremento de deformações viscoplásticas
 c     ! dsdeEl        (dp,ar(ncomp,ncomp),l)   matriz constitutiva elastica
-c     ! dt1,dt2       (dp,sc,l)                tempos limites do modelo viscoplástico
 c     ! epsVP         (dp,ar(ncomp),l)         deformações viscoplasticas
 c     ! epsVPeq       (dp,sc,l)                deformação viscoplástica equivalente
 c     ! fVP           (dp,sc,l)                função de escoamento do modelo viscoplástico
@@ -811,20 +794,6 @@ c     ! superficiefVP (int,sc,l)               identifica a função de escoamento
 c     ! superficiegVP (int,sc,l)               identifica a função potencial: 1-VM, 2-DP, 3-TR, 4-MC
 c     ! vPi           (dp,sc,l)                Pi
 c     ! 
-c     !**************************************************************************! 
-c     ! INFORMAÇÕES DAS VARIÁVEIS DE ESTADO                                      !
-c     !**************************************************************************!
-c     !
-c     !   nstatev    = 20 
-c     !   ustatev(1) = epsVPeq
-c     !   ustatev(2) = dt1
-c     !   ustatev(3) = dt2
-c     !   ustatev(4:ncomp) = epsVP(1:ncomp)
-c     !   ustatev(10:ncomp) = stress(1:ncomp)
-c     !
-c     ! OBS: as variáveis de estados podem ser plotadas na GUI do ANSYS
-c     ! utilizando o comando PLESOL,SVAR,[componente] ou PLNESOL,SVAR,[componente]
-c     !  
 c     !**************************************************************************! 
 c     ! Declaração das variáveis locais                                          !
 c     !**************************************************************************! 
@@ -1030,12 +999,12 @@ c     !
      &                   var6, var7)
 #include "impcom.inc"  
       !**************************************************************************!
-      !** SUBROTINA: USERMAT3D_EPVP                                            **!
+      !** SUBROTINA: USERMAT3D_EP                                              **!
       !**                                                                      **!
       !** Objetivo: atualiza as tensões, variáveis de estado e matriz          **!
-      !**           constitutiva para o modelo constitutivo EPVP               **!
+      !**           constitutiva para o modelo constitutivo elastoplastico     **!
       !**                                                                      **!
-      !** Situação: OK (10/11/2021)                                            **!
+      !** Situação:                                                            **!
       !**                                                                      **!
       !**************************************************************************!         
       ! 
@@ -1062,97 +1031,19 @@ c     !
      &                 var6, var7
       ! 
       !**************************************************************************! 
-      ! Informações sobre as variáveis locais (precisão, tipo, escopo)           !
-      !**************************************************************************!
-c     ! aux1          (dp,sc,l)                denominador no dlambdaVP
-c     ! c             (dp,sc,l)                coesão
-c     ! c1,c2,c3      (dp,sc,l)                magnitudes das componentes do vetor de fluxo
-c     ! cp,ci,cr      (dp,sc,l)                coesão inicial, pico e residual
-c     ! czao          (dp,sc,l)                constante para o calculo da deformação plástica equivalente
-c     ! czaoVP        (dp,sc,l)                constante para o calculo da deformação viscopástica equivalente
-c     ! cVP           (dp,sc,l)                coesão do modelo viscoplástio
-c     ! ddlam         (dp,sc,l)                incremento de dlam pelo NR do corretor plástico
-c     ! dfds          (dp,ar(ncomp),l)         derivada da função de escoamento em relação às tensões
-c     ! dfds_m        (dp,ar(1,ncomp),l)       df/ds^T em forma de matriz para aplicar MATMUL
-c     ! dgds          (dp,ar(ncomp),l)         vetor de fluxo elastoplástico
-c     ! dgdsVP        (dp,ar(ncomp),l)         vetor de fluxo viscoplástico
-c     ! dgds_m        (dp,ar(ncomp,1),l)       dg/ds em forma de matriz para aplicar MATMUL
-c     ! dgdsVP_m      (dp,ar(ncomp,1),l)       dg/dsVP em forma de matriz para aplicar MATMUL
-c     ! dhdq,dfdq,dfdc,dcde (dp,sc,l)          dh/dq, df/dq, df/dc, dc/de para o endurecimento/amolecimento
-c     ! dgPHItD       (dp,ar(ncomp,ncomp),l)   produto dg/ds*PHI^T*D
-c     ! dlam          (dp,sc,l)                incremento da magnitude da deformação plástica
-c     ! dlambdaVP     (dp,sc,l)                incremento da magnitude da deformação viscoplástica
-c     ! depsEP        (dp,ar(ncomp),l)         incremento de deformações plásticas
-c     ! depsVP        (dp,ar(ncomp),l)         incremento de deformações viscoplásticas
-c     ! depsEPeq      (dp,sc,l)                incremento de deformação plástica equivalente 
-c     ! DgftD         (dp,ar(ncomp,ncomp),l)   produto D*dg/ds*df/ds^T*D
-c     ! dsdeEl        (dp,ar(ncomp,ncomp),l)   matriz constitutiva elastica
-c     ! dsdeElinv     (dp,ar(ncomp,ncomp),l)   inversa da matriz constitutiva elastica
-c     ! dt1,dt2       (dp,sc,l)                tempos limites do modelo viscoplástico
-c     ! eps1,eps2,eps3(dp,sc,l)                deformações plásticas equivalentes limites 
-c     ! epsEP         (dp,ar(ncomp),l)         deformações plásticas
-c     ! epsVP         (dp,ar(ncomp),l)         deformações viscoplasticas
-c     ! epsEPeq       (dp,sc,l)                deformação plástica equivalente
-c     ! epsVPeq       (dp,sc,l)                deformação viscoplástica equivalente
-c     ! f             (dp,sc,l)                função de escoamento do modelo elastoplástico
-c     ! fVP           (dp,sc,l)                função de escoamento do modelo viscoplástico
-c     ! fi            (dp,sc,l)                ângulo de atrito
-c     ! fiVP          (dp,sc,l)                ângulo de atrito do modelo viscoplástico
-c     ! flag          (int,sc,l)               1- DP coincide com as bordas externas MC ou VM circunscreve TR 
-c     ! ftDg          (dp,sc,l)                produto df/ds^T*D*dg/ds
-c     ! g1,g2,g3      (dp,ar(ncomp),l)         componentes diretoras do vetor de fluxo
-c     ! i,j,k         (int,sc,l)               contadores
-c     ! I1            (dp,sc,l)                primeiro invariante das tensões
-c     ! J2            (dp,sc,l)                segundo invariante do desviador
-c     ! J3            (dp,sc,l)                terceiro invariante do desviador
-c     ! n,eta,f0      (dp,sc,l)                constantes de ajuste do modelo de Perzyna
-c     ! ncompgt       (int,sc,l)               componentes de tensões iniciais
-c     ! nrmax         (int,sc,l)               quantidade máxima de interações de NR
-c     ! PHI           (dp,sc,l)                função de sobretensão
-c     ! PHItDdeps     (dp,sc,l)                produto PHI^T*D*deps
-c     ! PHItDg        (dp,sc,l)                produto dPHI/ds^T*D*dg/ds
-c     ! psi           (dp,sc,l)                angulo de dilatância
-c     ! psiVP         (dp,sc,l)                angulo de dilatância do modelo viscoplástico
-c     ! s             (dp,ar(ncomp),l)         tensor desviador
-c     ! sigi          (dp,ar(ncomp),l)         tensão inicial
-c     ! sigmap        (dp,ar(ncomp),l)         tensão inicial a descontar
-c     ! stressn       (dp,ar(ncomp),l)         tensão no inicio do passo
-c     ! stresstrial   (dp,ar(ncomp),l)         tensão tentativa
-c     ! theta         (dp,sc,l)                ângulo de Lode
-c     ! thetaVP       (dp,sc,l)                ângulo de Lode do modelo viscoplástico
-c     ! young         (dp,sc,l)                módulo de Young
-c     ! posn          (dp,sc,l)                coeficiente de Poisson
-c     ! q1,dq         (dp,sc,l)                variaveis auxiliares
-c     ! superficief   (int,sc,l)               identifica a função de escoamento: 1-DPI, 2-DPII, 3-DPIII
-c     ! superficiefVP (int,sc,l)               identifica a função de escoamento: 1-DPI, 2-DPII, 3-DPIII
-c     ! superficiegVP (int,sc,l)               identifica a função potencial: 1-DPI, 2-DPII, 3-DPIII
-c     ! superficieg   (int,sc,l)               identifica a função potencial: 1-DPI, 2-DPII, 3-DPIII
-c     ! vPi           (dp,sc,l)                Pi
-c     ! 
-c     !**************************************************************************! 
-c     ! INFORMAÇÕES DAS VARIÁVEIS DE ESTADO                                      !
-c     !**************************************************************************!
-c     !
-c     !   nstatev    = 20 
-c     !   ustatev(1) = epsEPeq
-c     !   ustatev(2) = dlam
-c     !   ustatev(3) = c
-c     !   ustatev(4) = q
-c     !   ustatev(5) = f
-c     !   ustatev(6) = epsVPeq
-c     !   ustatev(7) = dt1
-c     !   ustatev(8) = dt2
-c     !   ustatev(9:ncomp) = espEP(1:ncomp)
-c     !   ustatev(15:ncomp) = espVP(1:ncomp)
-c     !
-c     ! OBS: as variáveis de estados podem ser plotadas na GUI do ANSYS
-c     ! utilizando o comando PLESOL,SVAR,[componente] ou PLNESOL,SVAR,[componente]
-c     ! 
-c     !**************************************************************************! 
-c     ! Declaração das variáveis locais                                          !
-c     !**************************************************************************!
-c     !
-c     ! Variáveis comuns a ambos modelos
+      ! Informações sobre as variáveis locais                                    !
+      !**************************************************************************! 
+      ! i,j           (int,sc,l)               contadores
+      ! mcomp         (int,sc,l)               total de componentes
+      ! stresstrial   (dp,ar(6),l)             tensão tentativa
+      ! dsdeEl        (dp,ar(6,6),l)           matriz constitutiva elastica
+      ! young         (dp,sc,l)                módulo de Young
+      ! posn          (dp,sc,l)                coeficiente de Poisson
+      ! 
+      !**************************************************************************! 
+      ! Declaração das variáveis locais                                          !
+      !**************************************************************************! 
+      ! Variáveis comuns a ambos modelos
       INTEGER 
      &                i, j, k, ncompgt   
       DOUBLE PRECISION
@@ -1172,8 +1063,8 @@ c     ! Variáveis comuns a ambos modelos
      &                vzero, vmove, get_ElmData, get_ElmInfo,
      &                matrizD,invars,normatensor,calcula_czao,  
      &                matinv,yield,c1c2c3,g1g2g3
-c     !
-c     ! variáveis do modelo viscoplástico
+      !
+      ! variáveis do modelo viscoplástico
       DOUBLE PRECISION
      &                fVP,PHI,
      &                dlambdaVP,PHItDdeps,PHItDg,aux1,
@@ -1188,8 +1079,8 @@ c     ! variáveis do modelo viscoplástico
      &                superficiefVP,superficiegVP   
       DOUBLE PRECISION
      &                cVP,fiVP,psiVP,n,eta,f0,thetaVP  
-c     !
-c     ! variáveis do modelo elastoplástico
+      !
+      ! variáveis do modelo elastoplástico
       INTEGER 
      &                nrmax, dalg        
       DOUBLE PRECISION
@@ -1217,9 +1108,10 @@ c     ! variáveis do modelo elastoplástico
       EXTERNAL        
      &                calcula_Xi,calcula_dcde
 c     ! 
-c     !**************************************************************************! 
-c     ! Entrada de dados                                                         !
-c     !**************************************************************************! 
+      ! 
+      !**************************************************************************! 
+      ! Entrada de dados                                                         !
+      !**************************************************************************! 
 c     !
 c     ! Variavel que controla o método da bisseção caso não haja convergência
       keycut      = 0
@@ -1353,7 +1245,7 @@ c     !*************************************************************************
           RETURN
       ENDIF
       ENDIF
-c     !
+c
 c     !**************************************************************************! 
 c     ! Atualização do módulo constitutivo                                       !
 c     !**************************************************************************! 
@@ -1462,6 +1354,7 @@ c             !*****************************************************************
 c             ! Incremento das tensões e do dlam                                         !
 c             !**************************************************************************!
               stress  = stress + dstress
+              !c       = c + dq/2.0d0
               c       = c + dq/Xi
               dlam    = dlam + ddlam
               q       = q + dq
@@ -1535,7 +1428,7 @@ c     ! Guarda valores nas variáveis de estado
       ustatev(2) = dlam
       ustatev(3) = c
       ustatev(4) = q
-      ustatev(5) = epsEPeq+epsVPeq
+      ustatev(5) = f
       ustatev(6) = epsVPeq
       ustatev(7) = dt1
       ustatev(8) = dt2
@@ -1544,6 +1437,7 @@ c     ! Guarda valores nas variáveis de estado
 c     !
       RETURN      
       END      
+      !
       !
       SUBROUTINE matrizD(E,Poisson,ncomp,D)
 c     !**************************************************************************!
@@ -1587,7 +1481,7 @@ c     !**                                                                      *
 c     !** Objetivo: calcula os invariantes do tensor de tensões e o tensor     **!
 c     !**           desviador. Adaptado de Chen e Han (1998, p.57-72)          **!
 c     !**                                                                      **!      
-c     !** Situação: (10-11-2021) OK                                            **!
+c     !** Situação:                                                            **!
 c     !**                                                                      **!
 c     !**************************************************************************!   
       IMPLICIT NONE
@@ -1659,10 +1553,10 @@ c     !
 c     !**************************************************************************!
 c     !** Subrotina: g1g2g3                                                    **!
 c     !**                                                                      **!
-c     !** Objetivo: calcula as direções do vetor de fluxo. Adaptado de Owen e  **!
+c     !** Objetivo: calcula as direções do vetor de fluxo. Adaptado de Oewn e  **!
 c     !**           Hinton (1980, p.231 e 233)                                 **! 
 c     !**                                                                      **!      
-c     !** Situação: (10-11-2021) OK                                            **!
+c     !** Situação:                                                            **!
 c     !**                                                                      **!
 c     !**************************************************************************!      
       IMPLICIT NONE
@@ -1717,10 +1611,9 @@ c     !*************************************************************************
 c     !** Subrotina: c1c2c3                                                    **!
 c     !**                                                                      **!
 c     !** Objetivo: calcula a magnitude das componentes do vetor de fluxo.     **!
-c     !**           Adaptado de Bernaud (1991, p.90, 91)                       **!
-c     !**           Adaptado de Owen e Hinton (1980, p.231)                    **!
+c     !**           Adaptado de Bernaud (1991, p.90, 91)                       **! 
 c     !**                                                                      **!      
-c     !** Situação: (10-11-2021) OK                                            **!
+c     !** Situação:                                                            **!
 c     !**                                                                      **!
 c     !**************************************************************************!      
       IMPLICIT NONE
@@ -1752,7 +1645,7 @@ c             ! DPII
 c             !  
           CASE(3)
 c             !    
-c             ! DPIII - Owen e Hinton (1980, p.231)
+c             ! DPIII
               c1 = 2.0d0*DSIN(fi)/(DSQRT(3.0d0)*(3.0d0+DSIN(fi)))
               c2 = 1.0d0
               c3 = 0.0d0
@@ -1764,20 +1657,19 @@ c     !
 c     !**************************************************************************!
 c     !** Subrotina: yield                                                     **!
 c     !**                                                                      **!
-c     !** Objetivo: calcula o critério de escoamento.                          **!
-c     !**           Adaptado de Bernaud (1991, p.90, 91)                       **!
-c     !**           Adaptado de Souza Neto,  Peri, Owen (2008, p. 162-167)     **!
+c     !** Objetivo: calcula o critério de escoamento. Adaptado de              **!
+c     !**           Bernaud (p. 88, 89)                                        **!      
 c     !**                                                                      **!      
-c     !** Situação: (10-11-2021) OK                                            **!
+c     !** Situação:                                                            **!
 c     !**                                                                      **!
 c     !**************************************************************************!      
       IMPLICIT NONE
-      INTEGER          superficie         ! 1-DPI, 2-DPII, 3-DPIII
-      DOUBLE PRECISION I1                 ! primeiro invariante do tensor de tensões
-      DOUBLE PRECISION J2                 ! segundo invariante do desviador
-      DOUBLE PRECISION theta              ! ângulo de Lode
-      DOUBLE PRECISION c                  ! coesão
-      DOUBLE PRECISION fi                 ! Ângulo de atrito
+      INTEGER          superficie     ! 1-DPI, 2-DPII, 3-DPIII
+      DOUBLE PRECISION I1             ! primeiro invariante do tensor de tensões
+      DOUBLE PRECISION J2             ! segundo invariante do desviador
+      DOUBLE PRECISION theta          ! ângulo de Lode
+      DOUBLE PRECISION c              ! coesão
+      DOUBLE PRECISION fi             ! Ângulo de atrito
       DOUBLE PRECISION f                  ! função de escoamento
       DOUBLE PRECISION beta1,beta2,beta3  ! Parametros para DP
       DOUBLE PRECISION k                  ! coeficiente de empuxo
@@ -1804,7 +1696,7 @@ c             ! DPII
 c             ! 
           CASE(3)
 c             !    
-c             ! DPIII Souza Neto,  Peri, Owen (2008, p. 162-167)
+c             ! DPIII
               beta1 = 2.0d0*DSIN(fi)/(DSQRT(3.0d0)*(3.0d0+DSIN(fi)))
               beta2 = 1.0d0
               beta3 = 6.0d0*DCOS(fi)/(DSQRT(3.0d0)*(3.0d0+DSIN(fi)))*c
@@ -1884,7 +1776,7 @@ c     !** Subrotina: normatensor                                               *
 c     !**                                                                      **!
 c     !** Objetivo: calcula a norma de um tensor escrito em notação de Voigt   **!
 c     !**                                                                      **!     
-c     !** Situação: (10-11-2021) OK                                            **!
+c     !** Situação:                                                            **!
 c     !**                                                                      **!
 c     !**************************************************************************!   
       IMPLICIT NONE
@@ -1911,7 +1803,7 @@ c     !**                                                                      *
 c     !** Objetivo: calcula o C utilizado no calculo da deformação plástica    **!
 c     !**           efetiva. Adaptado de Chen e Han (1988, p. 257-259).        **!
 c     !**                                                                      **!      
-c     !** Situação: (10-11-2021) OK                                            **!
+c     !** Situação:                                                            **!
 c     !**                                                                      **!
 c     !**************************************************************************!           
       IMPLICIT NONE
@@ -1947,10 +1839,9 @@ c     !*************************************************************************
 c     !** Subrotina: calcula_Xi                                                **!
 c     !**                                                                      **!
 c     !** Objetivo: calcula Xi                                                 **!
-c     !**           Adaptado de Potts e Zdravkovic (1999, p. 158)              **!
 c     !**                                                                      **!
 c     !**                                                                      **!      
-c     !** Situação: (10-11-2021) OK                                            **!
+c     !** Situação:                                                            **!
 c     !**                                                                      **!
 c     !**************************************************************************! 
       IMPLICIT NONE
@@ -1977,10 +1868,10 @@ c     !
 c     !**************************************************************************!
 c     !** Subrotina: calcula_dcde                                              **!
 c     !**                                                                      **!
-c     !** Objetivo: calcula dc/de                                              **!
-c     !**           Adaptado de Potts e Zdravkovic (1999, p. 158)              **!
-c     !**                                                                      **!    
-c     !** Situação: (10-11-2021) OK                                            **!
+c     !** Objetivo: calcula df/depsPleq                                        **!
+c     !**                                                                      **!
+c     !**                                                                      **!      
+c     !** Situação:                                                            **!
 c     !**                                                                      **!
 c     !**************************************************************************! 
       IMPLICIT NONE
